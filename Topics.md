@@ -74,7 +74,7 @@
 
 1. How does punctuality change throughout the day?
 
-2. How does the size of the city where a train station is located affect the functionality of the elevators?
+2. How does the size of the city where a train station is located affect the accessibility of the station?
 
 3. How does punctuality differ between the seasons?
 
