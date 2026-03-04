@@ -1,0 +1,3 @@
+scope,season,n_teams,pearson_r_age_efficiency,estimated_peak_age,estimated_peak_goals_per_shot,model_note
+all_seasons,all,18,-0.5699907826152887,,,Maximum liegt ausserhalb des beobachteten Altersbereichs (24.25-27.86).
+single_season,2425,18,-0.5699907826152887,,,Maximum liegt ausserhalb des beobachteten Altersbereichs (24.25-27.86).
