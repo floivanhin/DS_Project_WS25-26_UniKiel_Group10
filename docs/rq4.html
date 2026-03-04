@@ -22,7 +22,7 @@
   <body data-page="rq4">
     <header class="topbar">
       <div class="topbar-inner">
-        <a class="site-title" href="allgemein.html">Bundesliga Statistics</a>
+        <a class="site-title" href="summary.html">Bundesliga Statistics</a>
         <button
           class="menu-toggle"
           type="button"
@@ -32,7 +32,7 @@
           Menu
         </button>
         <nav class="top-nav">
-          <a href="allgemein.html">Overview</a>
+          <a href="summary.html">Overview</a>
           <a class="active" href="rq4.html">RQ4</a>
           <a href="rq9.html">RQ9</a>
         </nav>
@@ -49,9 +49,9 @@
           overall home advantage, with clear individual outliers.
         </p>
         <div class="chips">
-          <span class="chip">933 rows (home/away ratings)</span>
-          <span class="chip">481 player comparisons</span>
-          <span class="chip">365 with enough data on both sides</span>
+          <span class="chip"><span id="rq4-chip-ratings-rows">933</span> rows (home/away ratings)</span>
+          <span class="chip"><span id="rq4-chip-player-comparisons">481</span> player comparisons</span>
+          <span class="chip"><span id="rq4-chip-eligible-both">365</span> with enough data on both sides</span>
           <span class="chip">Leaderboard threshold: at least 5 matches</span>
         </div>
       </section>
@@ -59,19 +59,19 @@
       <section class="metrics">
         <article class="metric">
           <div class="metric-label">Mean home rating</div>
-          <div class="metric-value">6.614</div>
+          <div class="metric-value" id="rq4-metric-home-mean">6.614</div>
         </article>
         <article class="metric">
           <div class="metric-label">Mean away rating</div>
-          <div class="metric-value">6.578</div>
+          <div class="metric-value" id="rq4-metric-away-mean">6.578</div>
         </article>
         <article class="metric">
           <div class="metric-label">Home minus away</div>
-          <div class="metric-value">+0.036</div>
+          <div class="metric-value" id="rq4-metric-home-away-delta">+0.036</div>
         </article>
         <article class="metric">
           <div class="metric-label">Top player</div>
-          <div class="metric-value">Marmoush 8.27/8.20</div>
+          <div class="metric-value" id="rq4-metric-top-player">Marmoush 8.27/8.20</div>
         </article>
       </section>
 
@@ -91,15 +91,15 @@
         <article class="panel span-6">
           <h2>Key findings</h2>
           <ul class="insights">
-            <li>
+            <li id="rq4-key-positive">
               Strongest positive deltas: Lucas Hoeler (+0.785), Nico
               Schlotterbeck (+0.773), Felix Nmecha (+0.757).
             </li>
-            <li>
+            <li id="rq4-key-negative">
               Strongest negative deltas: Timo Horn (-0.735), Jakov Medic
               (-0.591), Nathan Ngoumou (-0.588).
             </li>
-            <li>
+            <li id="rq4-key-top-player">
               The top home and away average rating is Omar Marmoush.
             </li>
           </ul>
@@ -141,7 +141,7 @@
 
       <p class="source-note">
         <strong>Data source:</strong>
-        `RQ4_RQ9/data/outputs/rq4/rq4_home_away_player_ratings.csv` and
+        `data/rq4/rq4_home_away_player_ratings.csv` and
         `rq4_player_home_away_delta.csv`.
       </p>
 
@@ -152,6 +152,6 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
-    <script src="charts.js"></script>
+    <script src="charts.js?v=20260304-1"></script>
   </body>
 </html>

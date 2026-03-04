@@ -50,9 +50,9 @@
           efficiency).
         </p>
         <div class="chips">
-          <span class="chip">Season: 2024/25</span>
-          <span class="chip">Data basis: 568 players</span>
-          <span class="chip">18 teams</span>
+          <span class="chip">Season: <span id="ov-chip-season">2024/25</span></span>
+          <span class="chip">Data basis: <span id="ov-chip-players">568 players</span></span>
+          <span class="chip"><span id="ov-chip-teams">18 teams</span></span>
           <span class="chip">Python + Pandas</span>
           <span class="chip">WhoScored + ESPN data</span>
         </div>
@@ -61,19 +61,19 @@
       <section class="metrics">
         <article class="metric">
           <div class="metric-label">Players (unique)</div>
-          <div class="metric-value">568</div>
+          <div class="metric-value" id="ov-metric-players">568</div>
         </article>
         <article class="metric">
           <div class="metric-label">Average age</div>
-          <div class="metric-value">25.99</div>
+          <div class="metric-value" id="ov-metric-avg-age">25.99</div>
         </article>
         <article class="metric">
           <div class="metric-label">Age range</div>
-          <div class="metric-value">16.76-39.26</div>
+          <div class="metric-value" id="ov-metric-age-range">16.76-39.26</div>
         </article>
         <article class="metric">
           <div class="metric-label">Team-match rows</div>
-          <div class="metric-value">612</div>
+          <div class="metric-value" id="ov-metric-team-match-rows">612</div>
         </article>
       </section>
 
@@ -82,7 +82,7 @@
           <h2>Project and methodology</h2>
           <p>
             The pipeline loads team and match data, merges it into a consistent
-            tabular format, and stores outputs in `data/outputs`. This makes
+            tabular format, and stores outputs in `data`. This makes
             the RQ4 and RQ9 metrics reproducible.
           </p>
           <ul>
@@ -125,8 +125,8 @@
           <h2>Average age per team (2024/25)</h2>
           <p>
             Sorted from younger to older squads. The extremes are
-            <strong>RB Leipzig (24.25)</strong> and
-            <strong>1. FC Union Berlin (27.86)</strong>.
+            <strong id="ov-youngest-team">RB Leipzig (24.25)</strong> and
+            <strong id="ov-oldest-team">1. FC Union Berlin (27.86)</strong>.
           </p>
           <div class="chart-wrap">
             <canvas id="teamAgeChart"></canvas>
@@ -135,8 +135,8 @@
       </section>
 
       <p class="source-note">
-        <strong>Sources in your project:</strong> `RQ4_RQ9/README.md` and
-        `RQ4_RQ9/data/outputs/{core,rq4,rq9}`.
+        <strong>Sources in your project:</strong> `README.md` and
+        `data/{other,rq4,rq9}`.
       </p>
 
       <footer class="footer">
@@ -146,6 +146,6 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
-    <script src="charts.js"></script>
+    <script src="charts.js?v=20260304-1"></script>
   </body>
 </html>
