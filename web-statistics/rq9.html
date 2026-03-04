@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RQ9 - Age vs Efficiency</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="rq9">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="site-title" href="allgemein.html">Bundesliga Statistics</a>
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-label="Toggle menu"
+        >
+          Menu
+        </button>
+        <nav class="top-nav">
+          <a href="allgemein.html">Overview</a>
+          <a href="rq4.html">RQ4</a>
+          <a class="active" href="rq9.html">RQ9</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="hero">
+        <span class="tag">Research Question</span>
+        <h1>RQ9: How is team age related to shot efficiency?</h1>
+        <p class="subtitle">
+          For all 18 Bundesliga teams in the 2024/25 season, average team age
+          was linked with `goals_per_shot`. The data shows a negative
+          relationship: older teams tend to be less efficient in finishing.
+        </p>
+        <div class="chips">
+          <span class="chip">18 teams</span>
+          <span class="chip">612 team-match rows</span>
+          <span class="chip">Pearson r = -0.570</span>
+          <span class="chip">Season: 2024/25</span>
+        </div>
+      </section>
+
+      <section class="metrics">
+        <article class="metric">
+          <div class="metric-label">Pearson r</div>
+          <div class="metric-value">-0.570</div>
+        </article>
+        <article class="metric">
+          <div class="metric-label">Observed team age range</div>
+          <div class="metric-value">24.25-27.86</div>
+        </article>
+        <article class="metric">
+          <div class="metric-label">Best age band (players)</div>
+          <div class="metric-value">33 years</div>
+        </article>
+        <article class="metric">
+          <div class="metric-label">Band efficiency</div>
+          <div class="metric-value">0.175 (31/177)</div>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel span-6">
+          <h2>Answer to RQ9</h2>
+          <p>
+            At team level, there is a negative association between average age
+            and shot efficiency. Younger to mid-age squads tend to show higher
+            `goals_per_shot` values.
+          </p>
+          <p>
+            The quadratic model does not provide a stable single optimum age
+            within the observed range.
+          </p>
+        </article>
+
+        <article class="panel span-6">
+          <h2>Key findings</h2>
+          <ul class="insights">
+            <li>
+              Top efficiency: Bayern Munich (0.153), Borussia Dortmund (0.147),
+              Bayer Leverkusen (0.143).
+            </li>
+            <li>
+              Low efficiency: St. Pauli (0.074), VfL Bochum (0.076),
+              1. FC Union Berlin (0.084).
+            </li>
+            <li>
+              Model note: maximum lies outside the observed range of 24.25-27.86.
+            </li>
+          </ul>
+        </article>
+
+        <article class="panel span-8">
+          <h2>Scatter: team age vs goals_per_shot</h2>
+          <p>
+            Each team is a point, plus a linear trend line. The slope shows the
+            overall negative tendency.
+          </p>
+          <div class="chart-wrap">
+            <canvas id="rq9ScatterChart"></canvas>
+          </div>
+        </article>
+
+        <article class="panel span-4">
+          <h2>Team efficiency ranking</h2>
+          <p>Sorted by `goals_per_shot` (descending).</p>
+          <div class="chart-wrap">
+            <canvas id="rq9RankingChart"></canvas>
+          </div>
+        </article>
+
+        <article class="panel span-12">
+          <h2>Player age profile</h2>
+          <p>
+            Line plot for efficiency per age band and bars for shot volume in
+            the same age band.
+          </p>
+          <div class="chart-wrap">
+            <canvas id="rq9AgeProfileChart"></canvas>
+          </div>
+        </article>
+      </section>
+
+      <p class="source-note">
+        <strong>Data source:</strong>
+        `RQ4_RQ9/data/outputs/rq9/rq9_team_age_vs_efficiency.csv`,
+        `rq9_optimal_age_summary.csv`, `rq9_player_age_profile.csv`,
+        `rq9_player_best_age.csv`.
+      </p>
+
+      <footer class="footer">
+        RQ9 conclusion: in the 2024/25 data, efficiency decreases with average
+        team age, and no single robust team-age optimum can be inferred.
+      </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <script src="charts.js"></script>
+  </body>
+</html>
