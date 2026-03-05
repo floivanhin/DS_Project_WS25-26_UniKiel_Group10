@@ -1,0 +1,625 @@
+{
+  "_meta": {
+    "league": "Bundesliga",
+    "league_id": 78,
+    "season": 2024,
+    "dateFrom": "2024-08-01",
+    "dateTo": "2024-09-01",
+    "fixtures_fetched": 18,
+    "note": "Cards from /fixtures/statistics, venue capacity from /venues."
+  },
+  "matches": [
+    {
+      "fixture_id": 1223975,
+      "date": "2024-08-23T18:30:00+00:00",
+      "referee": "R. Schröder",
+      "round": "Regular Season - 1",
+      "home": {
+        "id": 163,
+        "name": "Borussia Mönchengladbach"
+      },
+      "away": {
+        "id": 168,
+        "name": "Bayer Leverkusen"
+      },
+      "venue": {
+        "id": 20471,
+        "name": "BORUSSIA-PARK",
+        "city": "Mönchengladbach",
+        "capacity": 54057
+      },
+      "stats_home": {
+        "fouls": 11,
+        "yellow": 1,
+        "red": 0,
+        "cards_total": 1,
+        "cards_per_foul": 0.09090909090909091
+      },
+      "stats_away": {
+        "fouls": 7,
+        "yellow": 0,
+        "red": 0,
+        "cards_total": 0,
+        "cards_per_foul": 0.0
+      }
+    },
+    {
+      "fixture_id": 1223979,
+      "date": "2024-08-24T13:30:00+00:00",
+      "referee": "T. Welz",
+      "round": "Regular Season - 1",
+      "home": {
+        "id": 160,
+        "name": "SC Freiburg"
+      },
+      "away": {
+        "id": 172,
+        "name": "VfB Stuttgart"
+      },
+      "venue": {
+        "id": 12717,
+        "name": "Europa-Park Stadion",
+        "city": "Freiburg im Breisgau",
+        "capacity": 34700
+      },
+      "stats_home": {
+        "fouls": 7,
+        "yellow": 2,
+        "red": 0,
+        "cards_total": 2,
+        "cards_per_foul": 0.2857142857142857
+      },
+      "stats_away": {
+        "fouls": 10,
+        "yellow": 1,
+        "red": 0,
+        "cards_total": 1,
+        "cards_per_foul": 0.1
+      }
+    },
+    {
+      "fixture_id": 1223982,
+      "date": "2024-08-24T13:30:00+00:00",
+      "referee": "H. Osmers",
+      "round": "Regular Season - 1",
+      "home": {
+        "id": 164,
+        "name": "FSV Mainz 05"
+      },
+      "away": {
+        "id": 182,
+        "name": "Union Berlin"
+      },
+      "venue": {
+        "id": 11899,
+        "name": "MEWA ARENA",
+        "city": "Mainz",
+        "capacity": 34034
+      },
+      "stats_home": {
+        "fouls": 10,
+        "yellow": 1,
+        "red": 0,
+        "cards_total": 1,
+        "cards_per_foul": 0.1
+      },
+      "stats_away": {
+        "fouls": 15,
+        "yellow": 3,
+        "red": 0,
+        "cards_total": 3,
+        "cards_per_foul": 0.2
+      }
+    },
+    {
+      "fixture_id": 1223978,
+      "date": "2024-08-24T13:30:00+00:00",
+      "referee": "T. Stieler",
+      "round": "Regular Season - 1",
+      "home": {
+        "id": 167,
+        "name": "1899 Hoffenheim"
+      },
+      "away": {
+        "id": 191,
+        "name": "Holstein Kiel"
+      },
+      "venue": {
+        "id": 724,
+        "name": "PreZero Arena",
+        "city": "Sinsheim",
+        "capacity": 30164
+      },
+      "stats_home": {
+        "fouls": 8,
+        "yellow": 2,
+        "red": 0,
+        "cards_total": 2,
+        "cards_per_foul": 0.25
+      },
+      "stats_away": {
+        "fouls": 14,
+        "yellow": 3,
+        "red": 1,
+        "cards_total": 4,
+        "cards_per_foul": 0.2857142857142857
+      }
+    },
+    {
+      "fixture_id": 1223980,
+      "date": "2024-08-24T13:30:00+00:00",
+      "referee": "S. Stegemann",
+      "round": "Regular Season - 1",
+      "home": {
+        "id": 170,
+        "name": "FC Augsburg"
+      },
+      "away": {
+        "id": 162,
+        "name": "Werder Bremen"
+      },
+      "venue": {
+        "id": 698,
+        "name": "WWK Arena",
+        "city": "Augsburg",
+        "capacity": 30662
+      },
+      "stats_home": {
+        "fouls": 11,
+        "yellow": 3,
+        "red": 0,
+        "cards_total": 3,
+        "cards_per_foul": 0.2727272727272727
+      },
+      "stats_away": {
+        "fouls": 10,
+        "yellow": 1,
+        "red": 0,
+        "cards_total": 1,
+        "cards_per_foul": 0.1
+      }
+    },
+    {
+      "fixture_id": 1223976,
+      "date": "2024-08-24T13:30:00+00:00",
+      "referee": "B. Brand",
+      "round": "Regular Season - 1",
+      "home": {
+        "id": 173,
+        "name": "RB Leipzig"
+      },
+      "away": {
+        "id": 176,
+        "name": "VfL Bochum"
+      },
+      "venue": {
+        "id": 738,
+        "name": "Red Bull Arena",
+        "city": "Leipzig",
+        "capacity": null
+      },
+      "stats_home": {
+        "fouls": 9,
+        "yellow": 1,
+        "red": 1,
+        "cards_total": 2,
+        "cards_per_foul": 0.2222222222222222
+      },
+      "stats_away": {
+        "fouls": 16,
+        "yellow": 3,
+        "red": 0,
+        "cards_total": 3,
+        "cards_per_foul": 0.1875
+      }
+    },
+    {
+      "fixture_id": 1223977,
+      "date": "2024-08-24T16:30:00+00:00",
+      "referee": "F. Zwayer",
+      "round": "Regular Season - 1",
+      "home": {
+        "id": 165,
+        "name": "Borussia Dortmund"
+      },
+      "away": {
+        "id": 169,
+        "name": "Eintracht Frankfurt"
+      },
+      "venue": {
+        "id": 19381,
+        "name": "SIGNAL IDUNA PARK",
+        "city": "Dortmund",
+        "capacity": null
+      },
+      "stats_home": {
+        "fouls": 6,
+        "yellow": 0,
+        "red": 0,
+        "cards_total": 0,
+        "cards_per_foul": 0.0
+      },
+      "stats_away": {
+        "fouls": 3,
+        "yellow": 1,
+        "red": 0,
+        "cards_total": 1,
+        "cards_per_foul": 0.3333333333333333
+      }
+    },
+    {
+      "fixture_id": 1223981,
+      "date": "2024-08-25T13:30:00+00:00",
+      "referee": "D. Siebert",
+      "round": "Regular Season - 1",
+      "home": {
+        "id": 161,
+        "name": "VfL Wolfsburg"
+      },
+      "away": {
+        "id": 157,
+        "name": "Bayern München"
+      },
+      "venue": {
+        "id": 752,
+        "name": "Volkswagen Arena",
+        "city": "Wolfsburg",
+        "capacity": 30000
+      },
+      "stats_home": {
+        "fouls": 12,
+        "yellow": 2,
+        "red": 0,
+        "cards_total": 2,
+        "cards_per_foul": 0.16666666666666666
+      },
+      "stats_away": {
+        "fouls": 11,
+        "yellow": 3,
+        "red": 0,
+        "cards_total": 3,
+        "cards_per_foul": 0.2727272727272727
+      }
+    },
+    {
+      "fixture_id": 1223983,
+      "date": "2024-08-25T15:30:00+00:00",
+      "referee": "S. Jablonski",
+      "round": "Regular Season - 1",
+      "home": {
+        "id": 186,
+        "name": "FC St. Pauli"
+      },
+      "away": {
+        "id": 180,
+        "name": "1. FC Heidenheim"
+      },
+      "venue": {
+        "id": 745,
+        "name": "Millerntor-Stadion",
+        "city": "Hamburg",
+        "capacity": 29564
+      },
+      "stats_home": {
+        "fouls": 9,
+        "yellow": 2,
+        "red": 0,
+        "cards_total": 2,
+        "cards_per_foul": 0.2222222222222222
+      },
+      "stats_away": {
+        "fouls": 15,
+        "yellow": 3,
+        "red": 0,
+        "cards_total": 3,
+        "cards_per_foul": 0.2
+      }
+    },
+    {
+      "fixture_id": 1223990,
+      "date": "2024-08-30T18:30:00+00:00",
+      "referee": "B. Dankert",
+      "round": "Regular Season - 2",
+      "home": {
+        "id": 182,
+        "name": "Union Berlin"
+      },
+      "away": {
+        "id": 186,
+        "name": "FC St. Pauli"
+      },
+      "venue": {
+        "id": 748,
+        "name": "Stadion An der Alten Försterei",
+        "city": "Berlin",
+        "capacity": 22467
+      },
+      "stats_home": {
+        "fouls": 10,
+        "yellow": 3,
+        "red": 0,
+        "cards_total": 3,
+        "cards_per_foul": 0.3
+      },
+      "stats_away": {
+        "fouls": 11,
+        "yellow": 1,
+        "red": 0,
+        "cards_total": 1,
+        "cards_per_foul": 0.09090909090909091
+      }
+    },
+    {
+      "fixture_id": 1223989,
+      "date": "2024-08-31T13:30:00+00:00",
+      "referee": "R. Hartmann",
+      "round": "Regular Season - 2",
+      "home": {
+        "id": 162,
+        "name": "Werder Bremen"
+      },
+      "away": {
+        "id": 165,
+        "name": "Borussia Dortmund"
+      },
+      "venue": {
+        "id": null,
+        "name": "Weserstadion",
+        "city": "Bremen",
+        "capacity": null
+      },
+      "stats_home": {
+        "fouls": 11,
+        "yellow": 2,
+        "red": 0,
+        "cards_total": 2,
+        "cards_per_foul": 0.18181818181818182
+      },
+      "stats_away": {
+        "fouls": 16,
+        "yellow": 7,
+        "red": 1,
+        "cards_total": 8,
+        "cards_per_foul": 0.5
+      }
+    },
+    {
+      "fixture_id": 1223987,
+      "date": "2024-08-31T13:30:00+00:00",
+      "referee": "F. Badstübner",
+      "round": "Regular Season - 2",
+      "home": {
+        "id": 169,
+        "name": "Eintracht Frankfurt"
+      },
+      "away": {
+        "id": 167,
+        "name": "1899 Hoffenheim"
+      },
+      "venue": {
+        "id": 10491,
+        "name": "Deutsche Bank Park",
+        "city": "Frankfurt am Main",
+        "capacity": null
+      },
+      "stats_home": {
+        "fouls": 10,
+        "yellow": 0,
+        "red": 0,
+        "cards_total": 0,
+        "cards_per_foul": 0.0
+      },
+      "stats_away": {
+        "fouls": 10,
+        "yellow": 3,
+        "red": 0,
+        "cards_total": 3,
+        "cards_per_foul": 0.3
+      }
+    },
+    {
+      "fixture_id": 1223985,
+      "date": "2024-08-31T13:30:00+00:00",
+      "referee": "T. Gerach",
+      "round": "Regular Season - 2",
+      "home": {
+        "id": 172,
+        "name": "VfB Stuttgart"
+      },
+      "away": {
+        "id": 164,
+        "name": "FSV Mainz 05"
+      },
+      "venue": {
+        "id": 20473,
+        "name": "MHPArena",
+        "city": "Stuttgart",
+        "capacity": null
+      },
+      "stats_home": {
+        "fouls": 6,
+        "yellow": 4,
+        "red": 0,
+        "cards_total": 4,
+        "cards_per_foul": 0.6666666666666666
+      },
+      "stats_away": {
+        "fouls": 12,
+        "yellow": 2,
+        "red": 0,
+        "cards_total": 2,
+        "cards_per_foul": 0.16666666666666666
+      }
+    },
+    {
+      "fixture_id": 1223991,
+      "date": "2024-08-31T13:30:00+00:00",
+      "referee": "S. Storks",
+      "round": "Regular Season - 2",
+      "home": {
+        "id": 176,
+        "name": "VfL Bochum"
+      },
+      "away": {
+        "id": 163,
+        "name": "Borussia Mönchengladbach"
+      },
+      "venue": {
+        "id": 751,
+        "name": "Vonovia Ruhrstadion",
+        "city": "Bochum",
+        "capacity": 27599
+      },
+      "stats_home": {
+        "fouls": 9,
+        "yellow": 1,
+        "red": 0,
+        "cards_total": 1,
+        "cards_per_foul": 0.1111111111111111
+      },
+      "stats_away": {
+        "fouls": 10,
+        "yellow": 0,
+        "red": 0,
+        "cards_total": 0,
+        "cards_per_foul": 0.0
+      }
+    },
+    {
+      "fixture_id": 1223992,
+      "date": "2024-08-31T13:30:00+00:00",
+      "referee": "F. Exner",
+      "round": "Regular Season - 2",
+      "home": {
+        "id": 191,
+        "name": "Holstein Kiel"
+      },
+      "away": {
+        "id": 161,
+        "name": "VfL Wolfsburg"
+      },
+      "venue": {
+        "id": 725,
+        "name": "Holstein-Stadion",
+        "city": "Kiel",
+        "capacity": 15034
+      },
+      "stats_home": {
+        "fouls": 17,
+        "yellow": 4,
+        "red": 0,
+        "cards_total": 4,
+        "cards_per_foul": 0.23529411764705882
+      },
+      "stats_away": {
+        "fouls": 14,
+        "yellow": 7,
+        "red": 0,
+        "cards_total": 7,
+        "cards_per_foul": 0.5
+      }
+    },
+    {
+      "fixture_id": 1223984,
+      "date": "2024-08-31T16:30:00+00:00",
+      "referee": "M. Jöllenbeck",
+      "round": "Regular Season - 2",
+      "home": {
+        "id": 168,
+        "name": "Bayer Leverkusen"
+      },
+      "away": {
+        "id": 173,
+        "name": "RB Leipzig"
+      },
+      "venue": {
+        "id": 699,
+        "name": "BayArena",
+        "city": "Leverkusen",
+        "capacity": 30210
+      },
+      "stats_home": {
+        "fouls": 7,
+        "yellow": 3,
+        "red": 0,
+        "cards_total": 3,
+        "cards_per_foul": 0.42857142857142855
+      },
+      "stats_away": {
+        "fouls": 8,
+        "yellow": 1,
+        "red": 0,
+        "cards_total": 1,
+        "cards_per_foul": 0.125
+      }
+    },
+    {
+      "fixture_id": 1223988,
+      "date": "2024-09-01T13:30:00+00:00",
+      "referee": "M. Petersen",
+      "round": "Regular Season - 2",
+      "home": {
+        "id": 180,
+        "name": "1. FC Heidenheim"
+      },
+      "away": {
+        "id": 170,
+        "name": "FC Augsburg"
+      },
+      "venue": {
+        "id": 723,
+        "name": "Voith-Arena",
+        "city": "Heidenheim an der Brenz",
+        "capacity": 15000
+      },
+      "stats_home": {
+        "fouls": 15,
+        "yellow": 1,
+        "red": 0,
+        "cards_total": 1,
+        "cards_per_foul": 0.06666666666666667
+      },
+      "stats_away": {
+        "fouls": 10,
+        "yellow": 4,
+        "red": 0,
+        "cards_total": 4,
+        "cards_per_foul": 0.4
+      }
+    },
+    {
+      "fixture_id": 1223986,
+      "date": "2024-09-01T15:30:00+00:00",
+      "referee": "C. Dingert",
+      "round": "Regular Season - 2",
+      "home": {
+        "id": 157,
+        "name": "Bayern München"
+      },
+      "away": {
+        "id": 160,
+        "name": "SC Freiburg"
+      },
+      "venue": {
+        "id": 700,
+        "name": "Allianz Arena",
+        "city": "München",
+        "capacity": null
+      },
+      "stats_home": {
+        "fouls": 13,
+        "yellow": 1,
+        "red": 0,
+        "cards_total": 1,
+        "cards_per_foul": 0.07692307692307693
+      },
+      "stats_away": {
+        "fouls": 12,
+        "yellow": 0,
+        "red": 0,
+        "cards_total": 0,
+        "cards_per_foul": 0.0
+      }
+    }
+  ]
+}

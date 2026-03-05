@@ -1,26 +1,23 @@
-import json
-import os
-import time
-import requests
+import os, json, requests
+from dotenv import load_dotenv
 
-API_KEY = "c1efa65f1ef945fb99d5cf6c23acc446"
-headers = {"X-Auth-Token": API_KEY}
+load_dotenv()
 
-with open("football.json", "r", encoding="utf-8") as f:
-    data = json.load(f)
+KEY = os.getenv("FOOTBALL_2_API_KEY")
+if not KEY:
+    raise RuntimeError("FOOTBALL_2_API_KEY is missing in .env")
 
-match_ids = [m["id"] for m in data["matches"]]
+url = "https://v3.football.api-sports.io/fixtures"
+headers = {"x-apisports-key": KEY}
+params = {"league": 78, "season": 2024}
 
-details = []
-for i, mid in enumerate(match_ids, 1):
-    print(f"[{i}/{len(match_ids)}] Fetching match {mid}...")
-    r = requests.get(f"https://api.football-data.org/v4/matches/{mid}", headers=headers)
-    r.raise_for_status()
-    details.append(r.json())
+r = requests.get(url, headers=headers, params=params, timeout=30)
+r.raise_for_status()
+data = r.json()
 
-    time.sleep(6)  
+data["_meta"] = {"league": "Bundesliga", "season": 2024}
 
-with open(os.path.join(os.path.dirname(__file__), "football_detailed.json"), "w", encoding="utf-8") as f:
-    json.dump(details, f, indent=2, ensure_ascii=False)
+with open(os.path.join(os.path.dirname(__file__), "football.json"), "w", encoding="utf-8") as f:
+    json.dump(data, f, ensure_ascii=False, indent=2)
 
-print("Saved football_detailed.json")
+print("Saved football.json")

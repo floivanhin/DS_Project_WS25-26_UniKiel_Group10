@@ -1,0 +1,677 @@
+{
+  "filters": {
+    "season": "2025"
+  },
+  "resultSet": {
+    "count": 10,
+    "first": "2026-02-27",
+    "last": "2026-03-04",
+    "played": 9
+  },
+  "competition": {
+    "id": 2002,
+    "name": "Bundesliga",
+    "code": "BL1",
+    "type": "LEAGUE",
+    "emblem": "https://crests.football-data.org/BL1.png"
+  },
+  "matches": [
+    {
+      "area": {
+        "id": 2088,
+        "name": "Germany",
+        "code": "DEU",
+        "flag": "https://crests.football-data.org/759.svg"
+      },
+      "competition": {
+        "id": 2002,
+        "name": "Bundesliga",
+        "code": "BL1",
+        "type": "LEAGUE",
+        "emblem": "https://crests.football-data.org/BL1.png"
+      },
+      "season": {
+        "id": 2414,
+        "startDate": "2025-08-22",
+        "endDate": "2026-05-16",
+        "currentMatchday": 24,
+        "winner": null
+      },
+      "id": 540621,
+      "utcDate": "2026-02-27T19:30:00Z",
+      "status": "FINISHED",
+      "matchday": 24,
+      "stage": "REGULAR_SEASON",
+      "group": null,
+      "lastUpdated": "2026-03-04T00:20:55Z",
+      "homeTeam": {
+        "id": 16,
+        "name": "FC Augsburg",
+        "shortName": "Augsburg",
+        "tla": "FCA",
+        "crest": "https://crests.football-data.org/16.png"
+      },
+      "awayTeam": {
+        "id": 1,
+        "name": "1. FC Köln",
+        "shortName": "1. FC Köln",
+        "tla": "KOE",
+        "crest": "https://crests.football-data.org/1.png"
+      },
+      "score": {
+        "winner": "HOME_TEAM",
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": 2,
+          "away": 0
+        },
+        "halfTime": {
+          "home": 0,
+          "away": 0
+        }
+      },
+      "odds": {
+        "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+      },
+      "referees": [
+        {
+          "id": 57539,
+          "name": "Tobias Welz",
+          "type": "REFEREE",
+          "nationality": "Germany"
+        }
+      ]
+    },
+    {
+      "area": {
+        "id": 2088,
+        "name": "Germany",
+        "code": "DEU",
+        "flag": "https://crests.football-data.org/759.svg"
+      },
+      "competition": {
+        "id": 2002,
+        "name": "Bundesliga",
+        "code": "BL1",
+        "type": "LEAGUE",
+        "emblem": "https://crests.football-data.org/BL1.png"
+      },
+      "season": {
+        "id": 2414,
+        "startDate": "2025-08-22",
+        "endDate": "2026-05-16",
+        "currentMatchday": 24,
+        "winner": null
+      },
+      "id": 540615,
+      "utcDate": "2026-02-28T14:30:00Z",
+      "status": "FINISHED",
+      "matchday": 24,
+      "stage": "REGULAR_SEASON",
+      "group": null,
+      "lastUpdated": "2026-03-04T00:20:55Z",
+      "homeTeam": {
+        "id": 3,
+        "name": "Bayer 04 Leverkusen",
+        "shortName": "Leverkusen",
+        "tla": "B04",
+        "crest": "https://crests.football-data.org/3.png"
+      },
+      "awayTeam": {
+        "id": 15,
+        "name": "1. FSV Mainz 05",
+        "shortName": "Mainz",
+        "tla": "M05",
+        "crest": "https://crests.football-data.org/15.png"
+      },
+      "score": {
+        "winner": "DRAW",
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": 1,
+          "away": 1
+        },
+        "halfTime": {
+          "home": 0,
+          "away": 0
+        }
+      },
+      "odds": {
+        "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+      },
+      "referees": [
+        {
+          "id": 43943,
+          "name": "Tobias Stieler",
+          "type": "REFEREE",
+          "nationality": "Germany"
+        }
+      ]
+    },
+    {
+      "area": {
+        "id": 2088,
+        "name": "Germany",
+        "code": "DEU",
+        "flag": "https://crests.football-data.org/759.svg"
+      },
+      "competition": {
+        "id": 2002,
+        "name": "Bundesliga",
+        "code": "BL1",
+        "type": "LEAGUE",
+        "emblem": "https://crests.football-data.org/BL1.png"
+      },
+      "season": {
+        "id": 2414,
+        "startDate": "2025-08-22",
+        "endDate": "2026-05-16",
+        "currentMatchday": 24,
+        "winner": null
+      },
+      "id": 540618,
+      "utcDate": "2026-02-28T14:30:00Z",
+      "status": "FINISHED",
+      "matchday": 24,
+      "stage": "REGULAR_SEASON",
+      "group": null,
+      "lastUpdated": "2026-03-04T00:20:55Z",
+      "homeTeam": {
+        "id": 18,
+        "name": "Borussia Mönchengladbach",
+        "shortName": "M'gladbach",
+        "tla": "BMG",
+        "crest": "https://crests.football-data.org/18.png"
+      },
+      "awayTeam": {
+        "id": 28,
+        "name": "1. FC Union Berlin",
+        "shortName": "Union Berlin",
+        "tla": "UNB",
+        "crest": "https://crests.football-data.org/28.png"
+      },
+      "score": {
+        "winner": "HOME_TEAM",
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": 1,
+          "away": 0
+        },
+        "halfTime": {
+          "home": 0,
+          "away": 0
+        }
+      },
+      "odds": {
+        "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+      },
+      "referees": [
+        {
+          "id": 56230,
+          "name": "Matthias Jöllenbeck",
+          "type": "REFEREE",
+          "nationality": "Germany"
+        }
+      ]
+    },
+    {
+      "area": {
+        "id": 2088,
+        "name": "Germany",
+        "code": "DEU",
+        "flag": "https://crests.football-data.org/759.svg"
+      },
+      "competition": {
+        "id": 2002,
+        "name": "Bundesliga",
+        "code": "BL1",
+        "type": "LEAGUE",
+        "emblem": "https://crests.football-data.org/BL1.png"
+      },
+      "season": {
+        "id": 2414,
+        "startDate": "2025-08-22",
+        "endDate": "2026-05-16",
+        "currentMatchday": 24,
+        "winner": null
+      },
+      "id": 540619,
+      "utcDate": "2026-02-28T14:30:00Z",
+      "status": "FINISHED",
+      "matchday": 24,
+      "stage": "REGULAR_SEASON",
+      "group": null,
+      "lastUpdated": "2026-03-04T00:20:55Z",
+      "homeTeam": {
+        "id": 2,
+        "name": "TSG 1899 Hoffenheim",
+        "shortName": "Hoffenheim",
+        "tla": "TSG",
+        "crest": "https://crests.football-data.org/2.png"
+      },
+      "awayTeam": {
+        "id": 20,
+        "name": "FC St. Pauli 1910",
+        "shortName": "St. Pauli",
+        "tla": "STP",
+        "crest": "https://crests.football-data.org/20.png"
+      },
+      "score": {
+        "winner": "AWAY_TEAM",
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": 0,
+          "away": 1
+        },
+        "halfTime": {
+          "home": 0,
+          "away": 1
+        }
+      },
+      "odds": {
+        "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+      },
+      "referees": [
+        {
+          "id": 8825,
+          "name": "Deniz Aytekin",
+          "type": "REFEREE",
+          "nationality": "Germany"
+        }
+      ]
+    },
+    {
+      "area": {
+        "id": 2088,
+        "name": "Germany",
+        "code": "DEU",
+        "flag": "https://crests.football-data.org/759.svg"
+      },
+      "competition": {
+        "id": 2002,
+        "name": "Bundesliga",
+        "code": "BL1",
+        "type": "LEAGUE",
+        "emblem": "https://crests.football-data.org/BL1.png"
+      },
+      "season": {
+        "id": 2414,
+        "startDate": "2025-08-22",
+        "endDate": "2026-05-16",
+        "currentMatchday": 24,
+        "winner": null
+      },
+      "id": 540620,
+      "utcDate": "2026-02-28T14:30:00Z",
+      "status": "FINISHED",
+      "matchday": 24,
+      "stage": "REGULAR_SEASON",
+      "group": null,
+      "lastUpdated": "2026-03-04T00:20:55Z",
+      "homeTeam": {
+        "id": 12,
+        "name": "SV Werder Bremen",
+        "shortName": "Bremen",
+        "tla": "SVW",
+        "crest": "https://crests.football-data.org/12.png"
+      },
+      "awayTeam": {
+        "id": 44,
+        "name": "1. FC Heidenheim 1846",
+        "shortName": "Heidenheim",
+        "tla": "HEI",
+        "crest": "https://crests.football-data.org/44.png"
+      },
+      "score": {
+        "winner": "HOME_TEAM",
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": 2,
+          "away": 0
+        },
+        "halfTime": {
+          "home": 0,
+          "away": 0
+        }
+      },
+      "odds": {
+        "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+      },
+      "referees": [
+        {
+          "id": 57518,
+          "name": "Florian Badstübner",
+          "type": "REFEREE",
+          "nationality": "Germany"
+        }
+      ]
+    },
+    {
+      "area": {
+        "id": 2088,
+        "name": "Germany",
+        "code": "DEU",
+        "flag": "https://crests.football-data.org/759.svg"
+      },
+      "competition": {
+        "id": 2002,
+        "name": "Bundesliga",
+        "code": "BL1",
+        "type": "LEAGUE",
+        "emblem": "https://crests.football-data.org/BL1.png"
+      },
+      "season": {
+        "id": 2414,
+        "startDate": "2025-08-22",
+        "endDate": "2026-05-16",
+        "currentMatchday": 24,
+        "winner": null
+      },
+      "id": 540613,
+      "utcDate": "2026-02-28T17:30:00Z",
+      "status": "FINISHED",
+      "matchday": 24,
+      "stage": "REGULAR_SEASON",
+      "group": null,
+      "lastUpdated": "2026-03-04T00:20:55Z",
+      "homeTeam": {
+        "id": 4,
+        "name": "Borussia Dortmund",
+        "shortName": "Dortmund",
+        "tla": "BVB",
+        "crest": "https://crests.football-data.org/4.png"
+      },
+      "awayTeam": {
+        "id": 5,
+        "name": "FC Bayern München",
+        "shortName": "Bayern",
+        "tla": "FCB",
+        "crest": "https://crests.football-data.org/5.png"
+      },
+      "score": {
+        "winner": "AWAY_TEAM",
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": 2,
+          "away": 3
+        },
+        "halfTime": {
+          "home": 1,
+          "away": 0
+        }
+      },
+      "odds": {
+        "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+      },
+      "referees": [
+        {
+          "id": 15824,
+          "name": "Sven Jablonski",
+          "type": "REFEREE",
+          "nationality": "Germany"
+        }
+      ]
+    },
+    {
+      "area": {
+        "id": 2088,
+        "name": "Germany",
+        "code": "DEU",
+        "flag": "https://crests.football-data.org/759.svg"
+      },
+      "competition": {
+        "id": 2002,
+        "name": "Bundesliga",
+        "code": "BL1",
+        "type": "LEAGUE",
+        "emblem": "https://crests.football-data.org/BL1.png"
+      },
+      "season": {
+        "id": 2414,
+        "startDate": "2025-08-22",
+        "endDate": "2026-05-16",
+        "currentMatchday": 24,
+        "winner": null
+      },
+      "id": 540617,
+      "utcDate": "2026-03-01T14:30:00Z",
+      "status": "FINISHED",
+      "matchday": 24,
+      "stage": "REGULAR_SEASON",
+      "group": null,
+      "lastUpdated": "2026-03-04T00:20:55Z",
+      "homeTeam": {
+        "id": 10,
+        "name": "VfB Stuttgart",
+        "shortName": "Stuttgart",
+        "tla": "VFB",
+        "crest": "https://crests.football-data.org/10.png"
+      },
+      "awayTeam": {
+        "id": 11,
+        "name": "VfL Wolfsburg",
+        "shortName": "Wolfsburg",
+        "tla": "WOB",
+        "crest": "https://crests.football-data.org/11.png"
+      },
+      "score": {
+        "winner": "HOME_TEAM",
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": 4,
+          "away": 0
+        },
+        "halfTime": {
+          "home": 3,
+          "away": 0
+        }
+      },
+      "odds": {
+        "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+      },
+      "referees": [
+        {
+          "id": 337,
+          "name": "Patrick Ittrich",
+          "type": "REFEREE",
+          "nationality": "Germany"
+        }
+      ]
+    },
+    {
+      "area": {
+        "id": 2088,
+        "name": "Germany",
+        "code": "DEU",
+        "flag": "https://crests.football-data.org/759.svg"
+      },
+      "competition": {
+        "id": 2002,
+        "name": "Bundesliga",
+        "code": "BL1",
+        "type": "LEAGUE",
+        "emblem": "https://crests.football-data.org/BL1.png"
+      },
+      "season": {
+        "id": 2414,
+        "startDate": "2025-08-22",
+        "endDate": "2026-05-16",
+        "currentMatchday": 24,
+        "winner": null
+      },
+      "id": 540614,
+      "utcDate": "2026-03-01T16:30:00Z",
+      "status": "FINISHED",
+      "matchday": 24,
+      "stage": "REGULAR_SEASON",
+      "group": null,
+      "lastUpdated": "2026-03-04T00:20:55Z",
+      "homeTeam": {
+        "id": 19,
+        "name": "Eintracht Frankfurt",
+        "shortName": "Frankfurt",
+        "tla": "SGE",
+        "crest": "https://crests.football-data.org/19.png"
+      },
+      "awayTeam": {
+        "id": 17,
+        "name": "SC Freiburg",
+        "shortName": "Freiburg",
+        "tla": "SCF",
+        "crest": "https://crests.football-data.org/17.png"
+      },
+      "score": {
+        "winner": "HOME_TEAM",
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": 2,
+          "away": 0
+        },
+        "halfTime": {
+          "home": 0,
+          "away": 0
+        }
+      },
+      "odds": {
+        "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+      },
+      "referees": [
+        {
+          "id": 57526,
+          "name": "Christian Dingert",
+          "type": "REFEREE",
+          "nationality": "Germany"
+        }
+      ]
+    },
+    {
+      "area": {
+        "id": 2088,
+        "name": "Germany",
+        "code": "DEU",
+        "flag": "https://crests.football-data.org/759.svg"
+      },
+      "competition": {
+        "id": 2002,
+        "name": "Bundesliga",
+        "code": "BL1",
+        "type": "LEAGUE",
+        "emblem": "https://crests.football-data.org/BL1.png"
+      },
+      "season": {
+        "id": 2414,
+        "startDate": "2025-08-22",
+        "endDate": "2026-05-16",
+        "currentMatchday": 24,
+        "winner": null
+      },
+      "id": 540616,
+      "utcDate": "2026-03-01T18:30:00Z",
+      "status": "FINISHED",
+      "matchday": 24,
+      "stage": "REGULAR_SEASON",
+      "group": null,
+      "lastUpdated": "2026-03-04T00:20:55Z",
+      "homeTeam": {
+        "id": 7,
+        "name": "Hamburger SV",
+        "shortName": "HSV",
+        "tla": "HSV",
+        "crest": "https://crests.football-data.org/7.png"
+      },
+      "awayTeam": {
+        "id": 721,
+        "name": "RB Leipzig",
+        "shortName": "RB Leipzig",
+        "tla": "RBL",
+        "crest": "https://crests.football-data.org/721.png"
+      },
+      "score": {
+        "winner": "AWAY_TEAM",
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": 1,
+          "away": 2
+        },
+        "halfTime": {
+          "home": 1,
+          "away": 1
+        }
+      },
+      "odds": {
+        "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+      },
+      "referees": [
+        {
+          "id": 15746,
+          "name": "Bastian Dankert",
+          "type": "REFEREE",
+          "nationality": "Germany"
+        }
+      ]
+    },
+    {
+      "area": {
+        "id": 2088,
+        "name": "Germany",
+        "code": "DEU",
+        "flag": "https://crests.football-data.org/759.svg"
+      },
+      "competition": {
+        "id": 2002,
+        "name": "Bundesliga",
+        "code": "BL1",
+        "type": "LEAGUE",
+        "emblem": "https://crests.football-data.org/BL1.png"
+      },
+      "season": {
+        "id": 2414,
+        "startDate": "2025-08-22",
+        "endDate": "2026-05-16",
+        "currentMatchday": 24,
+        "winner": null
+      },
+      "id": 540558,
+      "utcDate": "2026-03-04T19:30:00Z",
+      "status": "TIMED",
+      "matchday": 17,
+      "stage": "REGULAR_SEASON",
+      "group": null,
+      "lastUpdated": "2026-02-26T01:32:04Z",
+      "homeTeam": {
+        "id": 7,
+        "name": "Hamburger SV",
+        "shortName": "HSV",
+        "tla": "HSV",
+        "crest": "https://crests.football-data.org/7.png"
+      },
+      "awayTeam": {
+        "id": 3,
+        "name": "Bayer 04 Leverkusen",
+        "shortName": "Leverkusen",
+        "tla": "B04",
+        "crest": "https://crests.football-data.org/3.png"
+      },
+      "score": {
+        "winner": null,
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": null,
+          "away": null
+        },
+        "halfTime": {
+          "home": null,
+          "away": null
+        }
+      },
+      "odds": {
+        "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+      },
+      "referees": []
+    }
+  ],
+  "_meta": {
+    "dateFrom": "2026-02-25",
+    "dateTo": "2026-03-04"
+  }
+}
