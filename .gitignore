@@ -4,6 +4,7 @@
 
 # cache directories
 __pychache__/
+__pycache__/
 downloaded_files/
 .soccerdata_cache/
 

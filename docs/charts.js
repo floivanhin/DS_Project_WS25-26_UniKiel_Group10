@@ -8,15 +8,24 @@ const COLORS = {
 };
 
 const CSV_FILES = {
-  coreTeamAgeSummary: "data/other/bundesliga_team_age_summary.csv",
-  coreSeasonAgeSummary: "data/other/bundesliga_season_age_summary.csv",
-  rq4Ratings: "data/rq4/rq4_home_away_player_ratings.csv",
-  rq4Delta: "data/rq4/rq4_player_home_away_delta.csv",
-  rq9TeamAgeEfficiency: "data/rq9/rq9_team_age_vs_efficiency.csv",
-  rq9TeamMatchEfficiency: "data/rq9/rq9_team_match_efficiency.csv",
-  rq9OptimalAgeSummary: "data/rq9/rq9_optimal_age_summary.csv",
-  rq9PlayerAgeProfile: "data/rq9/rq9_player_age_profile.csv",
-  rq9PlayerBestAge: "data/rq9/rq9_player_best_age.csv",
+  coreTeamAgeSummary:
+    "analysis_diagram_data/rq9/bundesliga_team_age_summary.csv",
+  coreSeasonAgeSummary:
+    "analysis_diagram_data/rq9/bundesliga_season_age_summary.csv",
+  rq4Ratings:
+    "analysis_diagram_data/rq4/rq4_home_away_player_ratings.csv",
+  rq4Delta:
+    "analysis_diagram_data/rq4/rq4_player_home_away_delta.csv",
+  rq9TeamAgeEfficiency:
+    "analysis_diagram_data/rq9/rq9_team_age_vs_efficiency.csv",
+  rq9TeamMatchEfficiency:
+    "analysis_diagram_data/rq9/rq9_team_match_efficiency.csv",
+  rq9OptimalAgeSummary:
+    "analysis_diagram_data/rq9/rq9_optimal_age_summary.csv",
+  rq9PlayerAgeProfile:
+    "analysis_diagram_data/rq9/rq9_player_age_profile.csv",
+  rq9PlayerBestAge:
+    "analysis_diagram_data/rq9/rq9_player_best_age.csv",
 };
 
 const csvCache = new Map();
@@ -642,6 +651,17 @@ async function renderRq4Page() {
   setText("rq4-metric-away-mean", formatDecimal(meanAway, 3));
   setText("rq4-metric-home-away-delta", formatSigned(meanDelta, 3));
   setText("rq4-metric-top-player", buildRq4TopPlayerMetric(topHome, topAway));
+  const rq4AnswerSummary =
+    topHome && topAway
+      ? topHome.player === topAway.player
+        ? `The data answers RQ4 by showing that ${topHome.player} is the strongest-rated player in both home and away matches among leaderboard-eligible players.`
+        : `The data answers RQ4 by showing that ${topHome.player} leads the home ratings while ${topAway.player} leads the away ratings among leaderboard-eligible players.`
+      : "The data answers RQ4 by identifying the strongest-rated home and away performers.";
+  setText("rq4-answer-summary", rq4AnswerSummary);
+  setText(
+    "rq4-answer-detail",
+    `Across the league, the mean rating is still slightly higher at home than away (${formatDecimal(meanHome, 3)} vs ${formatDecimal(meanAway, 3)}, ${formatSigned(meanDelta, 3)}), so the home effect is present but modest.`
+  );
 
   if (topPositive.length) {
     setText("rq4-key-positive", `Strongest positive deltas: ${formatNamedList(topPositive.slice(0, 3), "player", "delta", 3, true)}.`);
@@ -701,12 +721,14 @@ async function renderRq9Page() {
     .filter((row) => Number.isFinite(row.ageInt) && Number.isFinite(row.goalsPerShot) && Number.isFinite(row.totalShots))
     .sort((a, b) => a.ageInt - b.ageInt);
 
-  const optimalRow = optimalRaw.find((row) => row.scope === "single_season") || optimalRaw[0] || {};
+  const optimalRow = optimalRaw[0] || {};
   const bestAgeRow = bestAgeRaw.find((row) => row.season !== "all") || bestAgeRaw[0] || {};
 
   const pearson = toNumber(optimalRow.pearson_r_age_efficiency);
   const minAvgAge = Math.min(...teamRows.map((row) => row.avgAge));
   const maxAvgAge = Math.max(...teamRows.map((row) => row.avgAge));
+  const peakAge = toNumber(optimalRow.estimated_peak_age);
+  const peakEfficiency = toNumber(optimalRow.estimated_peak_goals_per_shot);
   const bestAgeInt = toNumber(bestAgeRow.best_age_int);
   const bestBandEfficiency = toNumber(bestAgeRow.goals_per_shot);
   const bestBandGoals = toNumber(bestAgeRow.total_goals);
@@ -725,6 +747,16 @@ async function renderRq9Page() {
     "rq9-metric-band-efficiency",
     `${formatDecimal(bestBandEfficiency, 3)} (${formatCount(bestBandGoals)}/${formatCount(bestBandShots)})`
   );
+  setText("rq9-metric-peak-age", `${formatDecimal(peakAge, 2)} years`);
+  setText("rq9-metric-peak-efficiency", formatDecimal(peakEfficiency, 3));
+  setText(
+    "rq9-answer-summary",
+    `The data answers RQ9 with a negative association: as team-average age rises within the observed range, shot efficiency tends to fall (Pearson r = ${formatDecimal(pearson, 3)}).`
+  );
+  setText(
+    "rq9-answer-detail",
+    `The ${formatDecimal(minAvgAge, 2)}-${formatDecimal(maxAvgAge, 2)} range refers to team-average ages across the 18 Bundesliga teams. The quadratic fit estimates a peak at ${formatDecimal(peakAge, 2)} years with ${formatDecimal(peakEfficiency, 3)} goals_per_shot, but that point is extrapolated outside the observed range. The separate ${formatCount(bestAgeInt)}-year result comes from player-level age bands, where all individual players are grouped by age and then compared by goals_per_shot.`
+  );
 
   if (rankingRows.length) {
     setText("rq9-key-top", `Top efficiency: ${formatNamedList(rankingRows.slice(0, 3), "team", "goalsPerShot", 3)}.`);
@@ -733,7 +765,10 @@ async function renderRq9Page() {
     setText("rq9-key-low", `Low efficiency: ${formatNamedList(lowRows, "team", "goalsPerShot", 3)}.`);
   }
   if (optimalRow.model_note) {
-    setText("rq9-key-model-note", `Model note: ${optimalRow.model_note}`);
+    setText(
+      "rq9-key-model-note",
+      `Model note: ${optimalRow.model_note} Estimated peak: ${formatDecimal(peakAge, 2)} years and ${formatDecimal(peakEfficiency, 3)} goals_per_shot.`
+    );
   }
 
   renderRq9Charts({
