@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RQ9 - Age vs Efficiency</title>
+    <title>RQ9 - Average Age and Team Efficiency</title>
     <link
       rel="preconnect"
       href="https://fonts.googleapis.com"
@@ -42,11 +42,14 @@
     <main class="page">
       <section class="hero">
         <span class="tag">Research Question</span>
-        <h1>RQ9: How is team age related to shot efficiency?</h1>
+        <h1>
+          RQ9: How does the average player age affect a team's efficiency
+          (goals per shot)?
+        </h1>
         <p class="subtitle">
-          For all 18 Bundesliga teams in the 2024/25 season, average team age
-          was linked with `goals_per_shot`. The data shows a negative
-          relationship: older teams tend to be less efficient in finishing.
+          For all 18 Bundesliga teams in the 2024/25 season, team-average age
+          was linked with `goals_per_shot`. This shows how the average age of a
+          squad relates to finishing efficiency at team level.
         </p>
         <div class="chips">
           <span class="chip"><span id="rq9-chip-teams">18</span> teams</span>
@@ -73,19 +76,35 @@
           <div class="metric-label">Band efficiency</div>
           <div class="metric-value" id="rq9-metric-band-efficiency">0.175 (31/177)</div>
         </article>
+        <article class="metric">
+          <div class="metric-label">Estimated peak age</div>
+          <div class="metric-value" id="rq9-metric-peak-age">23.58 years</div>
+        </article>
+        <article class="metric">
+          <div class="metric-label">Estimated peak efficiency goal per shot</div>
+          <div class="metric-value" id="rq9-metric-peak-efficiency">0.138</div>
+        </article>
       </section>
 
       <section class="content-grid">
         <article class="panel span-6">
           <h2>Answer to RQ9</h2>
-          <p>
-            At team level, there is a negative association between average age
-            and shot efficiency. Younger to mid-age squads tend to show higher
-            `goals_per_shot` values.
+          <p id="rq9-answer-summary">
+            The data answers RQ9 with a negative relationship: teams with a
+            lower team-average age tend to convert shots more efficiently than
+            older teams.
+          </p>
+          <p id="rq9-answer-detail">
+            The team-average ages in this dataset only span a narrow range, so
+            the result supports a league-wide pattern rather than one exact
+            optimal team-average age.
           </p>
           <p>
-            The quadratic model does not provide a stable single optimum age
-            within the observed range.
+            The quadratic model still estimates a peak, but that estimate is
+            extrapolated when it lies outside the observed team-age range. The
+            separate 33-year result belongs to the player-level age-band
+            analysis, where all individual players are grouped by age and
+            compared by `goals_per_shot`.
           </p>
         </article>
 
@@ -101,7 +120,9 @@
               1. FC Union Berlin (0.084).
             </li>
             <li id="rq9-key-model-note">
-              Model note: maximum lies outside the observed range of 24.25-27.86.
+              Model note: the fitted quadratic peak lies outside the observed
+              team-average age range, so the data does not support one exact
+              optimal team-average age.
             </li>
           </ul>
         </article>
@@ -138,10 +159,12 @@
       </section>
 
       <p class="source-note">
-        <strong>Data source:</strong>
-        `data/rq9/rq9_team_age_vs_efficiency.csv`,
-        `rq9_optimal_age_summary.csv`, `rq9_player_age_profile.csv`,
-        `rq9_player_best_age.csv`.
+        <strong>Generated CSV files with analysis data for diagrams:</strong>
+        `analysis_diagram_data/rq9/rq9_team_match_efficiency.csv`,
+        `analysis_diagram_data/rq9/rq9_team_age_vs_efficiency.csv`,
+        `analysis_diagram_data/rq9/rq9_optimal_age_summary.csv`,
+        `analysis_diagram_data/rq9/rq9_player_age_profile.csv`, and
+        `analysis_diagram_data/rq9/rq9_player_best_age.csv`.
       </p>
 
       <footer class="footer">

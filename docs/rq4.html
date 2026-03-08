@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RQ4 - Home vs Away Ratings</title>
+    <title>RQ4 - Player Ratings by Home and Away Matches</title>
     <link
       rel="preconnect"
       href="https://fonts.googleapis.com"
@@ -42,11 +42,15 @@
     <main class="page">
       <section class="hero">
         <span class="tag">Research Question</span>
-        <h1>RQ4: Is there a home-away effect in player ratings?</h1>
+        <h1>
+          RQ4: Which players perform particularly well in home matches and
+          which in away matches (as measured by WhoScored overall ratings)?
+        </h1>
         <p class="subtitle">
           For 2024/25, WhoScored overall ratings were aggregated per player and
-          compared between home and away matches. The result shows a small
-          overall home advantage, with clear individual outliers.
+          compared between home and away matches. This shows which players
+          stand out in each setting and whether there is a broader home-away
+          pattern across the league.
         </p>
         <div class="chips">
           <span class="chip"><span id="rq4-chip-ratings-rows">933</span> rows (home/away ratings)</span>
@@ -78,13 +82,18 @@
       <section class="content-grid">
         <article class="panel span-6">
           <h2>Answer to RQ4</h2>
+          <p id="rq4-answer-summary">
+            The data answers RQ4 by identifying the strongest-rated home and
+            away performers and by showing a small overall home advantage.
+          </p>
+          <p id="rq4-answer-detail">
+            The standout players answer the "which players" part of the
+            question, while the mean home-away gap describes the broader league
+            trend.
+          </p>
           <p>
             On average, home ratings are slightly higher than away ratings.
             This indicates a small overall home effect in player ratings.
-          </p>
-          <p>
-            At the same time, the effect is not identical for all players:
-            several players show strong positive or negative deltas.
           </p>
         </article>
 
@@ -141,8 +150,8 @@
 
       <p class="source-note">
         <strong>Data source:</strong>
-        `data/rq4/rq4_home_away_player_ratings.csv` and
-        `rq4_player_home_away_delta.csv`.
+        `analysis_diagram_data/rq4/rq4_home_away_player_ratings.csv` and
+        `analysis_diagram_data/rq4/rq4_player_home_away_delta.csv`.
       </p>
 
       <footer class="footer">
