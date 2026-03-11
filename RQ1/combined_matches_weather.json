@@ -1,0 +1,476 @@
+{
+  "_meta": {
+    "dateFrom": "2026-02-25",
+    "dateTo": "2026-03-04",
+    "competitionCode": "BL1"
+  },
+  "competition": {
+    "id": 2002,
+    "name": "Bundesliga",
+    "code": "BL1",
+    "type": "LEAGUE",
+    "emblem": "https://crests.football-data.org/BL1.png"
+  },
+  "matches": [
+    {
+      "matchId": 540621,
+      "utcDate": "2026-02-27T19:30:00Z",
+      "matchDate": "2026-02-27",
+      "status": "FINISHED",
+      "matchday": 24,
+      "homeTeam": {
+        "teamId": 16,
+        "teamName": "FC Augsburg",
+        "shortName": "Augsburg",
+        "venue": "WWK Arena",
+        "address": "Donauwörther Straße 170 Augsburg 86154",
+        "city": "Donauwörther Straße 170 Augsburg"
+      },
+      "awayTeam": {
+        "id": 1,
+        "name": "1. FC Köln",
+        "shortName": "1. FC Köln",
+        "tla": "KOE",
+        "crest": "https://crests.football-data.org/1.png"
+      },
+      "score": {
+        "winner": "HOME_TEAM",
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": 2,
+          "away": 0
+        },
+        "halfTime": {
+          "home": 0,
+          "away": 0
+        }
+      },
+      "weather": {
+        "requestedAddress": "Donauwörther Straße 170 Augsburg 86154",
+        "resolvedAddress": "Donauwörther Straße 170, 86154 Augsburg, Deutschland",
+        "lat": 48.39613,
+        "lon": 10.88264,
+        "temp": 8.8,
+        "tempmax": 17.6,
+        "tempmin": 2.6,
+        "precip": 0.003,
+        "windspeed": 14.0,
+        "conditions": "Rain"
+      }
+    },
+    {
+      "matchId": 540615,
+      "utcDate": "2026-02-28T14:30:00Z",
+      "matchDate": "2026-02-28",
+      "status": "FINISHED",
+      "matchday": 24,
+      "homeTeam": {
+        "teamId": 3,
+        "teamName": "Bayer 04 Leverkusen",
+        "shortName": "Leverkusen",
+        "venue": "BayArena",
+        "address": "Bismarckstr. 122-124 Leverkusen 51373",
+        "city": "Bismarckstr. 122-124 Leverkusen"
+      },
+      "awayTeam": {
+        "id": 15,
+        "name": "1. FSV Mainz 05",
+        "shortName": "Mainz",
+        "tla": "M05",
+        "crest": "https://crests.football-data.org/15.png"
+      },
+      "score": {
+        "winner": "DRAW",
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": 1,
+          "away": 1
+        },
+        "halfTime": {
+          "home": 0,
+          "away": 0
+        }
+      },
+      "weather": {
+        "requestedAddress": "Bismarckstr. 122-124 Leverkusen 51373",
+        "resolvedAddress": "Bismarckstraße 122, 51373 Leverkusen, Deutschland",
+        "lat": 51.03741,
+        "lon": 7.00239,
+        "temp": 11.4,
+        "tempmax": 13.8,
+        "tempmin": 7.1,
+        "precip": 1.063,
+        "windspeed": 39.6,
+        "conditions": "Rain, Partially cloudy"
+      }
+    },
+    {
+      "matchId": 540618,
+      "utcDate": "2026-02-28T14:30:00Z",
+      "matchDate": "2026-02-28",
+      "status": "FINISHED",
+      "matchday": 24,
+      "homeTeam": {
+        "teamId": 18,
+        "teamName": "Borussia Mönchengladbach",
+        "shortName": "M'gladbach",
+        "venue": "Stadion im Borussia-Park",
+        "address": "Hennes-Weisweiler-Allee 1 Mönchengladbach 41179",
+        "city": "Hennes-Weisweiler-Allee 1 Mönchengladbach"
+      },
+      "awayTeam": {
+        "id": 28,
+        "name": "1. FC Union Berlin",
+        "shortName": "Union Berlin",
+        "tla": "UNB",
+        "crest": "https://crests.football-data.org/28.png"
+      },
+      "score": {
+        "winner": "HOME_TEAM",
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": 1,
+          "away": 0
+        },
+        "halfTime": {
+          "home": 0,
+          "away": 0
+        }
+      },
+      "weather": {
+        "requestedAddress": "Hennes-Weisweiler-Allee 1 Mönchengladbach 41179",
+        "resolvedAddress": "Hennes-Weisweiler-Allee 1, 41179 Mönchengladbach, Deutschland",
+        "lat": 51.17518,
+        "lon": 6.38408,
+        "temp": 10.8,
+        "tempmax": 13.0,
+        "tempmin": 6.7,
+        "precip": 2.665,
+        "windspeed": 47.2,
+        "conditions": "Rain, Partially cloudy"
+      }
+    },
+    {
+      "matchId": 540619,
+      "utcDate": "2026-02-28T14:30:00Z",
+      "matchDate": "2026-02-28",
+      "status": "FINISHED",
+      "matchday": 24,
+      "homeTeam": {
+        "teamId": 2,
+        "teamName": "TSG 1899 Hoffenheim",
+        "shortName": "Hoffenheim",
+        "venue": "PreZero Arena",
+        "address": "Horrenberger Straße 58 Zuzenhausen 74939",
+        "city": "Horrenberger Straße 58 Zuzenhausen"
+      },
+      "awayTeam": {
+        "id": 20,
+        "name": "FC St. Pauli 1910",
+        "shortName": "St. Pauli",
+        "tla": "STP",
+        "crest": "https://crests.football-data.org/20.png"
+      },
+      "score": {
+        "winner": "AWAY_TEAM",
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": 0,
+          "away": 1
+        },
+        "halfTime": {
+          "home": 0,
+          "away": 1
+        }
+      },
+      "weather": {
+        "requestedAddress": "Horrenberger Straße 58 Zuzenhausen 74939",
+        "resolvedAddress": "Horrenberger Straße 58, 74939 Zuzenhausen, Deutschland",
+        "lat": 49.29274,
+        "lon": 8.81729,
+        "temp": 9.9,
+        "tempmax": 14.5,
+        "tempmin": 6.0,
+        "precip": 0.0,
+        "windspeed": 26.6,
+        "conditions": "Partially cloudy"
+      }
+    },
+    {
+      "matchId": 540620,
+      "utcDate": "2026-02-28T14:30:00Z",
+      "matchDate": "2026-02-28",
+      "status": "FINISHED",
+      "matchday": 24,
+      "homeTeam": {
+        "teamId": 12,
+        "teamName": "SV Werder Bremen",
+        "shortName": "Bremen",
+        "venue": "Weserstadion",
+        "address": "Franz-Böhmert-Str. 1c Bremen 28205",
+        "city": "Franz-Böhmert-Str. 1c Bremen"
+      },
+      "awayTeam": {
+        "id": 44,
+        "name": "1. FC Heidenheim 1846",
+        "shortName": "Heidenheim",
+        "tla": "HEI",
+        "crest": "https://crests.football-data.org/44.png"
+      },
+      "score": {
+        "winner": "HOME_TEAM",
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": 2,
+          "away": 0
+        },
+        "halfTime": {
+          "home": 0,
+          "away": 0
+        }
+      },
+      "weather": {
+        "requestedAddress": "Franz-Böhmert-Str. 1c Bremen 28205",
+        "resolvedAddress": "Franz-Böhmert-Straße 1C, 28205 Bremen, Deutschland",
+        "lat": 53.06703,
+        "lon": 8.83853,
+        "temp": 11.3,
+        "tempmax": 13.6,
+        "tempmin": 6.9,
+        "precip": 1.662,
+        "windspeed": 42.8,
+        "conditions": "Rain, Partially cloudy"
+      }
+    },
+    {
+      "matchId": 540613,
+      "utcDate": "2026-02-28T17:30:00Z",
+      "matchDate": "2026-02-28",
+      "status": "FINISHED",
+      "matchday": 24,
+      "homeTeam": {
+        "teamId": 4,
+        "teamName": "Borussia Dortmund",
+        "shortName": "Dortmund",
+        "venue": "Signal Iduna Park",
+        "address": "Rheinlanddamm 207-209 Dortmund 44137",
+        "city": "Rheinlanddamm 207-209 Dortmund"
+      },
+      "awayTeam": {
+        "id": 5,
+        "name": "FC Bayern München",
+        "shortName": "Bayern",
+        "tla": "FCB",
+        "crest": "https://crests.football-data.org/5.png"
+      },
+      "score": {
+        "winner": "AWAY_TEAM",
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": 2,
+          "away": 3
+        },
+        "halfTime": {
+          "home": 1,
+          "away": 0
+        }
+      },
+      "weather": {
+        "requestedAddress": "Rheinlanddamm 207-209 Dortmund 44137",
+        "resolvedAddress": "Rheinlanddamm 207, 44137 Dortmund, Deutschland",
+        "lat": 51.49802,
+        "lon": 7.45118,
+        "temp": 11.1,
+        "tempmax": 13.3,
+        "tempmin": 7.6,
+        "precip": 1.189,
+        "windspeed": 31.7,
+        "conditions": "Rain, Partially cloudy"
+      }
+    },
+    {
+      "matchId": 540617,
+      "utcDate": "2026-03-01T14:30:00Z",
+      "matchDate": "2026-03-01",
+      "status": "FINISHED",
+      "matchday": 24,
+      "homeTeam": {
+        "teamId": 10,
+        "teamName": "VfB Stuttgart",
+        "shortName": "Stuttgart",
+        "venue": "Mercedes-Benz Arena",
+        "address": "Mercedesstraße 109 Stuttgart 70372",
+        "city": "Mercedesstraße 109 Stuttgart"
+      },
+      "awayTeam": {
+        "id": 11,
+        "name": "VfL Wolfsburg",
+        "shortName": "Wolfsburg",
+        "tla": "WOB",
+        "crest": "https://crests.football-data.org/11.png"
+      },
+      "score": {
+        "winner": "HOME_TEAM",
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": 4,
+          "away": 0
+        },
+        "halfTime": {
+          "home": 3,
+          "away": 0
+        }
+      },
+      "weather": {
+        "requestedAddress": "Mercedesstraße 109 Stuttgart 70372",
+        "resolvedAddress": "Mercedesstraße 109, 70372 Stuttgart, Deutschland",
+        "lat": 48.78955,
+        "lon": 9.23468,
+        "temp": 8.8,
+        "tempmax": 11.7,
+        "tempmin": 5.7,
+        "precip": 0.099,
+        "windspeed": 16.1,
+        "conditions": "Rain, Partially cloudy"
+      }
+    },
+    {
+      "matchId": 540614,
+      "utcDate": "2026-03-01T16:30:00Z",
+      "matchDate": "2026-03-01",
+      "status": "FINISHED",
+      "matchday": 24,
+      "homeTeam": {
+        "teamId": 19,
+        "teamName": "Eintracht Frankfurt",
+        "shortName": "Frankfurt",
+        "venue": "Deutsche Bank Park",
+        "address": "Mörfelder Landstraße 362 Frankfurt am Main 60528",
+        "city": "Mörfelder Landstraße 362 Frankfurt am Main"
+      },
+      "awayTeam": {
+        "id": 17,
+        "name": "SC Freiburg",
+        "shortName": "Freiburg",
+        "tla": "SCF",
+        "crest": "https://crests.football-data.org/17.png"
+      },
+      "score": {
+        "winner": "HOME_TEAM",
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": 2,
+          "away": 0
+        },
+        "halfTime": {
+          "home": 0,
+          "away": 0
+        }
+      },
+      "weather": {
+        "requestedAddress": "Mörfelder Landstraße 362 Frankfurt am Main 60528",
+        "resolvedAddress": "Mörfelder Landstraße 362, 60528 Frankfurt am Main, Deutschland",
+        "lat": 50.07071,
+        "lon": 8.65171,
+        "temp": 8.0,
+        "tempmax": 12.9,
+        "tempmin": 2.8,
+        "precip": 0.0,
+        "windspeed": 15.1,
+        "conditions": "Clear"
+      }
+    },
+    {
+      "matchId": 540616,
+      "utcDate": "2026-03-01T18:30:00Z",
+      "matchDate": "2026-03-01",
+      "status": "FINISHED",
+      "matchday": 24,
+      "homeTeam": {
+        "teamId": 7,
+        "teamName": "Hamburger SV",
+        "shortName": "HSV",
+        "venue": "Volksparkstadion",
+        "address": "Sylvesterallee 7 Hamburg 22525",
+        "city": "Sylvesterallee 7 Hamburg"
+      },
+      "awayTeam": {
+        "id": 721,
+        "name": "RB Leipzig",
+        "shortName": "RB Leipzig",
+        "tla": "RBL",
+        "crest": "https://crests.football-data.org/721.png"
+      },
+      "score": {
+        "winner": "AWAY_TEAM",
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": 1,
+          "away": 2
+        },
+        "halfTime": {
+          "home": 1,
+          "away": 1
+        }
+      },
+      "weather": {
+        "requestedAddress": "Sylvesterallee 7 Hamburg 22525",
+        "resolvedAddress": "Friedrich-Sylvester-Weg 45, 22525 Hamburg, Deutschland",
+        "lat": 53.58839,
+        "lon": 9.89295,
+        "temp": 7.6,
+        "tempmax": 10.9,
+        "tempmin": 4.1,
+        "precip": 0.216,
+        "windspeed": 31.5,
+        "conditions": "Rain, Partially cloudy"
+      }
+    },
+    {
+      "matchId": 540558,
+      "utcDate": "2026-03-04T19:30:00Z",
+      "matchDate": "2026-03-04",
+      "status": "FINISHED",
+      "matchday": 17,
+      "homeTeam": {
+        "teamId": 7,
+        "teamName": "Hamburger SV",
+        "shortName": "HSV",
+        "venue": "Volksparkstadion",
+        "address": "Sylvesterallee 7 Hamburg 22525",
+        "city": "Sylvesterallee 7 Hamburg"
+      },
+      "awayTeam": {
+        "id": 3,
+        "name": "Bayer 04 Leverkusen",
+        "shortName": "Leverkusen",
+        "tla": "B04",
+        "crest": "https://crests.football-data.org/3.png"
+      },
+      "score": {
+        "winner": "AWAY_TEAM",
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": 0,
+          "away": 1
+        },
+        "halfTime": {
+          "home": 0,
+          "away": 0
+        }
+      },
+      "weather": {
+        "requestedAddress": "Sylvesterallee 7 Hamburg 22525",
+        "resolvedAddress": "Friedrich-Sylvester-Weg 45, 22525 Hamburg, Deutschland",
+        "lat": 53.58839,
+        "lon": 9.89295,
+        "temp": 4.8,
+        "tempmax": 11.2,
+        "tempmin": -1.1,
+        "precip": 0.0,
+        "windspeed": 8.6,
+        "conditions": "Clear"
+      }
+    }
+  ]
+}
