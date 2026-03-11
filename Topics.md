@@ -13,13 +13,13 @@
 
 1. How does the weather affect the number of goals in a match?
 
-2. How does the remaining contract duration affect a player's performance as measured by the overall rating on whoscored?
+2. How does the matchday affect the amount of goals?
 
 3. How does the time between winning possession in your own half and the first shot correlate with the probability of scoring (per shot)?
 
 4. Which players perform particularly well in home matches and which in away matches?
 
-5. What is the relationship between transfer spending and league points?
+5. What is the relationship between payroll spending and league points?
 
 6. How does the league position affect ticket prices?
 
