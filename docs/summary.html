@@ -20,24 +20,8 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body data-page="overview">
-    <header class="topbar">
-      <div class="topbar-inner">
-        <a class="site-title" href="summary.html">Bundesliga Statistics</a>
-        <button
-          class="menu-toggle"
-          type="button"
-          aria-expanded="false"
-          aria-label="Toggle menu"
-        >
-          Menu
-        </button>
-        <nav class="top-nav">
-          <a class="active" href="summary.html">Overview</a>
-          <a href="rq4.html">RQ4</a>
-          <a href="rq9.html">RQ9</a>
-        </nav>
-      </div>
-    </header>
+    <div id="site-navbar"></div>
+    <script src="js/navbar-loader.js"></script>
 
     <main class="page">
       <section class="hero">
@@ -154,6 +138,6 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
-    <script src="charts.js?v=20260304-1"></script>
+    <script src="js/charts.js?v=20260311-1"></script>
   </body>
 </html>
