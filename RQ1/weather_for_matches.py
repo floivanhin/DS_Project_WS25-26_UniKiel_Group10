@@ -108,38 +108,54 @@ def fetch_weather_for_address(address: str, match_date: str) -> dict:
 
 def build_matches_weather(matches_data: dict, teams_data: dict) -> dict:
     team_lookup = build_team_lookup(teams_data)
+
+    matches = matches_data.get("matches", [])
+    total_matches = len(matches)
+
     out = {
         "_meta": matches_data.get("_meta", {}),
         "competition": matches_data.get("competition", {}),
         "matches": [],
     }
 
-    for match in matches_data.get("matches", []):
+    print(f"\nStarting weather fetching for {total_matches} matches\n")
+
+    for i, match in enumerate(matches, start=1):
+
         home_team_id = match.get("homeTeam", {}).get("id")
         home_team_info = team_lookup.get(home_team_id)
 
+        match_id = match.get("id")
+        match_date = get_match_date(match)
+
         if not home_team_info:
+            print(f"[{i}/{total_matches}] ERROR: home team not found for match {match_id}")
             out["matches"].append({
-                "matchId": match.get("id"),
+                "matchId": match_id,
                 "error": f"Home team with id {home_team_id} not found in teams.json",
             })
             continue
 
         address = home_team_info.get("address")
-        match_date = get_match_date(match)
+        team_name = home_team_info.get("teamName")
+
+        print(f"[{i}/{total_matches}] Fetching weather for {team_name} ({match_date})")
 
         if not address:
+            print(f"[{i}/{total_matches}] WARNING: No address for {team_name}")
             out["matches"].append({
-                "matchId": match.get("id"),
-                "error": f"No address found for home team {home_team_info.get('teamName')}",
+                "matchId": match_id,
+                "error": f"No address found for home team {team_name}",
             })
             continue
 
         try:
             weather = fetch_weather_for_address(address=address, match_date=match_date)
+
         except requests.HTTPError as exc:
+            print(f"[{i}/{total_matches}] ERROR: weather API failed -> {exc}")
             out["matches"].append({
-                "matchId": match.get("id"),
+                "matchId": match_id,
                 "homeTeam": home_team_info,
                 "matchDate": match_date,
                 "error": f"Weather request failed: {exc}",
@@ -147,7 +163,7 @@ def build_matches_weather(matches_data: dict, teams_data: dict) -> dict:
             continue
 
         out["matches"].append({
-            "matchId": match.get("id"),
+            "matchId": match_id,
             "utcDate": match.get("utcDate"),
             "matchDate": match_date,
             "status": match.get("status"),
@@ -157,6 +173,10 @@ def build_matches_weather(matches_data: dict, teams_data: dict) -> dict:
             "score": match.get("score", {}),
             "weather": weather,
         })
+
+        print(f"[{i}/{total_matches}] DONE\n")
+
+    print("\nWeather fetching completed\n")
 
     return out
 
