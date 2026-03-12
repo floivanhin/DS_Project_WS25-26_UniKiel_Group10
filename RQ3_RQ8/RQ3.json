@@ -1,7 +1,19 @@
 [
     {
         "is_goal":false,
-        "time_delta":5.0
+        "time_delta":0.0
+    },
+    {
+        "is_goal":false,
+        "time_delta":1.0
+    },
+    {
+        "is_goal":false,
+        "time_delta":2.0
+    },
+    {
+        "is_goal":false,
+        "time_delta":3.0
     },
     {
         "is_goal":false,
@@ -21,50 +33,6 @@
     },
     {
         "is_goal":false,
-        "time_delta":5.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":6.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":6.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":6.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":6.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":6.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":6.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":6.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":6.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":6.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":6.0
-    },
-    {
-        "is_goal":false,
         "time_delta":6.0
     },
     {
@@ -132,7 +100,7 @@
         "time_delta":6.0
     },
     {
-        "is_goal":false,
+        "is_goal":true,
         "time_delta":6.0
     },
     {
@@ -144,78 +112,6 @@
         "time_delta":6.0
     },
     {
-        "is_goal":false,
-        "time_delta":6.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":6.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":6.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":6.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":6.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":6.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":7.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":7.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":7.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":7.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":7.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":7.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":7.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":7.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":7.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":7.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":7.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":7.0
-    },
-    {
         "is_goal":true,
         "time_delta":7.0
     },
@@ -260,42 +156,6 @@
         "time_delta":7.0
     },
     {
-        "is_goal":true,
-        "time_delta":7.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":7.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":7.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":7.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":7.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":7.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":7.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":7.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":7.0
-    },
-    {
         "is_goal":false,
         "time_delta":7.0
     },
@@ -332,6 +192,10 @@
         "time_delta":7.0
     },
     {
+        "is_goal":true,
+        "time_delta":8.0
+    },
+    {
         "is_goal":false,
         "time_delta":8.0
     },
@@ -356,31 +220,7 @@
         "time_delta":8.0
     },
     {
-        "is_goal":false,
-        "time_delta":8.0
-    },
-    {
         "is_goal":true,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":false,
         "time_delta":8.0
     },
     {
@@ -469,178 +309,6 @@
     },
     {
         "is_goal":false,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":8.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
         "time_delta":9.0
     },
     {
@@ -677,26 +345,6 @@
     },
     {
         "is_goal":true,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
         "time_delta":9.0
     },
     {
@@ -772,43 +420,11 @@
         "time_delta":9.0
     },
     {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":9.0
-    },
-    {
         "is_goal":true,
+        "time_delta":9.0
+    },
+    {
+        "is_goal":false,
         "time_delta":9.0
     },
     {
@@ -824,78 +440,6 @@
         "time_delta":10.0
     },
     {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
         "is_goal":true,
         "time_delta":10.0
     },
@@ -913,86 +457,6 @@
     },
     {
         "is_goal":true,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":10.0
-    },
-    {
-        "is_goal":false,
         "time_delta":10.0
     },
     {
@@ -1049,43 +513,27 @@
     },
     {
         "is_goal":false,
-        "time_delta":11.0
+        "time_delta":10.0
     },
     {
         "is_goal":false,
-        "time_delta":11.0
+        "time_delta":10.0
+    },
+    {
+        "is_goal":true,
+        "time_delta":10.0
     },
     {
         "is_goal":false,
-        "time_delta":11.0
+        "time_delta":10.0
+    },
+    {
+        "is_goal":true,
+        "time_delta":10.0
     },
     {
         "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
+        "time_delta":10.0
     },
     {
         "is_goal":false,
@@ -1097,86 +545,6 @@
     },
     {
         "is_goal":true,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
         "time_delta":11.0
     },
     {
@@ -1240,35 +608,35 @@
         "time_delta":11.0
     },
     {
+        "is_goal":false,
+        "time_delta":11.0
+    },
+    {
+        "is_goal":false,
+        "time_delta":11.0
+    },
+    {
+        "is_goal":false,
+        "time_delta":11.0
+    },
+    {
+        "is_goal":false,
+        "time_delta":11.0
+    },
+    {
+        "is_goal":false,
+        "time_delta":11.0
+    },
+    {
+        "is_goal":false,
+        "time_delta":11.0
+    },
+    {
+        "is_goal":false,
+        "time_delta":11.0
+    },
+    {
         "is_goal":true,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":11.0
-    },
-    {
-        "is_goal":false,
         "time_delta":11.0
     },
     {
@@ -1300,10 +668,6 @@
         "time_delta":12.0
     },
     {
-        "is_goal":false,
-        "time_delta":12.0
-    },
-    {
         "is_goal":true,
         "time_delta":12.0
     },
@@ -1313,62 +677,6 @@
     },
     {
         "is_goal":false,
-        "time_delta":12.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":12.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":12.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":12.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":12.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":12.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":12.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":12.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":12.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":12.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":12.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":12.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":12.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":12.0
-    },
-    {
-        "is_goal":true,
         "time_delta":12.0
     },
     {
@@ -1473,98 +781,66 @@
     },
     {
         "is_goal":false,
-        "time_delta":12.0
+        "time_delta":13.0
+    },
+    {
+        "is_goal":false,
+        "time_delta":13.0
+    },
+    {
+        "is_goal":false,
+        "time_delta":13.0
+    },
+    {
+        "is_goal":false,
+        "time_delta":13.0
+    },
+    {
+        "is_goal":false,
+        "time_delta":13.0
+    },
+    {
+        "is_goal":false,
+        "time_delta":13.0
+    },
+    {
+        "is_goal":false,
+        "time_delta":13.0
+    },
+    {
+        "is_goal":false,
+        "time_delta":13.0
+    },
+    {
+        "is_goal":false,
+        "time_delta":13.0
+    },
+    {
+        "is_goal":false,
+        "time_delta":13.0
+    },
+    {
+        "is_goal":false,
+        "time_delta":13.0
+    },
+    {
+        "is_goal":false,
+        "time_delta":13.0
+    },
+    {
+        "is_goal":false,
+        "time_delta":13.0
+    },
+    {
+        "is_goal":false,
+        "time_delta":13.0
+    },
+    {
+        "is_goal":false,
+        "time_delta":13.0
     },
     {
         "is_goal":true,
-        "time_delta":12.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":12.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":12.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":12.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":12.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":12.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":12.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":12.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":12.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
         "time_delta":13.0
     },
     {
@@ -1629,131 +905,51 @@
     },
     {
         "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
+        "time_delta":14.0
     },
     {
         "is_goal":true,
-        "time_delta":13.0
+        "time_delta":14.0
     },
     {
         "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":13.0
+        "time_delta":14.0
     },
     {
         "is_goal":false,
-        "time_delta":13.0
+        "time_delta":14.0
     },
     {
         "is_goal":false,
-        "time_delta":13.0
+        "time_delta":14.0
     },
     {
         "is_goal":false,
-        "time_delta":13.0
+        "time_delta":14.0
     },
     {
         "is_goal":false,
-        "time_delta":13.0
+        "time_delta":14.0
     },
     {
         "is_goal":false,
-        "time_delta":13.0
+        "time_delta":14.0
     },
     {
         "is_goal":false,
-        "time_delta":13.0
+        "time_delta":14.0
     },
     {
         "is_goal":false,
-        "time_delta":13.0
+        "time_delta":14.0
     },
     {
         "is_goal":false,
-        "time_delta":13.0
+        "time_delta":14.0
     },
     {
         "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":13.0
+        "time_delta":14.0
     },
     {
         "is_goal":false,
@@ -1808,10 +1004,6 @@
         "time_delta":14.0
     },
     {
-        "is_goal":true,
-        "time_delta":14.0
-    },
-    {
         "is_goal":false,
         "time_delta":14.0
     },
@@ -1821,162 +1013,6 @@
     },
     {
         "is_goal":false,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":14.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":15.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":15.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":15.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":15.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":15.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":15.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":15.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":15.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":15.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":15.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":15.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":15.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":15.0
-    },
-    {
-        "is_goal":true,
         "time_delta":15.0
     },
     {
@@ -2028,19 +1064,7 @@
         "time_delta":15.0
     },
     {
-        "is_goal":false,
-        "time_delta":15.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":15.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":15.0
-    },
-    {
-        "is_goal":false,
+        "is_goal":true,
         "time_delta":15.0
     },
     {
@@ -2114,86 +1138,6 @@
     {
         "is_goal":false,
         "time_delta":16.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":16.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":16.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":16.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":16.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":16.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":16.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":16.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":16.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":17.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":17.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":17.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":17.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":17.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":17.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":17.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":17.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":17.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":17.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":17.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":17.0
     },
     {
         "is_goal":false,
@@ -2261,66 +1205,6 @@
     },
     {
         "is_goal":false,
-        "time_delta":18.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":18.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":18.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":18.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":18.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":18.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":18.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":18.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":19.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":19.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":19.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":19.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":19.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":19.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":19.0
-    },
-    {
-        "is_goal":false,
         "time_delta":19.0
     },
     {
@@ -2340,11 +1224,7 @@
         "time_delta":19.0
     },
     {
-        "is_goal":false,
-        "time_delta":19.0
-    },
-    {
-        "is_goal":false,
+        "is_goal":true,
         "time_delta":19.0
     },
     {
@@ -2354,70 +1234,6 @@
     {
         "is_goal":false,
         "time_delta":19.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":19.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":19.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":19.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":19.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":19.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":19.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":20.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":20.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":20.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":20.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":20.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":20.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":20.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":20.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":20.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":20.0
     },
     {
         "is_goal":false,
@@ -2440,15 +1256,7 @@
         "time_delta":20.0
     },
     {
-        "is_goal":false,
-        "time_delta":20.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":20.0
-    },
-    {
-        "is_goal":false,
+        "is_goal":true,
         "time_delta":20.0
     },
     {
@@ -2502,38 +1310,6 @@
     {
         "is_goal":false,
         "time_delta":21.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":21.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":21.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":21.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":22.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":22.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":22.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":22.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":22.0
     },
     {
         "is_goal":false,
@@ -2594,46 +1370,6 @@
     {
         "is_goal":false,
         "time_delta":23.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":23.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":23.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":23.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":23.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":23.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":23.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":24.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":24.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":24.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":24.0
     },
     {
         "is_goal":true,
@@ -2680,34 +1416,6 @@
         "time_delta":25.0
     },
     {
-        "is_goal":false,
-        "time_delta":25.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":25.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":25.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":25.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":25.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":25.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":25.0
-    },
-    {
         "is_goal":true,
         "time_delta":25.0
     },
@@ -2721,15 +1429,7 @@
     },
     {
         "is_goal":false,
-        "time_delta":26.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":26.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":26.0
+        "time_delta":25.0
     },
     {
         "is_goal":false,
@@ -2784,27 +1484,7 @@
         "time_delta":27.0
     },
     {
-        "is_goal":false,
-        "time_delta":27.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":27.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":27.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":27.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":28.0
-    },
-    {
-        "is_goal":false,
+        "is_goal":true,
         "time_delta":28.0
     },
     {
@@ -2833,18 +1513,6 @@
     },
     {
         "is_goal":false,
-        "time_delta":28.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":28.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":28.0
-    },
-    {
-        "is_goal":true,
         "time_delta":28.0
     },
     {
@@ -2869,26 +1537,6 @@
     },
     {
         "is_goal":true,
-        "time_delta":29.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":29.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":29.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":29.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":30.0
-    },
-    {
-        "is_goal":true,
         "time_delta":30.0
     },
     {
@@ -2904,16 +1552,12 @@
         "time_delta":30.0
     },
     {
-        "is_goal":true,
-        "time_delta":30.0
+        "is_goal":false,
+        "time_delta":31.0
     },
     {
         "is_goal":false,
-        "time_delta":30.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":30.0
+        "time_delta":31.0
     },
     {
         "is_goal":false,
@@ -2929,23 +1573,11 @@
     },
     {
         "is_goal":false,
-        "time_delta":31.0
+        "time_delta":32.0
     },
     {
         "is_goal":false,
-        "time_delta":31.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":31.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":31.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":31.0
+        "time_delta":32.0
     },
     {
         "is_goal":false,
@@ -2965,27 +1597,19 @@
     },
     {
         "is_goal":false,
-        "time_delta":32.0
+        "time_delta":33.0
     },
     {
         "is_goal":false,
-        "time_delta":32.0
+        "time_delta":33.0
     },
     {
         "is_goal":false,
-        "time_delta":32.0
+        "time_delta":33.0
     },
     {
         "is_goal":false,
-        "time_delta":32.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":32.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":32.0
+        "time_delta":33.0
     },
     {
         "is_goal":true,
@@ -3002,58 +1626,6 @@
     {
         "is_goal":false,
         "time_delta":33.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":33.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":33.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":33.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":33.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":33.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":34.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":34.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":34.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":34.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":35.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":35.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":35.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":35.0
     },
     {
         "is_goal":false,
@@ -3092,18 +1664,6 @@
         "time_delta":36.0
     },
     {
-        "is_goal":true,
-        "time_delta":36.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":36.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":36.0
-    },
-    {
         "is_goal":false,
         "time_delta":37.0
     },
@@ -3117,11 +1677,11 @@
     },
     {
         "is_goal":false,
-        "time_delta":37.0
+        "time_delta":38.0
     },
     {
         "is_goal":false,
-        "time_delta":37.0
+        "time_delta":38.0
     },
     {
         "is_goal":true,
@@ -3137,38 +1697,6 @@
     },
     {
         "is_goal":false,
-        "time_delta":38.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":38.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":38.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":38.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":39.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":39.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":39.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":39.0
-    },
-    {
-        "is_goal":false,
         "time_delta":39.0
     },
     {
@@ -3189,14 +1717,6 @@
     },
     {
         "is_goal":false,
-        "time_delta":40.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":40.0
-    },
-    {
-        "is_goal":false,
         "time_delta":41.0
     },
     {
@@ -3214,14 +1734,6 @@
     {
         "is_goal":false,
         "time_delta":41.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":41.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":42.0
     },
     {
         "is_goal":false,
@@ -3265,10 +1777,6 @@
     },
     {
         "is_goal":false,
-        "time_delta":43.0
-    },
-    {
-        "is_goal":false,
         "time_delta":44.0
     },
     {
@@ -3282,18 +1790,6 @@
     {
         "is_goal":false,
         "time_delta":44.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":44.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":44.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":45.0
     },
     {
         "is_goal":true,
@@ -3301,43 +1797,11 @@
     },
     {
         "is_goal":false,
-        "time_delta":46.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":46.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":46.0
-    },
-    {
-        "is_goal":false,
         "time_delta":47.0
     },
     {
         "is_goal":false,
         "time_delta":47.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":47.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":47.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":48.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":48.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":48.0
     },
     {
         "is_goal":false,
@@ -3365,27 +1829,7 @@
     },
     {
         "is_goal":false,
-        "time_delta":50.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":50.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":50.0
-    },
-    {
-        "is_goal":false,
         "time_delta":51.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":51.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":52.0
     },
     {
         "is_goal":false,
@@ -3409,18 +1853,6 @@
     },
     {
         "is_goal":false,
-        "time_delta":55.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":55.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":56.0
-    },
-    {
-        "is_goal":false,
         "time_delta":57.0
     },
     {
@@ -3430,14 +1862,6 @@
     {
         "is_goal":false,
         "time_delta":57.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":57.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":60.0
     },
     {
         "is_goal":false,
@@ -3457,30 +1881,10 @@
     },
     {
         "is_goal":false,
-        "time_delta":62.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":62.0
-    },
-    {
-        "is_goal":true,
-        "time_delta":62.0
-    },
-    {
-        "is_goal":false,
         "time_delta":63.0
     },
     {
         "is_goal":false,
-        "time_delta":65.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":66.0
-    },
-    {
-        "is_goal":false,
         "time_delta":66.0
     },
     {
@@ -3489,18 +1893,6 @@
     },
     {
         "is_goal":true,
-        "time_delta":68.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":69.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":71.0
-    },
-    {
-        "is_goal":true,
         "time_delta":71.0
     },
     {
@@ -3509,7 +1901,7 @@
     },
     {
         "is_goal":false,
-        "time_delta":72.0
+        "time_delta":71.0
     },
     {
         "is_goal":false,
@@ -3529,15 +1921,7 @@
     },
     {
         "is_goal":false,
-        "time_delta":77.0
-    },
-    {
-        "is_goal":false,
         "time_delta":108.0
-    },
-    {
-        "is_goal":false,
-        "time_delta":110.0
     },
     {
         "is_goal":false,
