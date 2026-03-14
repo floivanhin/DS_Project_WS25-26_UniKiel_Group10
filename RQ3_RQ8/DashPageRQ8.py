@@ -226,8 +226,6 @@ def update_graph(view, toggle, window_size):
 
     return fig, desc
 
-# TODO: Description einfügen, Toggle Buttons für Box Plot und Slider einbauen
-
 
 # Run the app
 if __name__ == "__main__":
