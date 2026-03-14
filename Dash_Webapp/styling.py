@@ -9,7 +9,17 @@ This file exists to centralize visual defaults used across pages:
 import plotly.graph_objects as go
 
 
-GRAPH_CONFIG = {"displayModeBar": False, "responsive": True}
+GRAPH_CONFIG = {
+    "displayModeBar": True,
+    "displaylogo": False,
+    "modeBarButtons": [["toImage"]],
+    "toImageButtonOptions": {
+        "format": "png",
+        "filename": "bundesliga_dashboard_plot",
+        "scale": 2,
+    },
+    "responsive": True,
+}
 COLORS = {
     "red": "#d20515",
     "red_dark": "#980211",
@@ -52,7 +62,8 @@ def _apply_base_layout(figure, height=360):
 
     figure.update_layout(
         height=height,
-        paper_bgcolor="rgba(0, 0, 0, 0)",
+        # Keep a solid paper background so exported PNGs retain readable text.
+        paper_bgcolor=COLORS["surface"],
         plot_bgcolor=COLORS["surface"],
         margin={"l": 18, "r": 18, "t": 40, "b": 18},
         font={
