@@ -368,7 +368,7 @@ def _build_state(selected_teams, top_n, min_total_shots):
     )
     team_note = (
         f"Selected teams: {', '.join(selected_teams)}. Together they average "
-        f"{selected_mean_efficiency} goals per shot at a mean squad age of "
+        f"{selected_mean_efficiency} goals per shot at an average squad age of "
         f"{selected_mean_age} years."
     )
     if original_selected and len(selected_teams) < len(original_selected):
