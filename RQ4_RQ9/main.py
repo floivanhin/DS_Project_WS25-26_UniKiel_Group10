@@ -28,11 +28,7 @@ from whoscored_data_download_pipeline import build_whoscored_dataset
 ESPN_OUTPUT_NAME = "espn_player_match_data_for_rq9.csv"
 WHOSCORED_OUTPUT_NAME = "whoscored_player_match_data_for_rq4.csv"
 REPO_ROOT = Path(__file__).resolve().parent.parent
-ANALYSIS_OUTPUT_ROOT = (
-    REPO_ROOT
-    / "docs"
-    / "analysis_diagram_data"
-)
+ANALYSIS_OUTPUT_ROOT = REPO_ROOT / "RQ4_RQ9"
 
 
 def write_output(df: pd.DataFrame, path: Path) -> None:
@@ -113,7 +109,7 @@ def build_analysis_tables(
     rq9_df: pd.DataFrame,
     rq4_df: pd.DataFrame,
 ) -> dict[str, pd.DataFrame]:
-    """Build all derived analysis tables used by the docs pages.
+    """Build all derived analysis tables used by the Dash pages.
 
     Input: raw RQ9 and RQ4 DataFrames.
     Output: dictionary from relative CSV path to DataFrame.
