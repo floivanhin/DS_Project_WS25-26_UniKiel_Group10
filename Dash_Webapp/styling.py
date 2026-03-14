@@ -1,4 +1,10 @@
-"""Store shared styling constants and figure helper utilities."""
+"""Styling module for shared visual configuration.
+
+This file exists to centralize visual defaults used across pages:
+- global color palette and graph config
+- reusable Plotly figure styling helpers
+- reusable empty-figure placeholder helper
+"""
 
 import plotly.graph_objects as go
 

@@ -1,7 +1,9 @@
-"""Store shared Dash helpers, constants, and styling utilities.
+"""Shared helper module for reusable app logic.
 
-Input: generic formatting values, figure objects, and HTML templates.
-Output: reusable layout, formatting, plotting, and template helpers.
+This file exists to avoid duplicating common logic across page modules:
+- HTML template loading and slot replacement helpers
+- formatting helpers for text/metrics
+- shared not-found page and generic data/plot helpers
 """
 
 import functools
