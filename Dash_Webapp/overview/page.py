@@ -1,7 +1,8 @@
-"""Build the text-only overview page for the Dash website.
+"""Overview page module for the project web app.
 
-Input: static project text.
-Output: the Dash layout for the landing page.
+This file exists to define the landing page content that summarizes:
+- the project goal
+- the Bundesliga research questions (RQ1-RQ9)
 """
 
 import dash

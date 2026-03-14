@@ -1,3 +1,7 @@
+/* Global stylesheet for the project web app.
+   This file exists to define the shared visual design for all pages:
+   layout, typography, navigation, panels, controls, and responsive behavior. */
+
 @import url("https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap");
 
 :root {
