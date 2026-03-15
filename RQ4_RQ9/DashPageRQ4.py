@@ -16,15 +16,10 @@ RAW_DATA_PATH = (
     / "whoscored_player_match_data_for_rq4.csv"
 )
 
-# Load the already prepared analysis tables plus the raw match-level file.
-# The analysis tables are used for the summary charts.
-# The raw match file is only needed for the player focus box plot.
 ratings_df = pd.read_csv(ANALYSIS_DIR / "rq4_home_away_player_ratings.csv")
 delta_df = pd.read_csv(ANALYSIS_DIR / "rq4_player_home_away_delta.csv")
 match_df = pd.read_csv(RAW_DATA_PATH)
 
-# Convert text columns from the CSV into real numbers/booleans.
-# This avoids bad sorting and makes the charts behave correctly.
 ratings_df["avg_overall_rating"] = pd.to_numeric(
     ratings_df["avg_overall_rating"],
     errors="coerce",
@@ -74,8 +69,6 @@ RQ4_MODE_LABELS = {
     "away_specialists": "strongest away specialists",
 }
 
-# Keep a cleaned "eligible only" table because many views should only use
-# players that have enough home and away matches to be compared fairly.
 RQ4_ELIGIBLE_DELTA = delta_df.loc[delta_df["eligible_both_sides"]].copy()
 RQ4_PLAYER_OPTIONS = sorted(RQ4_ELIGIBLE_DELTA["player"].dropna().unique().tolist())
 
@@ -88,20 +81,14 @@ MEAN_AWAY = away_rows["avg_overall_rating"].mean()
 
 
 def empty_figure(title):
-    """Return an empty placeholder chart when there is no usable data."""
-
+   
     fig = px.scatter(pd.DataFrame({"x": [], "y": []}), x="x", y="y", title=title)
     fig.update_layout(template="plotly_white")
     return fig
 
 
 def sanitize_focus_player(player_name):
-    """Return a valid player name for the focus-player dropdown.
-
-    If the incoming value is missing or invalid, fall back to the player with
-    the biggest absolute home-away gap.
-    """
-
+    
     if player_name in RQ4_PLAYER_OPTIONS:
         return player_name
 
@@ -117,12 +104,6 @@ def sanitize_focus_player(player_name):
 
 
 def get_leaderboard(view_mode, top_n):
-    """Build the player subset for the current leaderboard mode.
-
-    `abs_delta` keeps the biggest differences overall.
-    `home_specialists` keeps players who are clearly better at home.
-    `away_specialists` keeps players who are clearly better away.
-    """
 
     leaderboard = RQ4_ELIGIBLE_DELTA.copy()
 
@@ -155,12 +136,6 @@ def get_leaderboard(view_mode, top_n):
 
 
 def build_compare_figure(view_mode, top_n):
-    """Build the grouped bar chart for home vs away means.
-
-    This answers: for the selected leaderboard, how do the home and away
-    means compare side by side for each player?
-    """
-
     leaderboard = get_leaderboard(view_mode, top_n)
     if leaderboard.empty:
         return empty_figure("No comparison data available")
@@ -199,7 +174,6 @@ def build_compare_figure(view_mode, top_n):
 
 
 def build_delta_figure(view_mode, top_n):
-    """Build the horizontal bar chart for home-away rating differences."""
 
     leaderboard = get_leaderboard(view_mode, top_n)
     if leaderboard.empty:
@@ -239,11 +213,6 @@ def build_delta_figure(view_mode, top_n):
 
 
 def build_focus_figure(player_name):
-    """Build the match-level box plot for one selected player.
-
-    This uses raw match rows instead of the aggregated summary tables because
-    we want to show the spread of individual match ratings.
-    """
 
     player_name = sanitize_focus_player(player_name)
     if player_name is None:
@@ -278,8 +247,6 @@ def build_focus_figure(player_name):
 
 
 def build_league_summary_text():
-    """Build one short sentence with the overall league home/away means."""
-
     if pd.isna(MEAN_HOME) or pd.isna(MEAN_AWAY):
         return ""
 
@@ -291,8 +258,6 @@ def build_league_summary_text():
 
 
 def build_focus_text(player_name):
-    """Build the short text that explains the selected focus player."""
-
     player_name = sanitize_focus_player(player_name)
     if player_name is None:
         return "No focus player available."
@@ -389,12 +354,6 @@ app.layout = [
     Input("rq4_chart_selector", "value"),
 )
 def toggle_controls(chart_type):
-    """Show only the controls that matter for the current chart.
-
-    Compare/delta views need leaderboard controls.
-    Focus view only needs the player selector.
-    """
-
     leaderboard_style = {"display": "block", "marginTop": "16px"}
     focus_style = {"display": "block", "marginTop": "16px"}
 
@@ -413,7 +372,6 @@ def toggle_controls(chart_type):
     Input("rq4_focus_player", "value"),
 )
 def update_graph(chart_type, view_mode, top_n, focus_player):
-    """Build the current figure and the short explanation below the controls."""
 
     league_text = build_league_summary_text()
 
