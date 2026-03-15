@@ -18,11 +18,23 @@ print(df[["venue_name", "capacity", "cards_total"]].head())
 correlation = df["capacity"].corr(df["cards_total"])
 print("Correlation:", correlation)
 
-plt.figure(figsize=(8, 5))
-sns.scatterplot(data=df, x="capacity", y="cards_total")
 
-plt.title("Arena capacity vs number of cards issued")
+df_avg = (
+    df.groupby("capacity")["cards_total"]
+    .mean()
+    .reset_index()
+    .sort_values("capacity")
+)
+
+print(df_avg.head())
+
+plt.figure(figsize=(8, 5))
+
+sns.lineplot(data=df_avg, x="capacity", y="cards_total", marker="o")
+
+plt.title("Average number of cards depending on arena capacity")
 plt.xlabel("Arena capacity")
-plt.ylabel("Total cards in match")
+plt.ylabel("Average cards per match")
+
 plt.tight_layout()
 plt.show()
