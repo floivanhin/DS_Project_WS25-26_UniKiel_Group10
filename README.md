@@ -79,7 +79,3 @@ Raw source datasets are written to `RQ4_RQ9/data/downloaded_outputs_to_analyse/`
     `home_away`, `overall_rating`, `is_starting_xi`, and
     `is_man_of_the_match`
 
-Derived analysis CSVs for the website are written to the repository root under:
-
-- `docs/analysis_diagram_data/rq4/`
-- `docs/analysis_diagram_data/rq9/`
