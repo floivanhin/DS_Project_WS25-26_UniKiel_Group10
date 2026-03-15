@@ -16,11 +16,7 @@ RQ4_DELTA_FILE = "rq4/rq4_player_home_away_delta.csv"
 
 
 def is_true(value: object) -> bool:
-    """Convert loose truthy values into a boolean.
-
-    Input: raw boolean-like value.
-    Output: `True` or `False`.
-    """
+    
     if isinstance(value, bool):
         return value
     if value is None:
@@ -29,11 +25,7 @@ def is_true(value: object) -> bool:
 
 
 def normalize_rq4(rq4_df: pd.DataFrame) -> pd.DataFrame:
-    """Normalize the raw WhoScored table for downstream analysis.
 
-    Input: raw RQ4 DataFrame.
-    Output: copied DataFrame with cleaned types.
-    """
     out = rq4_df.copy()
     out["season"] = out["season"].astype(str)
     out["game_id"] = out["game_id"].astype(str)
@@ -48,11 +40,7 @@ def normalize_rq4(rq4_df: pd.DataFrame) -> pd.DataFrame:
 
 
 def build_rq4_home_away_player_ratings(rq4_df: pd.DataFrame) -> pd.DataFrame:
-    """Aggregate player ratings by home and away matches.
-
-    Input: normalized RQ4 DataFrame.
-    Output: DataFrame for `rq4_home_away_player_ratings.csv`.
-    """
+    
     summary = (
         rq4_df.groupby(
             ["season", "season_label", "home_away", "player", "player_id"],
@@ -81,11 +69,7 @@ def build_rq4_home_away_player_ratings(rq4_df: pd.DataFrame) -> pd.DataFrame:
 
 
 def build_rq4_player_home_away_delta(ratings_df: pd.DataFrame) -> pd.DataFrame:
-    """Compare average player ratings between home and away matches.
-
-    Input: aggregated RQ4 ratings DataFrame.
-    Output: DataFrame for `rq4_player_home_away_delta.csv`.
-    """
+    
     join_keys = ["season", "season_label", "player", "player_id"]
     value_columns = [
         "matches",
@@ -187,11 +171,7 @@ def build_rq4_player_home_away_delta(ratings_df: pd.DataFrame) -> pd.DataFrame:
 
 
 def build_rq4_tables(rq4_df: pd.DataFrame) -> dict[str, pd.DataFrame]:
-    """Build all derived RQ4 tables.
-
-    Input: raw RQ4 DataFrame.
-    Output: dictionary from relative CSV path to DataFrame.
-    """
+    
     normalized = normalize_rq4(rq4_df)
     ratings = build_rq4_home_away_player_ratings(normalized)
     delta = build_rq4_player_home_away_delta(ratings)
@@ -202,11 +182,7 @@ def build_rq4_tables(rq4_df: pd.DataFrame) -> dict[str, pd.DataFrame]:
 
 
 def build_rq4_answer(ratings_df: pd.DataFrame) -> str:
-    """Build the short RQ4 answer string for the terminal output.
-
-    Input: RQ4 ratings DataFrame.
-    Output: formatted answer string.
-    """
+    
     rq4_home = ratings_df.loc[
         ratings_df["eligible_for_leaderboard"]
         & (ratings_df["home_away"] == "home"),
