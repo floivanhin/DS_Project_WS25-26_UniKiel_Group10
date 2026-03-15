@@ -11,8 +11,14 @@ import pandas as pd
 
 RQ4_MIN_MATCHES_FOR_LEADERBOARD = 5
 RQ4_MIN_MATCHES_PER_SIDE_FOR_DELTA = 5
-RQ4_RATINGS_FILE = "rq4/rq4_home_away_player_ratings.csv"
-RQ4_DELTA_FILE = "rq4/rq4_player_home_away_delta.csv"
+RQ4_RATINGS_FILE = (
+    "dash_page_rq4/analysis_diagram_data/"
+    "rq4_home_away_player_ratings.csv"
+)
+RQ4_DELTA_FILE = (
+    "dash_page_rq4/analysis_diagram_data/"
+    "rq4_player_home_away_delta.csv"
+)
 
 
 def is_true(value: object) -> bool:

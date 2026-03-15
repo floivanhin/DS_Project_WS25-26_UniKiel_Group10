@@ -1,0 +1,44 @@
+<main class="page">
+    <section class="hero">
+        <span class="tag">Research Question 3</span>
+        <h1>
+            How does transition time to first shot affect scoring probability?
+        </h1>
+        <p class="subtitle">
+            This page compares shot outcome counts and conversion rates across
+            time intervals after winning possession in the own half.
+        </p>
+        <div class="chips">
+            <slot name="chip_shot_events" />
+            <slot name="chip_intervals" />
+        </div>
+    </section>
+    <section class="metrics">
+        <slot name="metrics" />
+    </section>
+    <section class="content-grid">
+        <article class="panel span-12">
+            <h2>Interactive chart</h2>
+            <p>
+                Switch between the stacked shot counts and the interval-level
+                conversion rate.
+            </p>
+            <div class="section-controls">
+                <div class="control-group">
+                    <label class="control-label">Chart mode</label>
+                    <slot name="chart_mode_radio" />
+                </div>
+            </div>
+            <div class="chart-section">
+                <slot name="main_chart" />
+                <div id="rq3-plot-description" class="note-box">
+                    <slot name="plot_description" />
+                </div>
+            </div>
+        </article>
+    </section>
+    <footer class="footer">
+        RQ3 compares shot outcome distributions and conversion rates over
+        transition-time intervals.
+    </footer>
+</main>
