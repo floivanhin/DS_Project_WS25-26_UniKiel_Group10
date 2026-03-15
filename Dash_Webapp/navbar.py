@@ -1,9 +1,4 @@
-"""Navbar module for the project web app.
-
-This file exists to keep all top-navigation logic in one place:
-- list of nav links (Overview + RQ1-RQ9)
-- rendering of the clickable header/navbar component
-"""
+"""Build the top navigation bar for the Dash app."""
 
 import dash
 

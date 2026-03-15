@@ -1,5 +1,3 @@
-Deployed Dash website: https://ds-project-ws25-26-unikiel-group10.onrender.com/
-
 # DS_Project_WS25-26_UniKiel_Group10
 
 This repository contains the Data Science Project of Group 10 for the

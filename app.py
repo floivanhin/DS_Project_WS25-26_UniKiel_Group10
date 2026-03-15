@@ -133,4 +133,4 @@ def _render_page(pathname):
 
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)
