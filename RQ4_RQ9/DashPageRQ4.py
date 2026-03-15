@@ -155,10 +155,10 @@ def get_leaderboard(view_mode, top_n):
 
 
 def build_compare_figure(view_mode, top_n):
-    """Build the grouped bar chart for home vs away averages.
+    """Build the grouped bar chart for home vs away means.
 
     This answers: for the selected leaderboard, how do the home and away
-    averages compare side by side for each player?
+    means compare side by side for each player?
     """
 
     leaderboard = get_leaderboard(view_mode, top_n)
@@ -192,7 +192,7 @@ def build_compare_figure(view_mode, top_n):
     fig.update_layout(
         template="plotly_white",
         xaxis_title="Player",
-        yaxis_title="Average Overall Rating",
+        yaxis_title="Mean Overall Rating",
     )
     fig.update_xaxes(tickangle=50)
     return fig
@@ -232,7 +232,7 @@ def build_delta_figure(view_mode, top_n):
     )
     fig.update_layout(
         template="plotly_white",
-        xaxis_title="Average Rating Delta (Home - Away)",
+        xaxis_title="Mean Rating Delta (Home - Away)",
         yaxis_title="Player",
     )
     return fig
