@@ -132,7 +132,7 @@ def build_league_age_text():
         return ""
 
     return (
-        f"League average player age: {row['avg_age']:.2f} years across "
+        f"League mean player age: {row['avg_age']:.2f} years across "
         f"{int(row['unique_players'])} players."
     )
 
@@ -175,8 +175,8 @@ def build_selected_team_note(selected_teams):
 
     return (
         f"Selected teams: {', '.join(selected_teams)}. "
-        f"They average {selected_rows['goals_per_shot'].mean():.3f} goals per shot "
-        f"at an average squad age of {selected_rows['avg_age'].mean():.2f} years."
+        f"They have a mean of {selected_rows['goals_per_shot'].mean():.3f} goals per shot "
+        f"at a mean squad age of {selected_rows['avg_age'].mean():.2f} years."
     )
 
 
@@ -210,7 +210,7 @@ def build_scatter_figure(selected_teams):
                 marker=dict(color="#B0B0B0", size=10),
                 hovertemplate=(
                     "<b>%{text}</b><br>"
-                    "Average age: %{x:.2f}<br>"
+                    "Mean age: %{x:.2f}<br>"
                     "Goals per shot: %{y:.3f}<extra></extra>"
                 ),
             )
@@ -229,7 +229,7 @@ def build_scatter_figure(selected_teams):
                 marker=dict(color="#B22222", size=12),
                 hovertemplate=(
                     "<b>%{text}</b><br>"
-                    "Average age: %{x:.2f}<br>"
+                    "Mean age: %{x:.2f}<br>"
                     "Goals per shot: %{y:.3f}<extra></extra>"
                 ),
             )
@@ -261,7 +261,7 @@ def build_scatter_figure(selected_teams):
     fig.update_layout(
         template="plotly_white",
         title="Team Age vs Shot Efficiency",
-        xaxis_title="Average Team Age",
+        xaxis_title="Mean Team Age",
         yaxis_title="Goals per Shot",
     )
     return fig
@@ -438,7 +438,7 @@ app = Dash()
 app.layout = [
     html.Div(
         children=(
-            "Research Question 9: Is there an ideal player age or average team "
+            "Research Question 9: Is there an ideal player age or mean team "
             "age for strong shooting efficiency?"
         )
     ),
