@@ -18,8 +18,6 @@ RAW_DATA_PATH = (
     / "espn_player_match_data_for_rq9.csv"
 )
 
-# Load the summary tables for team-level charts and the raw ESPN file for the
-# dynamic age-profile calculation.
 season_age_df = pd.read_csv(ANALYSIS_DIR / "bundesliga_season_age_summary.csv")
 team_efficiency_df = pd.read_csv(ANALYSIS_DIR / "rq9_team_age_vs_efficiency.csv")
 optimal_age_df = pd.read_csv(ANALYSIS_DIR / "rq9_optimal_age_summary.csv")
@@ -88,19 +86,12 @@ RQ9_DEFAULT_TEAMS = (
 
 
 def empty_figure(title):
-    """Return an empty placeholder chart when there is no usable data."""
-
     fig = px.scatter(pd.DataFrame({"x": [], "y": []}), x="x", y="y", title=title)
     fig.update_layout(template="plotly_white")
     return fig
 
 
 def sanitize_selected_teams(selected_teams, max_items=6):
-    """Clean the team multi-select value.
-
-    This keeps only valid teams, removes duplicates, and limits the amount of
-    highlighted teams so the plots do not get too crowded.
-    """
 
     if isinstance(selected_teams, str):
         selected_teams = [selected_teams]
@@ -138,8 +129,7 @@ def build_league_age_text():
 
 
 def build_optimal_age_text():
-    """Build the short explanation based on the quadratic model summary."""
-
+    
     if optimal_age_df.empty:
         return ""
 
@@ -163,7 +153,6 @@ def build_optimal_age_text():
 
 
 def build_selected_team_note(selected_teams):
-    """Build a readable sentence for the currently highlighted teams."""
 
     selected_teams = sanitize_selected_teams(selected_teams)
     selected_rows = team_efficiency_df.loc[
@@ -181,11 +170,6 @@ def build_selected_team_note(selected_teams):
 
 
 def build_scatter_figure(selected_teams):
-    """Build the team-age scatter plot.
-
-    Selected teams are shown in red and labeled directly.
-    Everyone else stays gray in the background.
-    """
 
     filtered = team_efficiency_df.dropna(subset=["avg_age", "goals_per_shot"]).copy()
     if filtered.empty:
@@ -268,8 +252,6 @@ def build_scatter_figure(selected_teams):
 
 
 def build_ranking_figure(selected_teams, top_n):
-    """Build the horizontal ranking chart for the top teams."""
-
     selected_teams = sanitize_selected_teams(selected_teams)
     filtered = team_efficiency_df.dropna(subset=["goals_per_shot"]).copy()
     filtered = filtered.sort_values(
@@ -308,14 +290,6 @@ def build_ranking_figure(selected_teams, top_n):
 
 
 def get_dynamic_age_profile(min_total_shots):
-    """Rebuild the player age profile from raw ESPN rows.
-
-    This is the most dynamic part of the page:
-    1. group raw player-match rows into age bands,
-    2. compute goals, shots, and goals-per-shot per age band,
-    3. mark which age bands pass the current minimum-shots threshold,
-    4. return the best eligible age band.
-    """
 
     age_frame = espn_match_df.loc[
         :, ["player_id", "age", "player_goals", "player_shots"]
@@ -347,20 +321,13 @@ def get_dynamic_age_profile(min_total_shots):
 
 
 def build_age_profile_figure(min_total_shots):
-    """Build the dynamic player-age chart.
-
-    Bars show shot volume.
-    The line shows goals per shot.
-    The star marks the best age band that passes the current threshold.
-    """
 
     grouped, best_row = get_dynamic_age_profile(min_total_shots)
     if grouped.empty:
         return empty_figure("No player age profile could be computed"), best_row
 
     fig = make_subplots(specs=[[{"secondary_y": True}]])
-    # Color age bands differently depending on whether they pass the current
-    # minimum-shots threshold.
+
     bar_colors = [
         "rgba(178, 34, 34, 0.35)" if is_valid else "rgba(110, 110, 110, 0.35)"
         for is_valid in grouped["eligible_threshold"]
@@ -410,7 +377,6 @@ def build_age_profile_figure(min_total_shots):
 
 
 def build_age_profile_text(min_total_shots):
-    """Build the short text below the dynamic age-profile chart."""
 
     _, best_row = get_dynamic_age_profile(min_total_shots)
     if best_row is None:
@@ -433,8 +399,6 @@ optimal_age_text = build_optimal_age_text()
 # Initialize the app
 app = Dash()
 
-# The layout is intentionally simple:
-# one chart selector, a few controls, one description, and one main graph.
 app.layout = [
     html.Div(
         children=(
@@ -506,7 +470,6 @@ app.layout = [
     dcc.Graph(id="main_graph"),
 ]
 
-
 @callback(
     Output("rq9_team_select_container", "style"),
     Output("rq9_top_n_container", "style"),
@@ -514,8 +477,6 @@ app.layout = [
     Input("rq9_chart_selector", "value"),
 )
 def toggle_controls(chart_type):
-    """Only show the controls needed for the current chart."""
-
     team_style = {"display": "block", "marginTop": "16px"}
     ranking_style = {"display": "block", "marginTop": "16px"}
     shots_style = {"display": "block", "marginTop": "16px"}
@@ -536,8 +497,6 @@ def toggle_controls(chart_type):
     Input("rq9_min_shots", "value"),
 )
 def update_graph(chart_type, selected_teams, top_n, min_shots):
-    """Build the current RQ9 chart and its explanation text."""
-
     if chart_type == "scatter":
         fig = build_scatter_figure(selected_teams)
         desc = (
@@ -555,7 +514,6 @@ def update_graph(chart_type, selected_teams, top_n, min_shots):
         desc = build_age_profile_text(min_shots)
 
     return fig, desc
-
 
 # Run the app
 if __name__ == "__main__":
