@@ -1,4 +1,0 @@
-dash==3.4.0
-plotly==6.6.0
-pandas==2.3.3
-gunicorn==23.0.0; platform_system != "Windows"

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Overview - Bundesliga Analysis</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="overview">
+    <div id="site-navbar"></div>
+    <script src="js/navbar-loader.js"></script>
+
+    <main class="page">
+      <section class="hero">
+        <span class="tag">Project Overview</span>
+        <h1>What does our Bundesliga analysis investigate?</h1>
+        <p class="subtitle">
+          We analyze the 2024/25 Bundesliga season with a focus on player age,
+          team structure, and performance metrics. The next pages answer RQ4
+          (home-away effect in player ratings) and RQ9 (age vs. shot
+          efficiency).
+        </p>
+        <div class="chips">
+          <span class="chip">Season: <span id="ov-chip-season">2024/25</span></span>
+          <span class="chip">Data basis: <span id="ov-chip-players">568 players</span></span>
+          <span class="chip"><span id="ov-chip-teams">18 teams</span></span>
+          <span class="chip">Python + Pandas</span>
+          <span class="chip">WhoScored + ESPN data</span>
+        </div>
+      </section>
+
+      <section class="metrics">
+        <article class="metric">
+          <div class="metric-label">Players (unique)</div>
+          <div class="metric-value" id="ov-metric-players">568</div>
+        </article>
+        <article class="metric">
+          <div class="metric-label">Average age</div>
+          <div class="metric-value" id="ov-metric-avg-age">25.99</div>
+        </article>
+        <article class="metric">
+          <div class="metric-label">Age range</div>
+          <div class="metric-value" id="ov-metric-age-range">16.76-39.26</div>
+        </article>
+        <article class="metric">
+          <div class="metric-label">Team-match rows</div>
+          <div class="metric-value" id="ov-metric-team-match-rows">612</div>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel span-6">
+          <h2>Project and methodology</h2>
+          <p>
+            The pipeline loads team and match data, merges it into a consistent
+            tabular format, and stores outputs in `data`. This makes
+            the RQ4 and RQ9 metrics reproducible.
+          </p>
+          <ul>
+            <li>
+              `RQ4`: home-vs-away analysis using aggregated WhoScored player
+              ratings.
+            </li>
+            <li>
+              `RQ9`: relationship between average team age and shot efficiency
+              (`goals_per_shot`).
+            </li>
+            <li>
+              Additional player age-band analysis for efficiency interpretation.
+            </li>
+          </ul>
+        </article>
+
+        <article class="panel span-6">
+          <h2>What is already answered?</h2>
+          <p>
+            The menu pages <strong>RQ4</strong> and <strong>RQ9</strong> already
+            include concrete results from your CSV outputs with interactive
+            charts.
+          </p>
+          <ul class="insights">
+            <li>
+              RQ4 shows a small overall home advantage in player ratings.
+            </li>
+            <li>
+              RQ9 shows a negative relationship between team age and shot
+              efficiency.
+            </li>
+            <li>
+              The best player-level age band in this dataset is 33 years.
+            </li>
+          </ul>
+        </article>
+
+        <article class="panel span-12">
+          <h2>Average age per team (2024/25)</h2>
+          <p>
+            Sorted from younger to older squads. The extremes are
+            <strong id="ov-youngest-team">RB Leipzig (24.25)</strong> and
+            <strong id="ov-oldest-team">1. FC Union Berlin (27.86)</strong>.
+          </p>
+          <div class="chart-wrap">
+            <canvas id="teamAgeChart"></canvas>
+          </div>
+        </article>
+      </section>
+
+      <p class="source-note">
+        <strong>Generated CSV files with analysis data for diagrams:</strong>
+        `analysis_diagram_data/rq4/rq4_home_away_player_ratings.csv`,
+        `analysis_diagram_data/rq4/rq4_player_home_away_delta.csv`,
+        `analysis_diagram_data/rq9/bundesliga_season_age_summary.csv`,
+        `analysis_diagram_data/rq9/bundesliga_team_age_summary.csv`,
+        `analysis_diagram_data/rq9/rq9_team_match_efficiency.csv`,
+        `analysis_diagram_data/rq9/rq9_team_age_vs_efficiency.csv`,
+        `analysis_diagram_data/rq9/rq9_optimal_age_summary.csv`,
+        `analysis_diagram_data/rq9/rq9_player_age_profile.csv`, and
+        `analysis_diagram_data/rq9/rq9_player_best_age.csv`.
+      </p>
+
+      <footer class="footer">
+        This web report focuses on research questions RQ4 and RQ9 and can be
+        extended with additional RQ pages.
+      </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <script src="js/charts.js?v=20260311-1"></script>
+  </body>
+</html>

@@ -11,34 +11,13 @@ import pandas as pd
 
 
 BEST_AGE_MIN_TOTAL_SHOTS = 80
-SEASON_SUMMARY_FILE = (
-    "dash_page_rq9/analysis_diagram_data/"
-    "bundesliga_season_age_summary.csv"
-)
-TEAM_SUMMARY_FILE = (
-    "dash_page_rq9/analysis_diagram_data/"
-    "bundesliga_team_age_summary.csv"
-)
-TEAM_MATCH_FILE = (
-    "dash_page_rq9/analysis_diagram_data/"
-    "rq9_team_match_efficiency.csv"
-)
-TEAM_EFFICIENCY_FILE = (
-    "dash_page_rq9/analysis_diagram_data/"
-    "rq9_team_age_vs_efficiency.csv"
-)
-PLAYER_AGE_PROFILE_FILE = (
-    "dash_page_rq9/analysis_diagram_data/"
-    "rq9_player_age_profile.csv"
-)
-PLAYER_BEST_AGE_FILE = (
-    "dash_page_rq9/analysis_diagram_data/"
-    "rq9_player_best_age.csv"
-)
-OPTIMAL_AGE_FILE = (
-    "dash_page_rq9/analysis_diagram_data/"
-    "rq9_optimal_age_summary.csv"
-)
+SEASON_SUMMARY_FILE = "rq9/bundesliga_season_age_summary.csv"
+TEAM_SUMMARY_FILE = "rq9/bundesliga_team_age_summary.csv"
+TEAM_MATCH_FILE = "rq9/rq9_team_match_efficiency.csv"
+TEAM_EFFICIENCY_FILE = "rq9/rq9_team_age_vs_efficiency.csv"
+PLAYER_AGE_PROFILE_FILE = "rq9/rq9_player_age_profile.csv"
+PLAYER_BEST_AGE_FILE = "rq9/rq9_player_best_age.csv"
+OPTIMAL_AGE_FILE = "rq9/rq9_optimal_age_summary.csv"
 
 
 def first_non_null(series: pd.Series) -> object:
@@ -101,7 +80,7 @@ def build_season_age_summary(rq9_df: pd.DataFrame) -> pd.DataFrame:
     """Aggregate one age summary row per season.
 
     Input: normalized RQ9 DataFrame.
-    Output: DataFrame for `bundesliga_season_age_summary.csv`.
+    Output: DataFrame for `rq9/bundesliga_season_age_summary.csv`.
     """
     season_players = (
         rq9_df.groupby(["season", "season_label", "player_id"], dropna=False)
@@ -126,7 +105,7 @@ def build_team_age_summary(rq9_df: pd.DataFrame) -> pd.DataFrame:
     """Aggregate one age summary row per team.
 
     Input: normalized RQ9 DataFrame.
-    Output: DataFrame for `bundesliga_team_age_summary.csv`.
+    Output: DataFrame for `rq9/bundesliga_team_age_summary.csv`.
     """
     team_players = (
         rq9_df.groupby(

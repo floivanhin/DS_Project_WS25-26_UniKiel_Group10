@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RQ4 - Player Ratings by Home and Away Matches</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="rq4">
+    <div id="site-navbar"></div>
+    <script src="js/navbar-loader.js"></script>
+
+    <main class="page">
+      <section class="hero">
+        <span class="tag">Research Question</span>
+        <h1>
+          RQ4: Which players perform particularly well in home matches and
+          which in away matches (as measured by WhoScored overall ratings)?
+        </h1>
+        <p class="subtitle">
+          For 2024/25, WhoScored overall ratings were aggregated per player and
+          compared between home and away matches. This shows which players
+          stand out in each setting and whether there is a broader home-away
+          pattern across the league.
+        </p>
+        <div class="chips">
+          <span class="chip"><span id="rq4-chip-ratings-rows">933</span> rows (home/away ratings)</span>
+          <span class="chip"><span id="rq4-chip-player-comparisons">481</span> player comparisons</span>
+          <span class="chip"><span id="rq4-chip-eligible-both">365</span> with enough data on both sides</span>
+          <span class="chip">Leaderboard threshold: at least 5 matches</span>
+        </div>
+      </section>
+
+      <section class="metrics">
+        <article class="metric">
+          <div class="metric-label">Mean home rating</div>
+          <div class="metric-value" id="rq4-metric-home-mean">6.614</div>
+        </article>
+        <article class="metric">
+          <div class="metric-label">Mean away rating</div>
+          <div class="metric-value" id="rq4-metric-away-mean">6.578</div>
+        </article>
+        <article class="metric">
+          <div class="metric-label">Home minus away</div>
+          <div class="metric-value" id="rq4-metric-home-away-delta">+0.036</div>
+        </article>
+        <article class="metric">
+          <div class="metric-label">Top player</div>
+          <div class="metric-value" id="rq4-metric-top-player">Marmoush 8.27/8.20</div>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel span-6">
+          <h2>Answer to RQ4</h2>
+          <p id="rq4-answer-summary">
+            The data answers RQ4 by identifying the strongest-rated home and
+            away performers and by showing a small overall home advantage.
+          </p>
+          <p id="rq4-answer-detail">
+            The standout players answer the "which players" part of the
+            question, while the mean home-away gap describes the broader league
+            trend.
+          </p>
+          <p>
+            On average, home ratings are slightly higher than away ratings.
+            This indicates a small overall home effect in player ratings.
+          </p>
+        </article>
+
+        <article class="panel span-6">
+          <h2>Key findings</h2>
+          <ul class="insights">
+            <li id="rq4-key-positive">
+              Strongest positive deltas: Lucas Hoeler (+0.785), Nico
+              Schlotterbeck (+0.773), Felix Nmecha (+0.757).
+            </li>
+            <li id="rq4-key-negative">
+              Strongest negative deltas: Timo Horn (-0.735), Jakov Medic
+              (-0.591), Nathan Ngoumou (-0.588).
+            </li>
+            <li id="rq4-key-top-player">
+              The top home and away average rating is Omar Marmoush.
+            </li>
+          </ul>
+        </article>
+
+        <article class="panel span-8">
+          <h2>Home vs away for the strongest outliers</h2>
+          <p>
+            Comparison of average ratings for the 10 players with the largest
+            absolute home-away differences.
+          </p>
+          <div class="chart-wrap">
+            <canvas id="rq4CompareChart"></canvas>
+          </div>
+        </article>
+
+        <article class="panel span-4">
+          <h2>Overall comparison</h2>
+          <p>
+            The average comparison highlights the small but stable difference in
+            favor of home matches.
+          </p>
+          <div class="chart-wrap tight">
+            <canvas id="rq4MeanChart"></canvas>
+          </div>
+        </article>
+
+        <article class="panel span-12">
+          <h2>Strongest positive and negative deltas</h2>
+          <p>
+            Positive values mean better home ratings, negative values mean
+            better away ratings.
+          </p>
+          <div class="chart-wrap">
+            <canvas id="rq4DeltaChart"></canvas>
+          </div>
+        </article>
+      </section>
+
+      <p class="source-note">
+        <strong>Data source:</strong>
+        `analysis_diagram_data/rq4/rq4_home_away_player_ratings.csv` and
+        `analysis_diagram_data/rq4/rq4_player_home_away_delta.csv`.
+      </p>
+
+      <footer class="footer">
+        RQ4 conclusion: a small overall home advantage with clear
+        player-specific differences.
+      </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <script src="js/charts.js?v=20260311-1"></script>
+  </body>
+</html>
