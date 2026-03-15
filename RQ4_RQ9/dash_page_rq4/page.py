@@ -121,7 +121,7 @@ def _build_state(view_mode, top_n, focus_player):
     league_delta = RQ4_METRICS["mean_home"] - RQ4_METRICS["mean_away"]
     player_delta = focus_summary["avg_rating_delta_home_minus_away"]
     answer_detail = (
-        f"Across all leaderboard-eligible players, the average home rating is "
+        f"Across all leaderboard-eligible players, the mean home rating is "
         f"{shared._format_decimal(RQ4_METRICS['mean_home'], 3)} versus "
         f"{shared._format_decimal(RQ4_METRICS['mean_away'], 3)} away, a "
         f"league-wide delta of {shared._format_signed(league_delta, 3)}. "
@@ -302,11 +302,11 @@ def _build_metrics_cards():
 
     return [
         shared._build_metric_card(
-            "Average home rating",
+            "Mean home rating",
             shared._format_decimal(RQ4_METRICS["mean_home"], 3),
         ),
         shared._build_metric_card(
-            "Average away rating",
+            "Mean away rating",
             shared._format_decimal(RQ4_METRICS["mean_away"], 3),
         ),
         shared._build_metric_card(

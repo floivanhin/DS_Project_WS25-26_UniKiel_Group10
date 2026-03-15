@@ -57,7 +57,6 @@ import dash
 import Dash_Webapp.navbar as navbar
 import Dash_Webapp.overview.page as overview_page
 import Dash_Webapp.shared as shared
-import RQ3_RQ8.dash_page_rq3.page as rq3_page
 import RQ4_RQ9.dash_page_rq4.page as rq4_page
 import RQ4_RQ9.dash_page_rq9.page as rq9_page
 
@@ -65,13 +64,13 @@ import RQ4_RQ9.dash_page_rq9.page as rq9_page
 PAGE_BUILDERS = {
     "/": overview_page.build_page,
     "/summary": overview_page.build_page,
-    "/rq3": rq3_page.build_page,
     "/rq4": rq4_page.build_page,
     "/rq9": rq9_page.build_page,
 }
 UNIMPLEMENTED_RQ_ROUTES = {
     "/rq1",
     "/rq2",
+    "/rq3",
     "/rq5",
     "/rq6",
     "/rq7",
@@ -101,7 +100,6 @@ def _serve_layout():
 
 
 app.layout = _serve_layout
-rq3_page.register_callbacks(app)
 rq4_page.register_callbacks(app)
 rq9_page.register_callbacks(app)
 
