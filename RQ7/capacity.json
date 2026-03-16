@@ -3,9 +3,7 @@
     "league": "Bundesliga",
     "league_id": 78,
     "season": 2024,
-    "dateFrom": "2024-08-01",
-    "dateTo": "2024-09-01",
-    "venues": 17
+    "venues": 18
   },
   "venues": [
     {
@@ -109,6 +107,12 @@
       "name": null,
       "city": null,
       "capacity": null
+    },
+    {
+      "venue_id": 710,
+      "name": "URSAPHARM-Arena an der Kaiserlinde",
+      "city": "Spiesen-Elversberg",
+      "capacity": 11150
     }
   ]
 }
