@@ -1,4 +1,4 @@
-﻿"""Build the ESPN dataset used for RQ9.
+﻿"""Build the ESPN dataset used for RQ8.
 
 Input: pipeline configuration with league, season, and refresh mode.
 Output: one CSV-ready DataFrame with player and team shooting data.

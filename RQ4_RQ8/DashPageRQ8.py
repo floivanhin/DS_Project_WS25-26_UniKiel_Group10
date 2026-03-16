@@ -10,17 +10,17 @@ from plotly.subplots import make_subplots
 
 # These paths make the script independent from the current working directory.
 BASE_DIR = Path(__file__).resolve().parent
-ANALYSIS_DIR = BASE_DIR / "analysis_output" / "rq9"
+ANALYSIS_DIR = BASE_DIR / "analysis_output" / "rq8"
 RAW_DATA_PATH = (
     BASE_DIR
     / "data"
     / "downloaded_outputs_to_analyse"
-    / "espn_player_match_data_for_rq9.csv"
+    / "espn_player_match_data_for_rq8.csv"
 )
 
 season_age_df = pd.read_csv(ANALYSIS_DIR / "bundesliga_season_age_summary.csv")
-team_efficiency_df = pd.read_csv(ANALYSIS_DIR / "rq9_team_age_vs_efficiency.csv")
-optimal_age_df = pd.read_csv(ANALYSIS_DIR / "rq9_optimal_age_summary.csv")
+team_efficiency_df = pd.read_csv(ANALYSIS_DIR / "rq8_team_age_vs_efficiency.csv")
+optimal_age_df = pd.read_csv(ANALYSIS_DIR / "rq8_optimal_age_summary.csv")
 espn_match_df = pd.read_csv(RAW_DATA_PATH)
 
 # Convert CSV text into numeric values so sorting, means, and charts work.
@@ -72,8 +72,8 @@ espn_match_df["player_shots"] = pd.to_numeric(
 
 # Build the team selector choices once up front.
 # The default selection is the top three teams by goals per shot.
-RQ9_TEAM_OPTIONS = sorted(team_efficiency_df["team"].dropna().unique().tolist())
-RQ9_DEFAULT_TEAMS = (
+RQ8_TEAM_OPTIONS = sorted(team_efficiency_df["team"].dropna().unique().tolist())
+RQ8_DEFAULT_TEAMS = (
     team_efficiency_df.sort_values(
         "goals_per_shot",
         ascending=False,
@@ -97,17 +97,17 @@ def sanitize_selected_teams(selected_teams, max_items=6):
         selected_teams = [selected_teams]
 
     if not selected_teams:
-        selected_teams = RQ9_DEFAULT_TEAMS
+        selected_teams = RQ8_DEFAULT_TEAMS
 
     valid_teams = []
     seen = set()
     for team in selected_teams:
-        if team in RQ9_TEAM_OPTIONS and team not in seen:
+        if team in RQ8_TEAM_OPTIONS and team not in seen:
             valid_teams.append(team)
             seen.add(team)
 
     if not valid_teams:
-        valid_teams = list(RQ9_DEFAULT_TEAMS)
+        valid_teams = list(RQ8_DEFAULT_TEAMS)
 
     return valid_teams[:max_items]
 
@@ -402,13 +402,13 @@ app = Dash()
 app.layout = [
     html.Div(
         children=(
-            "Research Question 9: Is there an ideal player age or mean team "
+            "Research Question 8: Is there an ideal player age or mean team "
             "age for strong shooting efficiency?"
         )
     ),
     html.Hr(),
     dcc.RadioItems(
-        id="rq9_chart_selector",
+        id="rq8_chart_selector",
         options=[
             {"label": "Age vs efficiency", "value": "scatter"},
             {"label": "Efficiency ranking", "value": "ranking"},
@@ -418,27 +418,27 @@ app.layout = [
         inline=True,
     ),
     html.Div(
-        id="rq9_team_select_container",
+        id="rq8_team_select_container",
         children=[
             html.Div("Highlight teams"),
             dcc.Dropdown(
-                id="rq9_team_select",
+                id="rq8_team_select",
                 options=[
                     {"label": team, "value": team}
-                    for team in RQ9_TEAM_OPTIONS
+                    for team in RQ8_TEAM_OPTIONS
                 ],
-                value=RQ9_DEFAULT_TEAMS,
+                value=RQ8_DEFAULT_TEAMS,
                 multi=True,
             ),
         ],
         style={"marginTop": "16px"},
     ),
     html.Div(
-        id="rq9_top_n_container",
+        id="rq8_top_n_container",
         children=[
             html.Div("Ranking depth"),
             dcc.Slider(
-                id="rq9_top_n",
+                id="rq8_top_n",
                 min=5,
                 max=18,
                 step=1,
@@ -449,11 +449,11 @@ app.layout = [
         style={"display": "none", "marginTop": "16px"},
     ),
     html.Div(
-        id="rq9_min_shots_container",
+        id="rq8_min_shots_container",
         children=[
             html.Div("Minimum shots per age band"),
             dcc.Slider(
-                id="rq9_min_shots",
+                id="rq8_min_shots",
                 min=50,
                 max=600,
                 step=10,
@@ -471,10 +471,10 @@ app.layout = [
 ]
 
 @callback(
-    Output("rq9_team_select_container", "style"),
-    Output("rq9_top_n_container", "style"),
-    Output("rq9_min_shots_container", "style"),
-    Input("rq9_chart_selector", "value"),
+    Output("rq8_team_select_container", "style"),
+    Output("rq8_top_n_container", "style"),
+    Output("rq8_min_shots_container", "style"),
+    Input("rq8_chart_selector", "value"),
 )
 def toggle_controls(chart_type):
     team_style = {"display": "block", "marginTop": "16px"}
@@ -491,10 +491,10 @@ def toggle_controls(chart_type):
 @callback(
     Output("main_graph", "figure"),
     Output("plot_description", "children"),
-    Input("rq9_chart_selector", "value"),
-    Input("rq9_team_select", "value"),
-    Input("rq9_top_n", "value"),
-    Input("rq9_min_shots", "value"),
+    Input("rq8_chart_selector", "value"),
+    Input("rq8_team_select", "value"),
+    Input("rq8_top_n", "value"),
+    Input("rq8_min_shots", "value"),
 )
 def update_graph(chart_type, selected_teams, top_n, min_shots):
     if chart_type == "scatter":

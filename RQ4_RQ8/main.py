@@ -15,17 +15,17 @@ from espn_data_download_pipeline import build_espn_dataset
 from pipeline_config import build_config, configure_env, parse_args
 from pipeline_utils import round_numeric_columns
 from rq4_analysis import RQ4_RATINGS_FILE, build_rq4_answer, build_rq4_tables
-from rq9_analysis import (
+from rq8_analysis import (
     OPTIMAL_AGE_FILE,
     PLAYER_BEST_AGE_FILE,
     TEAM_EFFICIENCY_FILE,
-    build_rq9_answer,
-    build_rq9_tables,
+    build_rq8_answer,
+    build_rq8_tables,
 )
 from whoscored_data_download_pipeline import build_whoscored_dataset
 
 
-ESPN_OUTPUT_NAME = "espn_player_match_data_for_rq9.csv"
+ESPN_OUTPUT_NAME = "espn_player_match_data_for_rq8.csv"
 WHOSCORED_OUTPUT_NAME = "whoscored_player_match_data_for_rq4.csv"
 PIPELINE_ROOT = Path(__file__).resolve().parent
 ANALYSIS_OUTPUT_ROOT = PIPELINE_ROOT / "analysis_output"
@@ -93,30 +93,30 @@ def print_analysis_report(paths: list[Path]) -> None:
 
 
 def print_answer_report(answers: dict[str, str]) -> None:
-    """Print the short RQ4 and RQ9 answer strings.
+    """Print the short answer strings.
 
     Input: dictionary with answer text by key.
     Output: no direct return value.
     """
     print("\n=== ANALYSIS DATA POINTS ===")
-    for key in ("rq4", "rq9"):
+    for key in ("rq4", "rq8"):
         answer = answers.get(key, "").strip()
         if answer:
             print(answer)
 
 
 def build_analysis_tables(
-    rq9_df: pd.DataFrame,
+    rq8_df: pd.DataFrame,
     rq4_df: pd.DataFrame,
 ) -> dict[str, pd.DataFrame]:
     """Build all derived analysis tables.
 
-    Input: raw RQ9 and RQ4 DataFrames.
+    Input: raw RQ8 and RQ4 DataFrames.
     Output: dictionary from relative CSV path to DataFrame.
     """
     tables: dict[str, pd.DataFrame] = {}
     tables.update(build_rq4_tables(rq4_df))
-    tables.update(build_rq9_tables(rq9_df))
+    tables.update(build_rq8_tables(rq8_df))
     return tables
 
 
@@ -144,11 +144,11 @@ def build_terminal_answers(
     """Build short answer strings for the terminal output.
 
     Input: dictionary with derived analysis tables.
-    Output: dictionary with short text answers for RQ4 and RQ9.
+    Output: dictionary with short text answers for RQ4 and RQ8.
     """
     return {
         "rq4": build_rq4_answer(tables[RQ4_RATINGS_FILE]),
-        "rq9": build_rq9_answer(
+        "rq8": build_rq8_answer(
             tables[TEAM_EFFICIENCY_FILE],
             tables[PLAYER_BEST_AGE_FILE],
             tables[OPTIMAL_AGE_FILE],
