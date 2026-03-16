@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+.rq1-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 20px 48px;
+  color: #111827;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.rq1-hero {
+  margin-bottom: 28px;
+}
+
+.rq1-page-title {
+  margin: 0 0 16px;
+  font-size: 28px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.rq1-page-subtitle {
+  margin: 0;
+  max-width: 950px;
+  font-size: 15px;
+  color: #374151;
+}
+
+.rq1-controls {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 28px;
+  margin-bottom: 18px;
+}
+
+.rq1-control-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rq1-control-label {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.rq1-select-control {
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  font-size: 15px;
+}
+
+.rq1-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: center;
+  min-height: 42px;
+}
+
+.rq1-radio-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+}
+
+.rq1-selection-summary {
+  margin-bottom: 26px;
+  font-size: 15px;
+}
+
+.rq1-chart-section {
+  margin-bottom: 36px;
+}
+
+.rq1-chart {
+  width: 100%;
+  min-height: 420px;
+}
+
+.rq1-section-title {
+  margin: 0 0 16px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.rq1-table-section {
+  margin-top: 8px;
+}
+
+.rq1-table-wrapper {
+  overflow-x: auto;
+}
+
+.rq1-summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+}
+
+.rq1-summary-table th,
+.rq1-summary-table td {
+  text-align: left;
+  padding: 14px 10px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 15px;
+}
+
+.rq1-summary-table th {
+  font-weight: 700;
+}
+
+.rq1-status-box {
+  padding: 14px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.rq1-error-box {
+  color: #991b1b;
+  border-color: #fecaca;
+  background: #fef2f2;
+}
+
+@media (max-width: 900px) {
+  .rq1-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .rq1-chart {
+    min-height: 340px;
+  }
+}
