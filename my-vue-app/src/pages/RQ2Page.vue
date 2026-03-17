@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     async loadData() {
-      const res = await fetch("/data/data_goals.csv");
+      const res = await fetch("/data/RQ2.csv");
       const text = await res.text();
       this.df = this.parseCSV(text);
       this.drawPlot();
