@@ -1,0 +1,2 @@
+season,n_teams,pearson_r_age_efficiency,estimated_peak_age,estimated_peak_goals_per_shot,model_note
+2425,18,-0.5219803347451109,23.582974459602383,0.13754078776110856,"The fitted quadratic peak lies outside the observed team-average age range (24.37-28.00), so the data does not support one exact optimal team-average age."

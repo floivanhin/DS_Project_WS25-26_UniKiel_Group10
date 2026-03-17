@@ -16,10 +16,7 @@ HEADERS = {"x-apisports-key": API_KEY}
 LEAGUE_ID = 78
 SEASON = 2024
 
-DATE_FROM = "2024-08-01"
-DATE_TO   = "2024-09-01"
-
-SLEEP_SECONDS = 7 
+SLEEP_SECONDS = 7
 
 
 def api_get(path: str, params: dict):
@@ -41,16 +38,16 @@ def api_get(path: str, params: dict):
 
 
 def main():
-    # 1) fixtures -> venue_id
     fixtures_data = api_get(
         "/fixtures",
-        {"league": LEAGUE_ID, "season": SEASON, "from": DATE_FROM, "to": DATE_TO},
+        {"league": LEAGUE_ID, "season": SEASON},
     )
     fixtures = fixtures_data.get("response", [])
     print(f"Fixtures fetched: {len(fixtures)}")
 
     venue_ids = []
     seen = set()
+
     for fx in fixtures:
         venue = (fx.get("fixture") or {}).get("venue") or {}
         vid = venue.get("id")
@@ -60,8 +57,8 @@ def main():
 
     print(f"Unique venues: {len(venue_ids)}")
 
-    # 2) venues -> capacity
     venues_out = []
+
     for i, vid in enumerate(venue_ids, 1):
         print(f"[{i}/{len(venue_ids)}] Fetching venue id={vid}")
         vdata = api_get("/venues", {"id": vid})
@@ -82,8 +79,6 @@ def main():
             "league": "Bundesliga",
             "league_id": LEAGUE_ID,
             "season": SEASON,
-            "dateFrom": DATE_FROM,
-            "dateTo": DATE_TO,
             "venues": len(venues_out),
         },
         "venues": venues_out,

@@ -1,1 +1,24 @@
+# General
 .env
+*.log
+
+# cache directories
+__pychache__/
+__pycache__/
+downloaded_files/
+.soccerdata_cache/
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Python virtual environments
+.venv/
+
+# VS Code
+.vscode
+
+# Mac OS
+.DS_Store

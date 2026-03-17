@@ -1,0 +1,307 @@
+league_id,season_id,game_id,date,home_team_id,away_team_id,home_team,away_team,away_team_code,home_team_code,home_goals,away_goals,home_xg,away_xg,is_result,has_data,url
+3,2021,17516,2021-08-13 18:30:00,130,117,Borussia M.Gladbach,Bayern Munich,BAY,BMG,1,1,1.98777,2.91794,True,True,https://understat.com/match/17516
+3,2021,17517,2021-08-14 13:30:00,262,135,Arminia Bielefeld,Freiburg,FRE,ARM,0,0,0.575032,1.63663,True,True,https://understat.com/match/17517
+3,2021,17518,2021-08-14 13:30:00,121,120,Augsburg,Hoffenheim,HOF,AUG,0,4,0.734658,3.44423,True,True,https://understat.com/match/17518
+3,2021,17522,2021-08-14 16:30:00,129,132,Borussia Dortmund,Eintracht Frankfurt,EIN,DOR,5,2,2.83799,1.36709,True,True,https://understat.com/match/17522
+3,2021,17520,2021-08-14 13:30:00,240,119,Union Berlin,Bayer Leverkusen,LEV,UNI,1,1,0.443841,0.7943,True,True,https://understat.com/match/17520
+3,2021,17519,2021-08-14 13:30:00,133,267,VfB Stuttgart,Greuther Fuerth,GRE,STU,5,1,4.25968,1.31466,True,True,https://understat.com/match/17519
+3,2021,17521,2021-08-14 13:30:00,131,268,Wolfsburg,Bochum,BOC,WOL,1,0,2.78774,0.297792,True,True,https://understat.com/match/17521
+3,2021,17524,2021-08-15 15:30:00,134,122,FC Cologne,Hertha Berlin,HER,COL,3,1,1.62567,2.1078,True,True,https://understat.com/match/17524
+3,2021,17523,2021-08-15 13:30:00,125,136,Mainz 05,RasenBallsport Leipzig,RBL,MAI,1,0,1.27109,0.841814,True,True,https://understat.com/match/17523
+3,2021,17525,2021-08-20 18:30:00,136,133,RasenBallsport Leipzig,VfB Stuttgart,STU,RBL,4,0,2.86627,0.958579,True,True,https://understat.com/match/17525
+3,2021,17531,2021-08-21 16:30:00,119,130,Bayer Leverkusen,Borussia M.Gladbach,BMG,LEV,4,0,1.94592,1.66054,True,True,https://understat.com/match/17531
+3,2021,17527,2021-08-21 13:30:00,268,125,Bochum,Mainz 05,MAI,BOC,2,0,1.05301,0.817413,True,True,https://understat.com/match/17527
+3,2021,17530,2021-08-21 13:30:00,132,121,Eintracht Frankfurt,Augsburg,AUG,EIN,0,0,1.3297,0.16593,True,True,https://understat.com/match/17530
+3,2021,17529,2021-08-21 13:30:00,135,129,Freiburg,Borussia Dortmund,DOR,FRE,2,1,1.58418,1.49634,True,True,https://understat.com/match/17529
+3,2021,17526,2021-08-21 13:30:00,267,262,Greuther Fuerth,Arminia Bielefeld,ARM,GRE,1,1,2.57735,0.763691,True,True,https://understat.com/match/17526
+3,2021,17528,2021-08-21 13:30:00,122,131,Hertha Berlin,Wolfsburg,WOL,HER,1,2,1.17401,0.558009,True,True,https://understat.com/match/17528
+3,2021,17533,2021-08-22 15:30:00,117,134,Bayern Munich,FC Cologne,COL,BAY,3,2,3.08002,0.957893,True,True,https://understat.com/match/17533
+3,2021,17532,2021-08-22 13:30:00,120,240,Hoffenheim,Union Berlin,UNI,HOF,2,2,0.967015,2.35122,True,True,https://understat.com/match/17532
+3,2021,17534,2021-08-27 18:30:00,129,120,Borussia Dortmund,Hoffenheim,HOF,DOR,3,2,3.40779,2.42487,True,True,https://understat.com/match/17534
+3,2021,17536,2021-08-28 13:30:00,262,132,Arminia Bielefeld,Eintracht Frankfurt,EIN,ARM,1,1,0.626534,1.78556,True,True,https://understat.com/match/17536
+3,2021,17537,2021-08-28 13:30:00,121,119,Augsburg,Bayer Leverkusen,LEV,AUG,1,4,1.6937,2.1207,True,True,https://understat.com/match/17537
+3,2021,17540,2021-08-28 16:30:00,117,122,Bayern Munich,Hertha Berlin,HER,BAY,5,0,4.25513,0.575566,True,True,https://understat.com/match/17540
+3,2021,17535,2021-08-28 13:30:00,134,268,FC Cologne,Bochum,BOC,COL,2,1,2.91135,0.721445,True,True,https://understat.com/match/17535
+3,2021,17538,2021-08-28 13:30:00,125,267,Mainz 05,Greuther Fuerth,GRE,MAI,3,0,2.79493,0.304223,True,True,https://understat.com/match/17538
+3,2021,17539,2021-08-28 13:30:00,133,135,VfB Stuttgart,Freiburg,FRE,STU,2,3,2.28063,1.36171,True,True,https://understat.com/match/17539
+3,2021,17541,2021-08-29 13:30:00,240,130,Union Berlin,Borussia M.Gladbach,BMG,UNI,2,1,1.56256,1.52841,True,True,https://understat.com/match/17541
+3,2021,17542,2021-08-29 15:30:00,131,136,Wolfsburg,RasenBallsport Leipzig,RBL,WOL,1,0,1.11229,1.43914,True,True,https://understat.com/match/17542
+3,2021,17547,2021-09-11 13:30:00,119,129,Bayer Leverkusen,Borussia Dortmund,DOR,LEV,3,4,0.471066,2.2922,True,True,https://understat.com/match/17547
+3,2021,17545,2021-09-11 13:30:00,135,134,Freiburg,FC Cologne,COL,FRE,1,1,0.871642,1.50213,True,True,https://understat.com/match/17545
+3,2021,17543,2021-09-11 13:30:00,267,131,Greuther Fuerth,Wolfsburg,WOL,GRE,0,2,0.392561,1.44282,True,True,https://understat.com/match/17543
+3,2021,17544,2021-09-11 13:30:00,120,125,Hoffenheim,Mainz 05,MAI,HOF,0,2,0.509713,0.933476,True,True,https://understat.com/match/17544
+3,2021,17548,2021-09-11 16:30:00,136,117,RasenBallsport Leipzig,Bayern Munich,BAY,RBL,1,4,0.347898,4.30091,True,True,https://understat.com/match/17548
+3,2021,17546,2021-09-11 13:30:00,240,121,Union Berlin,Augsburg,AUG,UNI,0,0,1.71533,0.831722,True,True,https://understat.com/match/17546
+3,2021,17550,2021-09-12 15:30:00,268,122,Bochum,Hertha Berlin,HER,BOC,1,3,1.02687,0.605231,True,True,https://understat.com/match/17550
+3,2021,17551,2021-09-12 17:30:00,130,262,Borussia M.Gladbach,Arminia Bielefeld,ARM,BMG,3,1,2.12932,1.53189,True,True,https://understat.com/match/17551
+3,2021,17549,2021-09-12 13:30:00,132,133,Eintracht Frankfurt,VfB Stuttgart,STU,EIN,1,1,1.46763,1.2361,True,True,https://understat.com/match/17549
+3,2021,17552,2021-09-17 18:30:00,122,267,Hertha Berlin,Greuther Fuerth,GRE,HER,2,1,1.59085,1.55279,True,True,https://understat.com/match/17552
+3,2021,17555,2021-09-18 13:30:00,262,120,Arminia Bielefeld,Hoffenheim,HOF,ARM,0,0,1.00534,1.54136,True,True,https://understat.com/match/17555
+3,2021,17553,2021-09-18 13:30:00,121,130,Augsburg,Borussia M.Gladbach,BMG,AUG,1,0,0.494801,0.74574,True,True,https://understat.com/match/17553
+3,2021,17556,2021-09-18 13:30:00,117,268,Bayern Munich,Bochum,BOC,BAY,7,0,6.88189,1.23312,True,True,https://understat.com/match/17556
+3,2021,17557,2021-09-18 16:30:00,134,136,FC Cologne,RasenBallsport Leipzig,RBL,COL,1,1,1.68932,2.03702,True,True,https://understat.com/match/17557
+3,2021,17554,2021-09-18 13:30:00,125,135,Mainz 05,Freiburg,FRE,MAI,0,0,1.26167,0.364252,True,True,https://understat.com/match/17554
+3,2021,17559,2021-09-19 15:30:00,129,240,Borussia Dortmund,Union Berlin,UNI,DOR,4,2,1.09855,1.7321,True,True,https://understat.com/match/17559
+3,2021,17558,2021-09-19 13:30:00,133,119,VfB Stuttgart,Bayer Leverkusen,LEV,STU,1,3,1.41677,1.59332,True,True,https://understat.com/match/17558
+3,2021,17560,2021-09-19 17:30:00,131,132,Wolfsburg,Eintracht Frankfurt,EIN,WOL,1,1,1.84989,0.280625,True,True,https://understat.com/match/17560
+3,2021,17561,2021-09-24 18:30:00,267,117,Greuther Fuerth,Bayern Munich,BAY,GRE,1,3,0.655908,0.677915,True,True,https://understat.com/match/17561
+3,2021,17563,2021-09-25 13:30:00,119,125,Bayer Leverkusen,Mainz 05,MAI,LEV,1,0,1.45034,0.930118,True,True,https://understat.com/match/17563
+3,2021,17567,2021-09-25 16:30:00,130,129,Borussia M.Gladbach,Borussia Dortmund,DOR,BMG,1,0,1.65529,0.568652,True,True,https://understat.com/match/17567
+3,2021,17564,2021-09-25 13:30:00,132,134,Eintracht Frankfurt,FC Cologne,COL,EIN,1,1,0.950916,1.10981,True,True,https://understat.com/match/17564
+3,2021,17566,2021-09-25 13:30:00,120,131,Hoffenheim,Wolfsburg,WOL,HOF,3,1,1.78602,0.504541,True,True,https://understat.com/match/17566
+3,2021,17565,2021-09-25 13:30:00,136,122,RasenBallsport Leipzig,Hertha Berlin,HER,RBL,6,0,4.25065,0.341267,True,True,https://understat.com/match/17565
+3,2021,17562,2021-09-25 13:30:00,240,262,Union Berlin,Arminia Bielefeld,ARM,UNI,1,0,1.25321,0.435528,True,True,https://understat.com/match/17562
+3,2021,17568,2021-09-26 13:30:00,268,133,Bochum,VfB Stuttgart,STU,BOC,0,0,0.925854,0.29441,True,True,https://understat.com/match/17568
+3,2021,17569,2021-09-26 15:30:00,135,121,Freiburg,Augsburg,AUG,FRE,3,0,3.97075,0.191653,True,True,https://understat.com/match/17569
+3,2021,17570,2021-10-01 18:30:00,134,267,FC Cologne,Greuther Fuerth,GRE,COL,3,1,2.8694,0.984368,True,True,https://understat.com/match/17570
+3,2021,17576,2021-10-02 13:30:00,129,121,Borussia Dortmund,Augsburg,AUG,DOR,2,1,2.72281,0.746485,True,True,https://understat.com/match/17576
+3,2021,17572,2021-10-02 13:30:00,122,135,Hertha Berlin,Freiburg,FRE,HER,1,2,0.913547,0.861008,True,True,https://understat.com/match/17572
+3,2021,17577,2021-10-02 16:30:00,136,268,RasenBallsport Leipzig,Bochum,BOC,RBL,3,0,2.46461,1.51583,True,True,https://understat.com/match/17577
+3,2021,17574,2021-10-02 13:30:00,133,120,VfB Stuttgart,Hoffenheim,HOF,STU,3,1,0.76705,0.978235,True,True,https://understat.com/match/17574
+3,2021,17575,2021-10-02 13:30:00,131,130,Wolfsburg,Borussia M.Gladbach,BMG,WOL,1,3,1.22196,3.51831,True,True,https://understat.com/match/17575
+3,2021,17571,2021-10-03 17:30:00,262,119,Arminia Bielefeld,Bayer Leverkusen,LEV,ARM,0,4,0.447571,2.96917,True,True,https://understat.com/match/17571
+3,2021,17578,2021-10-03 15:30:00,117,132,Bayern Munich,Eintracht Frankfurt,EIN,BAY,1,2,2.18047,0.389616,True,True,https://understat.com/match/17578
+3,2021,17573,2021-10-03 13:30:00,125,240,Mainz 05,Union Berlin,UNI,MAI,1,2,1.25545,1.1103,True,True,https://understat.com/match/17573
+3,2021,17581,2021-10-15 18:30:00,120,134,Hoffenheim,FC Cologne,COL,HOF,5,0,4.18974,0.484187,True,True,https://understat.com/match/17581
+3,2021,17587,2021-10-16 13:30:00,129,125,Borussia Dortmund,Mainz 05,MAI,DOR,3,1,2.3618,0.610876,True,True,https://understat.com/match/17587
+3,2021,17583,2021-10-16 16:30:00,130,133,Borussia M.Gladbach,VfB Stuttgart,STU,BMG,1,1,2.28296,0.292328,True,True,https://understat.com/match/17583
+3,2021,17586,2021-10-16 13:30:00,132,122,Eintracht Frankfurt,Hertha Berlin,HER,EIN,1,2,1.70283,2.56404,True,True,https://understat.com/match/17586
+3,2021,17582,2021-10-16 13:30:00,135,136,Freiburg,RasenBallsport Leipzig,RBL,FRE,1,1,1.63966,1.65528,True,True,https://understat.com/match/17582
+3,2021,17579,2021-10-16 13:30:00,267,268,Greuther Fuerth,Bochum,BOC,GRE,0,1,0.69855,1.72207,True,True,https://understat.com/match/17579
+3,2021,17584,2021-10-16 13:30:00,240,131,Union Berlin,Wolfsburg,WOL,UNI,2,0,1.32884,1.28381,True,True,https://understat.com/match/17584
+3,2021,17580,2021-10-17 15:30:00,121,262,Augsburg,Arminia Bielefeld,ARM,AUG,1,1,0.913256,0.285865,True,True,https://understat.com/match/17580
+3,2021,17585,2021-10-17 13:30:00,119,117,Bayer Leverkusen,Bayern Munich,BAY,LEV,1,5,0.729378,3.44913,True,True,https://understat.com/match/17585
+3,2021,17592,2021-10-22 18:30:00,125,121,Mainz 05,Augsburg,AUG,MAI,4,1,4.13366,0.664542,True,True,https://understat.com/match/17592
+3,2021,17590,2021-10-23 13:30:00,262,129,Arminia Bielefeld,Borussia Dortmund,DOR,ARM,1,3,1.40239,2.58993,True,True,https://understat.com/match/17590
+3,2021,17596,2021-10-23 13:30:00,117,120,Bayern Munich,Hoffenheim,HOF,BAY,4,0,3.31148,0.446465,True,True,https://understat.com/match/17596
+3,2021,17591,2021-10-23 16:30:00,122,130,Hertha Berlin,Borussia M.Gladbach,BMG,HER,1,0,1.47383,0.47063,True,True,https://understat.com/match/17591
+3,2021,17595,2021-10-23 13:30:00,136,267,RasenBallsport Leipzig,Greuther Fuerth,GRE,RBL,4,1,2.30304,1.94277,True,True,https://understat.com/match/17595
+3,2021,17594,2021-10-23 13:30:00,131,135,Wolfsburg,Freiburg,FRE,WOL,0,2,1.72591,2.17659,True,True,https://understat.com/match/17594
+3,2021,17588,2021-10-24 17:30:00,268,132,Bochum,Eintracht Frankfurt,EIN,BOC,2,0,2.78664,1.51826,True,True,https://understat.com/match/17588
+3,2021,17589,2021-10-24 13:30:00,134,119,FC Cologne,Bayer Leverkusen,LEV,COL,2,2,1.71198,1.79735,True,True,https://understat.com/match/17589
+3,2021,17593,2021-10-24 15:30:00,133,240,VfB Stuttgart,Union Berlin,UNI,STU,1,1,0.426401,1.01643,True,True,https://understat.com/match/17593
+3,2021,17599,2021-10-29 18:30:00,120,122,Hoffenheim,Hertha Berlin,HER,HOF,2,0,0.860088,0.471538,True,True,https://understat.com/match/17599
+3,2021,17597,2021-10-30 13:30:00,262,125,Arminia Bielefeld,Mainz 05,MAI,ARM,1,2,0.497896,2.97383,True,True,https://understat.com/match/17597
+3,2021,17603,2021-10-30 13:30:00,119,131,Bayer Leverkusen,Wolfsburg,WOL,LEV,0,2,1.30903,1.8693,True,True,https://understat.com/match/17603
+3,2021,17605,2021-10-30 13:30:00,129,134,Borussia Dortmund,FC Cologne,COL,DOR,2,0,1.75772,1.20191,True,True,https://understat.com/match/17605
+3,2021,17604,2021-10-30 16:30:00,132,136,Eintracht Frankfurt,RasenBallsport Leipzig,RBL,EIN,1,1,0.594345,3.99211,True,True,https://understat.com/match/17604
+3,2021,17600,2021-10-30 13:30:00,135,267,Freiburg,Greuther Fuerth,GRE,FRE,3,1,1.2181,0.48039,True,True,https://understat.com/match/17600
+3,2021,17602,2021-10-30 13:30:00,240,117,Union Berlin,Bayern Munich,BAY,UNI,2,5,0.744794,3.14739,True,True,https://understat.com/match/17602
+3,2021,17598,2021-10-31 14:30:00,121,133,Augsburg,VfB Stuttgart,STU,AUG,4,1,2.59567,0.90948,True,True,https://understat.com/match/17598
+3,2021,17601,2021-10-31 16:30:00,130,268,Borussia M.Gladbach,Bochum,BOC,BMG,2,1,1.81742,1.07958,True,True,https://understat.com/match/17601
+3,2021,17610,2021-11-05 19:30:00,125,130,Mainz 05,Borussia M.Gladbach,BMG,MAI,1,1,0.94947,1.50835,True,True,https://understat.com/match/17610
+3,2021,17614,2021-11-06 14:30:00,117,135,Bayern Munich,Freiburg,FRE,BAY,2,1,3.16849,0.910798,True,True,https://understat.com/match/17614
+3,2021,17607,2021-11-06 14:30:00,268,120,Bochum,Hoffenheim,HOF,BOC,2,0,2.12433,0.641687,True,True,https://understat.com/match/17607
+3,2021,17613,2021-11-06 17:30:00,136,129,RasenBallsport Leipzig,Borussia Dortmund,DOR,RBL,2,1,2.48845,0.734721,True,True,https://understat.com/match/17613
+3,2021,17611,2021-11-06 14:30:00,133,262,VfB Stuttgart,Arminia Bielefeld,ARM,STU,0,1,1.11192,1.55125,True,True,https://understat.com/match/17611
+3,2021,17612,2021-11-06 14:30:00,131,121,Wolfsburg,Augsburg,AUG,WOL,1,0,0.910085,0.867311,True,True,https://understat.com/match/17612
+3,2021,17608,2021-11-07 16:30:00,134,240,FC Cologne,Union Berlin,UNI,COL,2,2,1.93335,1.1297,True,True,https://understat.com/match/17608
+3,2021,17606,2021-11-07 18:30:00,267,132,Greuther Fuerth,Eintracht Frankfurt,EIN,GRE,1,2,2.4344,1.26639,True,True,https://understat.com/match/17606
+3,2021,17609,2021-11-07 14:30:00,122,119,Hertha Berlin,Bayer Leverkusen,LEV,HER,1,1,0.903476,0.774023,True,True,https://understat.com/match/17609
+3,2021,17616,2021-11-19 19:30:00,121,117,Augsburg,Bayern Munich,BAY,AUG,2,1,0.614461,1.24258,True,True,https://understat.com/match/17616
+3,2021,17615,2021-11-20 14:30:00,262,131,Arminia Bielefeld,Wolfsburg,WOL,ARM,2,2,1.40579,1.35662,True,True,https://understat.com/match/17615
+3,2021,17622,2021-11-20 14:30:00,119,268,Bayer Leverkusen,Bochum,BOC,LEV,1,0,1.62637,0.708697,True,True,https://understat.com/match/17622
+3,2021,17623,2021-11-20 14:30:00,129,133,Borussia Dortmund,VfB Stuttgart,STU,DOR,2,1,1.99186,1.54108,True,True,https://understat.com/match/17623
+3,2021,17620,2021-11-20 14:30:00,130,267,Borussia M.Gladbach,Greuther Fuerth,GRE,BMG,4,0,2.47443,0.307559,True,True,https://understat.com/match/17620
+3,2021,17618,2021-11-20 14:30:00,120,136,Hoffenheim,RasenBallsport Leipzig,RBL,HOF,2,0,2.88876,0.211083,True,True,https://understat.com/match/17618
+3,2021,17621,2021-11-20 17:30:00,240,122,Union Berlin,Hertha Berlin,HER,UNI,2,0,1.89108,0.211495,True,True,https://understat.com/match/17621
+3,2021,17619,2021-11-21 14:30:00,135,132,Freiburg,Eintracht Frankfurt,EIN,FRE,0,2,1.5667,1.24268,True,True,https://understat.com/match/17619
+3,2021,17617,2021-11-21 16:30:00,125,134,Mainz 05,FC Cologne,COL,MAI,1,1,0.941346,1.75564,True,True,https://understat.com/match/17617
+3,2021,17628,2021-11-26 19:30:00,133,125,VfB Stuttgart,Mainz 05,MAI,STU,2,1,0.276918,1.17743,True,True,https://understat.com/match/17628
+3,2021,17632,2021-11-27 17:30:00,117,262,Bayern Munich,Arminia Bielefeld,ARM,BAY,1,0,2.67728,0.385377,True,True,https://understat.com/match/17632
+3,2021,17625,2021-11-27 14:30:00,268,135,Bochum,Freiburg,FRE,BOC,2,1,0.955994,2.12135,True,True,https://understat.com/match/17625
+3,2021,17626,2021-11-27 14:30:00,134,130,FC Cologne,Borussia M.Gladbach,BMG,COL,4,1,1.48695,1.30291,True,True,https://understat.com/match/17626
+3,2021,17624,2021-11-27 14:30:00,267,120,Greuther Fuerth,Hoffenheim,HOF,GRE,3,6,1.36493,3.01705,True,True,https://understat.com/match/17624
+3,2021,17627,2021-11-27 14:30:00,122,121,Hertha Berlin,Augsburg,AUG,HER,1,1,1.92656,1.61295,True,True,https://understat.com/match/17627
+3,2021,17630,2021-11-27 14:30:00,131,129,Wolfsburg,Borussia Dortmund,DOR,WOL,1,3,2.17146,2.35127,True,True,https://understat.com/match/17630
+3,2021,17629,2021-11-28 14:30:00,132,240,Eintracht Frankfurt,Union Berlin,UNI,EIN,2,1,1.69692,1.07386,True,True,https://understat.com/match/17629
+3,2021,17631,2021-11-28 16:30:00,136,119,RasenBallsport Leipzig,Bayer Leverkusen,LEV,RBL,1,3,1.43225,1.23553,True,True,https://understat.com/match/17631
+3,2021,17639,2021-12-03 19:30:00,240,136,Union Berlin,RasenBallsport Leipzig,RBL,UNI,2,1,3.76492,1.14392,True,True,https://understat.com/match/17639
+3,2021,17633,2021-12-04 14:30:00,262,134,Arminia Bielefeld,FC Cologne,COL,ARM,1,1,1.01727,1.18693,True,True,https://understat.com/match/17633
+3,2021,17634,2021-12-04 14:30:00,121,268,Augsburg,Bochum,BOC,AUG,2,3,2.86606,2.04524,True,True,https://understat.com/match/17634
+3,2021,17640,2021-12-04 14:30:00,119,267,Bayer Leverkusen,Greuther Fuerth,GRE,LEV,7,1,2.4319,0.279746,True,True,https://understat.com/match/17640
+3,2021,17641,2021-12-04 17:30:00,129,117,Borussia Dortmund,Bayern Munich,BAY,DOR,2,3,1.43058,2.42143,True,True,https://understat.com/match/17641
+3,2021,17636,2021-12-04 14:30:00,120,132,Hoffenheim,Eintracht Frankfurt,EIN,HOF,3,2,0.924975,1.57864,True,True,https://understat.com/match/17636
+3,2021,17635,2021-12-04 14:30:00,125,131,Mainz 05,Wolfsburg,WOL,MAI,3,0,1.41164,0.760457,True,True,https://understat.com/match/17635
+3,2021,17638,2021-12-05 16:30:00,130,135,Borussia M.Gladbach,Freiburg,FRE,BMG,0,6,1.07562,2.70796,True,True,https://understat.com/match/17638
+3,2021,17637,2021-12-05 14:30:00,133,122,VfB Stuttgart,Hertha Berlin,HER,STU,2,2,0.921944,1.25849,True,True,https://understat.com/match/17637
+3,2021,17644,2021-12-10 19:30:00,134,121,FC Cologne,Augsburg,AUG,COL,0,2,1.15891,1.17632,True,True,https://understat.com/match/17644
+3,2021,17650,2021-12-11 14:30:00,117,125,Bayern Munich,Mainz 05,MAI,BAY,2,1,1.78613,0.872668,True,True,https://understat.com/match/17650
+3,2021,17643,2021-12-11 14:30:00,268,129,Bochum,Borussia Dortmund,DOR,BOC,1,1,0.966453,2.68284,True,True,https://understat.com/match/17643
+3,2021,17646,2021-12-11 14:30:00,135,120,Freiburg,Hoffenheim,HOF,FRE,1,2,2.25197,1.5054,True,True,https://understat.com/match/17646
+3,2021,17645,2021-12-11 14:30:00,122,262,Hertha Berlin,Arminia Bielefeld,ARM,HER,2,0,2.23797,0.454841,True,True,https://understat.com/match/17645
+3,2021,17649,2021-12-11 14:30:00,136,130,RasenBallsport Leipzig,Borussia M.Gladbach,BMG,RBL,4,1,4.80258,0.84748,True,True,https://understat.com/match/17649
+3,2021,17648,2021-12-11 17:30:00,131,133,Wolfsburg,VfB Stuttgart,STU,WOL,0,2,1.46986,1.53296,True,True,https://understat.com/match/17648
+3,2021,17647,2021-12-12 16:30:00,132,119,Eintracht Frankfurt,Bayer Leverkusen,LEV,EIN,5,2,1.44415,1.60141,True,True,https://understat.com/match/17647
+3,2021,17642,2021-12-12 14:30:00,267,240,Greuther Fuerth,Union Berlin,UNI,GRE,1,0,0.680225,1.83652,True,True,https://understat.com/match/17642
+3,2021,17651,2021-12-14 19:30:00,262,268,Arminia Bielefeld,Bochum,BOC,ARM,2,0,0.642785,0.748012,True,True,https://understat.com/match/17651
+3,2021,17653,2021-12-14 19:30:00,125,122,Mainz 05,Hertha Berlin,HER,MAI,4,0,3.10591,0.393369,True,True,https://understat.com/match/17653
+3,2021,17654,2021-12-14 17:30:00,133,117,VfB Stuttgart,Bayern Munich,BAY,STU,0,5,1.04709,4.98146,True,True,https://understat.com/match/17654
+3,2021,17658,2021-12-14 19:30:00,131,134,Wolfsburg,FC Cologne,COL,WOL,2,3,2.42693,3.14693,True,True,https://understat.com/match/17658
+3,2021,17652,2021-12-15 19:30:00,121,136,Augsburg,RasenBallsport Leipzig,RBL,AUG,1,1,1.56744,3.08255,True,True,https://understat.com/match/17652
+3,2021,17657,2021-12-15 19:30:00,119,120,Bayer Leverkusen,Hoffenheim,HOF,LEV,2,2,2.42553,1.68115,True,True,https://understat.com/match/17657
+3,2021,17659,2021-12-15 19:30:00,129,267,Borussia Dortmund,Greuther Fuerth,GRE,DOR,3,0,1.91572,0.379024,True,True,https://understat.com/match/17659
+3,2021,17655,2021-12-15 17:30:00,130,132,Borussia M.Gladbach,Eintracht Frankfurt,EIN,BMG,2,3,2.22983,2.50286,True,True,https://understat.com/match/17655
+3,2021,17656,2021-12-15 19:30:00,240,135,Union Berlin,Freiburg,FRE,UNI,0,0,2.25007,1.22466,True,True,https://understat.com/match/17656
+3,2021,17668,2021-12-17 19:30:00,117,131,Bayern Munich,Wolfsburg,WOL,BAY,4,0,4.31291,1.41635,True,True,https://understat.com/match/17668
+3,2021,17661,2021-12-18 14:30:00,268,240,Bochum,Union Berlin,UNI,BOC,0,1,1.04215,0.999651,True,True,https://understat.com/match/17661
+3,2021,17666,2021-12-18 14:30:00,132,125,Eintracht Frankfurt,Mainz 05,MAI,EIN,1,0,1.52805,0.832437,True,True,https://understat.com/match/17666
+3,2021,17660,2021-12-18 14:30:00,267,121,Greuther Fuerth,Augsburg,AUG,GRE,0,0,0.0901985,1.48497,True,True,https://understat.com/match/17660
+3,2021,17663,2021-12-18 17:30:00,122,129,Hertha Berlin,Borussia Dortmund,DOR,HER,3,2,1.61634,1.57262,True,True,https://understat.com/match/17663
+3,2021,17664,2021-12-18 14:30:00,120,130,Hoffenheim,Borussia M.Gladbach,BMG,HOF,1,1,2.24422,1.62486,True,True,https://understat.com/match/17664
+3,2021,17667,2021-12-18 14:30:00,136,262,RasenBallsport Leipzig,Arminia Bielefeld,ARM,RBL,0,2,1.64503,1.33454,True,True,https://understat.com/match/17667
+3,2021,17662,2021-12-19 16:30:00,134,133,FC Cologne,VfB Stuttgart,STU,COL,1,0,1.35819,0.333564,True,True,https://understat.com/match/17662
+3,2021,17665,2021-12-19 14:30:00,135,119,Freiburg,Bayer Leverkusen,LEV,FRE,2,1,2.07857,0.818605,True,True,https://understat.com/match/17665
+3,2021,17677,2022-01-07 19:30:00,117,130,Bayern Munich,Borussia M.Gladbach,BMG,BAY,1,2,1.35599,1.51069,True,True,https://understat.com/match/17677
+3,2021,17674,2022-01-08 14:30:00,119,240,Bayer Leverkusen,Union Berlin,UNI,LEV,2,2,2.20526,3.04208,True,True,https://understat.com/match/17674
+3,2021,17675,2022-01-08 17:30:00,132,129,Eintracht Frankfurt,Borussia Dortmund,DOR,EIN,2,3,1.77844,2.38227,True,True,https://understat.com/match/17675
+3,2021,17673,2022-01-08 14:30:00,135,262,Freiburg,Arminia Bielefeld,ARM,FRE,2,2,2.20416,1.1145,True,True,https://understat.com/match/17673
+3,2021,17669,2022-01-08 14:30:00,267,133,Greuther Fuerth,VfB Stuttgart,STU,GRE,0,0,1.12386,1.62697,True,True,https://understat.com/match/17669
+3,2021,17672,2022-01-08 14:30:00,120,121,Hoffenheim,Augsburg,AUG,HOF,3,1,2.76228,0.749744,True,True,https://understat.com/match/17672
+3,2021,17676,2022-01-08 14:30:00,136,125,RasenBallsport Leipzig,Mainz 05,MAI,RBL,4,1,3.55391,0.319779,True,True,https://understat.com/match/17676
+3,2021,17670,2022-01-09 16:30:00,268,131,Bochum,Wolfsburg,WOL,BOC,1,0,1.57295,0.400404,True,True,https://understat.com/match/17670
+3,2021,17671,2022-01-09 14:30:00,122,134,Hertha Berlin,FC Cologne,COL,HER,1,3,0.791753,2.46989,True,True,https://understat.com/match/17671
+3,2021,17686,2022-01-14 19:30:00,129,135,Borussia Dortmund,Freiburg,FRE,DOR,5,1,2.42754,1.04847,True,True,https://understat.com/match/17686
+3,2021,17683,2022-01-15 17:30:00,130,119,Borussia M.Gladbach,Bayer Leverkusen,LEV,BMG,1,2,1.44472,6.49734,True,True,https://understat.com/match/17683
+3,2021,17678,2022-01-15 14:30:00,134,117,FC Cologne,Bayern Munich,BAY,COL,0,4,1.0312,3.87329,True,True,https://understat.com/match/17678
+3,2021,17681,2022-01-15 14:30:00,125,268,Mainz 05,Bochum,BOC,MAI,1,0,1.60302,1.32639,True,True,https://understat.com/match/17681
+3,2021,17684,2022-01-15 14:30:00,240,120,Union Berlin,Hoffenheim,HOF,UNI,2,1,1.76684,0.61487,True,True,https://understat.com/match/17684
+3,2021,17682,2022-01-15 14:30:00,133,136,VfB Stuttgart,RasenBallsport Leipzig,RBL,STU,0,2,1.18793,1.601,True,True,https://understat.com/match/17682
+3,2021,17685,2022-01-15 14:30:00,131,122,Wolfsburg,Hertha Berlin,HER,WOL,0,0,1.80168,0.313936,True,True,https://understat.com/match/17685
+3,2021,17679,2022-01-16 16:30:00,262,267,Arminia Bielefeld,Greuther Fuerth,GRE,ARM,2,2,0.534681,0.55128,True,True,https://understat.com/match/17679
+3,2021,17680,2022-01-16 14:30:00,121,132,Augsburg,Eintracht Frankfurt,EIN,AUG,1,1,0.834967,2.14731,True,True,https://understat.com/match/17680
+3,2021,17694,2022-01-21 19:30:00,132,262,Eintracht Frankfurt,Arminia Bielefeld,ARM,EIN,0,2,1.44952,1.56136,True,True,https://understat.com/match/17694
+3,2021,17693,2022-01-22 14:30:00,119,121,Bayer Leverkusen,Augsburg,AUG,LEV,5,1,3.51884,1.21255,True,True,https://understat.com/match/17693
+3,2021,17688,2022-01-22 17:30:00,268,134,Bochum,FC Cologne,COL,BOC,2,2,1.77931,1.5434,True,True,https://understat.com/match/17688
+3,2021,17692,2022-01-22 14:30:00,130,240,Borussia M.Gladbach,Union Berlin,UNI,BMG,1,2,1.29912,1.30514,True,True,https://understat.com/match/17692
+3,2021,17691,2022-01-22 14:30:00,135,133,Freiburg,VfB Stuttgart,STU,FRE,2,0,1.58203,0.221777,True,True,https://understat.com/match/17691
+3,2021,17687,2022-01-22 14:30:00,267,125,Greuther Fuerth,Mainz 05,MAI,GRE,2,1,1.29371,1.40771,True,True,https://understat.com/match/17687
+3,2021,17690,2022-01-22 14:30:00,120,129,Hoffenheim,Borussia Dortmund,DOR,HOF,2,3,1.16246,1.3361,True,True,https://understat.com/match/17690
+3,2021,17689,2022-01-23 16:30:00,122,117,Hertha Berlin,Bayern Munich,BAY,HER,1,4,0.847937,5.18503,True,True,https://understat.com/match/17689
+3,2021,17695,2022-01-23 14:30:00,136,131,RasenBallsport Leipzig,Wolfsburg,WOL,RBL,2,0,1.69425,0.871043,True,True,https://understat.com/match/17695
+3,2021,17698,2022-02-04 19:30:00,122,268,Hertha Berlin,Bochum,BOC,HER,1,1,0.444153,0.993261,True,True,https://understat.com/match/17698
+3,2021,17697,2022-02-05 14:30:00,262,130,Arminia Bielefeld,Borussia M.Gladbach,BMG,ARM,1,1,0.5965,1.4844,True,True,https://understat.com/match/17697
+3,2021,17699,2022-02-05 14:30:00,121,240,Augsburg,Union Berlin,UNI,AUG,2,0,1.83212,2.09718,True,True,https://understat.com/match/17699
+3,2021,17704,2022-02-05 17:30:00,117,136,Bayern Munich,RasenBallsport Leipzig,RBL,BAY,3,2,3.0334,2.65667,True,True,https://understat.com/match/17704
+3,2021,17696,2022-02-05 14:30:00,134,135,FC Cologne,Freiburg,FRE,COL,1,0,1.09604,0.683704,True,True,https://understat.com/match/17696
+3,2021,17700,2022-02-05 14:30:00,125,120,Mainz 05,Hoffenheim,HOF,MAI,2,0,1.77868,1.31773,True,True,https://understat.com/match/17700
+3,2021,17701,2022-02-05 14:30:00,133,132,VfB Stuttgart,Eintracht Frankfurt,EIN,STU,2,3,2.12047,0.842047,True,True,https://understat.com/match/17701
+3,2021,17703,2022-02-06 14:30:00,129,119,Borussia Dortmund,Bayer Leverkusen,LEV,DOR,2,5,1.60338,1.81345,True,True,https://understat.com/match/17703
+3,2021,17702,2022-02-06 16:30:00,131,267,Wolfsburg,Greuther Fuerth,GRE,WOL,4,1,2.0638,1.10423,True,True,https://understat.com/match/17702
+3,2021,17713,2022-02-11 19:30:00,136,134,RasenBallsport Leipzig,FC Cologne,COL,RBL,3,1,0.850488,0.794743,True,True,https://understat.com/match/17713
+3,2021,17711,2022-02-12 17:30:00,119,133,Bayer Leverkusen,VfB Stuttgart,STU,LEV,4,2,2.41919,1.17227,True,True,https://understat.com/match/17711
+3,2021,17706,2022-02-12 14:30:00,268,117,Bochum,Bayern Munich,BAY,BOC,4,2,1.34846,1.87083,True,True,https://understat.com/match/17706
+3,2021,17709,2022-02-12 14:30:00,130,121,Borussia M.Gladbach,Augsburg,AUG,BMG,3,2,3.03062,1.62757,True,True,https://understat.com/match/17709
+3,2021,17712,2022-02-12 14:30:00,132,131,Eintracht Frankfurt,Wolfsburg,WOL,EIN,0,2,0.879318,1.61974,True,True,https://understat.com/match/17712
+3,2021,17708,2022-02-12 14:30:00,135,125,Freiburg,Mainz 05,MAI,FRE,1,1,1.69097,3.15753,True,True,https://understat.com/match/17708
+3,2021,17705,2022-02-12 14:30:00,267,122,Greuther Fuerth,Hertha Berlin,HER,GRE,2,1,2.69634,1.84512,True,True,https://understat.com/match/17705
+3,2021,17707,2022-02-13 16:30:00,120,262,Hoffenheim,Arminia Bielefeld,ARM,HOF,2,0,4.16571,0.652006,True,True,https://understat.com/match/17707
+3,2021,17710,2022-02-13 14:30:00,240,129,Union Berlin,Borussia Dortmund,DOR,UNI,0,3,1.47085,2.59623,True,True,https://understat.com/match/17710
+3,2021,17718,2022-02-18 19:30:00,125,119,Mainz 05,Bayer Leverkusen,LEV,MAI,3,2,1.00622,0.827749,True,True,https://understat.com/match/17718
+3,2021,17715,2022-02-19 14:30:00,262,240,Arminia Bielefeld,Union Berlin,UNI,ARM,1,0,1.41442,0.771488,True,True,https://understat.com/match/17715
+3,2021,17717,2022-02-19 14:30:00,121,135,Augsburg,Freiburg,FRE,AUG,1,2,0.951389,2.56075,True,True,https://understat.com/match/17717
+3,2021,17714,2022-02-19 17:30:00,134,132,FC Cologne,Eintracht Frankfurt,EIN,COL,1,0,1.43278,0.678832,True,True,https://understat.com/match/17714
+3,2021,17719,2022-02-19 14:30:00,133,268,VfB Stuttgart,Bochum,BOC,STU,1,1,1.37485,1.93431,True,True,https://understat.com/match/17719
+3,2021,17720,2022-02-19 14:30:00,131,120,Wolfsburg,Hoffenheim,HOF,WOL,1,2,1.50299,1.07132,True,True,https://understat.com/match/17720
+3,2021,17722,2022-02-20 14:30:00,117,267,Bayern Munich,Greuther Fuerth,GRE,BAY,4,1,2.52333,0.66071,True,True,https://understat.com/match/17722
+3,2021,17721,2022-02-20 16:30:00,129,130,Borussia Dortmund,Borussia M.Gladbach,BMG,DOR,6,0,3.59589,0.769068,True,True,https://understat.com/match/17721
+3,2021,17716,2022-02-20 18:30:00,122,136,Hertha Berlin,RasenBallsport Leipzig,RBL,HER,1,6,1.0916,3.42076,True,True,https://understat.com/match/17716
+3,2021,17726,2022-02-25 19:30:00,120,133,Hoffenheim,VfB Stuttgart,STU,HOF,2,1,2.65346,1.83937,True,True,https://understat.com/match/17726
+3,2021,17730,2022-02-26 14:30:00,119,262,Bayer Leverkusen,Arminia Bielefeld,ARM,LEV,3,0,3.05247,0.307307,True,True,https://understat.com/match/17730
+3,2021,17728,2022-02-26 14:30:00,130,131,Borussia M.Gladbach,Wolfsburg,WOL,BMG,2,2,2.7626,1.26995,True,True,https://understat.com/match/17728
+3,2021,17731,2022-02-26 17:30:00,132,117,Eintracht Frankfurt,Bayern Munich,BAY,EIN,0,1,1.1892,2.60814,True,True,https://understat.com/match/17731
+3,2021,17727,2022-02-26 14:30:00,135,122,Freiburg,Hertha Berlin,HER,FRE,3,0,3.66711,1.54627,True,True,https://understat.com/match/17727
+3,2021,17723,2022-02-26 14:30:00,267,134,Greuther Fuerth,FC Cologne,COL,GRE,1,1,0.640559,0.569519,True,True,https://understat.com/match/17723
+3,2021,17729,2022-02-26 14:30:00,240,125,Union Berlin,Mainz 05,MAI,UNI,3,1,0.883998,0.75947,True,True,https://understat.com/match/17729
+3,2021,17725,2022-02-27 16:30:00,121,129,Augsburg,Borussia Dortmund,DOR,AUG,1,1,0.856029,0.640799,True,True,https://understat.com/match/17725
+3,2021,17724,2022-02-27 14:30:00,268,136,Bochum,RasenBallsport Leipzig,RBL,BOC,0,1,0.998771,0.61309,True,True,https://understat.com/match/17724
+3,2021,17734,2022-03-04 19:30:00,262,121,Arminia Bielefeld,Augsburg,AUG,ARM,0,1,0.14375,0.308406,True,True,https://understat.com/match/17734
+3,2021,17740,2022-03-05 14:30:00,117,119,Bayern Munich,Bayer Leverkusen,LEV,BAY,1,1,1.6659,2.26407,True,True,https://understat.com/match/17740
+3,2021,17732,2022-03-05 14:30:00,268,267,Bochum,Greuther Fuerth,GRE,BOC,2,1,1.6566,0.579266,True,True,https://understat.com/match/17732
+3,2021,17735,2022-03-05 14:30:00,122,132,Hertha Berlin,Eintracht Frankfurt,EIN,HER,1,4,0.483243,1.37042,True,True,https://understat.com/match/17735
+3,2021,17739,2022-03-05 14:30:00,136,135,RasenBallsport Leipzig,Freiburg,FRE,RBL,1,1,0.753651,0.484924,True,True,https://understat.com/match/17739
+3,2021,17737,2022-03-05 17:30:00,133,130,VfB Stuttgart,Borussia M.Gladbach,BMG,STU,3,2,2.36751,1.20797,True,True,https://understat.com/match/17737
+3,2021,17738,2022-03-05 14:30:00,131,240,Wolfsburg,Union Berlin,UNI,WOL,1,0,0.411697,1.55639,True,True,https://understat.com/match/17738
+3,2021,17733,2022-03-06 16:30:00,134,120,FC Cologne,Hoffenheim,HOF,COL,0,1,1.22016,2.87337,True,True,https://understat.com/match/17733
+3,2021,17745,2022-03-12 17:30:00,130,122,Borussia M.Gladbach,Hertha Berlin,HER,BMG,2,0,1.75587,0.443109,True,True,https://understat.com/match/17745
+3,2021,17744,2022-03-12 14:30:00,135,131,Freiburg,Wolfsburg,WOL,FRE,3,2,1.54229,0.908576,True,True,https://understat.com/match/17744
+3,2021,17743,2022-03-12 14:30:00,120,117,Hoffenheim,Bayern Munich,BAY,HOF,1,1,2.02668,3.98532,True,True,https://understat.com/match/17743
+3,2021,17746,2022-03-12 14:30:00,240,133,Union Berlin,VfB Stuttgart,STU,UNI,1,1,1.89937,1.73181,True,True,https://understat.com/match/17746
+3,2021,17747,2022-03-13 14:30:00,119,134,Bayer Leverkusen,FC Cologne,COL,LEV,0,1,2.40118,0.59749,True,True,https://understat.com/match/17747
+3,2021,17749,2022-03-13 16:30:00,129,262,Borussia Dortmund,Arminia Bielefeld,ARM,DOR,1,0,2.06968,0.691049,True,True,https://understat.com/match/17749
+3,2021,17748,2022-03-13 16:30:00,132,268,Eintracht Frankfurt,Bochum,BOC,EIN,2,1,1.55276,1.20928,True,True,https://understat.com/match/17748
+3,2021,17741,2022-03-13 18:30:00,267,136,Greuther Fuerth,RasenBallsport Leipzig,RBL,GRE,1,6,0.377793,2.14171,True,True,https://understat.com/match/17741
+3,2021,17736,2022-03-16 17:30:00,125,129,Mainz 05,Borussia Dortmund,DOR,MAI,0,1,0.782406,1.39041,True,True,https://understat.com/match/17736
+3,2021,17751,2022-03-18 17:30:00,268,130,Bochum,Borussia M.Gladbach,BMG,BOC,0,2,1.65633,0.616407,True,True,https://understat.com/match/17751
+3,2021,17758,2022-03-19 17:30:00,117,240,Bayern Munich,Union Berlin,UNI,BAY,4,0,2.82028,1.38973,True,True,https://understat.com/match/17758
+3,2021,17750,2022-03-19 14:30:00,267,135,Greuther Fuerth,Freiburg,FRE,GRE,0,0,0.781339,1.05712,True,True,https://understat.com/match/17750
+3,2021,17753,2022-03-19 14:30:00,122,120,Hertha Berlin,Hoffenheim,HOF,HER,3,0,1.76348,0.576415,True,True,https://understat.com/match/17753
+3,2021,17754,2022-03-19 14:30:00,125,262,Mainz 05,Arminia Bielefeld,ARM,MAI,4,0,4.32637,0.236164,True,True,https://understat.com/match/17754
+3,2021,17755,2022-03-19 14:30:00,133,121,VfB Stuttgart,Augsburg,AUG,STU,3,2,2.18312,0.770891,True,True,https://understat.com/match/17755
+3,2021,17752,2022-03-20 18:30:00,134,129,FC Cologne,Borussia Dortmund,DOR,COL,1,1,1.265,1.0401,True,True,https://understat.com/match/17752
+3,2021,17757,2022-03-20 14:30:00,136,132,RasenBallsport Leipzig,Eintracht Frankfurt,EIN,RBL,0,0,1.05989,0.258751,True,True,https://understat.com/match/17757
+3,2021,17756,2022-03-20 16:30:00,131,119,Wolfsburg,Bayer Leverkusen,LEV,WOL,0,2,1.31797,1.43941,True,True,https://understat.com/match/17756
+3,2021,17764,2022-04-01 18:30:00,240,134,Union Berlin,FC Cologne,COL,UNI,1,0,1.0725,0.220646,True,True,https://understat.com/match/17764
+3,2021,17759,2022-04-02 13:30:00,262,133,Arminia Bielefeld,VfB Stuttgart,STU,ARM,1,1,1.01032,2.73417,True,True,https://understat.com/match/17759
+3,2021,17765,2022-04-02 13:30:00,119,122,Bayer Leverkusen,Hertha Berlin,HER,LEV,2,1,1.78741,0.872251,True,True,https://understat.com/match/17765
+3,2021,17767,2022-04-02 16:30:00,129,136,Borussia Dortmund,RasenBallsport Leipzig,RBL,DOR,1,4,0.969967,1.23272,True,True,https://understat.com/match/17767
+3,2021,17766,2022-04-02 13:30:00,132,267,Eintracht Frankfurt,Greuther Fuerth,GRE,EIN,0,0,1.31928,0.466385,True,True,https://understat.com/match/17766
+3,2021,17762,2022-04-02 13:30:00,135,117,Freiburg,Bayern Munich,BAY,FRE,1,4,0.754263,3.15613,True,True,https://understat.com/match/17762
+3,2021,17761,2022-04-02 13:30:00,120,268,Hoffenheim,Bochum,BOC,HOF,1,2,1.9687,1.70208,True,True,https://understat.com/match/17761
+3,2021,17760,2022-04-03 13:30:00,121,131,Augsburg,Wolfsburg,WOL,AUG,3,0,2.52845,1.18916,True,True,https://understat.com/match/17760
+3,2021,17763,2022-04-03 15:30:00,130,125,Borussia M.Gladbach,Mainz 05,MAI,BMG,1,1,1.55193,1.78,True,True,https://understat.com/match/17763
+3,2021,17742,2022-04-06 16:30:00,121,125,Augsburg,Mainz 05,MAI,AUG,2,1,1.92513,1.84563,True,True,https://understat.com/match/17742
+3,2021,17772,2022-04-08 18:30:00,133,129,VfB Stuttgart,Borussia Dortmund,DOR,STU,0,2,2.03163,1.49649,True,True,https://understat.com/match/17772
+3,2021,17776,2022-04-09 13:30:00,117,121,Bayern Munich,Augsburg,AUG,BAY,1,0,1.43145,0.277271,True,True,https://understat.com/match/17776
+3,2021,17770,2022-04-09 13:30:00,134,125,FC Cologne,Mainz 05,MAI,COL,3,2,1.90576,0.926438,True,True,https://understat.com/match/17770
+3,2021,17768,2022-04-09 13:30:00,267,130,Greuther Fuerth,Borussia M.Gladbach,BMG,GRE,0,2,0.651835,3.48459,True,True,https://understat.com/match/17768
+3,2021,17771,2022-04-09 16:30:00,122,240,Hertha Berlin,Union Berlin,UNI,HER,1,4,0.85457,1.85412,True,True,https://understat.com/match/17771
+3,2021,17774,2022-04-09 13:30:00,131,262,Wolfsburg,Arminia Bielefeld,ARM,WOL,4,0,1.99101,0.476945,True,True,https://understat.com/match/17774
+3,2021,17769,2022-04-10 13:30:00,268,119,Bochum,Bayer Leverkusen,LEV,BOC,0,0,1.05181,1.21928,True,True,https://understat.com/match/17769
+3,2021,17773,2022-04-10 15:30:00,132,135,Eintracht Frankfurt,Freiburg,FRE,EIN,1,2,1.09915,1.46109,True,True,https://understat.com/match/17773
+3,2021,17775,2022-04-10 17:30:00,136,120,RasenBallsport Leipzig,Hoffenheim,HOF,RBL,3,0,1.61141,0.171037,True,True,https://understat.com/match/17775
+3,2021,17778,2022-04-16 13:30:00,121,122,Augsburg,Hertha Berlin,HER,AUG,0,1,0.777494,1.6343,True,True,https://understat.com/match/17778
+3,2021,17785,2022-04-16 13:30:00,129,131,Borussia Dortmund,Wolfsburg,WOL,DOR,6,1,3.31511,1.96018,True,True,https://understat.com/match/17785
+3,2021,17782,2022-04-16 16:30:00,130,134,Borussia M.Gladbach,FC Cologne,COL,BMG,1,3,1.19803,3.01287,True,True,https://understat.com/match/17782
+3,2021,17781,2022-04-16 13:30:00,135,268,Freiburg,Bochum,BOC,FRE,3,0,2.45736,0.427462,True,True,https://understat.com/match/17781
+3,2021,17779,2022-04-16 13:30:00,125,133,Mainz 05,VfB Stuttgart,STU,MAI,0,0,0.723024,0.633775,True,True,https://understat.com/match/17779
+3,2021,17777,2022-04-17 13:30:00,262,117,Arminia Bielefeld,Bayern Munich,BAY,ARM,0,3,0.463135,3.49911,True,True,https://understat.com/match/17777
+3,2021,17784,2022-04-17 17:30:00,119,136,Bayer Leverkusen,RasenBallsport Leipzig,RBL,LEV,0,1,0.728724,0.507455,True,True,https://understat.com/match/17784
+3,2021,17780,2022-04-17 15:30:00,120,267,Hoffenheim,Greuther Fuerth,GRE,HOF,0,0,0.973602,0.284206,True,True,https://understat.com/match/17780
+3,2021,17783,2022-04-17 15:30:00,240,132,Union Berlin,Eintracht Frankfurt,EIN,UNI,2,0,1.3196,0.513925,True,True,https://understat.com/match/17783
+3,2021,17792,2022-04-22 18:30:00,131,125,Wolfsburg,Mainz 05,MAI,WOL,5,0,3.6526,0.613976,True,True,https://understat.com/match/17792
+3,2021,17794,2022-04-23 16:30:00,117,129,Bayern Munich,Borussia Dortmund,DOR,BAY,3,1,2.0232,1.17213,True,True,https://understat.com/match/17794
+3,2021,17791,2022-04-23 13:30:00,132,120,Eintracht Frankfurt,Hoffenheim,HOF,EIN,2,2,1.06541,0.757228,True,True,https://understat.com/match/17791
+3,2021,17788,2022-04-23 13:30:00,134,262,FC Cologne,Arminia Bielefeld,ARM,COL,3,1,1.91505,0.740533,True,True,https://understat.com/match/17788
+3,2021,17790,2022-04-23 13:30:00,135,130,Freiburg,Borussia M.Gladbach,BMG,FRE,3,3,2.49907,1.52115,True,True,https://understat.com/match/17790
+3,2021,17786,2022-04-23 13:30:00,267,119,Greuther Fuerth,Bayer Leverkusen,LEV,GRE,1,4,1.18317,2.11362,True,True,https://understat.com/match/17786
+3,2021,17793,2022-04-23 13:30:00,136,240,RasenBallsport Leipzig,Union Berlin,UNI,RBL,1,2,0.573656,1.93634,True,True,https://understat.com/match/17793
+3,2021,17787,2022-04-24 13:30:00,268,121,Bochum,Augsburg,AUG,BOC,0,2,1.18661,1.99486,True,True,https://understat.com/match/17787
+3,2021,17789,2022-04-24 15:30:00,122,133,Hertha Berlin,VfB Stuttgart,STU,HER,2,0,0.947404,0.451742,True,True,https://understat.com/match/17789
+3,2021,17801,2022-04-29 18:30:00,240,267,Union Berlin,Greuther Fuerth,GRE,UNI,1,1,0.857798,0.237425,True,True,https://understat.com/match/17801
+3,2021,17795,2022-04-30 13:30:00,262,122,Arminia Bielefeld,Hertha Berlin,HER,ARM,1,1,0.403104,1.66247,True,True,https://understat.com/match/17795
+3,2021,17796,2022-04-30 13:30:00,121,134,Augsburg,FC Cologne,COL,AUG,1,4,1.73625,3.04059,True,True,https://understat.com/match/17796
+3,2021,17803,2022-04-30 13:30:00,129,268,Borussia Dortmund,Bochum,BOC,DOR,3,4,3.34247,1.90488,True,True,https://understat.com/match/17803
+3,2021,17798,2022-04-30 16:30:00,120,135,Hoffenheim,Freiburg,FRE,HOF,3,4,2.60025,2.694,True,True,https://understat.com/match/17798
+3,2021,17797,2022-04-30 13:30:00,125,117,Mainz 05,Bayern Munich,BAY,MAI,3,1,3.17227,1.23601,True,True,https://understat.com/match/17797
+3,2021,17799,2022-04-30 13:30:00,133,131,VfB Stuttgart,Wolfsburg,WOL,STU,1,1,0.826738,1.16064,True,True,https://understat.com/match/17799
+3,2021,17802,2022-05-02 18:30:00,119,132,Bayer Leverkusen,Eintracht Frankfurt,EIN,LEV,2,0,2.17544,0.349041,True,True,https://understat.com/match/17802
+3,2021,17800,2022-05-02 18:30:00,130,136,Borussia M.Gladbach,RasenBallsport Leipzig,RBL,BMG,3,1,1.57029,1.22604,True,True,https://understat.com/match/17800
+3,2021,17805,2022-05-06 18:30:00,268,262,Bochum,Arminia Bielefeld,ARM,BOC,2,1,2.68894,0.845303,True,True,https://understat.com/match/17805
+3,2021,17806,2022-05-07 13:30:00,134,131,FC Cologne,Wolfsburg,WOL,COL,0,1,0.975489,1.14328,True,True,https://understat.com/match/17806
+3,2021,17809,2022-05-07 13:30:00,135,240,Freiburg,Union Berlin,UNI,FRE,1,4,1.64859,2.40109,True,True,https://understat.com/match/17809
+3,2021,17804,2022-05-07 13:30:00,267,129,Greuther Fuerth,Borussia Dortmund,DOR,GRE,1,3,1.22647,1.12743,True,True,https://understat.com/match/17804
+3,2021,17807,2022-05-07 16:30:00,122,125,Hertha Berlin,Mainz 05,MAI,HER,1,2,1.11131,0.756414,True,True,https://understat.com/match/17807
+3,2021,17808,2022-05-07 13:30:00,120,119,Hoffenheim,Bayer Leverkusen,LEV,HOF,2,4,2.09206,3.9336,True,True,https://understat.com/match/17808
+3,2021,17812,2022-05-08 15:30:00,117,133,Bayern Munich,VfB Stuttgart,STU,BAY,2,2,2.77465,1.95837,True,True,https://understat.com/match/17812
+3,2021,17810,2022-05-08 13:30:00,132,130,Eintracht Frankfurt,Borussia M.Gladbach,BMG,EIN,1,1,0.808226,2.02639,True,True,https://understat.com/match/17810
+3,2021,17811,2022-05-08 17:30:00,136,121,RasenBallsport Leipzig,Augsburg,AUG,RBL,4,0,3.4379,0.173579,True,True,https://understat.com/match/17811
+3,2021,17813,2022-05-14 13:30:00,262,136,Arminia Bielefeld,RasenBallsport Leipzig,RBL,ARM,1,1,1.66972,3.45794,True,True,https://understat.com/match/17813
+3,2021,17814,2022-05-14 13:30:00,121,267,Augsburg,Greuther Fuerth,GRE,AUG,2,1,1.17202,0.337532,True,True,https://understat.com/match/17814
+3,2021,17819,2022-05-14 13:30:00,119,135,Bayer Leverkusen,Freiburg,FRE,LEV,2,1,1.82142,1.1463,True,True,https://understat.com/match/17819
+3,2021,17821,2022-05-14 13:30:00,129,122,Borussia Dortmund,Hertha Berlin,HER,DOR,2,1,1.32689,0.876533,True,True,https://understat.com/match/17821
+3,2021,17817,2022-05-14 13:30:00,130,120,Borussia M.Gladbach,Hoffenheim,HOF,BMG,5,1,3.82831,1.92751,True,True,https://understat.com/match/17817
+3,2021,17815,2022-05-14 13:30:00,125,132,Mainz 05,Eintracht Frankfurt,EIN,MAI,2,2,0.850382,1.70213,True,True,https://understat.com/match/17815
+3,2021,17818,2022-05-14 13:30:00,240,268,Union Berlin,Bochum,BOC,UNI,3,2,3.37468,0.391265,True,True,https://understat.com/match/17818
+3,2021,17816,2022-05-14 13:30:00,133,134,VfB Stuttgart,FC Cologne,COL,STU,2,1,3.83676,1.11893,True,True,https://understat.com/match/17816
+3,2021,17820,2022-05-14 13:30:00,131,117,Wolfsburg,Bayern Munich,BAY,WOL,2,2,1.14112,2.07091,True,True,https://understat.com/match/17820

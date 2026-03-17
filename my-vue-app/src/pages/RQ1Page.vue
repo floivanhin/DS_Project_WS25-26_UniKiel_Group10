@@ -108,7 +108,6 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, ref, watch } from "vue";
 import Plotly from "plotly.js-dist-min";
-import "../assets/style.css";
 
 type MatchItem = {
   weather?: {
