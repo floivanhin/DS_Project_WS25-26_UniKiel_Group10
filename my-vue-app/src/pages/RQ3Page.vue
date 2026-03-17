@@ -84,17 +84,17 @@ const getAggregatedData = (data) => {
     if (!Number.isFinite(time)) return;
 
     // for 0 ≤ t < 10
-    /*
+    
     const binIndex = bins.findIndex(
       (edge, i) => i < bins.length - 1 && time > edge && time <= bins[i + 1],
     );
-    */
+    
 
     // for 0 < t ≤ 10
 
-    const binIndex = bins.findIndex(
-      (edge, i) => i < bins.length - 1 && time >= edge && time < bins[i + 1],
-    );
+    //const binIndex = bins.findIndex(
+    //  (edge, i) => i < bins.length - 1 && time >= edge && time < bins[i + 1],
+    //);
 
     if (binIndex !== -1) {
       const goalValue = String(item.is_goal).trim().toLowerCase();
