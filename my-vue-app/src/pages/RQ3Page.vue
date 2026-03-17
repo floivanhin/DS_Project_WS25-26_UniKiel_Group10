@@ -2,12 +2,12 @@
   <div class="rq1-page">
     <section class="rq1-hero">
       <h1 class="rq1-page-title">
-        How does the time between winning possession in your own half and the first shot
-        correlate with the probability of scoring (per shot)?
+        How does the time between winning possession in your own half and the
+        first shot correlate with the probability of scoring (per shot)?
       </h1>
       <p class="rq1-page-subtitle">
-        How the time between possession wins in the own half and a subsequent shot correlates with
-        the probability of scoring a goal
+        How the time between possession wins in the own half and a subsequent
+        shot correlates with the probability of scoring a goal
       </p>
     </section>
 
@@ -59,7 +59,18 @@ const error = ref("");
 const mainChartRef = ref(null);
 
 // Definitions matching your Python code
-const labels = ["0-10s", "10-15s", "15-20s", "20-25s", "25-30s", "30-35s", "35-40s", "40-45s", "45-50s", "50s+"];
+const labels = [
+  "0-10s",
+  "10-15s",
+  "15-20s",
+  "20-25s",
+  "25-30s",
+  "30-35s",
+  "35-40s",
+  "40-45s",
+  "45-50s",
+  "50s+",
+];
 const bins = [0, 10, 15, 20, 25, 30, 35, 40, 45, 50, Infinity];
 
 // --- 2. THE CALCULATION ENGINE ---
@@ -72,8 +83,17 @@ const getAggregatedData = (data) => {
 
     if (!Number.isFinite(time)) return;
 
+    // for 0 ≤ t < 10
+    /*
     const binIndex = bins.findIndex(
-      (edge, i) => i < bins.length - 1 && time >= edge && time < bins[i + 1]
+      (edge, i) => i < bins.length - 1 && time > edge && time <= bins[i + 1],
+    );
+    */
+
+    // for 0 < t ≤ 10
+
+    const binIndex = bins.findIndex(
+      (edge, i) => i < bins.length - 1 && time >= edge && time < bins[i + 1],
     );
 
     if (binIndex !== -1) {
