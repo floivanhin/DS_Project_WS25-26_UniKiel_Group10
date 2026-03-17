@@ -11,9 +11,6 @@ import pandas as pd
 
 
 BEST_AGE_MIN_TOTAL_SHOTS = 80
-SEASON_SUMMARY_FILE = "rq8/bundesliga_season_age_summary.csv"
-TEAM_SUMMARY_FILE = "rq8/bundesliga_team_age_summary.csv"
-TEAM_MATCH_FILE = "rq8/rq8_team_match_efficiency.csv"
 TEAM_EFFICIENCY_FILE = "rq8/rq8_team_age_vs_efficiency.csv"
 PLAYER_AGE_PROFILE_FILE = "rq8/rq8_player_age_profile.csv"
 PLAYER_BEST_AGE_FILE = "rq8/rq8_player_best_age.csv"
@@ -76,79 +73,27 @@ def normalize_rq8(rq8_df: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
-def build_season_age_summary(rq8_df: pd.DataFrame) -> pd.DataFrame:
-    """Aggregate one age summary row per season.
+def build_team_age_vs_efficiency(rq8_df: pd.DataFrame) -> pd.DataFrame:
+    """Aggregate team efficiency against average age.
 
     Input: normalized RQ8 DataFrame.
-    Output: DataFrame for `rq8/bundesliga_season_age_summary.csv`.
+    Output: exported team efficiency DataFrame.
     """
-    season_players = (
-        rq8_df.groupby(["season", "season_label", "player_id"], dropna=False)
-        .agg(age=("age", first_non_null))
-        .reset_index()
-    )
-    return (
-        season_players.groupby(["season", "season_label"], dropna=False)
-        .agg(
-            unique_players=("player_id", "nunique"),
-            avg_age=("age", "mean"),
-            min_age=("age", "min"),
-            max_age=("age", "max"),
-            missing_age=("age", lambda series: int(series.isna().sum())),
-        )
-        .reset_index()
-        .sort_values(["season"], kind="stable")
-    )
-
-
-def build_team_age_summary(rq8_df: pd.DataFrame) -> pd.DataFrame:
-    """Aggregate one age summary row per team.
-
-    Input: normalized RQ8 DataFrame.
-    Output: DataFrame for `rq8/bundesliga_team_age_summary.csv`.
-    """
-    team_players = (
+    team_age = (
         rq8_df.groupby(
             ["season", "season_label", "team", "player_id"],
             dropna=False,
         )
         .agg(age=("age", first_non_null))
         .reset_index()
-    )
-    return (
-        team_players.groupby(
+        .groupby(
             ["season", "season_label", "team"],
             dropna=False,
         )
-        .agg(
-            player_count=("player_id", "nunique"),
-            avg_age=("age", "mean"),
-            min_age=("age", "min"),
-            max_age=("age", "max"),
-            missing_age=("age", lambda series: int(series.isna().sum())),
-        )
+        .agg(avg_age=("age", "mean"))
         .reset_index()
-        .sort_values(
-            ["season", "avg_age", "team"],
-            ascending=[True, False, True],
-            kind="stable",
-        )
     )
-
-
-def build_team_match_efficiency(
-    rq8_df: pd.DataFrame,
-    team_age_df: pd.DataFrame,
-) -> pd.DataFrame:
-    """Build one team-match row with goals, shots, and average age.
-
-    Input: normalized RQ8 DataFrame and team age summary DataFrame.
-    Output: DataFrame for `rq8_team_match_efficiency.csv`.
-    """
-    team_lookup = team_age_df[
-        ["season", "season_label", "team", "avg_age"]
-    ].drop_duplicates()
-    match_df = (
+    team_totals = (
         rq8_df.groupby(
             ["season", "season_label", "game_id", "team"],
             dropna=False,
@@ -158,39 +103,8 @@ def build_team_match_efficiency(
             shots=("team_shots", first_non_null),
         )
         .reset_index()
-        .merge(
-            team_lookup,
-            how="left",
-            on=["season", "season_label", "team"],
-        )
-    )
-    match_df["goals_per_shot"] = safe_ratio(
-        match_df["goals"],
-        match_df["shots"],
-    )
-    return match_df[
-        [
-            "season",
-            "season_label",
-            "game_id",
-            "team",
-            "avg_age",
-            "goals",
-            "shots",
-            "goals_per_shot",
-        ]
-    ].sort_values(["season", "game_id", "team"], kind="stable")
-
-
-def build_team_age_vs_efficiency(team_match_df: pd.DataFrame) -> pd.DataFrame:
-    """Aggregate team efficiency against average age.
-
-    Input: team-match DataFrame.
-    Output: DataFrame for `rq8_team_age_vs_efficiency.csv`.
-    """
-    team_df = (
-        team_match_df.groupby(
-            ["season", "season_label", "team", "avg_age"],
+        .groupby(
+            ["season", "season_label", "team"],
             dropna=False,
         )
         .agg(
@@ -199,6 +113,11 @@ def build_team_age_vs_efficiency(team_match_df: pd.DataFrame) -> pd.DataFrame:
             total_shots=("shots", "sum"),
         )
         .reset_index()
+    )
+    team_df = team_age.merge(
+        team_totals,
+        how="left",
+        on=["season", "season_label", "team"],
     )
     team_df["goals_per_shot"] = safe_ratio(
         team_df["total_goals"],
@@ -226,7 +145,7 @@ def build_player_age_profile(rq8_df: pd.DataFrame) -> pd.DataFrame:
     """Aggregate player efficiency by integer age band.
 
     Input: normalized RQ8 DataFrame.
-    Output: DataFrame for `rq8_player_age_profile.csv`.
+    Output: exported player age profile DataFrame.
     """
     working = rq8_df.dropna(subset=["age"]).copy()
     working["age_int"] = np.floor(working["age"]).astype(int)
@@ -309,7 +228,7 @@ def build_player_best_age(rq8_df: pd.DataFrame) -> pd.DataFrame:
     """Compute the strongest player age band per season.
 
     Input: normalized RQ8 DataFrame.
-    Output: DataFrame for `rq8_player_best_age.csv`.
+    Output: exported best-age DataFrame.
     """
     rows = []
     per_season_profile = build_player_age_profile(rq8_df)
@@ -324,7 +243,7 @@ def build_quadratic_model_row(
 ) -> dict[str, object]:
     """Fit one quadratic age-efficiency model summary row.
 
-    Input: season label and team summary DataFrame.
+    Input: season label and team efficiency DataFrame.
     Output: dictionary with model summary values.
     """
     valid = team_df.dropna(subset=["avg_age", "goals_per_shot"]).copy()
@@ -398,8 +317,8 @@ def build_quadratic_model_row(
 def build_optimal_age_summary(team_df: pd.DataFrame) -> pd.DataFrame:
     """Summarize RQ8 age-efficiency model results by season.
 
-    Input: team summary DataFrame.
-    Output: DataFrame for `rq8_optimal_age_summary.csv`.
+    Input: team efficiency DataFrame.
+    Output: exported optimal-age summary DataFrame.
     """
     rows = []
     for season, group in team_df.groupby("season", sort=True):
@@ -419,17 +338,11 @@ def build_rq8_tables(rq8_df: pd.DataFrame) -> dict[str, pd.DataFrame]:
     Output: dictionary from relative CSV path to DataFrame.
     """
     normalized = normalize_rq8(rq8_df)
-    season_age = build_season_age_summary(normalized)
-    team_age = build_team_age_summary(normalized)
-    team_match = build_team_match_efficiency(normalized, team_age)
-    team_efficiency = build_team_age_vs_efficiency(team_match)
+    team_efficiency = build_team_age_vs_efficiency(normalized)
     age_profile = build_player_age_profile(normalized)
     best_age = build_player_best_age(normalized)
     optimal_age = build_optimal_age_summary(team_efficiency)
     return {
-        SEASON_SUMMARY_FILE: season_age,
-        TEAM_SUMMARY_FILE: team_age,
-        TEAM_MATCH_FILE: team_match,
         TEAM_EFFICIENCY_FILE: team_efficiency,
         PLAYER_AGE_PROFILE_FILE: age_profile,
         PLAYER_BEST_AGE_FILE: best_age,
@@ -444,7 +357,7 @@ def build_rq8_answer(
 ) -> str:
     """Build the short RQ8 answer string for the terminal output.
 
-    Input: team summary, best-age summary, and model summary DataFrames.
+    Input: team efficiency, best-age summary, and model summary DataFrames.
     Output: formatted answer string.
     """
     best_age_row = best_age_df.loc[best_age_df["season"] != "all"].head(1)
