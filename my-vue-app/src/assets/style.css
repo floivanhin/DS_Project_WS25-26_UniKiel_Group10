@@ -56,17 +56,16 @@
 
 .rq1-radio-group {
   display: flex;
-  flex-wrap: wrap;
-  gap: 18px;
+  flex-direction: row;
+  gap: 16px;
   align-items: center;
-  min-height: 42px;
 }
 
 .rq1-radio-option {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 15px;
+  gap: 6px;
+  white-space: nowrap;
 }
 
 .rq1-selection-summary {
@@ -166,7 +165,7 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #441AEE; /* Matches your line chart color */
+  background: #441aee; /* Matches your line chart color */
   cursor: pointer;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   transition: transform 0.1s ease;
