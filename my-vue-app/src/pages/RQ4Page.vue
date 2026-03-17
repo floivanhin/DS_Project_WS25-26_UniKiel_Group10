@@ -22,7 +22,7 @@
 
           <label class="rq4-radio-option">
             <input v-model="selectedChart" type="radio" value="scatter" />
-            <span>Eligible-player scatter</span>
+            <span>All Player Scatter</span>
           </label>
         </div>
       </div>
@@ -64,24 +64,6 @@
     </section>
 
     <section class="rq4-chart-card">
-      <div class="rq4-chart-toolbar">
-        <button
-          type="button"
-          class="rq4-download-button"
-          :disabled="isDownloading"
-          @click="downloadChartAsPng"
-        >
-          {{ isDownloading ? "Preparing PNG..." : "Download PNG" }}
-        </button>
-        <button
-          type="button"
-          class="rq4-download-button rq4-download-button-secondary"
-          :disabled="isExportingCsv"
-          @click="downloadChartAsCsv"
-        >
-          {{ isExportingCsv ? "Preparing CSV..." : "Download CSV" }}
-        </button>
-      </div>
       <div ref="chartRef" class="rq4-chart"></div>
     </section>
   </div>
@@ -188,66 +170,11 @@ function mean(values) {
   return values.reduce((sum, value) => sum + value, 0) / values.length;
 }
 
-function computeLinearTrend(rows, xSelector, ySelector) {
-  if (rows.length < 2) {
-    return null;
-  }
-
-  let sumX = 0;
-  let sumY = 0;
-  let sumXY = 0;
-  let sumXSquare = 0;
-
-  for (const row of rows) {
-    const x = xSelector(row);
-    const y = ySelector(row);
-    sumX += x;
-    sumY += y;
-    sumXY += x * y;
-    sumXSquare += x * x;
-  }
-
-  const denominator = rows.length * sumXSquare - sumX * sumX;
-  if (denominator === 0) {
-    return null;
-  }
-
-  const slope = (rows.length * sumXY - sumX * sumY) / denominator;
-  const intercept = (sumY - slope * sumX) / rows.length;
-  return { slope, intercept };
-}
-
 // Waiting one browser frame avoids rendering Plotly before the container is ready.
 function waitForFrame() {
   return new Promise((resolve) => {
     requestAnimationFrame(() => resolve());
   });
-}
-
-// Reusable fallback figure for empty or invalid datasets.
-function emptyFigure(title) {
-  return {
-    data: [],
-    layout: {
-      title,
-      margin: { t: 64, r: 24, b: 64, l: 64 },
-      paper_bgcolor: "#ffffff",
-      plot_bgcolor: "#ffffff",
-      xaxis: { visible: false },
-      yaxis: { visible: false },
-      annotations: [
-        {
-          text: "No data available",
-          showarrow: false,
-          xref: "paper",
-          yref: "paper",
-          x: 0.5,
-          y: 0.5,
-          font: { size: 16, color: "#475569" },
-        },
-      ],
-    },
-  };
 }
 
 // Convert the raw CSV text into JavaScript objects with usable field names.
@@ -290,8 +217,6 @@ const chartRef = ref(null);
 const selectedChart = ref(DEFAULT_CHART);
 const selectedViewMode = ref(DEFAULT_VIEW_MODE);
 const topN = ref(DEFAULT_TOP_N);
-const isDownloading = ref(false);
-const isExportingCsv = ref(false);
 let scatterAnnotationRestoreTimer = null;
 
 // Produces the short answer shown directly under the page title.
@@ -404,7 +329,7 @@ function buildCompareFigure(viewMode, rankingDepth) {
   const leaderboard = getLeaderboard(viewMode, rankingDepth);
 
   if (leaderboard.length === 0) {
-    return emptyFigure("No comparison data available");
+    throw new Error("RQ4 comparison chart expected leaderboard data, but none was found.");
   }
 
   return {
@@ -447,6 +372,8 @@ function buildCompareFigure(viewMode, rankingDepth) {
   };
 }
 
+// Creates the default scatter annotation.
+// It belongs to the red point and shows the overall average across all displayed players.
 function buildOverallAverageAnnotation(averageAwayRating, averageHomeRating) {
   return {
     x: averageAwayRating,
@@ -472,12 +399,13 @@ function buildOverallAverageAnnotation(averageAwayRating, averageHomeRating) {
   };
 }
 
+// Builds the scatter plot that compares each player's away and home rating.
 function buildScatterFigure() {
   if (scatterRows.length === 0) {
-    return emptyFigure("No scatter data available");
+    throw new Error("RQ4 scatter chart expected eligible player data, but none was found.");
   }
 
-  // These values are reused for the red average point, the trend line, and the axis limits.
+  // These values are reused for the red average point and the axis limits.
   const averageAwayRating =
     scatterRows.reduce(
       (sum, row) => sum + row.away_avg_overall_rating,
@@ -488,21 +416,10 @@ function buildScatterFigure() {
       (sum, row) => sum + row.home_avg_overall_rating,
       0,
     ) / scatterRows.length;
-  const trend = computeLinearTrend(
-    scatterRows,
-    (row) => row.away_avg_overall_rating,
-    (row) => row.home_avg_overall_rating,
-  );
   const allRatings = scatterRows.flatMap((row) => [
     row.away_avg_overall_rating,
     row.home_avg_overall_rating,
   ]);
-  const minAwayRating = Math.min(
-    ...scatterRows.map((row) => row.away_avg_overall_rating),
-  );
-  const maxAwayRating = Math.max(
-    ...scatterRows.map((row) => row.away_avg_overall_rating),
-  );
   const minRating = Math.min(...allRatings);
   const maxRating = Math.max(...allRatings);
   const padding = Math.max((maxRating - minRating) * 0.05, 0.05);
@@ -532,25 +449,6 @@ function buildScatterFigure() {
     },
   ];
 
-  if (trend) {
-    data.push({
-      type: "scatter",
-      mode: "lines",
-      name: "Trend line",
-      x: [minAwayRating, maxAwayRating],
-      y: [
-        trend.slope * minAwayRating + trend.intercept,
-        trend.slope * maxAwayRating + trend.intercept,
-      ],
-      line: {
-        color: "#111827",
-        dash: "dash",
-        width: 2,
-      },
-      hoverinfo: "skip",
-    });
-  }
-
   data.push({
     type: "scatter",
     mode: "markers",
@@ -579,20 +477,6 @@ function buildScatterFigure() {
       annotations: [
         buildOverallAverageAnnotation(averageAwayRating, averageHomeRating),
       ],
-      shapes: [
-        {
-          type: "line",
-          x0: axisMin,
-          y0: axisMin,
-          x1: axisMax,
-          y1: axisMax,
-          line: {
-            color: "#94A3B8",
-            dash: "dot",
-            width: 1.5,
-          },
-        },
-      ],
       xaxis: {
         title: "Away Average Overall Rating",
         range: [axisMin, axisMax],
@@ -618,12 +502,7 @@ function buildFigure() {
 
 const plotDescription = computed(() => {
   if (selectedChart.value === "scatter") {
-    const scatterSummary = buildSelectionSummaryText(
-      scatterRows,
-      `Across all ${scatterRows.length} eligible players, average`,
-    );
-
-    return `This scatter uses all ${scatterRows.length} eligible players with valid home and away averages on both sides. The x-axis shows each player's away average overall rating, and the y-axis shows the home average overall rating. Points above the dotted parity line indicate better home ratings, the dashed line shows the overall linear trend, and the larger red point marks the overall average across all displayed players. Its callout is visible by default, while the other points only show their details on hover. ${scatterSummary}`.trim();
+    return `This chart shows ${scatterRows.length} players. The bottom axis shows each player's away rating. The left axis shows each player's home rating. The red point shows the average of all shown players. You can move your mouse over a blue point to see that player's details.`;
   }
 
   const leaderboard = getLeaderboard(selectedViewMode.value, topN.value);
@@ -637,8 +516,7 @@ const plotDescription = computed(() => {
 
 const researchQuestionAnswer = computed(() => buildResearchQuestionAnswer());
 
-// These helpers control the default red annotation in scatter mode.
-// It hides while the user hovers a player and comes back afterward.
+// Stops the timer that would show the default scatter annotation again.
 function clearScatterAnnotationRestoreTimer() {
   if (scatterAnnotationRestoreTimer !== null) {
     window.clearTimeout(scatterAnnotationRestoreTimer);
@@ -646,6 +524,8 @@ function clearScatterAnnotationRestoreTimer() {
   }
 }
 
+// Shows the default scatter annotation.
+// That default annotation is the average label for the red overall-average point, not a single player.
 function showDefaultScatterAnnotation() {
   if (!chartRef.value || selectedChart.value !== "scatter") {
     return;
@@ -665,6 +545,7 @@ function showDefaultScatterAnnotation() {
   });
 }
 
+// Hides the default scatter annotation while the user is hovering player points.
 function hideDefaultScatterAnnotation() {
   if (!chartRef.value || selectedChart.value !== "scatter") {
     return;
@@ -684,6 +565,7 @@ function hideDefaultScatterAnnotation() {
   });
 }
 
+// Schedules the default scatter annotation to appear again after hover ends.
 function scheduleDefaultScatterAnnotation() {
   clearScatterAnnotationRestoreTimer();
   scatterAnnotationRestoreTimer = window.setTimeout(() => {
@@ -692,6 +574,7 @@ function scheduleDefaultScatterAnnotation() {
   }, 0);
 }
 
+// Decides whether the default scatter annotation should be shown or hidden on hover.
 function handleScatterHover(event) {
   const hoveredTraceName = event?.points?.[0]?.data?.name;
   clearScatterAnnotationRestoreTimer();
@@ -704,10 +587,12 @@ function handleScatterHover(event) {
   showDefaultScatterAnnotation();
 }
 
+// Restores the default scatter annotation after the mouse leaves a point.
 function handleScatterUnhover() {
   scheduleDefaultScatterAnnotation();
 }
 
+// Connects Plotly hover events that control the default scatter annotation.
 function bindScatterHoverEvents() {
   if (!chartRef.value?.on) {
     return;
@@ -719,6 +604,7 @@ function bindScatterHoverEvents() {
   chartRef.value.on("plotly_unhover", handleScatterUnhover);
 }
 
+// Removes the Plotly hover events used for the default scatter annotation.
 function unbindScatterHoverEvents() {
   clearScatterAnnotationRestoreTimer();
   showDefaultScatterAnnotation();
@@ -744,7 +630,7 @@ async function renderChart() {
 
   await Plotly.react(chartRef.value, figure.data, figure.layout, {
     responsive: true,
-    displayModeBar: false,
+    displayModeBar: true,
   });
 
   Plotly.Plots.resize(chartRef.value);
@@ -759,145 +645,6 @@ async function renderChart() {
 
   unbindScatterHoverEvents();
   Plotly.Fx.unhover(chartRef.value);
-}
-
-function buildDownloadFilename() {
-  if (selectedChart.value === "scatter") {
-    return "rq4-scatter-eligible-players.png";
-  }
-
-  return `rq4-${selectedChart.value}-${selectedViewMode.value}-top-${topN.value}.png`;
-}
-
-function buildCsvFilename() {
-  if (selectedChart.value === "scatter") {
-    return "rq4-scatter-eligible-players.csv";
-  }
-
-  return `rq4-${selectedChart.value}-${selectedViewMode.value}-top-${topN.value}.csv`;
-}
-
-function escapeCsvValue(value) {
-  const text = value === null || value === undefined ? "" : String(value);
-
-  if (/[",\n\r]/.test(text)) {
-    return `"${text.replace(/"/g, '""')}"`;
-  }
-
-  return text;
-}
-
-function rowsToCsv(rows) {
-  if (rows.length === 0) {
-    return "";
-  }
-
-  const headers = Array.from(
-    rows.reduce((headerSet, row) => {
-      Object.keys(row).forEach((key) => headerSet.add(key));
-      return headerSet;
-    }, new Set()),
-  );
-
-  const csvLines = [
-    headers.join(","),
-    ...rows.map((row) =>
-      headers.map((header) => escapeCsvValue(row[header])).join(","),
-    ),
-  ];
-
-  return csvLines.join("\r\n");
-}
-
-function triggerFileDownload(filename, content, mimeType) {
-  const blob = new Blob([content], { type: mimeType });
-  const objectUrl = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-
-  link.href = objectUrl;
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-
-  setTimeout(() => URL.revokeObjectURL(objectUrl), 0);
-}
-
-// Export only the rows that belong to the chart the user is currently viewing.
-function buildCurrentCsvRows() {
-  if (selectedChart.value === "scatter") {
-    return scatterRows
-      .slice()
-      .sort((left, right) => left.player.localeCompare(right.player))
-      .map((row) => ({
-        player: row.player,
-        away_avg_overall_rating: row.away_avg_overall_rating,
-        home_avg_overall_rating: row.home_avg_overall_rating,
-        avg_rating_delta_home_minus_away: row.avg_rating_delta_home_minus_away,
-        away_matches: row.away_matches,
-        home_matches: row.home_matches,
-        eligible_both_sides: row.eligible_both_sides,
-      }));
-  }
-
-  const leaderboard = getLeaderboard(selectedViewMode.value, topN.value);
-
-  return leaderboard.flatMap((row) => [
-    {
-      player: row.player,
-      setting: "Home",
-      avg_overall_rating: row.home_avg_overall_rating,
-    },
-    {
-      player: row.player,
-      setting: "Away",
-      avg_overall_rating: row.away_avg_overall_rating,
-    },
-  ]);
-}
-
-async function downloadChartAsPng() {
-  if (!chartRef.value || isDownloading.value) {
-    return;
-  }
-
-  isDownloading.value = true;
-
-  try {
-    await nextTick();
-    await waitForFrame();
-
-    await Plotly.downloadImage(chartRef.value, {
-      format: "png",
-      filename: buildDownloadFilename().replace(/\.png$/, ""),
-      width: 1600,
-      height: 900,
-      scale: 2,
-    });
-  } finally {
-    isDownloading.value = false;
-  }
-}
-
-async function downloadChartAsCsv() {
-  if (isExportingCsv.value) {
-    return;
-  }
-
-  isExportingCsv.value = true;
-
-  try {
-    const rows = buildCurrentCsvRows();
-    const csvContent = rowsToCsv(rows);
-
-    triggerFileDownload(
-      buildCsvFilename(),
-      csvContent,
-      "text/csv;charset=utf-8;",
-    );
-  } finally {
-    isExportingCsv.value = false;
-  }
 }
 
 // Plotly needs a manual resize call when the window changes size.

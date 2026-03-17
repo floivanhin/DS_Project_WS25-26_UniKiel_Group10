@@ -69,26 +69,16 @@
     </section>
 
     <section class="rq8-chart-card">
-      <div class="rq8-chart-toolbar">
-        <button
-          type="button"
-          class="rq8-download-button"
-          :disabled="isDownloading"
-          @click="downloadChartAsPng"
-        >
-          {{ isDownloading ? "Preparing PNG..." : "Download PNG" }}
-        </button>
-        <button
-          type="button"
-          class="rq8-download-button rq8-download-button-secondary"
-          :disabled="isExportingCsv"
-          @click="downloadChartAsCsv"
-        >
-          {{ isExportingCsv ? "Preparing CSV..." : "Download CSV" }}
-        </button>
-      </div>
       <div ref="chartRef" class="rq8-chart"></div>
     </section>
+
+    <p v-if="selectedChart === 'team_scatter'" class="rq8-helper-text rq8-chart-note">
+      The trendline is a simple best-fit line that uses all team points to show the overall direction, so it summarizes whether efficiency usually goes up or down as average team age changes.
+    </p>
+
+    <p v-if="selectedChart === 'age_profile'" class="rq8-helper-text rq8-chart-note">
+      We use age groups to see general patterns instead of judging one single player. We limit shots, not players, because this chart is about goals per shot, so each age group needs enough shots to give a fair result.
+    </p>
   </div>
 </template>
 
@@ -165,42 +155,20 @@ function parseCsv(text) {
   );
 }
 
+// Converts CSV text values into numbers and keeps invalid values as null.
 function toNumber(value) {
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : null;
 }
 
+// Waits for the next browser frame before drawing the chart.
 function waitForFrame() {
   return new Promise((resolve) => {
     requestAnimationFrame(() => resolve());
   });
 }
 
-function emptyFigure(title) {
-  return {
-    data: [],
-    layout: {
-      title,
-      margin: { t: 64, r: 24, b: 64, l: 64 },
-      paper_bgcolor: "#ffffff",
-      plot_bgcolor: "#ffffff",
-      xaxis: { visible: false },
-      yaxis: { visible: false },
-      annotations: [
-        {
-          text: "No data available",
-          showarrow: false,
-          xref: "paper",
-          yref: "paper",
-          x: 0.5,
-          y: 0.5,
-          font: { size: 16, color: "#475569" },
-        },
-      ],
-    },
-  };
-}
-
+// Calculates a simple straight trend line for team age and efficiency.
 function computeLinearTrend(rows) {
   if (rows.length < 2) {
     return null;
@@ -247,7 +215,6 @@ const optimalAgeRows = parseCsv(optimalAgeCsv).map((row) => ({
   pearson_r_age_efficiency: toNumber(row.pearson_r_age_efficiency),
   estimated_peak_age: toNumber(row.estimated_peak_age),
   estimated_peak_goals_per_shot: toNumber(row.estimated_peak_goals_per_shot),
-  model_note: row.model_note,
 }));
 
 const playerAgeProfileRows = parseCsv(playerAgeProfileCsv).map((row) => ({
@@ -293,8 +260,6 @@ const minShotThresholds = [
 const selectedChart = ref("team_scatter");
 const minShots = ref(referenceMinShotsThreshold);
 const chartRef = ref(null);
-const isExportingCsv = ref(false);
-const isDownloading = ref(false);
 
 // Convert a slider value into a percentage so we can place labels below the range input.
 function getRangePercent(value) {
@@ -319,44 +284,7 @@ function buildTeamScatterNote() {
   return `All ${rows.length} teams are included. They average ${averageEfficiency.toFixed(3)} goals per shot at an average squad age of ${averageAge.toFixed(2)} years.`;
 }
 
-function buildOptimalAgeText() {
-  const row = optimalAgeRows[0];
-
-  if (!row) {
-    return "";
-  }
-
-  const parts = [];
-  if (
-    row.estimated_peak_age !== null &&
-    row.estimated_peak_goals_per_shot !== null
-  ) {
-    parts.push(
-      `Estimated quadratic peak: ${row.estimated_peak_age.toFixed(2)} years and ${row.estimated_peak_goals_per_shot.toFixed(3)} goals per shot.`,
-    );
-  }
-
-  const note = String(row.model_note ?? "").trim();
-  if (note && note.toLowerCase() !== "nan") {
-    parts.push(note);
-  }
-
-  return parts.join(" ");
-}
-
-function buildStoredBestAgeText() {
-  if (
-    !storedBestAge ||
-    storedBestAge.best_age_int === null ||
-    storedBestAge.goals_per_shot === null ||
-    storedBestAge.min_total_shots === null
-  ) {
-    return "";
-  }
-
-  return `Stored best-age result at ${storedBestAge.min_total_shots} shots: age ${storedBestAge.best_age_int} with ${storedBestAge.goals_per_shot.toFixed(3)} goals per shot.`;
-}
-
+// Creates the main written answer shown under the page title.
 function buildResearchQuestionAnswer() {
   const optimalRow = optimalAgeRows[0] ?? null;
   const validTeamRows = teamEfficiencyRows.filter((row) => row.avg_age !== null);
@@ -371,7 +299,7 @@ function buildResearchQuestionAnswer() {
 
     if (optimalRow.pearson_r_age_efficiency !== null) {
       parts.push(
-        `${teamScope}there is no single supported optimal average team age: shooting efficiency trends downward as squads get older (r = ${optimalRow.pearson_r_age_efficiency.toFixed(3)}).`,
+        `${teamScope}there is no single supported optimal average team age: shooting efficiency trends downward as squads get older (Pearson correlation coefficient = ${optimalRow.pearson_r_age_efficiency.toFixed(3)}).`,
       );
     } else {
       parts.push(
@@ -390,9 +318,6 @@ function buildResearchQuestionAnswer() {
         optimalRow.estimated_peak_age < observedMinAge ||
         optimalRow.estimated_peak_age > observedMaxAge
       ) {
-        parts.push(
-          `The fitted peak is ${optimalRow.estimated_peak_age.toFixed(2)} years, but that lies outside the observed team-average range of ${observedMinAge.toFixed(2)}-${observedMaxAge.toFixed(2)} years.`,
-        );
       } else if (optimalRow.estimated_peak_goals_per_shot !== null) {
         parts.push(
           `The fitted peak appears at ${optimalRow.estimated_peak_age.toFixed(2)} years with ${optimalRow.estimated_peak_goals_per_shot.toFixed(3)} goals per shot.`,
@@ -435,7 +360,7 @@ function buildTeamScatterFigure() {
   );
 
   if (rows.length === 0) {
-    return emptyFigure("No team efficiency data available");
+    throw new Error("RQ8 team scatter chart expected team efficiency data, but none was found.");
   }
 
   const trend = computeLinearTrend(rows);
@@ -564,7 +489,7 @@ function buildAgeProfileFigure(threshold) {
   const bestRow = getBestAgeRow(threshold);
 
   if (rows.length === 0) {
-    return emptyFigure("No player age profile data available");
+    throw new Error("RQ8 age profile chart expected player age data, but none was found.");
   }
 
   const data = [
@@ -643,15 +568,15 @@ function buildAgeProfileFigure(threshold) {
   };
 }
 
+// Creates the short explanation text for the current age-profile slider setting.
 function buildAgeProfileText(threshold) {
   const bestRow = getBestAgeRow(threshold);
-  const storedText = buildStoredBestAgeText();
 
   if (!bestRow) {
-    return `No age band reaches the minimum threshold of ${Number(threshold)} total shots. ${storedText}`.trim();
+    return `No age band reaches the minimum threshold of ${Number(threshold)} total shots.`;
   }
 
-  return `With a minimum of ${Number(threshold)} shots per age band, age ${bestRow.age_int} leads with ${bestRow.goals_per_shot.toFixed(3)} goals per shot across ${bestRow.players} players. ${storedText}`.trim();
+  return `With a minimum of ${Number(threshold)} shots per age band, age ${bestRow.age_int} leads with ${bestRow.goals_per_shot.toFixed(3)} goals per shot across ${bestRow.players} players.`;
 }
 
 // Keep the chart selection logic in one place so rendering stays easy to follow.
@@ -665,7 +590,7 @@ function buildFigure() {
 
 const plotDescription = computed(() => {
   if (selectedChart.value === "team_scatter") {
-    return `${buildTeamScatterNote()} ${buildOptimalAgeText()}`.trim();
+    return buildTeamScatterNote();
   }
 
   return buildAgeProfileText(minShots.value);
@@ -673,6 +598,7 @@ const plotDescription = computed(() => {
 
 const researchQuestionAnswer = computed(() => buildResearchQuestionAnswer());
 
+// Draws or updates the currently selected chart in Plotly.
 async function renderChart() {
   if (!chartRef.value) {
     return;
@@ -685,140 +611,13 @@ async function renderChart() {
 
   await Plotly.react(chartRef.value, figure.data, figure.layout, {
     responsive: true,
-    displayModeBar: false,
+    displayModeBar: true,
   });
 
   Plotly.Plots.resize(chartRef.value);
 }
 
-function buildDownloadFilename() {
-  if (selectedChart.value === "age_profile") {
-    return `rq8-player-age-profile-min-shots-${minShots.value}.png`;
-  }
-
-  return `rq8-${selectedChart.value}.png`;
-}
-
-function buildCsvFilename() {
-  if (selectedChart.value === "age_profile") {
-    return `rq8-player-age-profile-min-shots-${minShots.value}.csv`;
-  }
-
-  return `rq8-${selectedChart.value}.csv`;
-}
-
-function escapeCsvValue(value) {
-  const text = value === null || value === undefined ? "" : String(value);
-
-  if (/[",\n\r]/.test(text)) {
-    return `"${text.replace(/"/g, '""')}"`;
-  }
-
-  return text;
-}
-
-function rowsToCsv(rows) {
-  if (rows.length === 0) {
-    return "";
-  }
-
-  const headers = Array.from(
-    rows.reduce((headerSet, row) => {
-      Object.keys(row).forEach((key) => headerSet.add(key));
-      return headerSet;
-    }, new Set()),
-  );
-
-  const csvLines = [
-    headers.join(","),
-    ...rows.map((row) =>
-      headers.map((header) => escapeCsvValue(row[header])).join(","),
-    ),
-  ];
-
-  return csvLines.join("\r\n");
-}
-
-function triggerFileDownload(filename, content, mimeType) {
-  const blob = new Blob([content], { type: mimeType });
-  const objectUrl = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-
-  link.href = objectUrl;
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-
-  setTimeout(() => URL.revokeObjectURL(objectUrl), 0);
-}
-
-// Export data that matches the chart the user is currently looking at.
-function buildCurrentCsvRows() {
-  if (selectedChart.value === "team_scatter") {
-    return teamEfficiencyRows
-      .filter((row) => row.avg_age !== null && row.goals_per_shot !== null)
-      .map((row) => ({
-        team: row.team,
-        avg_age: row.avg_age,
-        goals_per_shot: row.goals_per_shot,
-      }));
-  }
-
-  return playerAgeProfileRows
-    .slice()
-    .sort((left, right) => left.age_int - right.age_int)
-    .map((row) => ({
-      age_int: row.age_int,
-      total_shots: row.total_shots,
-      goals_per_shot: row.goals_per_shot,
-    }));
-}
-
-async function downloadChartAsPng() {
-  if (!chartRef.value || isDownloading.value) {
-    return;
-  }
-
-  isDownloading.value = true;
-
-  try {
-    await nextTick();
-    await waitForFrame();
-
-    await Plotly.downloadImage(chartRef.value, {
-      format: "png",
-      filename: buildDownloadFilename().replace(/\.png$/, ""),
-      width: 1600,
-      height: 900,
-      scale: 2,
-    });
-  } finally {
-    isDownloading.value = false;
-  }
-}
-
-async function downloadChartAsCsv() {
-  if (isExportingCsv.value) {
-    return;
-  }
-
-  isExportingCsv.value = true;
-
-  try {
-    const rows = buildCurrentCsvRows();
-    const csvContent = rowsToCsv(rows);
-
-    triggerFileDownload(
-      buildCsvFilename(),
-      csvContent,
-      "text/csv;charset=utf-8;",
-    );
-  } finally {
-    isExportingCsv.value = false;
-  }
-}
-
+// Resizes the Plotly chart when the browser window size changes.
 function handleResize() {
   if (chartRef.value) {
     Plotly.Plots.resize(chartRef.value);
