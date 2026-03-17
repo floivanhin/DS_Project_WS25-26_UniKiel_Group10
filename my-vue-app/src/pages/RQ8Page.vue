@@ -100,6 +100,7 @@ import optimalAgeCsv from "../../data/rq8/rq8_optimal_age_summary.csv?raw";
 import playerAgeProfileCsv from "../../data/rq8/rq8_player_age_profile.csv?raw";
 import playerBestAgeCsv from "../../data/rq8/rq8_player_best_age.csv?raw";
 
+// Read CSV text into an array of objects so the rest of the code can work with named fields.
 function parseCsv(text) {
   const normalizedText = text.replace(/^\uFEFF/, "");
   const rows = [];
@@ -231,6 +232,7 @@ const MIN_SHOTS_MIN = 50;
 const MIN_SHOTS_MAX = 800;
 const MIN_SHOTS_STEP = 10;
 
+// Convert each CSV file into rows with numbers instead of plain text.
 const teamEfficiencyRows = parseCsv(teamEfficiencyCsv).map((row) => ({
   team: row.team,
   avg_age: toNumber(row.avg_age),
@@ -272,8 +274,11 @@ const playerBestAgeRows = parseCsv(playerBestAgeCsv).map((row) => ({
   players: toNumber(row.players),
 }));
 
+// The precomputed "best age" result is also useful as the default slider value.
 const storedBestAge = playerBestAgeRows[0] ?? null;
 const referenceMinShotsThreshold = storedBestAge?.min_total_shots ?? 80;
+
+// These values become the small helper markers shown under the slider.
 const minShotThresholds = [
   MIN_SHOTS_MIN,
   referenceMinShotsThreshold,
@@ -291,10 +296,12 @@ const chartRef = ref(null);
 const isExportingCsv = ref(false);
 const isDownloading = ref(false);
 
+// Convert a slider value into a percentage so we can place labels below the range input.
 function getRangePercent(value) {
   return ((Number(value) - MIN_SHOTS_MIN) / (MIN_SHOTS_MAX - MIN_SHOTS_MIN)) * 100;
 }
 
+// Short helper text for the team chart description.
 function buildTeamScatterNote() {
   const rows = teamEfficiencyRows.filter(
     (row) => row.avg_age !== null && row.goals_per_shot !== null,
@@ -353,6 +360,7 @@ function buildStoredBestAgeText() {
 function buildResearchQuestionAnswer() {
   const optimalRow = optimalAgeRows[0] ?? null;
   const validTeamRows = teamEfficiencyRows.filter((row) => row.avg_age !== null);
+  // We build the answer in parts because team-level and player-level evidence come from different tables.
   const parts = [];
 
   if (optimalRow) {
@@ -420,6 +428,7 @@ function buildResearchQuestionAnswer() {
   return parts.join(" ");
 }
 
+// Scatter chart: one point per team, plus optional helpers like a trend line and peak marker.
 function buildTeamScatterFigure() {
   const rows = teamEfficiencyRows.filter(
     (row) => row.avg_age !== null && row.goals_per_shot !== null,
@@ -526,6 +535,7 @@ function buildTeamScatterFigure() {
   };
 }
 
+// Keep only age bands with enough shots, then choose the strongest efficiency value.
 function getBestAgeRow(threshold) {
   const eligibleRows = playerAgeProfileRows
     .filter((row) => row.total_shots >= Number(threshold))
@@ -546,6 +556,7 @@ function getBestAgeRow(threshold) {
   return eligibleRows[0] ?? null;
 }
 
+// Age profile chart: bars show shot volume, the line shows efficiency, and the star marks the best age.
 function buildAgeProfileFigure(threshold) {
   const rows = playerAgeProfileRows
     .slice()
@@ -643,6 +654,7 @@ function buildAgeProfileText(threshold) {
   return `With a minimum of ${Number(threshold)} shots per age band, age ${bestRow.age_int} leads with ${bestRow.goals_per_shot.toFixed(3)} goals per shot across ${bestRow.players} players. ${storedText}`.trim();
 }
 
+// Keep the chart selection logic in one place so rendering stays easy to follow.
 function buildFigure() {
   if (selectedChart.value === "team_scatter") {
     return buildTeamScatterFigure();
@@ -741,6 +753,7 @@ function triggerFileDownload(filename, content, mimeType) {
   setTimeout(() => URL.revokeObjectURL(objectUrl), 0);
 }
 
+// Export data that matches the chart the user is currently looking at.
 function buildCurrentCsvRows() {
   if (selectedChart.value === "team_scatter") {
     return teamEfficiencyRows
@@ -812,6 +825,7 @@ function handleResize() {
   }
 }
 
+// Re-render when the user switches charts or changes the minimum-shot slider.
 watch([selectedChart, minShots], async () => {
   await renderChart();
 });

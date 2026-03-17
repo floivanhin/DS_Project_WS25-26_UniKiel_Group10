@@ -22,7 +22,7 @@
 
           <label class="rq4-radio-option">
             <input v-model="selectedChart" type="radio" value="scatter" />
-            <span>All-player scatter</span>
+            <span>Eligible-player scatter</span>
           </label>
         </div>
       </div>
@@ -90,7 +90,6 @@
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import Plotly from "plotly.js-dist-min";
-import ratingsCsv from "../../data/rq4/rq4_home_away_player_ratings.csv?raw";
 import deltaCsv from "../../data/rq4/rq4_player_home_away_delta.csv?raw";
 
 // Labels used in the UI and in the explanation text below the controls.
@@ -251,17 +250,7 @@ function emptyFigure(title) {
   };
 }
 
-// Convert raw CSV strings to typed JavaScript objects once when the page loads.
-function buildRatingsRows() {
-  return parseCsv(ratingsCsv).map((row) => ({
-    home_away: row.home_away,
-    player: row.player,
-    avg_overall_rating: toNumber(row.avg_overall_rating),
-    matches: toNumber(row.matches),
-    eligible_for_leaderboard: toBoolean(row.eligible_for_leaderboard),
-  }));
-}
-
+// Convert the raw CSV text into JavaScript objects with usable field names.
 function buildDeltaRows() {
   return parseCsv(deltaCsv).map((row) => ({
     player: row.player,
@@ -277,7 +266,7 @@ function buildDeltaRows() {
   }));
 }
 
-const ratingsRows = buildRatingsRows();
+// The CSV file does not change while the page is open, so we parse it once here.
 const deltaRows = buildDeltaRows();
 
 // Keep only rows that are safe to use in the charts and text summaries.
@@ -293,35 +282,10 @@ const eligibleDeltaRows = deltaRows.filter(
     row.away_matches !== null,
 );
 
-const scatterRows = deltaRows.filter(
-  (row) =>
-    row.player &&
-    row.home_avg_overall_rating !== null &&
-    row.away_avg_overall_rating !== null &&
-    row.avg_rating_delta_home_minus_away !== null &&
-    row.home_matches !== null &&
-    row.away_matches !== null,
-);
+// Use the same cohort across the headline, scatter, and leaderboard views.
+const scatterRows = eligibleDeltaRows;
 
-const leaderboardRows = ratingsRows.filter(
-  (row) =>
-    row.eligible_for_leaderboard &&
-    row.avg_overall_rating !== null &&
-    row.matches !== null,
-);
-
-const meanHomeRating = mean(
-  leaderboardRows
-    .filter((row) => row.home_away === "home")
-    .map((row) => row.avg_overall_rating),
-);
-
-const meanAwayRating = mean(
-  leaderboardRows
-    .filter((row) => row.home_away === "away")
-    .map((row) => row.avg_overall_rating),
-);
-
+// `ref(...)` creates reactive state. When one of these values changes, Vue can redraw the chart.
 const chartRef = ref(null);
 const selectedChart = ref(DEFAULT_CHART);
 const selectedViewMode = ref(DEFAULT_VIEW_MODE);
@@ -332,26 +296,36 @@ let scatterAnnotationRestoreTimer = null;
 
 // Produces the short answer shown directly under the page title.
 function buildResearchQuestionAnswer() {
-  if (meanHomeRating === null || meanAwayRating === null) {
+  const meanHomeRating = mean(
+    eligibleDeltaRows.map((row) => row.home_avg_overall_rating),
+  );
+  const meanAwayRating = mean(
+    eligibleDeltaRows.map((row) => row.away_avg_overall_rating),
+  );
+
+  if (
+    eligibleDeltaRows.length === 0 ||
+    meanHomeRating === null ||
+    meanAwayRating === null
+  ) {
     return "The derived RQ4 tables do not contain enough data to support a home-versus-away conclusion.";
   }
 
-  const eligibleRows = eligibleDeltaRows.filter(
-    (row) => row.avg_rating_delta_home_minus_away !== null,
-  );
-  const homeBetterCount = eligibleRows.filter(
+  // Count how many players are better at home or away to support the written summary.
+  const homeBetterCount = eligibleDeltaRows.filter(
     (row) => row.avg_rating_delta_home_minus_away > 0,
   ).length;
-  const awayBetterCount = eligibleRows.filter(
+  const awayBetterCount = eligibleDeltaRows.filter(
     (row) => row.avg_rating_delta_home_minus_away < 0,
   ).length;
   const delta = meanHomeRating - meanAwayRating;
 
-  return `Players perform slightly better at home overall: average home rating is ${meanHomeRating.toFixed(3)} versus ${meanAwayRating.toFixed(3)} away (${delta >= 0 ? "+" : ""}${delta.toFixed(3)}). The effect is modest, but ${homeBetterCount} of ${eligibleRows.length} eligible players rate better at home, compared with ${awayBetterCount} who rate better away.`;
+  return `Players perform slightly better at home overall: average home rating is ${meanHomeRating.toFixed(3)} versus ${meanAwayRating.toFixed(3)} away (${delta >= 0 ? "+" : ""}${delta.toFixed(3)}). The effect is modest, but ${homeBetterCount} of ${eligibleDeltaRows.length} eligible players rate better at home, compared with ${awayBetterCount} who rate better away.`;
 }
 
 // Returns the player subset that should appear in the current chart.
 function getLeaderboard(viewMode, rankingDepth) {
+  // `slice()` makes a copy so sorting below does not change the original full dataset.
   let leaderboard = eligibleDeltaRows.slice();
 
   if (viewMode === "home_specialists") {
@@ -503,6 +477,7 @@ function buildScatterFigure() {
     return emptyFigure("No scatter data available");
   }
 
+  // These values are reused for the red average point, the trend line, and the axis limits.
   const averageAwayRating =
     scatterRows.reduce(
       (sum, row) => sum + row.away_avg_overall_rating,
@@ -545,7 +520,6 @@ function buildScatterFigure() {
         row.home_matches,
         row.away_matches,
         row.avg_rating_delta_home_minus_away,
-        row.eligible_both_sides ? "Yes" : "No",
       ]),
       marker: {
         color: "#1F77B4",
@@ -554,7 +528,7 @@ function buildScatterFigure() {
         line: { color: "#ffffff", width: 0.8 },
       },
       hovertemplate:
-        "<b>%{text}</b><br>Away average rating: %{x:.3f}<br>Home average rating: %{y:.3f}<br>Delta (Home - Away): %{customdata[2]:.3f}<br>Home matches: %{customdata[0]}<br>Away matches: %{customdata[1]}<br>Eligible both sides: %{customdata[3]}<extra></extra>",
+        "<b>%{text}</b><br>Away average rating: %{x:.3f}<br>Home average rating: %{y:.3f}<br>Delta (Home - Away): %{customdata[2]:.3f}<br>Home matches: %{customdata[0]}<br>Away matches: %{customdata[1]}<extra></extra>",
     },
   ];
 
@@ -596,7 +570,7 @@ function buildScatterFigure() {
   return {
     data,
     layout: {
-      title: "Home vs Away Average Rating for All Players",
+      title: "Home vs Away Average Rating for Eligible Players",
       margin: { t: 64, r: 24, b: 72, l: 72 },
       paper_bgcolor: "#ffffff",
       plot_bgcolor: "#ffffff",
@@ -646,10 +620,10 @@ const plotDescription = computed(() => {
   if (selectedChart.value === "scatter") {
     const scatterSummary = buildSelectionSummaryText(
       scatterRows,
-      `Across all ${scatterRows.length} displayed players, average`,
+      `Across all ${scatterRows.length} eligible players, average`,
     );
 
-    return `This scatter uses all ${scatterRows.length} players with valid home and away averages. The x-axis shows each player's away average overall rating, and the y-axis shows the home average overall rating. Points above the dotted parity line indicate better home ratings, the dashed line shows the overall linear trend, and the larger red point marks the overall average across all players. Its callout is visible by default, while the other points only show their details on hover. ${scatterSummary}`.trim();
+    return `This scatter uses all ${scatterRows.length} eligible players with valid home and away averages on both sides. The x-axis shows each player's away average overall rating, and the y-axis shows the home average overall rating. Points above the dotted parity line indicate better home ratings, the dashed line shows the overall linear trend, and the larger red point marks the overall average across all displayed players. Its callout is visible by default, while the other points only show their details on hover. ${scatterSummary}`.trim();
   }
 
   const leaderboard = getLeaderboard(selectedViewMode.value, topN.value);
@@ -663,6 +637,8 @@ const plotDescription = computed(() => {
 
 const researchQuestionAnswer = computed(() => buildResearchQuestionAnswer());
 
+// These helpers control the default red annotation in scatter mode.
+// It hides while the user hovers a player and comes back afterward.
 function clearScatterAnnotationRestoreTimer() {
   if (scatterAnnotationRestoreTimer !== null) {
     window.clearTimeout(scatterAnnotationRestoreTimer);
@@ -787,7 +763,7 @@ async function renderChart() {
 
 function buildDownloadFilename() {
   if (selectedChart.value === "scatter") {
-    return "rq4-scatter-all-players.png";
+    return "rq4-scatter-eligible-players.png";
   }
 
   return `rq4-${selectedChart.value}-${selectedViewMode.value}-top-${topN.value}.png`;
@@ -795,7 +771,7 @@ function buildDownloadFilename() {
 
 function buildCsvFilename() {
   if (selectedChart.value === "scatter") {
-    return "rq4-scatter-all-players.csv";
+    return "rq4-scatter-eligible-players.csv";
   }
 
   return `rq4-${selectedChart.value}-${selectedViewMode.value}-top-${topN.value}.csv`;
@@ -847,6 +823,7 @@ function triggerFileDownload(filename, content, mimeType) {
   setTimeout(() => URL.revokeObjectURL(objectUrl), 0);
 }
 
+// Export only the rows that belong to the chart the user is currently viewing.
 function buildCurrentCsvRows() {
   if (selectedChart.value === "scatter") {
     return scatterRows
@@ -936,6 +913,7 @@ function handleResize() {
   }
 }
 
+// Whenever the controls change, rebuild the chart with the new selection.
 watch([selectedChart, selectedViewMode, topN], async () => {
   await renderChart();
 });
