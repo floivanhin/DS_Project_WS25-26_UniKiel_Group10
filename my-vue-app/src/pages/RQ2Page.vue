@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     async loadData() {
-      const res = await fetch("/data/data_goals.csv");
+      const res = await fetch("/data/RQ2.csv");
       const text = await res.text();
       this.df = this.parseCSV(text);
       this.drawPlot();
@@ -101,7 +101,7 @@ export default {
       const layout = {
         xaxis: { title: "Matchday" },
         yaxis: { title: "goals" },
-        barmode: this.chartType === 'bar' ? 'group' : 'overlay',
+        barmode: this.chartType === 'bar' ? "stack" : "overlay",
         margin: { t: 30, r: 20, l: 50, b: 50 },
         legend: { orientation: "h", y: -0.15 },
       };
