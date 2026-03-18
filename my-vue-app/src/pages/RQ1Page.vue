@@ -1,6 +1,7 @@
 <template>
   <div class="rq1-page">
     <section class="rq1-hero">
+      <p class="rq1-kicker">RQ1</p>
       <h1 class="rq1-page-title">
         How do weather conditions influence total goals scored?
       </h1>
@@ -11,53 +12,98 @@
       </p>
     </section>
 
-    <section class="rq1-controls">
-      <div class="rq1-control-block">
-        <label class="rq1-control-label" for="weatherFilter"
-          >Weather filter</label
-        >
-        <select
-          id="weatherFilter"
-          v-model="selectedWeather"
-          class="rq1-select-control"
-        >
-          <option value="All">All</option>
-          <option
-            v-for="group in availableWeatherGroups"
-            :key="group"
-            :value="group"
-          >
-            {{ group }}
-          </option>
-        </select>
+    <section class="rq1-description">
+      Explore whether different weather groups are linked to changes in scoring.
+      Use the filter to narrow the sample and switch between average goals,
+      median goals, and match count.
+    </section>
+
+    <section class="rq1-summary-grid">
+      <div class="rq1-summary-card">
+        <span class="rq1-summary-label">Matches in selection</span>
+        <strong class="rq1-summary-value">{{ filteredMatches.length }}</strong>
       </div>
 
-      <div class="rq1-control-block">
-        <span class="rq1-control-label">Metric</span>
-        <div class="rq1-radio-group">
-          <label class="rq1-radio-option">
-            <input v-model="selectedMetric" type="radio" value="avg" />
-            <span>Average goals</span>
-          </label>
+      <div class="rq1-summary-card">
+        <span class="rq1-summary-label">Weather filter</span>
+        <strong class="rq1-summary-value rq1-summary-value-small">{{
+          selectedWeather
+        }}</strong>
+      </div>
 
-          <label class="rq1-radio-option">
-            <input v-model="selectedMetric" type="radio" value="median" />
-            <span>Median goals</span>
-          </label>
+      <div class="rq1-summary-card">
+        <span class="rq1-summary-label">Selected metric</span>
+        <strong class="rq1-summary-value rq1-summary-value-small">{{
+          metricButtonLabel
+        }}</strong>
+      </div>
 
-          <label class="rq1-radio-option">
-            <input v-model="selectedMetric" type="radio" value="count" />
-            <span>Match count</span>
-          </label>
-        </div>
+      <div class="rq1-summary-card">
+        <span class="rq1-summary-label">{{ metricSummaryLabel }}</span>
+        <strong class="rq1-summary-value">{{ metricSummaryValue }}</strong>
       </div>
     </section>
 
-    <section class="rq1-selection-summary">
-      <strong>Current selection:</strong>
-      {{ selectedWeather }}. <strong>Matches:</strong>
-      {{ filteredMatches.length }}. <strong>{{ metricSummaryLabel }}:</strong>
-      {{ metricSummaryValue }}.
+    <section class="rq1-controls-card">
+      <div class="rq1-toolbar">
+        <div class="rq1-control-block rq1-control-block-compact">
+          <label class="rq1-control-label" for="weatherFilter">
+            Weather filter
+          </label>
+          <select
+            id="weatherFilter"
+            v-model="selectedWeather"
+            class="rq1-select-control"
+          >
+            <option value="All">All</option>
+            <option
+              v-for="group in availableWeatherGroups"
+              :key="group"
+              :value="group"
+            >
+              {{ group }}
+            </option>
+          </select>
+        </div>
+
+        <div class="rq1-control-block">
+          <span class="rq1-control-label">Metric</span>
+          <div class="rq1-button-group">
+            <button
+              class="rq1-toggle-button"
+              :class="{ 'rq1-toggle-button-active': selectedMetric === 'avg' }"
+              type="button"
+              @click="selectedMetric = 'avg'"
+            >
+              Average goals
+            </button>
+            <button
+              class="rq1-toggle-button"
+              :class="{
+                'rq1-toggle-button-active': selectedMetric === 'median',
+              }"
+              type="button"
+              @click="selectedMetric = 'median'"
+            >
+              Median goals
+            </button>
+            <button
+              class="rq1-toggle-button"
+              :class="{ 'rq1-toggle-button-active': selectedMetric === 'count' }"
+              type="button"
+              @click="selectedMetric = 'count'"
+            >
+              Match count
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <p class="rq1-selection-summary">
+        Current selection: <strong>{{ selectedWeather }}</strong>. Matches:
+        <strong>{{ filteredMatches.length }}</strong>. {{ metricSummaryLabel }}:
+        <strong>{{ metricSummaryValue }}</strong>.
+      </p>
     </section>
 
     <section v-if="loading" class="rq1-status-box">
@@ -69,15 +115,25 @@
     </section>
 
     <template v-else>
-      <section class="rq1-chart-section">
+      <section class="rq1-chart-card">
+        <h2 class="rq1-section-title">{{ getMetricTitle() }}</h2>
+        <p class="rq1-chart-note">
+          This chart compares the selected weather groups using the current
+          metric.
+        </p>
         <div ref="mainChartRef" class="rq1-chart"></div>
       </section>
 
-      <section class="rq1-chart-section">
+      <section class="rq1-chart-card">
+        <h2 class="rq1-section-title">Distribution of total goals</h2>
+        <p class="rq1-chart-note">
+          The histogram shows how many matches ended with a given total number
+          of goals in the current selection.
+        </p>
         <div ref="distributionChartRef" class="rq1-chart"></div>
       </section>
 
-      <section class="rq1-table-section">
+      <section class="rq1-table-card">
         <h2 class="rq1-section-title">Summary table</h2>
 
         <div class="rq1-table-wrapper">
@@ -237,6 +293,12 @@ const summaryRows = computed<SummaryRow[]>(() => {
 const metricSummaryLabel = computed(() => {
   if (selectedMetric.value === "avg") return "Average total goals";
   if (selectedMetric.value === "median") return "Median total goals";
+  return "Match count";
+});
+
+const metricButtonLabel = computed(() => {
+  if (selectedMetric.value === "avg") return "Average goals";
+  if (selectedMetric.value === "median") return "Median goals";
   return "Match count";
 });
 
