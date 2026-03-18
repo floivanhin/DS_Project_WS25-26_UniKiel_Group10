@@ -1,0 +1,203 @@
+{
+  "_meta": {
+    "league": "Bundesliga",
+    "league_id": 78,
+    "season": 2024,
+    "teams": 19,
+    "venues": 19,
+    "missing_capacity": 0,
+    "source": "/teams"
+  },
+  "venues": [
+    {
+      "venue_id": 723,
+      "team_name": "1. FC Heidenheim",
+      "name": "Voith-Arena",
+      "address": "Schloßhaustraße 160",
+      "city": "Heidenheim an der Brenz",
+      "capacity": 15000,
+      "surface": "grass",
+      "image": "https://media.api-sports.io/football/venues/723.png"
+    },
+    {
+      "venue_id": 724,
+      "team_name": "1899 Hoffenheim",
+      "name": "PreZero Arena",
+      "address": "Dietmar-Hopp-Straße 1",
+      "city": "Sinsheim",
+      "capacity": 30164,
+      "surface": "grass",
+      "image": "https://media.api-sports.io/football/venues/724.png"
+    },
+    {
+      "venue_id": 699,
+      "team_name": "Bayer Leverkusen",
+      "name": "BayArena",
+      "address": "Bismarckstr. 122-124",
+      "city": "Leverkusen",
+      "capacity": 30210,
+      "surface": "grass",
+      "image": "https://media.api-sports.io/football/venues/699.png"
+    },
+    {
+      "venue_id": 20732,
+      "team_name": "Bayern München",
+      "name": "Fußball Arena München",
+      "address": "Werner-Heisenberg-Allee 25",
+      "city": "München",
+      "capacity": 75024,
+      "surface": "grass",
+      "image": "https://media.api-sports.io/football/venues/20732.png"
+    },
+    {
+      "venue_id": 20733,
+      "team_name": "Borussia Dortmund",
+      "name": "BVB Stadion Dortmund",
+      "address": "Strobelalle 50",
+      "city": "Dortmund",
+      "capacity": 81365,
+      "surface": "grass",
+      "image": "https://media.api-sports.io/football/venues/20733.png"
+    },
+    {
+      "venue_id": 20471,
+      "team_name": "Borussia Mönchengladbach",
+      "name": "BORUSSIA-PARK",
+      "address": "Hennes-Weisweiler-Allee 1",
+      "city": "Mönchengladbach",
+      "capacity": 54057,
+      "surface": "grass",
+      "image": "https://media.api-sports.io/football/venues/20471.png"
+    },
+    {
+      "venue_id": 20734,
+      "team_name": "Eintracht Frankfurt",
+      "name": "Frankfurt Arena",
+      "address": "Mörfelder Landstr. 362",
+      "city": "Frankfurt am Main",
+      "capacity": 58000,
+      "surface": "grass",
+      "image": "https://media.api-sports.io/football/venues/20734.png"
+    },
+    {
+      "venue_id": 698,
+      "team_name": "FC Augsburg",
+      "name": "WWK Arena",
+      "address": "Bürgermeister Ulrich-Straße 90",
+      "city": "Augsburg",
+      "capacity": 30662,
+      "surface": "grass",
+      "image": "https://media.api-sports.io/football/venues/698.png"
+    },
+    {
+      "venue_id": 745,
+      "team_name": "FC St. Pauli",
+      "name": "Millerntor-Stadion",
+      "address": "Harald-Stender-Platz 1",
+      "city": "Hamburg",
+      "capacity": 29564,
+      "surface": "grass",
+      "image": "https://media.api-sports.io/football/venues/745.png"
+    },
+    {
+      "venue_id": 11899,
+      "team_name": "FSV Mainz 05",
+      "name": "MEWA ARENA",
+      "address": "Eugen-Salomon-Straße 1",
+      "city": "Mainz",
+      "capacity": 34034,
+      "surface": "grass",
+      "image": "https://media.api-sports.io/football/venues/11899.png"
+    },
+    {
+      "venue_id": 725,
+      "team_name": "Holstein Kiel",
+      "name": "Holstein-Stadion",
+      "address": "Westring 501",
+      "city": "Kiel",
+      "capacity": 15034,
+      "surface": "grass",
+      "image": "https://media.api-sports.io/football/venues/725.png"
+    },
+    {
+      "venue_id": 20737,
+      "team_name": "RB Leipzig",
+      "name": "Leipzig Stadium",
+      "address": "Am Sportforum 3",
+      "city": "Leipzig",
+      "capacity": 47069,
+      "surface": "grass",
+      "image": "https://media.api-sports.io/football/venues/20737.png"
+    },
+    {
+      "venue_id": 12717,
+      "team_name": "SC Freiburg",
+      "name": "Europa-Park Stadion",
+      "address": "Achim-Stocker-Straße 1",
+      "city": "Freiburg im Breisgau",
+      "capacity": 34700,
+      "surface": "grass",
+      "image": "https://media.api-sports.io/football/venues/12717.png"
+    },
+    {
+      "venue_id": 710,
+      "team_name": "SV Elversberg",
+      "name": "URSAPHARM-Arena an der Kaiserlinde",
+      "address": "Lindenstraße 7",
+      "city": "Spiesen-Elversberg",
+      "capacity": 11150,
+      "surface": "grass",
+      "image": "https://media.api-sports.io/football/venues/710.png"
+    },
+    {
+      "venue_id": 748,
+      "team_name": "Union Berlin",
+      "name": "Stadion An der Alten Försterei",
+      "address": "Hämmerlingstraße 80-88, Köpenick",
+      "city": "Berlin",
+      "capacity": 22467,
+      "surface": "grass",
+      "image": "https://media.api-sports.io/football/venues/748.png"
+    },
+    {
+      "venue_id": 20739,
+      "team_name": "VfB Stuttgart",
+      "name": "Stuttgart Arena",
+      "address": "Mercedesstrasse 87",
+      "city": "Stuttgart",
+      "capacity": 60469,
+      "surface": "grass",
+      "image": "https://media.api-sports.io/football/venues/20739.png"
+    },
+    {
+      "venue_id": 751,
+      "team_name": "VfL Bochum",
+      "name": "Vonovia Ruhrstadion",
+      "address": "Castropher Straße 145",
+      "city": "Bochum",
+      "capacity": 27599,
+      "surface": "grass",
+      "image": "https://media.api-sports.io/football/venues/751.png"
+    },
+    {
+      "venue_id": 752,
+      "team_name": "VfL Wolfsburg",
+      "name": "Volkswagen Arena",
+      "address": "In den Allerwiesen 1",
+      "city": "Wolfsburg",
+      "capacity": 30000,
+      "surface": "grass",
+      "image": "https://media.api-sports.io/football/venues/752.png"
+    },
+    {
+      "venue_id": 755,
+      "team_name": "Werder Bremen",
+      "name": "wohninvest WESERSTADION",
+      "address": "Franz-Böhmert-Straße 1c",
+      "city": "Bremen",
+      "capacity": 42358,
+      "surface": "grass",
+      "image": "https://media.api-sports.io/football/venues/755.png"
+    }
+  ]
+}

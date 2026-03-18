@@ -14,7 +14,7 @@
     "id": 2414,
     "startDate": "2025-08-22",
     "endDate": "2026-05-16",
-    "currentMatchday": 24,
+    "currentMatchday": 26,
     "winner": null
   },
   "teams": [
@@ -52,10 +52,10 @@
         }
       ],
       "coach": {
-        "id": 179967,
+        "id": 101269,
         "firstName": "Łukasz",
         "lastName": "Kwasniok",
-        "name": "Łukasz Kwasniok",
+        "name": "Lukas Kwasniok",
         "dateOfBirth": "1981-06-12",
         "nationality": "Germany",
         "contract": {
@@ -371,7 +371,7 @@
           "name": "Albian Hajdari",
           "position": "Defence",
           "dateOfBirth": "2003-05-18",
-          "nationality": "Switzerland"
+          "nationality": "Kosovo"
         },
         {
           "id": 188239,
@@ -406,7 +406,7 @@
           "name": "Leon Avdullahu",
           "position": "Midfield",
           "dateOfBirth": "1991-03-20",
-          "nationality": "Switzerland"
+          "nationality": "Kosovo"
         },
         {
           "id": 212107,
@@ -711,6 +711,13 @@
           "nationality": "Germany"
         },
         {
+          "id": 293515,
+          "name": "Emmanuel Owen",
+          "position": "Offence",
+          "dateOfBirth": "2007-06-11",
+          "nationality": "Germany"
+        },
+        {
           "id": 144715,
           "name": "Nathan Tella",
           "position": "Right Midfield",
@@ -953,7 +960,7 @@
           "id": 250515,
           "name": "Danylo Krevsun",
           "position": "Midfield",
-          "dateOfBirth": null,
+          "dateOfBirth": "2005-04-21",
           "nationality": "Ukraine"
         },
         {
@@ -1080,7 +1087,7 @@
           "name": "Carney Chukwuemeka",
           "position": "Central Midfield",
           "dateOfBirth": "2003-10-20",
-          "nationality": "England"
+          "nationality": "Austria"
         },
         {
           "id": 144283,
@@ -1196,6 +1203,13 @@
           "nationality": "Germany"
         },
         {
+          "id": 288435,
+          "name": "Leonard Prescott",
+          "position": "Goalkeeper",
+          "dateOfBirth": "2009-09-23",
+          "nationality": "Germany"
+        },
+        {
           "id": 212343,
           "name": "Vincent Manuba",
           "position": "Defence",
@@ -1238,39 +1252,18 @@
           "nationality": "Gambia"
         },
         {
+          "id": 291949,
+          "name": "Maycon Cardozo",
+          "position": "Midfield",
+          "dateOfBirth": "2008-10-10",
+          "nationality": "Brazil"
+        },
+        {
           "id": 275164,
           "name": "Wisdom Mike",
           "position": "Offence",
           "dateOfBirth": "2008-09-24",
           "nationality": "Germany"
-        },
-        {
-          "id": 202665,
-          "name": "Aleksandar Pavlović",
-          "position": "Defensive Midfield",
-          "dateOfBirth": "2004-05-03",
-          "nationality": "Germany"
-        },
-        {
-          "id": 172574,
-          "name": "Tom Bischof",
-          "position": "Attacking Midfield",
-          "dateOfBirth": "2005-06-28",
-          "nationality": "Germany"
-        },
-        {
-          "id": 168299,
-          "name": "Min-Jae Kim",
-          "position": "Centre-Back",
-          "dateOfBirth": "1996-11-15",
-          "nationality": "South Korea"
-        },
-        {
-          "id": 152515,
-          "name": "Nicolas Jackson",
-          "position": "Centre-Forward",
-          "dateOfBirth": "2001-06-20",
-          "nationality": "Senegal"
         },
         {
           "id": 144393,
@@ -1369,6 +1362,34 @@
           "position": "Centre-Back",
           "dateOfBirth": "1996-02-11",
           "nationality": "Germany"
+        },
+        {
+          "id": 202665,
+          "name": "Aleksandar Pavlović",
+          "position": "Defensive Midfield",
+          "dateOfBirth": "2004-05-03",
+          "nationality": "Germany"
+        },
+        {
+          "id": 172574,
+          "name": "Tom Bischof",
+          "position": "Attacking Midfield",
+          "dateOfBirth": "2005-06-28",
+          "nationality": "Germany"
+        },
+        {
+          "id": 168299,
+          "name": "Min-Jae Kim",
+          "position": "Centre-Back",
+          "dateOfBirth": "1996-11-15",
+          "nationality": "South Korea"
+        },
+        {
+          "id": 152515,
+          "name": "Nicolas Jackson",
+          "position": "Centre-Forward",
+          "dateOfBirth": "2001-06-20",
+          "nationality": "Senegal"
         }
       ],
       "staff": [],
@@ -1970,15 +1991,15 @@
         }
       ],
       "coach": {
-        "id": 278254,
-        "firstName": "Daniel",
-        "lastName": "Bauer",
-        "name": "Daniel Bauer",
-        "dateOfBirth": "1982-10-17",
+        "id": 10244,
+        "firstName": "Dieter",
+        "lastName": "Hecking",
+        "name": "Dieter Hecking",
+        "dateOfBirth": "1964-09-12",
         "nationality": "Germany",
         "contract": {
-          "start": "2025-11",
-          "until": "2027-06"
+          "start": "2026-03",
+          "until": "2026-06"
         }
       },
       "squad": [
@@ -2100,13 +2121,6 @@
           "position": "Offence",
           "dateOfBirth": "2008-05-14",
           "nationality": "Finland"
-        },
-        {
-          "id": 154109,
-          "name": "Jenson Seelt",
-          "position": "Centre-Back",
-          "dateOfBirth": "2003-05-23",
-          "nationality": "Netherlands"
         },
         {
           "id": 153289,
@@ -2233,6 +2247,13 @@
           "position": "Right-Back",
           "dateOfBirth": "2005-03-26",
           "nationality": "France"
+        },
+        {
+          "id": 154109,
+          "name": "Jenson Seelt",
+          "position": "Centre-Back",
+          "dateOfBirth": "2003-05-23",
+          "nationality": "Netherlands"
         }
       ],
       "staff": [],
@@ -2313,6 +2334,13 @@
           "nationality": "Bulgaria"
         },
         {
+          "id": 255080,
+          "name": "Mats Heitmann",
+          "position": "Defence",
+          "dateOfBirth": "2006-02-11",
+          "nationality": "Germany"
+        },
+        {
           "id": 275165,
           "name": "Mick Schmetgens",
           "position": "Defence",
@@ -2367,6 +2395,13 @@
           "position": "Offence",
           "dateOfBirth": "2006-02-22",
           "nationality": "Germany"
+        },
+        {
+          "id": 93320,
+          "name": "Olivier Deman",
+          "position": "Left Midfield",
+          "dateOfBirth": "2000-04-06",
+          "nationality": "Belgium"
         },
         {
           "id": 66095,
@@ -2486,13 +2521,6 @@
           "position": "Left-Back",
           "dateOfBirth": "1999-12-07",
           "nationality": "Switzerland"
-        },
-        {
-          "id": 93320,
-          "name": "Olivier Deman",
-          "position": "Left Midfield",
-          "dateOfBirth": "2000-04-06",
-          "nationality": "Belgium"
         }
       ],
       "staff": [],
@@ -3785,7 +3813,7 @@
           "name": "Mahmoud Dahoud",
           "position": "Central Midfield",
           "dateOfBirth": "1996-01-01",
-          "nationality": "Syria"
+          "nationality": "Germany"
         },
         {
           "id": 140,
@@ -4101,7 +4129,7 @@
           "name": "Andreas Hountondji",
           "position": "Centre-Forward",
           "dateOfBirth": "2002-07-11",
-          "nationality": "France"
+          "nationality": "Benin"
         }
       ],
       "staff": [],
@@ -4179,7 +4207,7 @@
           "name": "Derrick Köhn",
           "position": "Defence",
           "dateOfBirth": "1999-02-04",
-          "nationality": "Germany"
+          "nationality": "Ghana"
         },
         {
           "id": 152811,
