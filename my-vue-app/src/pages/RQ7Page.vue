@@ -2,12 +2,17 @@
   <div class="rq1-page">
     <section class="rq1-hero">
       <h1 class="rq1-page-title">
-        How does the time between winning possession in your own half and the first shot
-        correlate with the probability of scoring (per shot)?
+        How do substitutions affect the number of shots on goal in the second half?
       </h1>
       <p class="rq1-page-subtitle">
-        How the time between possession wins in the own half and a subsequent shot correlates with
-        the probability of scoring a goal
+        We tried to answer this question in three different ways. Our first graph shows the average number
+        of shots taken by a team based on the number of substitutions they took.
+        Our second graph shows how the amount of shots in the second half changes when comparing the time
+        before and after the minute of the average substitution by that team during that game based on 
+        the minute of the average substitution.
+        Our third graph shows how the total number of minutes played by substituted players affects the average amount 
+        of shots taken in the second half. The resulting graph was smoothed, using a rolling average window. 
+        The window size can be adjusted manually using the slider.
       </p>
     </section>
 
@@ -30,22 +35,22 @@
             <span>Number of minutes</span>
           </label>
         </div>
-        <div v-if="selectedMetric === 'Minutes'" class="rq1-slider-container">
-          <label class="rq1-control-label">
-          Smoothing Window: <span style="color: #441AEE; font-weight: bold;">{{ windowSize }}</span>
-          </label>
-          <input 
-            type="range" 
-            min="2" 
-            max="20" 
-            step="1"
-            v-model.number="windowSize" 
-            class="rq1-slider"
-          />
-          <div class="slider-hints">
-            <span>2</span>
-            <span>20</span>
-          </div>
+      </div>
+      <div v-if="selectedMetric === 'Minutes'" class="rq1-slider-container">
+        <label class="rq1-control-label">
+        Smoothing Window: <span style="color: #441AEE; font-weight: bold;">{{ windowSize }}</span>
+        </label>
+        <input 
+          type="range" 
+          min="2" 
+          max="20" 
+          step="1"
+          v-model.number="windowSize" 
+          class="rq1-slider"
+        />
+        <div class="slider-hints">
+          <span>2</span>
+          <span>20</span>
         </div>
       </div>
     </section>

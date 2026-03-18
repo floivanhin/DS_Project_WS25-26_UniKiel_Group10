@@ -130,13 +130,12 @@
 .rq1-slider-container {
   margin: 20px 0;
   padding: 20px;
-  background-color: #f8f9fa; /* Light grey background to define the area */
+  background-color: #ffffff; 
   border-radius: 12px;
-  border: 1px solid #e9ecef;
-  max-width: 500px;
+  border: 1px solid #ffffff;
+  max-width: 300px;
 }
 
-/* Label styling */
 .rq1-control-label {
   display: block;
   margin-bottom: 12px;
@@ -145,7 +144,6 @@
   font-size: 0.95rem;
 }
 
-/* The actual Slider track */
 .rq1-slider {
   -webkit-appearance: none;
   width: 100%;
@@ -157,15 +155,13 @@
   transition: background 0.2s;
 }
 
-/* The Slider Handle (The circle you drag) */
-/* For Chrome, Safari, Edge, Opera */
 .rq1-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #441aee; /* Matches your line chart color */
+  background: #441aee; 
   cursor: pointer;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   transition: transform 0.1s ease;
@@ -175,7 +171,6 @@
   transform: scale(1.1);
 }
 
-/* Visual indicators for the min/max values */
 .slider-hints {
   display: flex;
   justify-content: space-between;

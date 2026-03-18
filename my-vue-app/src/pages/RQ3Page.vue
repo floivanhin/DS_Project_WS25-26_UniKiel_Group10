@@ -2,12 +2,16 @@
   <div class="rq1-page">
     <section class="rq1-hero">
       <h1 class="rq1-page-title">
-        How does the time between winning possession in your own half and the
-        first shot correlate with the probability of scoring (per shot)?
+        How does transition time correlate with goal probability?
       </h1>
       <p class="rq1-page-subtitle">
-        How the time between possession wins in the own half and a subsequent
-        shot correlates with the probability of scoring a goal
+        To answer this research question we scraped raw event data and
+        filtered out all the events, where a team won possession in their own half and then shot on the 
+        opposing team's goal, before they lost possession. 
+        Our first graph shows how many shots were taken and how many
+        goals were scored after a team won possession in their half. The results are partitioned based on how much time
+        passed between the possession win and the subsequent shot or goal (transition time).
+        Our second graph shows the percentage of shots that resulted in a goal based on the transition time.
       </p>
     </section>
 
@@ -49,7 +53,7 @@ import { ref, onMounted, watch, computed, nextTick } from "vue";
 import Plotly from "plotly.js-dist-min";
 import "../assets/style.css";
 
-// --- 1. STATE ---
+// Setting up the data transformation
 const df_RQ3 = ref([]);
 const selection = ref("bar");
 const selectedMetric = ref("Boxplot");
@@ -58,7 +62,6 @@ const loading = ref(true);
 const error = ref("");
 const mainChartRef = ref(null);
 
-// Definitions matching your Python code
 const labels = [
   "0-10s",
   "10-15s",
@@ -73,7 +76,7 @@ const labels = [
 ];
 const bins = [0, 10, 15, 20, 25, 30, 35, 40, 45, 50, Infinity];
 
-// --- 2. THE CALCULATION ENGINE ---
+// Ordering goals and non-goals by time intervall
 const getAggregatedData = (data) => {
   const goals = new Array(labels.length).fill(0);
   const noGoals = new Array(labels.length).fill(0);
@@ -83,18 +86,10 @@ const getAggregatedData = (data) => {
 
     if (!Number.isFinite(time)) return;
 
-    // for 0 ≤ t < 10
-    
     const binIndex = bins.findIndex(
       (edge, i) => i < bins.length - 1 && time > edge && time <= bins[i + 1],
     );
     
-
-    // for 0 < t ≤ 10
-
-    //const binIndex = bins.findIndex(
-    //  (edge, i) => i < bins.length - 1 && time >= edge && time < bins[i + 1],
-    //);
 
     if (binIndex !== -1) {
       const goalValue = String(item.is_goal).trim().toLowerCase();
@@ -121,7 +116,7 @@ const getAggregatedData = (data) => {
   return { goals, noGoals, percentages };
 };
 
-// --- 3. THE GRAPHING FUNCTION ---
+// Creating the graphs
 const updateGraph = async () => {
   await nextTick();
 
@@ -180,13 +175,7 @@ const updateGraph = async () => {
   Plotly.react(gd, traces, layout, { responsive: true });
 };
 
-// --- 4. REACTIVITY & DATA LOAD ---
-const description = computed(() => {
-  return selection.value === "bar"
-    ? "Amount of shots and goals that happened after a team gained possession in its own half based on the time it took between winning possession and shooting."
-    : "Percentage of shots that turned into goals based on the time it took for a team between winning possession in its own half and shooting";
-});
-
+// Loading the data
 watch(selectedMetric, (value) => {
   selection.value = value === "Boxplot" ? "bar" : "line";
 });
