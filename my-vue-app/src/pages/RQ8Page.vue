@@ -2,7 +2,7 @@
   <div class="rq8-page">
     <section class="rq8-hero">
       <h1 class="rq8-page-title">
-        Is there an ideal age for strong shooting efficiency?
+        How does the average player age affect a team's efficiency?
       </h1>
       <p class="rq8-page-subtitle">{{ researchQuestionAnswer }}</p>
     </section>
@@ -68,7 +68,6 @@ import playerAgeProfileCsv from "../../data/rq8/rq8_player_age_profile.csv?raw";
 import playerBestAgeCsv from "../../data/rq8/rq8_player_best_age.csv?raw";
 
 // load the rq8 csv files
-// reactive ui state
 const chartRef = ref(null);
 const selectedChart = ref("team_scatter");
 
@@ -79,33 +78,52 @@ function parseCsv(text) {
     return [];
   }
 
-  const headers = lines[0].split(",").map((value) => value.trim());
-  return lines.slice(1).map((line) => {
-    const values = line
-      .split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/)
-      .map((value) => value.replace(/^"|"$/g, "").replace(/""/g, '"'));
+  const splitLine = (line) => {
+    const values = [];
+    let current = "";
+    let inQuotes = false;
 
-    return Object.fromEntries(
-      headers.map((header, index) => [header, values[index] ?? ""]),
-    );
+    // rq8 data has a quoted note with a comma, so plain split(",") would break that row
+    for (let i = 0; i < line.length; i += 1) {
+      const char = line[i];
+
+      if (char === '"') {
+        if (inQuotes && line[i + 1] === '"') {
+          current += '"';
+          i += 1;
+        } else {
+          inQuotes = !inQuotes;
+        }
+      } else if (char === "," && !inQuotes) {
+        values.push(current);
+        current = "";
+      } else {
+        current += char;
+      }
+    }
+
+    values.push(current);
+    return values;
+  };
+
+  const headers = splitLine(lines[0]).map((value) => value.trim());
+  return lines.slice(1).map((line) => {
+    const values = splitLine(line);
+    const row = {};
+
+    headers.forEach((header, index) => {
+      row[header] = values[index] ?? "";
+    });
+
+    return row;
   });
 }
 
-// convert text values to numbers
+// turn text into numbers
 const num = (value) => {
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : null;
 };
-
-// helper for average values
-const average = (values) =>
-  values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : null;
-
-// wait so plotly sees the chart size
-const waitForFrame = () =>
-  new Promise((resolve) => {
-    requestAnimationFrame(() => resolve());
-  });
 
 // keep only valid team rows
 const teamRows = parseCsv(teamEfficiencyCsv)
@@ -120,7 +138,6 @@ const teamRows = parseCsv(teamEfficiencyCsv)
 const optimalRow =
   parseCsv(optimalAgeCsv)
     .map((row) => ({
-      teams: num(row.n_teams),
       pearson: num(row.pearson_r_age_efficiency),
       peakAge: num(row.estimated_peak_age),
       peakRate: num(row.estimated_peak_goals_per_shot),
@@ -152,52 +169,24 @@ const storedBest =
       minShots: num(row.min_total_shots),
       age: num(row.best_age_int),
       goalsPerShot: num(row.goals_per_shot),
-      shots: num(row.total_shots),
-      players: num(row.players),
     }))[0] ?? null;
 
 const minShots = ref(storedBest?.minShots ?? 80);
 
-function getTrend(rows) {
-  // calculate a simple trend line
-  if (rows.length < 2) {
-    return null;
-  }
-
-  let sumX = 0;
-  let sumY = 0;
-  let sumXY = 0;
-  let sumX2 = 0;
-
-  for (const row of rows) {
-    sumX += row.avgAge;
-    sumY += row.goalsPerShot;
-    sumXY += row.avgAge * row.goalsPerShot;
-    sumX2 += row.avgAge * row.avgAge;
-  }
-
-  const divider = rows.length * sumX2 - sumX * sumX;
-  if (!divider) {
-    return null;
-  }
-
-  const slope = (rows.length * sumXY - sumX * sumY) / divider;
-  const intercept = (sumY - slope * sumX) / rows.length;
-  return { slope, intercept };
-}
-
 function getBestAge(threshold) {
   // get the best age above the shot limit
   const eligible = ageRows
-    .filter((row) => row.shots >= Number(threshold))
-    .slice()
+    .filter((row) => row.shots >= threshold)
     .sort((a, b) => {
+      // best rate first
       if (b.goalsPerShot !== a.goalsPerShot) {
         return b.goalsPerShot - a.goalsPerShot;
       }
+      // if the rate ties, prefer the age band with more shots
       if (b.shots !== a.shots) {
         return b.shots - a.shots;
       }
+      // last tie-breaker: smaller age first
       return a.age - b.age;
     });
 
@@ -205,31 +194,35 @@ function getBestAge(threshold) {
 }
 
 // summary values for the page text
-const averageTeamAge = average(teamRows.map((row) => row.avgAge));
-const averageTeamRate = average(teamRows.map((row) => row.goalsPerShot));
+const averageTeamAge = teamRows.length
+  ? teamRows.reduce((sum, row) => sum + row.avgAge, 0) / teamRows.length
+  : null;
+const averageTeamRate = teamRows.length
+  ? teamRows.reduce((sum, row) => sum + row.goalsPerShot, 0) / teamRows.length
+  : null;
 
 // short answer for the title
 const researchQuestionAnswer = (() => {
   const parts = [];
 
   // team summary text
-  if (optimalRow?.pearson !== null) {
+  if (optimalRow?.pearson != null) {
     if (optimalRow.pearson < 0) {
       parts.push(
-        `There is no clear best average team age here. Older teams trend a bit lower in goals per shot (r = ${optimalRow.pearson.toFixed(3)}).`,
+        `There is no clear best average team age. Older teams trend a bit lower in goals per shot (r = ${optimalRow.pearson.toFixed(3)}).`,
       );
     } else {
       parts.push(
-        `There is no clear best average team age here. Older teams trend a bit higher in goals per shot (r = ${optimalRow.pearson.toFixed(3)}).`,
+        `There is no clear best average team age. Older teams trend a bit higher in goals per shot (r = ${optimalRow.pearson.toFixed(3)}).`,
       );
     }
   }
 
   // player age summary text
   if (
-    storedBest?.age !== null &&
-    storedBest?.goalsPerShot !== null &&
-    storedBest?.minShots !== null
+    storedBest?.age != null &&
+    storedBest?.goalsPerShot != null &&
+    storedBest?.minShots != null
   ) {
     parts.push(
       `In the player summary table, age ${storedBest.age} is best at the ${storedBest.minShots}-shot cutoff with ${storedBest.goalsPerShot.toFixed(3)} goals per shot.`,
@@ -257,7 +250,31 @@ function buildTeamScatterFigure() {
   // get the age range for the line
   const minAge = Math.min(...teamRows.map((row) => row.avgAge));
   const maxAge = Math.max(...teamRows.map((row) => row.avgAge));
-  const trend = getTrend(teamRows);
+  let trend = null;
+
+  if (teamRows.length >= 2) {
+    let sumX = 0;
+    let sumY = 0;
+    let sumXY = 0;
+    let sumX2 = 0;
+
+    // add up the values we need for a simple straight trend line
+    for (const row of teamRows) {
+      sumX += row.avgAge;
+      sumY += row.goalsPerShot;
+      sumXY += row.avgAge * row.goalsPerShot;
+      sumX2 += row.avgAge * row.avgAge;
+    }
+
+    const divider = teamRows.length * sumX2 - sumX * sumX;
+    if (divider) {
+      // slope + intercept define the line: y = slope * x + intercept
+      const slope = (teamRows.length * sumXY - sumX * sumY) / divider;
+      const intercept = (sumY - slope * sumX) / teamRows.length;
+      trend = { slope, intercept };
+    }
+  }
+
   const data = [
     {
       type: "scatter",
@@ -294,8 +311,8 @@ function buildTeamScatterFigure() {
   }
 
   if (
-    optimalRow?.peakAge !== null &&
-    optimalRow?.peakRate !== null &&
+    optimalRow?.peakAge != null &&
+    optimalRow?.peakRate != null &&
     optimalRow.peakAge >= minAge &&
     optimalRow.peakAge <= maxAge
   ) {
@@ -364,7 +381,8 @@ function buildAgeProfileFigure() {
       yaxis: "y2",
       marker: {
         color: ageRows.map((row) =>
-          row.shots >= Number(minShots.value)
+          // highlight age bands that pass the current shot cutoff
+          row.shots >= minShots.value
             ? "rgba(178, 34, 34, 0.35)"
             : "rgba(110, 110, 110, 0.35)",
         ),
@@ -431,13 +449,6 @@ function buildAgeProfileFigure() {
   };
 }
 
-// choose which chart to show
-const figure = computed(() =>
-  selectedChart.value === "team_scatter"
-    ? buildTeamScatterFigure()
-    : buildAgeProfileFigure(),
-);
-
 async function renderChart() {
   if (!chartRef.value) {
     return;
@@ -445,9 +456,17 @@ async function renderChart() {
 
   // wait until the chart container is ready
   await nextTick();
-  await waitForFrame();
+  await new Promise((resolve) => {
+    // one extra frame helps Plotly read the final element size
+    requestAnimationFrame(resolve);
+  });
 
-  await Plotly.react(chartRef.value, figure.value.data, figure.value.layout, {
+  const figure =
+    selectedChart.value === "team_scatter"
+      ? buildTeamScatterFigure()
+      : buildAgeProfileFigure();
+
+  await Plotly.react(chartRef.value, figure.data, figure.layout, {
     responsive: true,
     displayModeBar: true,
   });

@@ -2,7 +2,7 @@
   <div class="rq4-page">
     <section class="rq4-hero">
       <h1 class="rq4-page-title">
-        How does playing at home vs away affect player ratings?
+        Which players perform particularly well in home matches and which in away matches?
       </h1>
       <p class="rq4-page-subtitle">{{ researchQuestionAnswer }}</p>
     </section>
@@ -68,14 +68,6 @@ import Plotly from "plotly.js-dist-min";
 import deltaCsv from "../../data/rq4/rq4_player_home_away_delta.csv?raw";
 
 // load the rq4 csv data
-// labels for the chart modes
-const modeLabels = {
-  abs_delta: "biggest home-away gaps",
-  home_specialists: "players who do better at home",
-  away_specialists: "players who do better away",
-};
-
-// reactive ui state
 const chartRef = ref(null);
 const selectedChart = ref("compare");
 const selectedViewMode = ref("abs_delta");
@@ -88,33 +80,29 @@ function parseCsv(text) {
     return [];
   }
 
+  // rq4 data has no quoted cells, so a normal split is enough here
   const headers = lines[0].split(",").map((value) => value.trim());
   return lines.slice(1).map((line) => {
-    const values = line
-      .split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/)
-      .map((value) => value.replace(/^"|"$/g, "").replace(/""/g, '"'));
+    const values = line.split(",");
+    const row = {};
 
-    return Object.fromEntries(
-      headers.map((header, index) => [header, values[index] ?? ""]),
-    );
+    headers.forEach((header, index) => {
+      row[header] = values[index] ?? "";
+    });
+
+    return row;
   });
 }
 
-// convert text values to numbers
+// turn text into numbers
 const num = (value) => {
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : null;
 };
 
-// helper for average values
+// average helper for summary text
 const average = (values) =>
   values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : null;
-
-// wait so plotly sees the right size
-const waitForFrame = () =>
-  new Promise((resolve) => {
-    requestAnimationFrame(() => resolve());
-  });
 
 // keep only valid player rows
 const rows = parseCsv(deltaCsv)
@@ -148,33 +136,40 @@ const homeBetterCount = rows.filter((row) => row.delta > 0).length;
 // short answer for the title
 const researchQuestionAnswer =
   rows.length && overallHome !== null && overallAway !== null
-    ? `Players are a bit better at home in this dataset. Mean home rating is ${overallHome.toFixed(3)} and away is ${overallAway.toFixed(3)}. ${homeBetterCount} of ${rows.length} eligible players rate higher at home.`
+    ? `Players are a bit better at home. Average home rating is ${overallHome.toFixed(3)} and away is ${overallAway.toFixed(3)}. The average difference is ${(overallHome - overallAway).toFixed(3)} rating points. ${homeBetterCount} of ${rows.length} eligible players rate higher at home.`
     : "Not enough usable RQ4 data was found.";
 
 // rows used in the bar chart
 const leaderboardRows = computed(() => {
-  let list = rows.slice();
+  // first keep only the players that fit the selected mode
+  const list = rows.filter((row) => {
+    if (selectedViewMode.value === "home_specialists") {
+      return row.delta > 0;
+    }
+    if (selectedViewMode.value === "away_specialists") {
+      return row.delta < 0;
+    }
+    return true;
+  });
 
-  // sort rows based on selected mode
-  if (selectedViewMode.value === "home_specialists") {
-    list = list
-      .filter((row) => row.delta > 0)
-      .sort((a, b) => b.delta - a.delta || a.player.localeCompare(b.player));
-  } else if (selectedViewMode.value === "away_specialists") {
-    list = list
-      .filter((row) => row.delta < 0)
-      .sort((a, b) => a.delta - b.delta || a.player.localeCompare(b.player));
-  } else {
-    list = list.sort((a, b) => b.absDelta - a.absDelta || a.player.localeCompare(b.player));
-  }
+  // then sort by the number that matters for that mode
+  list.sort((a, b) => {
+    if (selectedViewMode.value === "home_specialists") {
+      return b.delta - a.delta || a.player.localeCompare(b.player);
+    }
+    if (selectedViewMode.value === "away_specialists") {
+      return a.delta - b.delta || a.player.localeCompare(b.player);
+    }
+    return b.absDelta - a.absDelta || a.player.localeCompare(b.player);
+  });
 
-  return list.slice(0, Number(topN.value));
+  return list.slice(0, topN.value);
 });
 
 const plotDescription = computed(() => {
   // text shown under the controls
   if (selectedChart.value === "scatter") {
-    return `Each blue point is one player. The x-axis is away rating, the y-axis is home rating, and the red point is the overall average.`;
+    return "Each blue point is one player. The x-axis is away rating, the y-axis is home rating, and the red point is the overall average.";
   }
 
   const list = leaderboardRows.value;
@@ -184,8 +179,17 @@ const plotDescription = computed(() => {
 
   const home = average(list.map((row) => row.home));
   const away = average(list.map((row) => row.away));
+  let modeLabel = "biggest home-away gaps";
 
-  return `This view shows the ${modeLabels[selectedViewMode.value]}. For these ${list.length} players, home averages ${home.toFixed(3)} and away averages ${away.toFixed(3)}.`;
+  if (selectedViewMode.value === "home_specialists") {
+    modeLabel = "players who do better at home";
+  } else if (selectedViewMode.value === "away_specialists") {
+    modeLabel = "players who do better away";
+  }
+
+  return `This view shows the ${modeLabel}. For these ${list.length} players, home averages ${home.toFixed(3)} and away averages ${away.toFixed(3)} (Difference ${(
+    home - away
+  ).toFixed(3)}).`;
 });
 
 function buildCompareFigure() {
@@ -233,9 +237,10 @@ function buildCompareFigure() {
 function buildScatterFigure() {
   // scatter plot for all players
   const allRatings = rows.flatMap((row) => [row.away, row.home]);
-  // add some space around the axes
+  // use both home and away values so both axes cover all points
   const minRating = Math.min(...allRatings);
   const maxRating = Math.max(...allRatings);
+  // a bit of padding stops points from touching the plot edges
   const padding = Math.max((maxRating - minRating) * 0.05, 0.05);
   const axisMin = minRating - padding;
   const axisMax = maxRating + padding;
@@ -272,22 +277,22 @@ function buildScatterFigure() {
           line: { color: "#ffffff", width: 1.5 },
         },
         hovertemplate: "Overall average<br>Away: %{x:.3f}<br>Home: %{y:.3f}<extra></extra>",
-        },
-      ],
-      layout: {
-        title: "Home vs away average rating",
+      },
+    ],
+    layout: {
+      title: "Home vs away average rating",
       margin: { t: 64, r: 24, b: 72, l: 72 },
       paper_bgcolor: "#ffffff",
       plot_bgcolor: "#ffffff",
       hovermode: "closest",
       legend: { orientation: "h", y: 1.12 },
-        annotations: [
-          {
-            // label the overall average point
-            x: overallAway,
-            y: overallHome,
-            xref: "x",
-            yref: "y",
+      annotations: [
+        {
+          // label the overall average point
+          x: overallAway,
+          y: overallHome,
+          xref: "x",
+          yref: "y",
           showarrow: false,
           xanchor: "left",
           xshift: 14,
@@ -312,11 +317,6 @@ function buildScatterFigure() {
   };
 }
 
-// choose which chart to show
-const figure = computed(() =>
-  selectedChart.value === "scatter" ? buildScatterFigure() : buildCompareFigure(),
-);
-
 async function renderChart() {
   if (!chartRef.value) {
     return;
@@ -324,9 +324,15 @@ async function renderChart() {
 
   // wait until the chart container is ready
   await nextTick();
-  await waitForFrame();
+  await new Promise((resolve) => {
+    // one extra frame helps Plotly read the final element size
+    requestAnimationFrame(resolve);
+  });
 
-  await Plotly.react(chartRef.value, figure.value.data, figure.value.layout, {
+  const figure =
+    selectedChart.value === "scatter" ? buildScatterFigure() : buildCompareFigure();
+
+  await Plotly.react(chartRef.value, figure.data, figure.layout, {
     responsive: true,
     displayModeBar: true,
   });
