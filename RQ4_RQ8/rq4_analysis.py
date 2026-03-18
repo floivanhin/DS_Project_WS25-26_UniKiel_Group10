@@ -1,11 +1,3 @@
-﻿"""Build the derived analysis tables for RQ4.
-
-Input: raw WhoScored output data.
-Output: derived RQ4 tables and short terminal answer text.
-"""
-
-from __future__ import annotations
-
 import pandas as pd
 
 
@@ -14,9 +6,55 @@ RQ4_MIN_MATCHES_PER_SIDE_FOR_DELTA = 5
 RQ4_RATINGS_FILE = "rq4/rq4_home_away_player_ratings.csv"
 RQ4_DELTA_FILE = "rq4/rq4_player_home_away_delta.csv"
 
+# columns for the main rq4 table
+RATINGS_COLUMNS = [
+    "season",
+    "season_label",
+    "home_away",
+    "player",
+    "player_id",
+    "matches",
+    "teams",
+    "avg_overall_rating",
+    "median_overall_rating",
+    "best_overall_rating",
+    "worst_overall_rating",
+    "starts",
+    "motm_awards",
+    "eligible_for_leaderboard",
+]
 
-def is_true(value: object) -> bool:
-    
+# columns for the home vs away diff table
+DELTA_COLUMNS = [
+    "season",
+    "season_label",
+    "player",
+    "player_id",
+    "home_matches",
+    "away_matches",
+    "matches_total",
+    "home_avg_overall_rating",
+    "away_avg_overall_rating",
+    "avg_rating_delta_home_minus_away",
+    "abs_avg_rating_delta",
+    "home_median_overall_rating",
+    "away_median_overall_rating",
+    "home_best_overall_rating",
+    "away_best_overall_rating",
+    "home_worst_overall_rating",
+    "away_worst_overall_rating",
+    "home_starts",
+    "away_starts",
+    "home_motm_awards",
+    "away_motm_awards",
+    "home_teams",
+    "away_teams",
+    "eligible_both_sides",
+]
+
+
+# turn weird truthy stuff into bool
+def boolish(value):
     if isinstance(value, bool):
         return value
     if value is None:
@@ -24,25 +62,26 @@ def is_true(value: object) -> bool:
     return str(value).strip().lower() in {"1", "true", "t", "yes", "y"}
 
 
-def normalize_rq4(rq4_df: pd.DataFrame) -> pd.DataFrame:
+# make the rq4 csv tables
+def rq4_tables(rq4_df):
+    if rq4_df.empty:
+        return {
+            RQ4_RATINGS_FILE: pd.DataFrame(columns=RATINGS_COLUMNS),
+            RQ4_DELTA_FILE: pd.DataFrame(columns=DELTA_COLUMNS),
+        }
 
-    out = rq4_df.copy()
-    out["season"] = out["season"].astype(str)
-    out["game_id"] = out["game_id"].astype(str)
-    out["player_id"] = out["player_id"].astype(str)
-    out["overall_rating"] = pd.to_numeric(
-        out["overall_rating"],
-        errors="coerce",
-    )
-    out["is_starting_xi"] = out["is_starting_xi"].map(is_true)
-    out["is_man_of_the_match"] = out["is_man_of_the_match"].map(is_true)
-    return out
+    # clean the raw columns a bit
+    df = rq4_df.copy()
+    df["season"] = df["season"].astype(str)
+    df["game_id"] = df["game_id"].astype(str)
+    df["player_id"] = df["player_id"].astype(str)
+    df["overall_rating"] = pd.to_numeric(df["overall_rating"], errors="coerce")
+    df["is_starting_xi"] = df["is_starting_xi"].map(boolish)
+    df["is_man_of_the_match"] = df["is_man_of_the_match"].map(boolish)
 
-
-def build_rq4_home_away_player_ratings(rq4_df: pd.DataFrame) -> pd.DataFrame:
-    
-    summary = (
-        rq4_df.groupby(
+    # main table by player and side
+    ratings = (
+        df.groupby(
             ["season", "season_label", "home_away", "player", "player_id"],
             dropna=False,
         )
@@ -58,38 +97,18 @@ def build_rq4_home_away_player_ratings(rq4_df: pd.DataFrame) -> pd.DataFrame:
         )
         .reset_index()
     )
-    summary["eligible_for_leaderboard"] = (
-        summary["matches"] >= RQ4_MIN_MATCHES_FOR_LEADERBOARD
+    ratings["eligible_for_leaderboard"] = (
+        ratings["matches"] >= RQ4_MIN_MATCHES_FOR_LEADERBOARD
     )
-    return summary.sort_values(
+    ratings = ratings[RATINGS_COLUMNS].sort_values(
         ["season", "home_away", "avg_overall_rating", "matches", "player"],
         ascending=[True, True, False, False, True],
         kind="stable",
     )
 
-
-def build_rq4_player_home_away_delta(ratings_df: pd.DataFrame) -> pd.DataFrame:
-    
-    join_keys = ["season", "season_label", "player", "player_id"]
-    value_columns = [
-        "matches",
-        "teams",
-        "avg_overall_rating",
-        "median_overall_rating",
-        "best_overall_rating",
-        "worst_overall_rating",
-        "starts",
-        "motm_awards",
-    ]
-
-    home = ratings_df.loc[
-        ratings_df["home_away"] == "home",
-        join_keys + value_columns,
-    ].copy()
-    away = ratings_df.loc[
-        ratings_df["home_away"] == "away",
-        join_keys + value_columns,
-    ].copy()
+    # split home and away so we can compare them
+    home = ratings.loc[ratings["home_away"] == "home"].copy()
+    away = ratings.loc[ratings["home_away"] == "away"].copy()
 
     home = home.rename(
         columns={
@@ -116,111 +135,77 @@ def build_rq4_player_home_away_delta(ratings_df: pd.DataFrame) -> pd.DataFrame:
         }
     )
 
-    delta = home.merge(away, how="inner", on=join_keys)
-    delta["matches_total"] = delta["home_matches"] + delta["away_matches"]
-    delta["avg_rating_delta_home_minus_away"] = (
-        delta["home_avg_overall_rating"]
-        - delta["away_avg_overall_rating"]
+    # join both sides into one row
+    delta = home.merge(
+        away,
+        how="inner",
+        on=["season", "season_label", "player", "player_id"],
     )
-    delta["abs_avg_rating_delta"] = (
-        delta["avg_rating_delta_home_minus_away"].abs()
-    )
-    delta["eligible_both_sides"] = (
-        delta["home_matches"] >= RQ4_MIN_MATCHES_PER_SIDE_FOR_DELTA
-    ) & (
-        delta["away_matches"] >= RQ4_MIN_MATCHES_PER_SIDE_FOR_DELTA
-    )
+    if delta.empty:
+        delta = pd.DataFrame(columns=DELTA_COLUMNS)
+    else:
+        # simple difference stuff
+        delta["matches_total"] = delta["home_matches"] + delta["away_matches"]
+        delta["avg_rating_delta_home_minus_away"] = (
+            delta["home_avg_overall_rating"] - delta["away_avg_overall_rating"]
+        )
+        delta["abs_avg_rating_delta"] = (
+            delta["avg_rating_delta_home_minus_away"].abs()
+        )
+        delta["eligible_both_sides"] = (
+            delta["home_matches"] >= RQ4_MIN_MATCHES_PER_SIDE_FOR_DELTA
+        ) & (delta["away_matches"] >= RQ4_MIN_MATCHES_PER_SIDE_FOR_DELTA)
+        delta = delta[DELTA_COLUMNS].sort_values(
+            [
+                "season",
+                "abs_avg_rating_delta",
+                "avg_rating_delta_home_minus_away",
+                "player",
+            ],
+            ascending=[True, False, False, True],
+            kind="stable",
+        )
 
-    return delta[
-        [
-            "season",
-            "season_label",
-            "player",
-            "player_id",
-            "home_matches",
-            "away_matches",
-            "matches_total",
-            "home_avg_overall_rating",
-            "away_avg_overall_rating",
-            "avg_rating_delta_home_minus_away",
-            "abs_avg_rating_delta",
-            "home_median_overall_rating",
-            "away_median_overall_rating",
-            "home_best_overall_rating",
-            "away_best_overall_rating",
-            "home_worst_overall_rating",
-            "away_worst_overall_rating",
-            "home_starts",
-            "away_starts",
-            "home_motm_awards",
-            "away_motm_awards",
-            "home_teams",
-            "away_teams",
-            "eligible_both_sides",
-        ]
-    ].sort_values(
-        [
-            "season",
-            "abs_avg_rating_delta",
-            "avg_rating_delta_home_minus_away",
-            "player",
-        ],
-        ascending=[True, False, False, True],
-        kind="stable",
-    )
-
-
-def build_rq4_tables(rq4_df: pd.DataFrame) -> dict[str, pd.DataFrame]:
-    
-    normalized = normalize_rq4(rq4_df)
-    ratings = build_rq4_home_away_player_ratings(normalized)
-    delta = build_rq4_player_home_away_delta(ratings)
     return {
-        RQ4_RATINGS_FILE: ratings,
-        RQ4_DELTA_FILE: delta,
+        RQ4_RATINGS_FILE: ratings.reset_index(drop=True),
+        RQ4_DELTA_FILE: delta.reset_index(drop=True),
     }
 
 
-def build_rq4_answer(ratings_df: pd.DataFrame) -> str:
-    
-    rq4_home = ratings_df.loc[
+# build the short text answer
+def rq4_answer(ratings_df):
+    home = ratings_df.loc[
         ratings_df["eligible_for_leaderboard"]
         & (ratings_df["home_away"] == "home"),
         "avg_overall_rating",
     ]
-    rq4_away = ratings_df.loc[
+    away = ratings_df.loc[
         ratings_df["eligible_for_leaderboard"]
         & (ratings_df["home_away"] == "away"),
         "avg_overall_rating",
     ]
-    mean_home = float(rq4_home.mean()) if not rq4_home.empty else float("nan")
-    mean_away = float(rq4_away.mean()) if not rq4_away.empty else float("nan")
-    mean_delta = mean_home - mean_away
 
-    top_home_row = ratings_df.loc[
+    mean_home = float(home.mean()) if not home.empty else float("nan")
+    mean_away = float(away.mean()) if not away.empty else float("nan")
+
+    # just grab the first ranked player
+    top_home = ratings_df.loc[
         ratings_df["eligible_for_leaderboard"]
         & (ratings_df["home_away"] == "home")
     ].head(1)
-    top_away_row = ratings_df.loc[
+    top_away = ratings_df.loc[
         ratings_df["eligible_for_leaderboard"]
         & (ratings_df["home_away"] == "away")
     ].head(1)
 
-    top_home_player = (
-        str(top_home_row.iloc[0]["player"])
-        if not top_home_row.empty
-        else "n/a"
-    )
-    top_away_player = (
-        str(top_away_row.iloc[0]["player"])
-        if not top_away_row.empty
-        else "n/a"
-    )
+    top_home_player = str(top_home.iloc[0]["player"]) if not top_home.empty else "n/a"
+    top_away_player = str(top_away.iloc[0]["player"]) if not top_away.empty else "n/a"
+
     return (
         "RQ4 | "
         f"top_home={top_home_player} | "
         f"top_away={top_away_player} | "
         f"mean_home={mean_home:.3f} | "
         f"mean_away={mean_away:.3f} | "
-        f"delta={mean_delta:+.3f}"
+        f"delta={mean_home - mean_away:+.3f}"
     )
