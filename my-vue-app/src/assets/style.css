@@ -404,6 +404,23 @@ input {
   margin: 0;
 }
 
+.rq8-subtitle,
+.rq8-footnote,
+.rq8-note {
+  max-width: 920px;
+}
+
+.rq8-footnote {
+  margin-top: 0.2rem;
+  font-size: 0.76rem;
+  line-height: 1.25;
+  color: #6a6a6a;
+}
+
+.rq8-helper-note {
+  max-width: none;
+}
+
 .chart-card-compact {
   padding-top: 16px;
   padding-bottom: 16px;

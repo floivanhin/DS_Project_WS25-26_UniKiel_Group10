@@ -5,7 +5,10 @@
       <h1 class="page-title">
         How does the average player age affect a team's efficiency?
       </h1>
-      <p class="page-subtitle">{{ researchQuestionAnswer }}</p>
+      <p class="page-subtitle rq8-subtitle">{{ researchQuestionAnswer }}</p>
+      <p v-if="correlationFootnote" class="rq8-footnote">
+        * {{ correlationFootnote }}
+      </p>
     </section>
 
     <section class="controls-card">
@@ -53,25 +56,7 @@
           max="800"
           step="10"
         />
-
-        <div class="range-meta">{{ minShots }} shots</div>
-        <div class="range-hints">
-          <span>50</span>
-          <span>800</span>
-        </div>
       </div>
-
-      <p class="selection-summary">
-        Current selection:
-        <strong>
-          {{
-            selectedChart === "team_scatter" ? "Team scatter" : "Age profile"
-          }}
-        </strong>
-        <span v-if="selectedChart === 'age_profile'">
-          - minimum shots: <strong>{{ minShots }}</strong>
-        </span>
-      </p>
     </section>
 
     <section class="description-box">
@@ -95,7 +80,7 @@
           }}
         </h2>
 
-        <p class="chart-note">
+        <p class="chart-note rq8-note">
           {{
             selectedChart === "team_scatter"
               ? "Each point represents one team. The dashed line shows the overall trend between average team age and goals per shot."
@@ -109,15 +94,15 @@
       <section class="chart-card chart-card-compact">
         <p
           v-if="selectedChart === 'team_scatter'"
-          class="chart-note helper-text"
+          class="chart-note helper-text rq8-note rq8-helper-note"
         >
-          The dashed line shows the broad trend across all teams. It does not
-          imply a causal effect of age on efficiency.
+          The dashed line is just the overall trend across all teams, so it shows if
+          efficiency generally goes up or down with team age.
         </p>
 
-        <p v-else class="chart-note helper-text">
-          The shot cutoff prevents very small age groups from appearing more
-          important than they actually are.
+        <p v-else class="chart-note helper-text rq8-note rq8-helper-note">
+          This chart groups players by age. The shot cutoff is there so one small age
+          group with very few shots does not look more important than it is.
         </p>
       </section>
     </template>
@@ -165,52 +150,50 @@ type OptimalRow = {
   peakRate: number;
 };
 
+type ChartMode = "team_scatter" | "age_profile";
+
 const chartRef = ref<HTMLDivElement | null>(null);
-const selectedChart = ref<"team_scatter" | "age_profile">("team_scatter");
+const selectedChart = ref<ChartMode>("team_scatter");
 const minShots = ref(80);
 
 function parseCsv(text: string): Record<string, string>[] {
-  const lines = text
-    .replace(/^\uFEFF/, "")
-    .trim()
-    .split(/\r?\n/)
-    .filter(Boolean);
+  const lines = text.replace(/^\uFEFF/, "").trim().split(/\r?\n/).filter(Boolean);
 
   if (lines.length < 2) {
     return [];
   }
 
-  const splitLine = (line: string) => {
+  const parseLine = (line: string) => {
     const values: string[] = [];
-    let current = "";
+    let value = "";
     let inQuotes = false;
 
     for (let index = 0; index < line.length; index += 1) {
-      const character = line[index];
+      const char = line[index];
 
-      if (character === '"') {
+      if (char === '"') {
         if (inQuotes && line[index + 1] === '"') {
-          current += '"';
+          value += '"';
           index += 1;
         } else {
           inQuotes = !inQuotes;
         }
-      } else if (character === "," && !inQuotes) {
-        values.push(current);
-        current = "";
+      } else if (char === "," && !inQuotes) {
+        values.push(value);
+        value = "";
       } else {
-        current += character;
+        value += char;
       }
     }
 
-    values.push(current);
+    values.push(value);
     return values;
   };
 
-  const headers = splitLine(lines[0]).map((value) => value.trim());
+  const headers = parseLine(lines[0]).map((value) => value.trim());
 
   return lines.slice(1).map((line) => {
-    const values = splitLine(line);
+    const values = parseLine(line);
     const row: Record<string, string> = {};
 
     headers.forEach((header, index) => {
@@ -309,23 +292,27 @@ function getAverage(values: number[]): number | null {
 }
 
 function getBestAge(threshold: number) {
-  return (
-    ageRows
-      .filter((row) => row.shots >= threshold)
-      .sort((left, right) => {
-        if (right.goalsPerShot !== left.goalsPerShot) {
-          return right.goalsPerShot - left.goalsPerShot;
-        }
-        if (right.shots !== left.shots) {
-          return right.shots - left.shots;
-        }
-        return left.age - right.age;
-      })[0] ?? null
-  );
-}
+  let bestRow: AgeRow | null = null;
 
-const averageTeamAge = getAverage(teamRows.map((row) => row.avgAge));
-const averageTeamRate = getAverage(teamRows.map((row) => row.goalsPerShot));
+  for (const row of ageRows) {
+    if (row.shots < threshold) {
+      continue;
+    }
+
+    if (
+      !bestRow ||
+      row.goalsPerShot > bestRow.goalsPerShot ||
+      (row.goalsPerShot === bestRow.goalsPerShot && row.shots > bestRow.shots) ||
+      (row.goalsPerShot === bestRow.goalsPerShot &&
+        row.shots === bestRow.shots &&
+        row.age < bestRow.age)
+    ) {
+      bestRow = row;
+    }
+  }
+
+  return bestRow;
+}
 
 const researchQuestionAnswer = (() => {
   const parts: string[] = [];
@@ -333,8 +320,8 @@ const researchQuestionAnswer = (() => {
   if (optimalRow) {
     parts.push(
       optimalRow.pearson < 0
-        ? `There is no single best average team age. Older teams tend to show slightly lower goals per shot (r = ${optimalRow.pearson.toFixed(3)}).`
-        : `There is no single best average team age. Older teams tend to show slightly higher goals per shot (r = ${optimalRow.pearson.toFixed(3)}).`,
+        ? `There is no single best average team age. Older teams tend to show slightly lower goals per shot (r* = ${optimalRow.pearson.toFixed(3)}).`
+        : `There is no single best average team age. Older teams tend to show slightly higher goals per shot (r* = ${optimalRow.pearson.toFixed(3)}).`,
     );
   }
 
@@ -347,8 +334,27 @@ const researchQuestionAnswer = (() => {
   return parts.join(" ") || "Not enough usable RQ8 data was found.";
 })();
 
+const correlationFootnote = (() => {
+  if (!optimalRow) {
+    return "";
+  }
+
+  if (optimalRow.pearson < 0) {
+    return "r = Pearson correlation; negative means lower goals per shot for older teams.";
+  }
+
+  if (optimalRow.pearson > 0) {
+    return "r = Pearson correlation; positive means higher goals per shot for older teams.";
+  }
+
+  return "r = Pearson correlation; zero means no clear linear relationship.";
+})();
+
 const plotDescription = computed(() => {
   if (selectedChart.value === "team_scatter") {
+    const averageTeamAge = getAverage(teamRows.map((row) => row.avgAge));
+    const averageTeamRate = getAverage(teamRows.map((row) => row.goalsPerShot));
+
     if (averageTeamAge === null || averageTeamRate === null) {
       return "Not enough team rows are available for the scatter plot.";
     }
@@ -367,7 +373,8 @@ const plotDescription = computed(() => {
 function buildTeamScatterFigure() {
   const minAge = Math.min(...teamRows.map((row) => row.avgAge));
   const maxAge = Math.max(...teamRows.map((row) => row.avgAge));
-  let trend: { slope: number; intercept: number } | null = null;
+  let slope: number | null = null;
+  let intercept = 0;
 
   if (teamRows.length >= 2) {
     let sumX = 0;
@@ -384,13 +391,12 @@ function buildTeamScatterFigure() {
 
     const denominator = teamRows.length * sumX2 - sumX * sumX;
     if (denominator !== 0) {
-      const slope = (teamRows.length * sumXY - sumX * sumY) / denominator;
-      const intercept = (sumY - slope * sumX) / teamRows.length;
-      trend = { slope, intercept };
+      slope = (teamRows.length * sumXY - sumX * sumY) / denominator;
+      intercept = (sumY - slope * sumX) / teamRows.length;
     }
   }
 
-  const data: Record<string, any>[] = [
+  const data: any[] = [
     {
       type: "scatter",
       mode: "markers",
@@ -407,18 +413,15 @@ function buildTeamScatterFigure() {
     },
   ];
 
-  const shapes: Record<string, any>[] = [];
+  const shapes: any[] = [];
 
-  if (trend) {
+  if (slope !== null) {
     data.push({
       type: "scatter",
       mode: "lines",
       name: "Trend line",
       x: [minAge, maxAge],
-      y: [
-        trend.slope * minAge + trend.intercept,
-        trend.slope * maxAge + trend.intercept,
-      ],
+      y: [slope * minAge + intercept, slope * maxAge + intercept],
       line: {
         color: "#444444",
         dash: "dash",
@@ -484,7 +487,7 @@ function buildTeamScatterFigure() {
 
 function buildAgeProfileFigure() {
   const bestAge = getBestAge(minShots.value);
-  const data: Record<string, any>[] = [
+  const data: any[] = [
     {
       type: "bar",
       name: "Total shots",
@@ -579,23 +582,21 @@ async function renderChart() {
   });
 }
 
-function handleResize() {
+function resizeChart() {
   if (chartRef.value) {
     Plotly.Plots.resize(chartRef.value);
   }
 }
 
-watch([selectedChart, minShots], async () => {
-  await renderChart();
-});
+watch([selectedChart, minShots], renderChart);
 
 onMounted(async () => {
-  window.addEventListener("resize", handleResize);
+  window.addEventListener("resize", resizeChart);
   await renderChart();
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener("resize", handleResize);
+  window.removeEventListener("resize", resizeChart);
 
   if (chartRef.value) {
     Plotly.purge(chartRef.value);

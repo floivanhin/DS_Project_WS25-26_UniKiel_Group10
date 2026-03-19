@@ -99,11 +99,7 @@ const selectedViewMode = ref<ViewMode>("abs_delta");
 const topN = ref(10);
 
 function parseCsv(text: string): Record<string, string>[] {
-  const lines = text
-    .replace(/^\uFEFF/, "")
-    .trim()
-    .split(/\r?\n/)
-    .filter(Boolean);
+  const lines = text.replace(/^\uFEFF/, "").trim().split(/\r?\n/).filter(Boolean);
 
   if (lines.length < 2) {
     return [];
@@ -136,7 +132,7 @@ function getAverage(values: number[]): number | null {
   return values.reduce((sum, value) => sum + value, 0) / values.length;
 }
 
-const rows = parseCsv(deltaCsv)
+const rows: PlayerRow[] = parseCsv(deltaCsv)
   .map((row) => {
     const home = toNumber(row.home_avg_overall_rating);
     const away = toNumber(row.away_avg_overall_rating);
@@ -168,7 +164,7 @@ const rows = parseCsv(deltaCsv)
       absDelta,
       homeMatches,
       awayMatches,
-    } satisfies PlayerRow;
+    };
   })
   .filter((row): row is PlayerRow => row !== null);
 
@@ -176,42 +172,43 @@ const clampedTopN = computed(() => Math.min(Math.max(topN.value, 5), 20));
 
 const overallHome = getAverage(rows.map((row) => row.home));
 const overallAway = getAverage(rows.map((row) => row.away));
+const overallDelta =
+  overallHome !== null && overallAway !== null ? overallHome - overallAway : null;
 const homeBetterCount = rows.filter((row) => row.delta > 0).length;
 
 const researchQuestionAnswer =
-  rows.length > 0 && overallHome !== null && overallAway !== null
-    ? `Players perform slightly better at home overall. The average home rating is ${overallHome.toFixed(3)}, compared with ${overallAway.toFixed(3)} away. ${homeBetterCount} of ${rows.length} eligible players have a higher home rating.`
+  rows.length > 0 &&
+  overallHome !== null &&
+  overallAway !== null &&
+  overallDelta !== null
+    ? `Players perform slightly better at home overall. The average home rating is ${overallHome.toFixed(3)}, compared with ${overallAway.toFixed(3)} away, a difference of ${overallDelta.toFixed(3)} rating points. ${homeBetterCount} of ${rows.length} eligible players have a higher home rating.`
     : "Not enough usable RQ4 data was found.";
 
 const leaderboardRows = computed(() => {
-  const filteredRows = rows.filter((row) => {
-    if (selectedViewMode.value === "home_specialists") {
-      return row.delta > 0;
+  const mode = selectedViewMode.value;
+  const filteredRows = rows.filter((row) =>
+    mode === "home_specialists"
+      ? row.delta > 0
+      : mode === "away_specialists"
+        ? row.delta < 0
+        : true,
+  );
+
+  filteredRows.sort((left, right) => {
+    if (mode === "home_specialists") {
+      return right.delta - left.delta || left.player.localeCompare(right.player);
     }
-    if (selectedViewMode.value === "away_specialists") {
-      return row.delta < 0;
+
+    if (mode === "away_specialists") {
+      return left.delta - right.delta || left.player.localeCompare(right.player);
     }
-    return true;
+
+    return (
+      right.absDelta - left.absDelta || left.player.localeCompare(right.player)
+    );
   });
 
-  return [...filteredRows]
-    .sort((left, right) => {
-      if (selectedViewMode.value === "home_specialists") {
-        return (
-          right.delta - left.delta || left.player.localeCompare(right.player)
-        );
-      }
-      if (selectedViewMode.value === "away_specialists") {
-        return (
-          left.delta - right.delta || left.player.localeCompare(right.player)
-        );
-      }
-      return (
-        right.absDelta - left.absDelta ||
-        left.player.localeCompare(right.player)
-      );
-    })
-    .slice(0, clampedTopN.value);
+  return filteredRows.slice(0, clampedTopN.value);
 });
 
 const plotDescription = computed(() => {
@@ -225,6 +222,7 @@ const plotDescription = computed(() => {
 
   const homeAverage = getAverage(leaderboardRows.value.map((row) => row.home));
   const awayAverage = getAverage(leaderboardRows.value.map((row) => row.away));
+  const averageDifference = (homeAverage ?? 0) - (awayAverage ?? 0);
 
   let modeLabel = "biggest home-away gaps";
   if (selectedViewMode.value === "home_specialists") {
@@ -233,7 +231,7 @@ const plotDescription = computed(() => {
     modeLabel = "players who perform better away";
   }
 
-  return `This view highlights the ${modeLabel}. Across the shown players, home averages ${homeAverage?.toFixed(3) ?? "0.000"} and away averages ${awayAverage?.toFixed(3) ?? "0.000"}.`;
+  return `This view highlights the ${modeLabel}. Across the shown players, home averages ${homeAverage?.toFixed(3) ?? "0.000"} and away averages ${awayAverage?.toFixed(3) ?? "0.000"}, a difference of ${Math.abs(averageDifference).toFixed(3)}${averageDifference === 0 ? "" : averageDifference > 0 ? " in favor of home" : " in favor of away"}.`;
 });
 
 function buildCompareFigure() {
@@ -280,7 +278,7 @@ function buildCompareFigure() {
 }
 
 function buildScatterFigure() {
-  if (rows.length === 0 || overallHome === null || overallAway === null) {
+  if (overallHome === null || overallAway === null) {
     return { data: [], layout: {} };
   }
 
@@ -386,23 +384,21 @@ async function renderChart() {
   });
 }
 
-function handleResize() {
+function resizeChart() {
   if (chartRef.value) {
     Plotly.Plots.resize(chartRef.value);
   }
 }
 
-watch([selectedChart, selectedViewMode, clampedTopN], async () => {
-  await renderChart();
-});
+watch([selectedChart, selectedViewMode, clampedTopN], renderChart);
 
 onMounted(async () => {
-  window.addEventListener("resize", handleResize);
+  window.addEventListener("resize", resizeChart);
   await renderChart();
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener("resize", handleResize);
+  window.removeEventListener("resize", resizeChart);
 
   if (chartRef.value) {
     Plotly.purge(chartRef.value);
