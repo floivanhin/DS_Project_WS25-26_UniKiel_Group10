@@ -1,21 +1,25 @@
 <template>
   <header class="bg-slate-900 text-white shadow-md">
-    <nav class="mx-auto flex max-w-7xl flex-wrap gap-3 px-6 py-4">
+    <nav
+      class="mx-auto flex max-w-7xl flex-wrap gap-3 px-6 py-4"
+      aria-label="Primary navigation"
+    >
       <RouterLink
-        v-for="item in links"
-        :key="item.path"
-        :to="item.path"
+        v-for="link in navigationLinks"
+        :key="link.path"
+        :to="link.path"
         class="rounded-lg px-4 py-2 transition hover:bg-slate-700"
         active-class="bg-slate-700"
+        exact-active-class="bg-slate-700"
       >
-        {{ item.label }}
+        {{ link.label }}
       </RouterLink>
     </nav>
   </header>
 </template>
 
 <script setup lang="ts">
-const links = [
+const navigationLinks = [
   { label: "Main", path: "/" },
   { label: "RQ1", path: "/rq1" },
   { label: "RQ2", path: "/rq2" },
@@ -25,5 +29,5 @@ const links = [
   { label: "RQ6", path: "/rq6" },
   { label: "RQ7", path: "/rq7" },
   { label: "RQ8", path: "/rq8" },
-];
+] as const;
 </script>

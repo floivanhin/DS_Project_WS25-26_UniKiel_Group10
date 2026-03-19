@@ -1,59 +1,59 @@
 <template>
-  <div class="rq1-page">
-    <section class="rq1-hero">
-      <p class="rq1-kicker">RQ1</p>
-      <h1 class="rq1-page-title">
+  <div class="page">
+    <section class="hero">
+      <p class="kicker">RQ1</p>
+      <h1 class="page-title">
         How do weather conditions influence total goals scored?
       </h1>
-      <p class="rq1-page-subtitle">
-        Bundesliga matches are grouped by simplified weather categories. The
+      <p class="page-subtitle">
+        Bundesliga matches are grouped into simplified weather categories. The
         dashboard compares total goals by weather condition and shows how many
         matches belong to each group.
       </p>
     </section>
 
-    <section class="rq1-description">
-      Explore whether different weather groups are linked to changes in scoring.
-      Use the filter to narrow the sample and switch between average goals,
-      median goals, and match count.
+    <section class="description-box">
+      Explore whether different weather groups are linked to changes in
+      scoring. Use the filter to narrow the sample and switch between average
+      goals, median goals, and match count.
     </section>
 
-    <section class="rq1-summary-grid">
-      <div class="rq1-summary-card">
-        <span class="rq1-summary-label">Matches in selection</span>
-        <strong class="rq1-summary-value">{{ filteredMatches.length }}</strong>
+    <section class="summary-grid">
+      <div class="summary-card">
+        <span class="summary-label">Matches in selection</span>
+        <strong class="summary-value">{{ filteredMatches.length }}</strong>
       </div>
 
-      <div class="rq1-summary-card">
-        <span class="rq1-summary-label">Weather filter</span>
-        <strong class="rq1-summary-value rq1-summary-value-small">{{
-          selectedWeather
-        }}</strong>
+      <div class="summary-card">
+        <span class="summary-label">Weather filter</span>
+        <strong class="summary-value summary-value-small">
+          {{ selectedWeather }}
+        </strong>
       </div>
 
-      <div class="rq1-summary-card">
-        <span class="rq1-summary-label">Selected metric</span>
-        <strong class="rq1-summary-value rq1-summary-value-small">{{
-          metricButtonLabel
-        }}</strong>
+      <div class="summary-card">
+        <span class="summary-label">Selected metric</span>
+        <strong class="summary-value summary-value-small">
+          {{ metricButtonLabel }}
+        </strong>
       </div>
 
-      <div class="rq1-summary-card">
-        <span class="rq1-summary-label">{{ metricSummaryLabel }}</span>
-        <strong class="rq1-summary-value">{{ metricSummaryValue }}</strong>
+      <div class="summary-card">
+        <span class="summary-label">{{ metricSummaryLabel }}</span>
+        <strong class="summary-value">{{ metricSummaryValue }}</strong>
       </div>
     </section>
 
-    <section class="rq1-controls-card">
-      <div class="rq1-toolbar">
-        <div class="rq1-control-block rq1-control-block-compact">
-          <label class="rq1-control-label" for="weatherFilter">
+    <section class="controls-card">
+      <div class="toolbar">
+        <div class="control-block control-block-compact">
+          <label class="control-label" for="weatherFilter">
             Weather filter
           </label>
           <select
             id="weatherFilter"
             v-model="selectedWeather"
-            class="rq1-select-control"
+            class="select-control"
           >
             <option value="All">All</option>
             <option
@@ -66,31 +66,29 @@
           </select>
         </div>
 
-        <div class="rq1-control-block">
-          <span class="rq1-control-label">Metric</span>
-          <div class="rq1-button-group">
+        <div class="control-block">
+          <span class="control-label">Metric</span>
+          <div class="button-group">
             <button
-              class="rq1-toggle-button"
-              :class="{ 'rq1-toggle-button-active': selectedMetric === 'avg' }"
               type="button"
+              class="toggle-button"
+              :class="{ 'toggle-button-active': selectedMetric === 'avg' }"
               @click="selectedMetric = 'avg'"
             >
               Average goals
             </button>
             <button
-              class="rq1-toggle-button"
-              :class="{
-                'rq1-toggle-button-active': selectedMetric === 'median',
-              }"
               type="button"
+              class="toggle-button"
+              :class="{ 'toggle-button-active': selectedMetric === 'median' }"
               @click="selectedMetric = 'median'"
             >
               Median goals
             </button>
             <button
-              class="rq1-toggle-button"
-              :class="{ 'rq1-toggle-button-active': selectedMetric === 'count' }"
               type="button"
+              class="toggle-button"
+              :class="{ 'toggle-button-active': selectedMetric === 'count' }"
               @click="selectedMetric = 'count'"
             >
               Match count
@@ -99,45 +97,42 @@
         </div>
       </div>
 
-      <p class="rq1-selection-summary">
+      <p class="selection-summary">
         Current selection: <strong>{{ selectedWeather }}</strong>. Matches:
-        <strong>{{ filteredMatches.length }}</strong>. {{ metricSummaryLabel }}:
-        <strong>{{ metricSummaryValue }}</strong>.
+        <strong>{{ filteredMatches.length }}</strong
+        >. {{ metricSummaryLabel }}: <strong>{{ metricSummaryValue }}</strong
+        >.
       </p>
     </section>
 
-    <section v-if="loading" class="rq1-status-box">
-      Loading dashboard...
-    </section>
-
-    <section v-else-if="error" class="rq1-status-box rq1-error-box">
+    <section v-if="error" class="status-box error-box">
       {{ error }}
     </section>
 
     <template v-else>
-      <section class="rq1-chart-card">
-        <h2 class="rq1-section-title">{{ getMetricTitle() }}</h2>
-        <p class="rq1-chart-note">
+      <section class="chart-card">
+        <h2 class="section-title">{{ metricTitle }}</h2>
+        <p class="chart-note">
           This chart compares the selected weather groups using the current
           metric.
         </p>
-        <div ref="mainChartRef" class="rq1-chart"></div>
+        <div ref="mainChartRef" class="chart"></div>
       </section>
 
-      <section class="rq1-chart-card">
-        <h2 class="rq1-section-title">Distribution of total goals</h2>
-        <p class="rq1-chart-note">
+      <section class="chart-card">
+        <h2 class="section-title">Distribution of total goals</h2>
+        <p class="chart-note">
           The histogram shows how many matches ended with a given total number
           of goals in the current selection.
         </p>
-        <div ref="distributionChartRef" class="rq1-chart"></div>
+        <div ref="distributionChartRef" class="chart"></div>
       </section>
 
-      <section class="rq1-table-card">
-        <h2 class="rq1-section-title">Summary table</h2>
+      <section class="table-card">
+        <h2 class="section-title">Summary table</h2>
 
-        <div class="rq1-table-wrapper">
-          <table class="rq1-summary-table">
+        <div class="table-wrapper">
+          <table class="summary-table">
             <thead>
               <tr>
                 <th>Weather group</th>
@@ -147,11 +142,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="row in summaryRows" :key="row.weather_group">
-                <td>{{ row.weather_group }}</td>
-                <td>{{ row.avg_goals.toFixed(2) }}</td>
-                <td>{{ row.median_goals.toFixed(2) }}</td>
-                <td>{{ row.match_count }}</td>
+              <tr v-for="row in summaryRows" :key="row.weatherGroup">
+                <td>{{ row.weatherGroup }}</td>
+                <td>{{ row.averageGoals.toFixed(2) }}</td>
+                <td>{{ row.medianGoals.toFixed(2) }}</td>
+                <td>{{ row.matchCount }}</td>
               </tr>
             </tbody>
           </table>
@@ -162,8 +157,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, onMounted, ref, watch } from "vue";
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import Plotly from "plotly.js-dist-min";
+import weatherDataUrl from "../../data/combined_matches_weather.json?url";
+
+type Metric = "avg" | "median" | "count";
 
 type MatchItem = {
   weather?: {
@@ -182,33 +180,41 @@ type JsonData = {
 };
 
 type SummaryRow = {
-  weather_group: string;
-  avg_goals: number;
-  median_goals: number;
-  match_count: number;
+  weatherGroup: string;
+  averageGoals: number;
+  medianGoals: number;
+  matchCount: number;
 };
 
-const loading = ref(true);
+const WEATHER_ORDER = ["Clear", "Cloudy", "Rain", "Snow", "Other"] as const;
+
 const error = ref("");
 const allMatches = ref<MatchItem[]>([]);
-
 const selectedWeather = ref("All");
-const selectedMetric = ref<"avg" | "median" | "count">("avg");
+const selectedMetric = ref<Metric>("avg");
 
 const mainChartRef = ref<HTMLDivElement | null>(null);
 const distributionChartRef = ref<HTMLDivElement | null>(null);
 
 function classifyWeather(condition?: string): string {
-  if (!condition || typeof condition !== "string") return "Other";
+  if (!condition) {
+    return "Other";
+  }
 
-  const c = condition.toLowerCase();
+  const normalized = condition.toLowerCase();
 
-  if (c.includes("snow")) return "Snow";
-  if (c.includes("rain") || c.includes("drizzle") || c.includes("showers"))
+  if (normalized.includes("snow")) return "Snow";
+  if (
+    normalized.includes("rain") ||
+    normalized.includes("drizzle") ||
+    normalized.includes("showers")
+  ) {
     return "Rain";
-  if (c.includes("overcast")) return "Cloudy";
-  if (c.includes("cloud")) return "Cloudy";
-  if (c.includes("clear")) return "Clear";
+  }
+  if (normalized.includes("overcast") || normalized.includes("cloud")) {
+    return "Cloudy";
+  }
+  if (normalized.includes("clear")) return "Clear";
 
   return "Other";
 }
@@ -219,33 +225,29 @@ function getTotalGoals(match: MatchItem): number {
   return homeGoals + awayGoals;
 }
 
-function median(values: number[]): number {
-  if (values.length === 0) return 0;
+function getMedian(values: number[]): number {
+  if (values.length === 0) {
+    return 0;
+  }
 
-  const sorted = [...values].sort((a, b) => a - b);
-  const middle = Math.floor(sorted.length / 2);
+  const sorted = [...values].sort((left, right) => left - right);
+  const middleIndex = Math.floor(sorted.length / 2);
 
   return sorted.length % 2 === 0
-    ? (sorted[middle - 1] + sorted[middle]) / 2
-    : sorted[middle];
+    ? (sorted[middleIndex - 1] + sorted[middleIndex]) / 2
+    : sorted[middleIndex];
 }
 
 function waitForFrame(): Promise<void> {
-  return new Promise((resolve) => {
-    requestAnimationFrame(() => resolve());
-  });
+  return new Promise((resolve) => requestAnimationFrame(() => resolve()));
 }
 
 const availableWeatherGroups = computed(() => {
-  const groups = new Set<string>();
-
-  for (const match of allMatches.value) {
-    groups.add(classifyWeather(match.weather?.conditions));
-  }
-
-  return ["Clear", "Cloudy", "Rain", "Snow", "Other"].filter((group) =>
-    groups.has(group),
+  const groups = new Set(
+    allMatches.value.map((match) => classifyWeather(match.weather?.conditions)),
   );
+
+  return WEATHER_ORDER.filter((group) => groups.has(group));
 });
 
 const filteredMatches = computed(() => {
@@ -253,41 +255,33 @@ const filteredMatches = computed(() => {
     return allMatches.value;
   }
 
-  return allMatches.value.filter(
-    (match) =>
-      classifyWeather(match.weather?.conditions) === selectedWeather.value,
-  );
+  return allMatches.value.filter((match) => {
+    return classifyWeather(match.weather?.conditions) === selectedWeather.value;
+  });
 });
 
 const summaryRows = computed<SummaryRow[]>(() => {
-  const grouped: Record<string, number[]> = {};
+  const grouped = new Map<string, number[]>();
 
   for (const match of filteredMatches.value) {
     const weatherGroup = classifyWeather(match.weather?.conditions);
     const totalGoals = getTotalGoals(match);
-
-    if (!grouped[weatherGroup]) {
-      grouped[weatherGroup] = [];
-    }
-
-    grouped[weatherGroup].push(totalGoals);
+    const values = grouped.get(weatherGroup) ?? [];
+    values.push(totalGoals);
+    grouped.set(weatherGroup, values);
   }
 
-  const orderedGroups = ["Clear", "Cloudy", "Rain", "Snow", "Other"];
+  return WEATHER_ORDER.filter((group) => grouped.has(group)).map((group) => {
+    const values = grouped.get(group) ?? [];
+    const totalGoals = values.reduce((sum, value) => sum + value, 0);
 
-  return orderedGroups
-    .filter((group) => grouped[group] && grouped[group].length > 0)
-    .map((group) => {
-      const goals = grouped[group];
-      const sum = goals.reduce((acc, value) => acc + value, 0);
-
-      return {
-        weather_group: group,
-        avg_goals: sum / goals.length,
-        median_goals: median(goals),
-        match_count: goals.length,
-      };
-    });
+    return {
+      weatherGroup: group,
+      averageGoals: values.length ? totalGoals / values.length : 0,
+      medianGoals: getMedian(values),
+      matchCount: values.length,
+    };
+  });
 });
 
 const metricSummaryLabel = computed(() => {
@@ -302,59 +296,66 @@ const metricButtonLabel = computed(() => {
   return "Match count";
 });
 
+const metricTitle = computed(() => {
+  if (selectedMetric.value === "avg") {
+    return "Average total goals by weather condition";
+  }
+  if (selectedMetric.value === "median") {
+    return "Median total goals by weather condition";
+  }
+  return "Number of matches by weather condition";
+});
+
+const metricYAxisLabel = computed(() => {
+  if (selectedMetric.value === "avg") return "Average total goals";
+  if (selectedMetric.value === "median") return "Median total goals";
+  return "Number of matches";
+});
+
 const metricSummaryValue = computed(() => {
-  if (filteredMatches.value.length === 0) return "0.00";
+  if (filteredMatches.value.length === 0) {
+    return selectedMetric.value === "count" ? "0" : "0.00";
+  }
 
   const goals = filteredMatches.value.map(getTotalGoals);
 
   if (selectedMetric.value === "avg") {
-    const avg = goals.reduce((acc, value) => acc + value, 0) / goals.length;
-    return avg.toFixed(2);
+    const average =
+      goals.reduce((sum, value) => sum + value, 0) / goals.length;
+    return average.toFixed(2);
   }
 
   if (selectedMetric.value === "median") {
-    return median(goals).toFixed(2);
+    return getMedian(goals).toFixed(2);
   }
 
   return String(filteredMatches.value.length);
 });
 
 function getMetricValue(row: SummaryRow): number {
-  if (selectedMetric.value === "avg") return row.avg_goals;
-  if (selectedMetric.value === "median") return row.median_goals;
-  return row.match_count;
-}
-
-function getMetricTitle(): string {
-  if (selectedMetric.value === "avg")
-    return "Average total goals by weather condition";
-  if (selectedMetric.value === "median")
-    return "Median total goals by weather condition";
-  return "Number of matches by weather condition";
-}
-
-function getMetricYAxis(): string {
-  if (selectedMetric.value === "avg") return "Average total goals";
-  if (selectedMetric.value === "median") return "Median total goals";
-  return "Number of matches";
+  if (selectedMetric.value === "avg") return row.averageGoals;
+  if (selectedMetric.value === "median") return row.medianGoals;
+  return row.matchCount;
 }
 
 async function renderCharts() {
   await nextTick();
   await waitForFrame();
 
-  if (!mainChartRef.value || !distributionChartRef.value) return;
+  if (!mainChartRef.value || !distributionChartRef.value) {
+    return;
+  }
 
   const rows = summaryRows.value;
   const goals = filteredMatches.value.map(getTotalGoals);
 
-  await Plotly.newPlot(
+  await Plotly.react(
     mainChartRef.value,
     [
       {
         type: "bar",
-        x: rows.map((row) => row.weather_group),
-        y: rows.map((row) => getMetricValue(row)),
+        x: rows.map((row) => row.weatherGroup),
+        y: rows.map(getMetricValue),
         text: rows.map((row) =>
           selectedMetric.value === "count"
             ? String(getMetricValue(row))
@@ -364,13 +365,16 @@ async function renderCharts() {
         hovertemplate:
           selectedMetric.value === "count"
             ? "Weather: %{x}<br>Number of matches: %{y}<extra></extra>"
-            : `Weather: %{x}<br>${getMetricYAxis()}: %{y:.2f}<extra></extra>`,
+            : `Weather: %{x}<br>${metricYAxisLabel.value}: %{y:.2f}<extra></extra>`,
+        marker: {
+          color: "#2563eb",
+        },
       },
     ],
     {
-      title: getMetricTitle(),
+      title: metricTitle.value,
       xaxis: { title: "Weather condition" },
-      yaxis: { title: getMetricYAxis() },
+      yaxis: { title: metricYAxisLabel.value },
       margin: { t: 60, r: 20, b: 60, l: 70 },
       paper_bgcolor: "#ffffff",
       plot_bgcolor: "#ffffff",
@@ -381,12 +385,15 @@ async function renderCharts() {
     },
   );
 
-  await Plotly.newPlot(
+  await Plotly.react(
     distributionChartRef.value,
     [
       {
         type: "histogram",
         x: goals,
+        marker: {
+          color: "#16a34a",
+        },
         hovertemplate:
           "Total goals: %{x}<br>Number of matches: %{y}<extra></extra>",
       },
@@ -404,44 +411,60 @@ async function renderCharts() {
       displayModeBar: false,
     },
   );
+}
 
-  Plotly.Plots.resize(mainChartRef.value);
-  Plotly.Plots.resize(distributionChartRef.value);
+function handleResize() {
+  if (mainChartRef.value) {
+    Plotly.Plots.resize(mainChartRef.value);
+  }
+  if (distributionChartRef.value) {
+    Plotly.Plots.resize(distributionChartRef.value);
+  }
 }
 
 async function loadData() {
   try {
-    loading.value = true;
-    error.value = "";
-
-    const response = await fetch("/data/combined_matches_weather.json");
+    const response = await fetch(weatherDataUrl);
 
     if (!response.ok) {
       throw new Error(`Could not load JSON: ${response.status}`);
     }
 
-    const data: JsonData = await response.json();
-    allMatches.value = data.matches ?? [];
+    const data = (await response.json()) as JsonData;
+    const matches = data.matches ?? [];
 
-    if (allMatches.value.length === 0) {
-      throw new Error("No matches found in JSON");
+    if (matches.length === 0) {
+      throw new Error("No matches found in the JSON dataset.");
     }
 
-    loading.value = false;
+    allMatches.value = matches;
     await renderCharts();
-  } catch (e) {
-    loading.value = false;
-    error.value = e instanceof Error ? e.message : "Unknown error";
+  } catch (loadError) {
+    error.value =
+      loadError instanceof Error ? loadError.message : "Unknown error";
   }
 }
 
 watch([selectedWeather, selectedMetric], async () => {
-  if (!loading.value && !error.value) {
+  if (!error.value) {
     await renderCharts();
   }
 });
 
 onMounted(async () => {
+  window.addEventListener("resize", handleResize);
   await loadData();
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", handleResize);
+
+  if (mainChartRef.value) {
+    Plotly.purge(mainChartRef.value);
+  }
+
+  if (distributionChartRef.value) {
+    Plotly.purge(distributionChartRef.value);
+  }
 });
 </script>
