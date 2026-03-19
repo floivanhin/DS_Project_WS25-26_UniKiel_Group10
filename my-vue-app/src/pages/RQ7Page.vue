@@ -11,8 +11,8 @@
         before and after the minute of the average substitution by that team during that game based on 
         the minute of the average substitution.
         Our third graph shows how the total number of minutes played by substituted players affects the average amount 
-        of shots taken in the second half. The resulting graph was smoothed, using a rolling average window. 
-        The window size can be adjusted manually using the slider.
+        of shots taken in the second half. The resulting graph was smoothed, using a rolling average. 
+        The window size for the rolling average calculation can be adjusted manually using a slider.
       </p>
     </section>
 
