@@ -86,7 +86,6 @@ import { ref, onMounted, watch, computed, nextTick } from "vue";
 import Plotly from "plotly.js-dist-min";
 import "../assets/style.css";
 
-// --- 1. TYPES & STATE ---
 interface RQ8Data {
   sub_count: number;
   total_shots_secondHalf: number;
@@ -97,15 +96,13 @@ interface RQ8Data {
 
 const df_RQ8 = ref<RQ8Data[]>([]);
 const selectedMetric = ref('NumOfSubs');
-const toggleBarBox = ref(false); // Replacement for daq.BooleanSwitch
-const windowSize = ref(10);     // Replacement for dcc.Slider
+const toggleBarBox = ref(false);
+const windowSize = ref(10);
 const loading = ref(true);
 const error = ref<string | null>(null);
 const mainChartRef = ref<HTMLElement | null>(null);
 
-// --- 2. MATHEMATICAL WORKAROUNDS (The "Pandas" logic in JS) ---
 
-// Replicates pandas .rolling(window=n, center=True).mean()
 const getRollingAverage = (data: {x: number, y: number}[], window: number) => {
   return data.map((val, idx, arr) => {
     const offset = Math.floor(window / 2);
@@ -117,7 +114,6 @@ const getRollingAverage = (data: {x: number, y: number}[], window: number) => {
   });
 };
 
-// Replicates pandas .groupby().mean()
 const getGroupedMean = (data: RQ8Data[], key: keyof RQ8Data, valueKey: keyof RQ8Data) => {
   const groups: Record<number, number[]> = {};
   data.forEach(item => {
@@ -132,12 +128,10 @@ const getGroupedMean = (data: RQ8Data[], key: keyof RQ8Data, valueKey: keyof RQ8
   })).sort((a, b) => a.x - b.x);
 };
 
-// --- 3. GRAPHING ENGINE ---
 const updateGraph = async () => {
   await nextTick();
   if (!mainChartRef.value || df_RQ8.value.length === 0) return;
 
-  // Sync with your style.css variables if needed
   const style = getComputedStyle(document.documentElement);
   const gridColor = "LightGray";
 
@@ -155,7 +149,6 @@ const updateGraph = async () => {
     const filtered = df_RQ8.value.filter(d => [2, 3, 4, 5].includes(d.sub_count));
     
     if (toggleBarBox.value) {
-      // Bar Chart (Grouped Mean)
       const grouped = getGroupedMean(filtered, 'sub_count', 'total_shots_secondHalf');
       traces = [{
         x: grouped.map(d => d.x),
@@ -164,7 +157,6 @@ const updateGraph = async () => {
         marker: { color: '#02A508' }
       }];
     } else {
-      // Box Plot
       traces = [2, 3, 4, 5].map(count => ({
         y: filtered.filter(d => d.sub_count === count).map(d => d.total_shots_secondHalf),
         type: 'box',
@@ -194,7 +186,6 @@ const updateGraph = async () => {
   } 
   
   else {
-    // Minutes Played (Rolling Average)
     const rawGrouped = getGroupedMean(df_RQ8.value, 'total_sub_time', 'total_shots_secondHalf');
     const smoothed = getRollingAverage(rawGrouped, windowSize.value);
     
@@ -222,12 +213,11 @@ function getMetricTitle(){
   }
 }
 
-// --- 4. LIFECYCLE & WATCHERS ---
 watch([selectedMetric, toggleBarBox, windowSize], updateGraph);
 
 onMounted(async () => {
   try {
-    const res = await fetch("/data/RQ8.json"); // Ensure this is JSON now
+    const res = await fetch("/data/RQ8.json");
     if (!res.ok) throw new Error("Could not fetch data");
     df_RQ8.value = await res.json();
     loading.value = false;

@@ -67,7 +67,6 @@ import "../assets/style.css";
 
 // Setting up the data transformation
 const df_RQ3 = ref([]);
-const selection = ref("Absolute");
 const selectedMetric = ref("Absolute");
 
 const loading = ref(true);
@@ -140,18 +139,18 @@ const updateGraph = async () => {
   let layout = {
     template: "plotly_white",
     xaxis: {
-      title: selection.value === "line" ? "Seconds after possession win" : "",
+      title: selectedMetric.value === "line" ? "Seconds after possession win" : "",
       categoryorder: "array",
       categoryarray: labels,
     },
     yaxis: {
-      title: selection.value === "line" ? "Conversion Rate (%)" : "Count",
+      title: selectedMetric.value === "line" ? "Conversion Rate (%)" : "Count",
       gridcolor: "LightGray",
     },
     margin: { l: 60, r: 40, t: 80, b: 60 },
   };
 
-  if (selection.value === "Absolute") {
+  if (selectedMetric.value === "Absolute") {
     traces = [
       {
         x: labels,
@@ -197,11 +196,8 @@ function getMetricTitle(){
 }
 
 // Loading the data
-watch(selectedMetric, (value) => {
-  selection.value = value === "Absolute" ? "Efficiency" : "line";
-});
 
-watch([selection, df_RQ3], updateGraph);
+watch([selectedMetric, df_RQ3], updateGraph);
 
 function parseCSV(text) {
   const lines = text
