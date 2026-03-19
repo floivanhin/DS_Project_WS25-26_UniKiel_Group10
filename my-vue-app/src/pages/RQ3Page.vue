@@ -1,35 +1,46 @@
 <template>
   <div class="rq1-page">
     <section class="rq1-hero">
+      <p class="rq1-kicker">RQ3</p>
       <h1 class="rq1-page-title">
         How does transition time correlate with goal probability?
       </h1>
       <p class="rq1-page-subtitle">
         To answer this research question we scraped raw event data and
         filtered out all the events, where a team won possession in their own half and then shot on the 
-        opposing team's goal, before they lost possession. 
-        Our first graph shows how many shots were taken and how many
-        goals were scored after a team won possession in their half. The results are partitioned based on how much time
-        passed between the possession win and the subsequent shot or goal (transition time).
-        Our second graph shows the percentage of shots that resulted in a goal based on the transition time.
+        opposing team's goal, without losing possession before the shot event.
       </p>
+    </section>
+
+    <section class="rq1-description">
+      The graphs show how many shots were taken and goals were scored based on how long it took a team to shoot
+      after they have won possession in their own half (transition time).
     </section>
 
     <section class="rq1-controls">
       <div class="rq1-control-block">
         <span class="rq1-control-label">Metric</span>
-        <div class="rq1-radio-group">
-          <label class="rq1-radio-option">
-            <input v-model="selectedMetric" type="radio" value="Boxplot" />
-            <span>Absolute numbers</span>
-          </label>
-
-          <label class="rq1-radio-option">
-            <input v-model="selectedMetric" type="radio" value="Barplot" />
-            <span>Shot efficiency</span>
-          </label>
-        </div>
+          <div class="rq1-button-group">
+            <button
+              class="rq1-toggle-button"
+              :class="{ 'rq1-toggle-button-active': selectedMetric === 'Absolute' }"
+              type="button"
+              @click="selectedMetric = 'Absolute'"
+            >
+              Absolute Numbers
+            </button>
+            <button
+              class="rq1-toggle-button"
+              :class="{
+                'rq1-toggle-button-active': selectedMetric === 'Efficiency',
+              }"
+              type="button"
+              @click="selectedMetric = 'Efficiency'"
+            >
+              Shot Efficiency
+            </button>
       </div>
+    </div> 
     </section>
 
     <section v-if="loading" class="rq1-status-box">
@@ -42,6 +53,7 @@
 
     <template v-else>
       <section class="rq1-chart-section">
+        <h2 class="rq1-section-title">{{ getMetricTitle() }}</h2>
         <div ref="mainChartRef" class="rq1-chart"></div>
       </section>
     </template>
@@ -55,8 +67,8 @@ import "../assets/style.css";
 
 // Setting up the data transformation
 const df_RQ3 = ref([]);
-const selection = ref("bar");
-const selectedMetric = ref("Boxplot");
+const selection = ref("Absolute");
+const selectedMetric = ref("Absolute");
 
 const loading = ref(true);
 const error = ref("");
@@ -139,7 +151,7 @@ const updateGraph = async () => {
     margin: { l: 60, r: 40, t: 80, b: 60 },
   };
 
-  if (selection.value === "bar") {
+  if (selection.value === "Absolute") {
     traces = [
       {
         x: labels,
@@ -175,9 +187,18 @@ const updateGraph = async () => {
   Plotly.react(gd, traces, layout, { responsive: true });
 };
 
+function getMetricTitle(){
+  if (selectedMetric.value === "Absolute"){
+    return "Absolute number of shots and goals by transition time";
+  }
+  if (selectedMetric.value === "Efficiency") {
+    return "Percentage of shots that resulted in a goal by transition time";
+  }
+}
+
 // Loading the data
 watch(selectedMetric, (value) => {
-  selection.value = value === "Boxplot" ? "bar" : "line";
+  selection.value = value === "Absolute" ? "Efficiency" : "line";
 });
 
 watch([selection, df_RQ3], updateGraph);

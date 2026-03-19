@@ -1,57 +1,66 @@
 <template>
   <div class="rq1-page">
     <section class="rq1-hero">
+      <p class="rq1-kicker">RQ7</p>
       <h1 class="rq1-page-title">
         How do substitutions affect the number of shots on goal in the second half?
       </h1>
       <p class="rq1-page-subtitle">
-        We tried to answer this question in three different ways. Our first graph shows the average number
-        of shots taken by a team based on the number of substitutions they took.
-        Our second graph shows how the amount of shots in the second half changes when comparing the time
-        before and after the minute of the average substitution by that team during that game based on 
-        the minute of the average substitution.
-        Our third graph shows how the total number of minutes played by substituted players affects the average amount 
-        of shots taken in the second half. The resulting graph was smoothed, using a rolling average. 
-        The window size for the rolling average calculation can be adjusted manually using a slider.
+        We tried to answer this question by looking at the number of substitutions, the timing of substitutions and the total
+        amount of minutes played by substituted players.
       </p>
+    </section>
+
+    <section class="rq1-description">
+      The graphs show the average amount of shots taken by a team in the second half and its correlation with the chosen metric.
+      The graph that shows the total amount of minutes played by substituted players was smoothed using a rolling average,
+      the size of the rolling average window can be adjusted using the rolling average window slider.
     </section>
 
     <section class="rq1-controls">
       <div class="rq1-control-block">
         <span class="rq1-control-label">Metric</span>
-        <div class="rq1-radio-group">
-          <label class="rq1-radio-option">
-            <input v-model="selectedMetric" type="radio" value="NumOfSubs" />
-            <span>Number of substitutions</span>
-          </label>
-
-          <label class="rq1-radio-option">
-            <input v-model="selectedMetric" type="radio" value="Timing" />
-            <span>Substitution timing</span>
-          </label>
-
-          <label class="rq1-radio-option">
-            <input v-model="selectedMetric" type="radio" value="Minutes" />
-            <span>Number of minutes</span>
-          </label>
-        </div>
+        <div class="rq1-button-group">
+            <button
+              class="rq1-toggle-button"
+              :class="{ 'rq1-toggle-button-active': selectedMetric === 'NumOfSubs' }"
+              type="button"
+              @click="selectedMetric = 'NumOfSubs'"
+            >
+              Average goals
+            </button>
+            <button
+              class="rq1-toggle-button"
+              :class="{
+                'rq1-toggle-button-active': selectedMetric === 'Timing',
+              }"
+              type="button"
+              @click="selectedMetric = 'Timing'"
+            >
+              Median goals
+            </button>
+            <button
+              class="rq1-toggle-button"
+              :class="{ 'rq1-toggle-button-active': selectedMetric === 'Minutes' }"
+              type="button"
+              @click="selectedMetric = 'Minutes'"
+            >
+              Match count
+            </button>
+          </div>
       </div>
       <div v-if="selectedMetric === 'Minutes'" class="rq1-slider-container">
         <label class="rq1-control-label">
-        Smoothing Window: <span style="color: #441AEE; font-weight: bold;">{{ windowSize }}</span>
+        Rolling average window: <span style="color: #441AEE; font-weight: bold;">{{ windowSize }}</span>
         </label>
         <input 
           type="range" 
           min="2" 
           max="20" 
-          step="1"
+          step="2"
           v-model.number="windowSize" 
           class="rq1-slider"
         />
-        <div class="slider-hints">
-          <span>2</span>
-          <span>20</span>
-        </div>
       </div>
     </section>
 
@@ -65,6 +74,7 @@
 
     <template v-else>
       <section class="rq1-chart-section">
+        <h2 class="rq1-section-title">{{ getMetricTitle() }}</h2>
         <div ref="mainChartRef" class="rq1-chart"></div>
       </section>
     </template>
@@ -199,6 +209,18 @@ const updateGraph = async () => {
 
   Plotly.react(mainChartRef.value, traces, layout);
 };
+
+function getMetricTitle(){
+  if (selectedMetric.value === "NumOfSubs"){
+    return "Average amount of shots by amount of substituions a team took";
+  }
+  if (selectedMetric.value === "Timing") {
+    return "Average difference in shots taken before and after the minute of the average substitution";
+  }
+  if (selectedMetric.value === "Minutes") {
+    return "Correlation between the total amount of minutes played by substituted players and the amount of shots";
+  }
+}
 
 // --- 4. LIFECYCLE & WATCHERS ---
 watch([selectedMetric, toggleBarBox, windowSize], updateGraph);
