@@ -1,7 +1,6 @@
 <template>
   <div class="page">
     <section class="hero">
-      <p class="kicker">Data Science Project</p>
       <h1 class="page-title">Bundesliga Statistics (Season 2024/2025)</h1>
       <p class="page-subtitle">
         This project analyzes data from the 2024-25 Bundesliga season. We
@@ -17,11 +16,7 @@
     </section>
 
     <section class="summary-grid">
-      <div
-        v-for="card in summaryCards"
-        :key="card.label"
-        class="summary-card"
-      >
+      <div v-for="card in summaryCards" :key="card.label" class="summary-card">
         <span class="summary-label">{{ card.label }}</span>
         <strong class="summary-value summary-value-small">
           {{ card.value }}
@@ -74,11 +69,10 @@
       <div class="table-wrapper">
         <table class="summary-table">
           <tbody>
-            <tr
-              v-for="question in researchQuestions"
-              :key="question.path"
-            >
-              <td><strong>{{ question.label }}</strong></td>
+            <tr v-for="question in researchQuestions" :key="question.path">
+              <td>
+                <strong>{{ question.label }}</strong>
+              </td>
               <td>
                 <RouterLink :to="question.path" class="brand-text">
                   {{ question.title }}
@@ -88,29 +82,27 @@
           </tbody>
         </table>
       </div>
-
-      <p class="chart-note">
-        Each research question is explored on a separate page with interactive
-        charts and short interpretations.
-      </p>
     </section>
 
     <section class="chart-card">
       <h2 class="section-title">Data & Sources</h2>
       <p class="chart-note">
-        The analysis combines football match data, weather data, and additional
-        contextual information from public sources.
+        The analysis is based on a combination of publicly available data from
+        multiple sources, including football statistics platforms, financial and
+        performance databases, and external contextual data such as weather
+        conditions.
       </p>
       <p class="chart-note">
-        We cleaned, merged, and structured the raw data before using it in the
-        visualizations shown across the project pages.
+        Match and team performance data were collected from sources like
+        WhoScored, Understat, ESPN, and football-data.org, while additional
+        contextual information was obtained via APIs such as API-Football and
+        Visual Crossing (weather data). Financial and squad-related data were
+        complemented using Capology.
       </p>
-    </section>
-
-    <section class="controls-card">
-      <p class="selection-summary">
-        Use the navigation above to move between the main overview and each
-        research question page.
+      <p class="chart-note">
+        All datasets were preprocessed, cleaned, and merged to ensure
+        consistency and comparability before being used in the visualizations
+        presented in this project.
       </p>
     </section>
   </div>
@@ -160,12 +152,14 @@ const researchQuestions = [
   {
     label: "RQ5",
     path: "/rq5",
-    title: "What is the relationship between payroll spending and league points?",
+    title:
+      "What is the relationship between payroll spending and league points?",
   },
   {
     label: "RQ6",
     path: "/rq6",
-    title: "What is the relationship between arena capacity and the number of cards issued?",
+    title:
+      "What is the relationship between arena capacity and the number of cards issued?",
   },
   {
     label: "RQ7",

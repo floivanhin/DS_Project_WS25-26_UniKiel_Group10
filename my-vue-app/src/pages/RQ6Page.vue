@@ -1,7 +1,6 @@
 <template>
   <div class="page">
     <section class="hero">
-      <p class="kicker">RQ6</p>
       <h1 class="page-title">
         What is the relationship between arena capacity and the number of cards
         issued?
@@ -54,7 +53,9 @@
             <button
               type="button"
               class="toggle-button"
-              :class="{ 'toggle-button-active': selectedMetric === 'avg_cards' }"
+              :class="{
+                'toggle-button-active': selectedMetric === 'avg_cards',
+              }"
               @click="selectedMetric = 'avg_cards'"
             >
               Total cards
@@ -62,7 +63,9 @@
             <button
               type="button"
               class="toggle-button"
-              :class="{ 'toggle-button-active': selectedMetric === 'avg_yellow' }"
+              :class="{
+                'toggle-button-active': selectedMetric === 'avg_yellow',
+              }"
               @click="selectedMetric = 'avg_yellow'"
             >
               Yellow cards
@@ -104,7 +107,9 @@
       <div class="detail-grid">
         <div class="detail-item">
           <span class="detail-label">Team</span>
-          <strong class="detail-value">{{ selectedStadium.homeTeamName }}</strong>
+          <strong class="detail-value">{{
+            selectedStadium.homeTeamName
+          }}</strong>
         </div>
         <div class="detail-item">
           <span class="detail-label">Venue</span>
@@ -126,15 +131,21 @@
         </div>
         <div class="detail-item">
           <span class="detail-label">Average total cards</span>
-          <strong class="detail-value">{{ selectedStadium.avg_cards.toFixed(2) }}</strong>
+          <strong class="detail-value">{{
+            selectedStadium.avg_cards.toFixed(2)
+          }}</strong>
         </div>
         <div class="detail-item">
           <span class="detail-label">Average yellow cards</span>
-          <strong class="detail-value">{{ selectedStadium.avg_yellow.toFixed(2) }}</strong>
+          <strong class="detail-value">{{
+            selectedStadium.avg_yellow.toFixed(2)
+          }}</strong>
         </div>
         <div class="detail-item">
           <span class="detail-label">Average red cards</span>
-          <strong class="detail-value">{{ selectedStadium.avg_red.toFixed(2) }}</strong>
+          <strong class="detail-value">{{
+            selectedStadium.avg_red.toFixed(2)
+          }}</strong>
         </div>
       </div>
     </section>
@@ -223,7 +234,9 @@ const matches = computed<MatchRow[]>(() => {
   const rawMatches = relationData?.matches ?? [];
 
   return rawMatches.filter((item: Partial<MatchRow>) => {
-    return Number.isFinite(item?.capacity) && Number.isFinite(item?.cards_total);
+    return (
+      Number.isFinite(item?.capacity) && Number.isFinite(item?.cards_total)
+    );
   }) as MatchRow[];
 });
 
@@ -296,9 +309,15 @@ const metricAxisLabelMap: Record<MetricKey, string> = {
 };
 
 const metricLabel = computed(() => metricLabelMap[selectedMetric.value]);
-const metricAxisLabel = computed(() => metricAxisLabelMap[selectedMetric.value]);
+const metricAxisLabel = computed(
+  () => metricAxisLabelMap[selectedMetric.value],
+);
 
-function pearsonCorrelation(data: StadiumRow[], xKey: keyof StadiumRow, yKey: MetricKey) {
+function pearsonCorrelation(
+  data: StadiumRow[],
+  xKey: keyof StadiumRow,
+  yKey: MetricKey,
+) {
   const sampleSize = data.length;
   if (sampleSize === 0) return 0;
 
@@ -323,7 +342,11 @@ function pearsonCorrelation(data: StadiumRow[], xKey: keyof StadiumRow, yKey: Me
   return numerator / Math.sqrt(denominatorX * denominatorY);
 }
 
-function linearRegression(data: StadiumRow[], xKey: keyof StadiumRow, yKey: MetricKey) {
+function linearRegression(
+  data: StadiumRow[],
+  xKey: keyof StadiumRow,
+  yKey: MetricKey,
+) {
   const sampleSize = data.length;
   if (sampleSize === 0) return { slope: 0, intercept: 0 };
 
@@ -433,7 +456,9 @@ async function renderChart() {
         name: "Stadiums",
         hovertemplate: "%{text}<extra></extra>",
         marker: {
-          size: stadiumData.value.map((stadium) => 12 + stadium.matchCount * 0.18),
+          size: stadiumData.value.map(
+            (stadium) => 12 + stadium.matchCount * 0.18,
+          ),
           color: stadiumData.value.map((_, index) =>
             index === selectedIndex ? "#b91c1c" : "#2563eb",
           ),
@@ -488,12 +513,15 @@ async function renderChart() {
   );
 
   chartRef.value.removeAllListeners?.("plotly_click");
-  chartRef.value.on?.("plotly_click", (event: { points?: Array<{ pointIndex?: number }> }) => {
-    const pointIndex = event?.points?.[0]?.pointIndex;
-    if (typeof pointIndex === "number") {
-      selectedStadium.value = stadiumData.value[pointIndex] ?? null;
-    }
-  });
+  chartRef.value.on?.(
+    "plotly_click",
+    (event: { points?: Array<{ pointIndex?: number }> }) => {
+      const pointIndex = event?.points?.[0]?.pointIndex;
+      if (typeof pointIndex === "number") {
+        selectedStadium.value = stadiumData.value[pointIndex] ?? null;
+      }
+    },
+  );
 }
 
 function handleResize() {

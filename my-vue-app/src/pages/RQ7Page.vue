@@ -1,7 +1,6 @@
 <template>
   <div class="page">
     <section class="hero">
-      <p class="kicker">RQ7</p>
       <h1 class="page-title">
         How do substitutions affect the number of shots on goal in the second
         half?

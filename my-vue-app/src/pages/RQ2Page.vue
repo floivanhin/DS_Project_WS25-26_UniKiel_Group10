@@ -1,7 +1,6 @@
 <template>
   <div class="page">
     <section class="hero">
-      <p class="kicker">RQ2</p>
       <h1 class="page-title">
         How does the matchday affect the amount of goals?
       </h1>
@@ -20,22 +19,29 @@
 
     <section class="summary-grid">
       <div class="summary-card">
-        <span class="summary-label">Minimum amount of goals scored on a matchday in 2024/25</span>
+        <span class="summary-label"
+          >Minimum amount of goals scored on a matchday in 2024/25</span
+        >
         <strong class="summary-value">19</strong>
       </div>
       <div class="summary-card">
-        <span class="summary-label">Maximum amount of goals scored on a matchday in 2024/25</span>
+        <span class="summary-label"
+          >Maximum amount of goals scored on a matchday in 2024/25</span
+        >
         <strong class="summary-value">37</strong>
       </div>
       <div class="summary-card">
-        <span class="summary-label">Median amount of goals scored on a matchday in 2024/25</span>
+        <span class="summary-label"
+          >Median amount of goals scored on a matchday in 2024/25</span
+        >
         <strong class="summary-value">30</strong>
       </div>
       <div class="summary-card">
-        <span class="summary-label">Total amount of goals scored in 2024/25</span>
+        <span class="summary-label"
+          >Total amount of goals scored in 2024/25</span
+        >
         <strong class="summary-value">959</strong>
       </div>
-      
     </section>
 
     <section class="controls-card">

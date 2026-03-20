@@ -1,7 +1,6 @@
 <template>
   <div class="page">
     <section class="hero">
-      <p class="kicker">RQ5</p>
       <h1 class="page-title">
         What is the relationship between payroll spending and league points?
       </h1>

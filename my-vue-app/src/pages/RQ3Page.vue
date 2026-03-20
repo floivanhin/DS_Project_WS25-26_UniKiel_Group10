@@ -1,7 +1,6 @@
 <template>
   <div class="page">
     <section class="hero">
-      <p class="kicker">RQ3</p>
       <h1 class="page-title">
         How does transition time correlate with goal probability?
       </h1>

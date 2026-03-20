@@ -1,7 +1,6 @@
 <template>
   <div class="page">
     <section class="hero">
-      <p class="kicker">RQ1</p>
       <h1 class="page-title">
         How do weather conditions influence total goals scored?
       </h1>
@@ -13,9 +12,9 @@
     </section>
 
     <section class="description-box">
-      Explore whether different weather groups are linked to changes in
-      scoring. Use the filter to narrow the sample and switch between average
-      goals, median goals, and match count.
+      Explore whether different weather groups are linked to changes in scoring.
+      Use the filter to narrow the sample and switch between average goals,
+      median goals, and match count.
     </section>
 
     <section class="summary-grid">
@@ -98,8 +97,8 @@
       </div>
 
       <p class="selection-summary">
-        Current selection: <strong>{{ selectedWeather }}</strong>. Matches:
-        <strong>{{ filteredMatches.length }}</strong
+        Current selection: <strong>{{ selectedWeather }}</strong
+        >. Matches: <strong>{{ filteredMatches.length }}</strong
         >. {{ metricSummaryLabel }}: <strong>{{ metricSummaryValue }}</strong
         >.
       </p>
@@ -157,7 +156,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
+import {
+  computed,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  watch,
+} from "vue";
 import Plotly from "plotly.js-dist-min";
 import weatherDataUrl from "../../data/combined_matches_weather.json?url";
 
@@ -320,8 +326,7 @@ const metricSummaryValue = computed(() => {
   const goals = filteredMatches.value.map(getTotalGoals);
 
   if (selectedMetric.value === "avg") {
-    const average =
-      goals.reduce((sum, value) => sum + value, 0) / goals.length;
+    const average = goals.reduce((sum, value) => sum + value, 0) / goals.length;
     return average.toFixed(2);
   }
 

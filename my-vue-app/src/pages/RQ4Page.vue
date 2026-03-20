@@ -1,7 +1,6 @@
 <template>
   <div class="page">
     <section class="hero">
-      <p class="kicker">RQ4</p>
       <h1 class="page-title">
         Which players perform particularly well in home matches and which in
         away matches?
@@ -99,7 +98,11 @@ const selectedViewMode = ref<ViewMode>("abs_delta");
 const topN = ref(10);
 
 function parseCsv(text: string): Record<string, string>[] {
-  const lines = text.replace(/^\uFEFF/, "").trim().split(/\r?\n/).filter(Boolean);
+  const lines = text
+    .replace(/^\uFEFF/, "")
+    .trim()
+    .split(/\r?\n/)
+    .filter(Boolean);
 
   if (lines.length < 2) {
     return [];
@@ -173,7 +176,9 @@ const clampedTopN = computed(() => Math.min(Math.max(topN.value, 5), 20));
 const overallHome = getAverage(rows.map((row) => row.home));
 const overallAway = getAverage(rows.map((row) => row.away));
 const overallDelta =
-  overallHome !== null && overallAway !== null ? overallHome - overallAway : null;
+  overallHome !== null && overallAway !== null
+    ? overallHome - overallAway
+    : null;
 const homeBetterCount = rows.filter((row) => row.delta > 0).length;
 
 const researchQuestionAnswer =
@@ -196,11 +201,15 @@ const leaderboardRows = computed(() => {
 
   filteredRows.sort((left, right) => {
     if (mode === "home_specialists") {
-      return right.delta - left.delta || left.player.localeCompare(right.player);
+      return (
+        right.delta - left.delta || left.player.localeCompare(right.player)
+      );
     }
 
     if (mode === "away_specialists") {
-      return left.delta - right.delta || left.player.localeCompare(right.player);
+      return (
+        left.delta - right.delta || left.player.localeCompare(right.player)
+      );
     }
 
     return (

@@ -1,7 +1,6 @@
 <template>
   <div class="page">
     <section class="hero">
-      <p class="kicker">RQ8</p>
       <h1 class="page-title">
         How does the average player age affect a team's efficiency?
       </h1>
@@ -96,13 +95,14 @@
           v-if="selectedChart === 'team_scatter'"
           class="chart-note helper-text rq8-note rq8-helper-note"
         >
-          The dashed line is just the overall trend across all teams, so it shows if
-          efficiency generally goes up or down with team age.
+          The dashed line is just the overall trend across all teams, so it
+          shows if efficiency generally goes up or down with team age.
         </p>
 
         <p v-else class="chart-note helper-text rq8-note rq8-helper-note">
-          This chart groups players by age. The shot cutoff is there so one small age
-          group with very few shots does not look more important than it is.
+          This chart groups players by age. The shot cutoff is there so one
+          small age group with very few shots does not look more important than
+          it is.
         </p>
       </section>
     </template>
@@ -157,7 +157,11 @@ const selectedChart = ref<ChartMode>("team_scatter");
 const minShots = ref(80);
 
 function parseCsv(text: string): Record<string, string>[] {
-  const lines = text.replace(/^\uFEFF/, "").trim().split(/\r?\n/).filter(Boolean);
+  const lines = text
+    .replace(/^\uFEFF/, "")
+    .trim()
+    .split(/\r?\n/)
+    .filter(Boolean);
 
   if (lines.length < 2) {
     return [];
@@ -302,7 +306,8 @@ function getBestAge(threshold: number) {
     if (
       !bestRow ||
       row.goalsPerShot > bestRow.goalsPerShot ||
-      (row.goalsPerShot === bestRow.goalsPerShot && row.shots > bestRow.shots) ||
+      (row.goalsPerShot === bestRow.goalsPerShot &&
+        row.shots > bestRow.shots) ||
       (row.goalsPerShot === bestRow.goalsPerShot &&
         row.shots === bestRow.shots &&
         row.age < bestRow.age)
