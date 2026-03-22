@@ -1,3 +1,18 @@
+"""
+This script combines match data and team data into a single dataset.
+
+It reads data from:
+- `football.json` (match information and results)
+- `teams.json` (team and squad data)
+
+The script matches teams to their corresponding matches and merges
+the relevant information into a unified structure.
+
+The resulting combined dataset is saved to `combined_matches_weather.json`,
+which is later used for analysis and visualization.
+"""
+
+
 import os
 import json
 

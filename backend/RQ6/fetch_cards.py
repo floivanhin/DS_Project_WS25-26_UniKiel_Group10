@@ -1,3 +1,23 @@
+"""
+This script sends API requests to retrieve match data with a focus on
+yellow and red cards issued during Bundesliga games.
+
+For each match, it collects information about the number of yellow and red cards,
+along with basic match metadata, and stores the results in `cards.json`.
+
+Due to the API request limit (100 requests per day), the script is designed
+to process data in batches. It performs up to 90 requests per run to stay
+within safe limits.
+
+The script supports incremental data collection:
+if `cards.json` already exists, it will append new data without overwriting
+previous results. This allows the script to be executed again on the next day
+to continue fetching the remaining matches.
+
+This approach ensures that the full dataset can be built over multiple runs
+while respecting API rate limits.
+"""
+
 import os
 import json
 import time

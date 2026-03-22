@@ -6,11 +6,11 @@ import pandas as pd
 import plotly.express as px
 
 # Incorporate data
-df_RQ8 = pd.read_csv("RQ8.csv")
+df_RQ7 = pd.read_csv("RQ7.csv")
 
 # Average shots by number of subs box plot
 
-avg_shots = df_RQ8[df_RQ8["sub_count"].isin([2, 3, 4, 5])]
+avg_shots = df_RQ7[df_RQ7["sub_count"].isin([2, 3, 4, 5])]
 
 fig_subCountBox = px.box(
     avg_shots, 
@@ -37,7 +37,7 @@ fig_subCountBox.update_yaxes(showgrid=True, gridwidth=1, gridcolor="LightGray")
 
 # Average shots by number of subs bar plot
 
-avg_shots = df_RQ8[df_RQ8["sub_count"].isin([2, 3, 4, 5])].groupby("sub_count")["total_shots_secondHalf"].mean().reset_index()
+avg_shots = df_RQ7[df_RQ7["sub_count"].isin([2, 3, 4, 5])].groupby("sub_count")["total_shots_secondHalf"].mean().reset_index()
 
 fig_subCountBar = px.bar(
     avg_shots, 
@@ -78,7 +78,7 @@ fig_subCountBar.update_yaxes(
 
 # Substitution timing vs. shots on goal
 
-shot_diff_df = df_RQ8[(df_RQ8["avg_sub"] > 55) & (df_RQ8["avg_sub"] < 80)].copy()
+shot_diff_df = df_RQ7[(df_RQ7["avg_sub"] > 55) & (df_RQ7["avg_sub"] < 80)].copy()
 
 aggregated_shotDiff_df = shot_diff_df.groupby(shot_diff_df["avg_sub"].round())["spm_diff"].mean()
 
@@ -103,7 +103,7 @@ fig_timing.update_layout(
 
 # Number of minutes played by substituted players vs. shots on goal
 
-aggregated_subMin_df = df_RQ8.groupby(df_RQ8["total_sub_time"].round())["total_shots_secondHalf"].mean()
+aggregated_subMin_df = df_RQ7.groupby(df_RQ7["total_sub_time"].round())["total_shots_secondHalf"].mean()
 
 
 def fig_minutes(smoothed_data):
@@ -156,7 +156,7 @@ app = Dash()
 # App layout
 app.layout = [
     html.Div(children=
-             "Research Question 8:  How do the number and average timing of substitutions affect the number of shots on goal in the second half?"),
+             "Research Question 7:  How do the number and average timing of substitutions affect the number of shots on goal in the second half?"),
     html.Hr(),
     html.Div([
         html.Label("Select Analysis View:"),

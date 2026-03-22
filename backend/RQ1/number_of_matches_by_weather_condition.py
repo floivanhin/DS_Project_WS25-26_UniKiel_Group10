@@ -1,3 +1,16 @@
+"""
+This script reads weather and match data from `combined_matches_weather.json`
+and generates a chart showing the number of matches played under different weather conditions.
+
+The weather descriptions are grouped into simplified categories in order to make
+the analysis clearer and easier to interpret. For example, similar weather conditions
+such as rain, drizzle, or showers are combined into a single category (`Rain`),
+while overcast and cloudy conditions are grouped as `Cloudy`.
+
+After categorizing the weather data, it counts how many matches were played
+under each condition and visualizes the results in a chart.
+"""
+
 import json
 import pandas as pd
 import matplotlib.pyplot as plt

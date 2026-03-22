@@ -1,3 +1,18 @@
+"""
+This script sends API requests to retrieve stadium information for Bundesliga matches,
+specifically focusing on stadium capacity.
+
+For each team or match location, it collects data about the stadium,
+including its maximum capacity (number of spectators it can hold).
+
+The script processes the API responses, extracts the relevant capacity values,
+and structures the data into a consistent format.
+
+All collected information is then saved to a JSON file (`capacity.json`),
+which can be used for further analysis, such as examining the relationship
+between stadium size, attendance, and match-related factors.
+"""
+
 import os
 import json
 import time

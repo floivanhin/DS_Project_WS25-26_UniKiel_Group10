@@ -1,3 +1,15 @@
+"""
+This script sends API requests to retrieve detailed information about all teams
+in the German Bundesliga 2025 (1st division).
+
+For each team, it collects general team data as well as the full squad
+(player roster), including relevant player details provided by the API.
+
+The script processes the responses and aggregates the data into a structured format.
+Finally, all collected information is stored in a JSON file (`teams.json`)
+for further analysis and use in other parts of the project.
+"""
+
 import os
 import json
 

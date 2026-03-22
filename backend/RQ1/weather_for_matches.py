@@ -1,3 +1,14 @@
+"""
+This script sends API requests to retrieve weather data for football matches.
+
+Using match information and the stadium location (address), it queries a weather API
+to obtain relevant weather conditions (e.g., temperature, precipitation, wind)
+for the specific match time and place.
+
+The retrieved data is then stored in a JSON file (`matches_weather.json`)
+for further analysis.
+"""
+
 import os
 import json
 from datetime import datetime

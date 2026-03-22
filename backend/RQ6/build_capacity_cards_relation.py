@@ -1,3 +1,22 @@
+"""
+This script combines stadium capacity data with match card statistics
+to analyze the relationship between stadium size and the number of cards in matches.
+
+It loads data from:
+- `capacity.json` (stadium capacities)
+- `cards.json` (yellow and red card statistics)
+- `fixtures_cache.json` (used to link matches and teams)
+
+Matches are connected to teams via `fixture_id`, and teams are matched
+to their stadium capacity using normalized team names.
+
+The script merges all relevant information (teams, venue, capacity, and card stats)
+into a single dataset. Matches with missing data are skipped, and unmatched teams
+are tracked for debugging.
+
+The final dataset is saved to `capacity_cards_relation.json`.
+"""
+
 import os
 import json
 import unicodedata
@@ -32,11 +51,9 @@ def normalize_team_name(name: str) -> str:
     for old, new in replacements.items():
         name = name.replace(old, new)
 
-    # убираем акценты/диакритику на всякий случай
     name = unicodedata.normalize("NFKD", name)
     name = "".join(ch for ch in name if not unicodedata.combining(ch))
 
-    # схлопываем пробелы
     name = " ".join(name.split())
     return name
 
@@ -46,7 +63,6 @@ def main():
     cards_data = load_json(CARDS_FILE)
     fixtures_data = load_json(FIXTURES_FILE)
 
-    # 1. capacity lookup по имени команды
     capacity_lookup = {}
     for venue in capacity_data.get("venues", []):
         team_name = venue.get("team_name")
@@ -54,7 +70,6 @@ def main():
         if key:
             capacity_lookup[key] = venue
 
-    # 2. fixture lookup по fixture_id
     fixture_lookup = {}
     for fx in fixtures_data.get("response", []):
         fixture = fx.get("fixture") or {}

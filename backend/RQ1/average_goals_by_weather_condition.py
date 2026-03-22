@@ -1,3 +1,19 @@
+"""
+This script reads combined match and weather data from `combined_matches_weather.json`
+and generates a chart showing how the number of goals scored in matches
+varies under different weather conditions.
+
+The weather descriptions are first categorized into simplified groups
+(e.g., `Rain`, `Snow`, `Cloudy`, `Clear`) to make the analysis more interpretable.
+
+For each weather category, the script calculates the total or average number of goals
+scored in matches played under those conditions.
+
+The aggregated results are then visualized in a chart to highlight potential
+relationships between weather conditions and goal scoring.
+"""
+
+
 import json
 import pandas as pd
 import matplotlib.pyplot as plt

@@ -1,3 +1,15 @@
+"""
+This script sends API requests to retrieve information about all matches
+in the German Bundesliga 2025 (1st division).
+
+For each match, it collects relevant data such as participating teams,
+match date, and the final result (e.g., goals scored by each team).
+
+The script processes and structures the API responses into a consistent format.
+All collected match data is then stored in a JSON file (`football.json`)
+for further analysis and integration with other parts of the project.
+"""
+
 import os
 import json
 
