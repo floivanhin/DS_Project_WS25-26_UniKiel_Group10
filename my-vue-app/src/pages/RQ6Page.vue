@@ -1,82 +1,79 @@
 <template>
-  <div class="rq6-page">
-    <section class="rq6-hero">
-      <p class="rq6-kicker">RQ6</p>
-      <h1 class="rq6-page-title">
+  <div class="page">
+    <section class="hero">
+      <h1 class="page-title">
         What is the relationship between arena capacity and the number of cards
         issued?
       </h1>
-      <p class="rq6-page-subtitle">
-        This page analyses all 308 Bundesliga matches from the 2024 season. The
-        data is aggregated by stadium, so each point in the chart represents one
-        stadium instead of one individual match.
+      <p class="page-subtitle">
+        This page analyzes Bundesliga matches from the 2024 season. The data is
+        aggregated by stadium, so each point in the chart represents one venue
+        instead of one individual match.
       </p>
     </section>
 
-    <section class="rq6-description">
+    <section class="description-box">
       Arena capacity is operationalized as the home team's stadium capacity.
-      Switch between total, yellow, and red cards to compare how the trend
+      Switch between total, yellow, and red cards to compare how the pattern
       changes across metrics. Click a point or a table row to inspect one
       stadium in detail.
     </section>
 
-    <section class="rq6-summary-grid">
-      <div class="rq6-summary-card">
-        <span class="rq6-summary-label">Matches analysed</span>
-        <strong class="rq6-summary-value">{{ totalMatches }}</strong>
+    <section class="summary-grid">
+      <div class="summary-card">
+        <span class="summary-label">Matches analyzed</span>
+        <strong class="summary-value">{{ totalMatches }}</strong>
       </div>
 
-      <div class="rq6-summary-card">
-        <span class="rq6-summary-label">Stadiums analysed</span>
-        <strong class="rq6-summary-value">{{ totalStadiums }}</strong>
+      <div class="summary-card">
+        <span class="summary-label">Stadiums analyzed</span>
+        <strong class="summary-value">{{ totalStadiums }}</strong>
       </div>
 
-      <div class="rq6-summary-card">
-        <span class="rq6-summary-label">Selected metric</span>
-        <strong class="rq6-summary-value rq6-summary-value-small">{{
-          metricLabel
-        }}</strong>
+      <div class="summary-card">
+        <span class="summary-label">Selected metric</span>
+        <strong class="summary-value summary-value-small">
+          {{ metricLabel }}
+        </strong>
       </div>
 
-      <div class="rq6-summary-card">
-        <span class="rq6-summary-label">Pearson correlation</span>
-        <strong class="rq6-summary-value">{{
-          stadiumCorrelation.toFixed(3)
-        }}</strong>
+      <div class="summary-card">
+        <span class="summary-label">Pearson correlation</span>
+        <strong class="summary-value">
+          {{ stadiumCorrelation.toFixed(3) }}
+        </strong>
       </div>
     </section>
 
-    <section class="rq6-chart-card">
-      <div class="rq6-toolbar">
-        <div class="rq6-toolbar-group">
-          <span class="rq6-toolbar-label">Metric</span>
-          <div class="rq6-button-group">
+    <section class="chart-card">
+      <div class="toolbar">
+        <div class="control-block">
+          <span class="control-label">Metric</span>
+          <div class="button-group">
             <button
-              class="rq6-toggle-button"
-              :class="{
-                'rq6-toggle-button-active': selectedMetric === 'avg_cards',
-              }"
               type="button"
+              class="toggle-button"
+              :class="{
+                'toggle-button-active': selectedMetric === 'avg_cards',
+              }"
               @click="selectedMetric = 'avg_cards'"
             >
               Total cards
             </button>
             <button
-              class="rq6-toggle-button"
-              :class="{
-                'rq6-toggle-button-active': selectedMetric === 'avg_yellow',
-              }"
               type="button"
+              class="toggle-button"
+              :class="{
+                'toggle-button-active': selectedMetric === 'avg_yellow',
+              }"
               @click="selectedMetric = 'avg_yellow'"
             >
               Yellow cards
             </button>
             <button
-              class="rq6-toggle-button"
-              :class="{
-                'rq6-toggle-button-active': selectedMetric === 'avg_red',
-              }"
               type="button"
+              class="toggle-button"
+              :class="{ 'toggle-button-active': selectedMetric === 'avg_red' }"
               @click="selectedMetric = 'avg_red'"
             >
               Red cards
@@ -84,93 +81,88 @@
           </div>
         </div>
 
-        <div class="rq6-toolbar-group rq6-toolbar-group-compact">
-          <span class="rq6-toolbar-label">Current reading</span>
-          <p class="rq6-toolbar-summary">
+        <div class="control-block control-block-compact">
+          <span class="control-label">Current reading</span>
+          <p class="selection-summary">
             {{ correlationStrengthLabel }} correlation, r =
-            {{ stadiumCorrelation.toFixed(3) }}
+            <strong>{{ stadiumCorrelation.toFixed(3) }}</strong>
           </p>
         </div>
       </div>
 
-      <h2 class="rq6-section-title">
+      <h2 class="section-title">
         Arena capacity vs {{ metricAxisLabel.toLowerCase() }}
       </h2>
-      <p class="rq6-chart-note">
+      <p class="chart-note">
         Marker size reflects the number of home matches in the dataset. The red
         line shows the linear trend.
       </p>
 
-      <div ref="chartRef" class="rq6-chart"></div>
+      <div ref="chartRef" class="chart"></div>
     </section>
 
-    <section v-if="selectedStadium" class="rq6-detail-card">
-      <h2 class="rq6-section-title">Selected stadium</h2>
-      <div class="rq6-detail-grid">
-        <div class="rq6-detail-item">
-          <span class="rq6-detail-label">Team</span>
-          <strong class="rq6-detail-value">{{
-            selectedStadium.home_team_name
+    <section v-if="selectedStadium" class="chart-card">
+      <h2 class="section-title">Selected stadium</h2>
+
+      <div class="detail-grid">
+        <div class="detail-item">
+          <span class="detail-label">Team</span>
+          <strong class="detail-value">{{
+            selectedStadium.homeTeamName
           }}</strong>
         </div>
-        <div class="rq6-detail-item">
-          <span class="rq6-detail-label">Venue</span>
-          <strong class="rq6-detail-value">{{
-            selectedStadium.venue_name
-          }}</strong>
+        <div class="detail-item">
+          <span class="detail-label">Venue</span>
+          <strong class="detail-value">{{ selectedStadium.venueName }}</strong>
         </div>
-        <div class="rq6-detail-item">
-          <span class="rq6-detail-label">City</span>
-          <strong class="rq6-detail-value">{{ selectedStadium.city }}</strong>
+        <div class="detail-item">
+          <span class="detail-label">City</span>
+          <strong class="detail-value">{{ selectedStadium.city }}</strong>
         </div>
-        <div class="rq6-detail-item">
-          <span class="rq6-detail-label">Capacity</span>
-          <strong class="rq6-detail-value">{{
-            selectedStadium.capacity.toLocaleString()
-          }}</strong>
+        <div class="detail-item">
+          <span class="detail-label">Capacity</span>
+          <strong class="detail-value">
+            {{ selectedStadium.capacity.toLocaleString() }}
+          </strong>
         </div>
-        <div class="rq6-detail-item">
-          <span class="rq6-detail-label">Home matches</span>
-          <strong class="rq6-detail-value">{{
-            selectedStadium.match_count
-          }}</strong>
+        <div class="detail-item">
+          <span class="detail-label">Home matches</span>
+          <strong class="detail-value">{{ selectedStadium.matchCount }}</strong>
         </div>
-        <div class="rq6-detail-item">
-          <span class="rq6-detail-label">Average total cards</span>
-          <strong class="rq6-detail-value">{{
+        <div class="detail-item">
+          <span class="detail-label">Average total cards</span>
+          <strong class="detail-value">{{
             selectedStadium.avg_cards.toFixed(2)
           }}</strong>
         </div>
-        <div class="rq6-detail-item">
-          <span class="rq6-detail-label">Average yellow cards</span>
-          <strong class="rq6-detail-value">{{
+        <div class="detail-item">
+          <span class="detail-label">Average yellow cards</span>
+          <strong class="detail-value">{{
             selectedStadium.avg_yellow.toFixed(2)
           }}</strong>
         </div>
-        <div class="rq6-detail-item">
-          <span class="rq6-detail-label">Average red cards</span>
-          <strong class="rq6-detail-value">{{
+        <div class="detail-item">
+          <span class="detail-label">Average red cards</span>
+          <strong class="detail-value">{{
             selectedStadium.avg_red.toFixed(2)
           }}</strong>
         </div>
       </div>
     </section>
 
-    <section class="rq6-insight-card">
-      <h2 class="rq6-section-title">Interpretation</h2>
-      <p class="rq6-insight-text">{{ interpretationText }}</p>
+    <section class="chart-card">
+      <h2 class="section-title">Interpretation</h2>
+      <p class="selection-summary">{{ interpretationText }}</p>
     </section>
 
-    <section class="rq6-table-card">
-      <div class="rq6-table-header">
-        <h2 class="rq6-section-title">Stadium overview</h2>
-        <p class="rq6-chart-note">
-          Select a row to highlight the same stadium in the scatter plot.
-        </p>
-      </div>
+    <section class="table-card">
+      <h2 class="section-title">Stadium overview</h2>
+      <p class="chart-note">
+        Select a row to highlight the same stadium in the scatter plot.
+      </p>
 
-      <div class="rq6-table-wrapper">
-        <table class="rq6-table">
+      <div class="table-wrapper">
+        <table class="summary-table">
           <thead>
             <tr>
               <th>Team</th>
@@ -184,20 +176,19 @@
           <tbody>
             <tr
               v-for="stadium in stadiumData"
-              :key="`${stadium.home_team_name}-${stadium.venue_name}`"
+              :key="`${stadium.homeTeamName}-${stadium.venueName}`"
               :class="{
-                'rq6-table-row-active':
-                  selectedStadium &&
-                  selectedStadium.home_team_name === stadium.home_team_name &&
-                  selectedStadium.venue_name === stadium.venue_name,
+                'table-row-active':
+                  selectedStadium?.homeTeamName === stadium.homeTeamName &&
+                  selectedStadium?.venueName === stadium.venueName,
               }"
               @click="selectedStadium = stadium"
             >
-              <td>{{ stadium.home_team_name }}</td>
-              <td>{{ stadium.venue_name }}</td>
+              <td>{{ stadium.homeTeamName }}</td>
+              <td>{{ stadium.venueName }}</td>
               <td>{{ stadium.city }}</td>
               <td>{{ stadium.capacity.toLocaleString() }}</td>
-              <td>{{ stadium.match_count }}</td>
+              <td>{{ stadium.matchCount }}</td>
               <td>{{ stadium[selectedMetric].toFixed(2) }}</td>
             </tr>
           </tbody>
@@ -207,124 +198,173 @@
   </div>
 </template>
 
-<script setup>
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
+<script setup lang="ts">
+import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import Plotly from "plotly.js-dist-min";
 import relationData from "../../data/capacity_cards_relation.json";
 
-const chartRef = ref(null);
-const selectedMetric = ref("avg_cards");
-const selectedStadium = ref(null);
+type MetricKey = "avg_cards" | "avg_yellow" | "avg_red";
 
-const matches = computed(() => {
-  const raw = relationData?.matches ?? [];
+type MatchRow = {
+  home_team_name: string;
+  team_capacity_venue_name: string;
+  team_capacity_city: string;
+  capacity: number;
+  cards_total: number;
+  yellow_total: number;
+  red_total: number;
+};
 
-  return raw.filter(
-    (item) =>
-      Number.isFinite(item?.capacity) && Number.isFinite(item?.cards_total),
-  );
+type StadiumRow = {
+  homeTeamName: string;
+  venueName: string;
+  city: string;
+  capacity: number;
+  matchCount: number;
+  avg_cards: number;
+  avg_yellow: number;
+  avg_red: number;
+};
+
+const chartRef = ref<HTMLDivElement | null>(null);
+const selectedMetric = ref<MetricKey>("avg_cards");
+const selectedStadium = ref<StadiumRow | null>(null);
+
+const matches = computed<MatchRow[]>(() => {
+  const rawMatches = relationData?.matches ?? [];
+
+  return rawMatches.filter((item: Partial<MatchRow>) => {
+    return (
+      Number.isFinite(item?.capacity) && Number.isFinite(item?.cards_total)
+    );
+  }) as MatchRow[];
 });
 
 const totalMatches = computed(() => matches.value.length);
 
-const stadiumData = computed(() => {
-  const grouped = new Map();
+const stadiumData = computed<StadiumRow[]>(() => {
+  const grouped = new Map<
+    string,
+    StadiumRow & {
+      totalCardsSum: number;
+      yellowSum: number;
+      redSum: number;
+    }
+  >();
 
   for (const match of matches.value) {
     const key = `${match.home_team_name}__${match.team_capacity_venue_name}`;
 
     if (!grouped.has(key)) {
       grouped.set(key, {
-        home_team_name: match.home_team_name,
-        venue_name: match.team_capacity_venue_name,
+        homeTeamName: match.home_team_name,
+        venueName: match.team_capacity_venue_name,
         city: match.team_capacity_city,
         capacity: match.capacity,
-        match_count: 0,
-        total_cards_sum: 0,
-        yellow_sum: 0,
-        red_sum: 0,
+        matchCount: 0,
+        avg_cards: 0,
+        avg_yellow: 0,
+        avg_red: 0,
+        totalCardsSum: 0,
+        yellowSum: 0,
+        redSum: 0,
       });
     }
 
     const entry = grouped.get(key);
-    entry.match_count += 1;
-    entry.total_cards_sum += match.cards_total ?? 0;
-    entry.yellow_sum += match.yellow_total ?? 0;
-    entry.red_sum += match.red_total ?? 0;
+    if (!entry) continue;
+
+    entry.matchCount += 1;
+    entry.totalCardsSum += match.cards_total ?? 0;
+    entry.yellowSum += match.yellow_total ?? 0;
+    entry.redSum += match.red_total ?? 0;
   }
 
   return Array.from(grouped.values())
     .map((entry) => ({
-      ...entry,
-      avg_cards: entry.match_count ? entry.total_cards_sum / entry.match_count : 0,
-      avg_yellow: entry.match_count ? entry.yellow_sum / entry.match_count : 0,
-      avg_red: entry.match_count ? entry.red_sum / entry.match_count : 0,
+      homeTeamName: entry.homeTeamName,
+      venueName: entry.venueName,
+      city: entry.city,
+      capacity: entry.capacity,
+      matchCount: entry.matchCount,
+      avg_cards: entry.matchCount ? entry.totalCardsSum / entry.matchCount : 0,
+      avg_yellow: entry.matchCount ? entry.yellowSum / entry.matchCount : 0,
+      avg_red: entry.matchCount ? entry.redSum / entry.matchCount : 0,
     }))
     .sort((left, right) => right.capacity - left.capacity);
 });
 
 const totalStadiums = computed(() => stadiumData.value.length);
 
-const metricLabelMap = {
+const metricLabelMap: Record<MetricKey, string> = {
   avg_cards: "Average total cards",
   avg_yellow: "Average yellow cards",
   avg_red: "Average red cards",
 };
 
-const metricAxisLabelMap = {
+const metricAxisLabelMap: Record<MetricKey, string> = {
   avg_cards: "Average cards per match",
   avg_yellow: "Average yellow cards per match",
   avg_red: "Average red cards per match",
 };
 
 const metricLabel = computed(() => metricLabelMap[selectedMetric.value]);
-const metricAxisLabel = computed(() => metricAxisLabelMap[selectedMetric.value]);
+const metricAxisLabel = computed(
+  () => metricAxisLabelMap[selectedMetric.value],
+);
 
-function pearsonCorrelation(data, xKey, yKey) {
-  const n = data.length;
-  if (n === 0) return 0;
+function pearsonCorrelation(
+  data: StadiumRow[],
+  xKey: keyof StadiumRow,
+  yKey: MetricKey,
+) {
+  const sampleSize = data.length;
+  if (sampleSize === 0) return 0;
 
-  const xs = data.map((d) => d[xKey]);
-  const ys = data.map((d) => d[yKey]);
-  const meanX = xs.reduce((sum, value) => sum + value, 0) / n;
-  const meanY = ys.reduce((sum, value) => sum + value, 0) / n;
+  const xs = data.map((row) => Number(row[xKey]));
+  const ys = data.map((row) => row[yKey]);
+  const meanX = xs.reduce((sum, value) => sum + value, 0) / sampleSize;
+  const meanY = ys.reduce((sum, value) => sum + value, 0) / sampleSize;
 
   let numerator = 0;
-  let denomX = 0;
-  let denomY = 0;
+  let denominatorX = 0;
+  let denominatorY = 0;
 
-  for (let i = 0; i < n; i += 1) {
-    const dx = xs[i] - meanX;
-    const dy = ys[i] - meanY;
+  for (let index = 0; index < sampleSize; index += 1) {
+    const dx = xs[index] - meanX;
+    const dy = ys[index] - meanY;
     numerator += dx * dy;
-    denomX += dx * dx;
-    denomY += dy * dy;
+    denominatorX += dx * dx;
+    denominatorY += dy * dy;
   }
 
-  if (denomX === 0 || denomY === 0) return 0;
-  return numerator / Math.sqrt(denomX * denomY);
+  if (denominatorX === 0 || denominatorY === 0) return 0;
+  return numerator / Math.sqrt(denominatorX * denominatorY);
 }
 
-function linearRegression(data, xKey, yKey) {
-  const n = data.length;
-  if (n === 0) return { slope: 0, intercept: 0 };
+function linearRegression(
+  data: StadiumRow[],
+  xKey: keyof StadiumRow,
+  yKey: MetricKey,
+) {
+  const sampleSize = data.length;
+  if (sampleSize === 0) return { slope: 0, intercept: 0 };
 
-  const xs = data.map((d) => d[xKey]);
-  const ys = data.map((d) => d[yKey]);
-  const meanX = xs.reduce((sum, value) => sum + value, 0) / n;
-  const meanY = ys.reduce((sum, value) => sum + value, 0) / n;
+  const xs = data.map((row) => Number(row[xKey]));
+  const ys = data.map((row) => row[yKey]);
+  const meanX = xs.reduce((sum, value) => sum + value, 0) / sampleSize;
+  const meanY = ys.reduce((sum, value) => sum + value, 0) / sampleSize;
 
   let numerator = 0;
   let denominator = 0;
 
-  for (let i = 0; i < n; i += 1) {
-    numerator += (xs[i] - meanX) * (ys[i] - meanY);
-    denominator += (xs[i] - meanX) ** 2;
+  for (let index = 0; index < sampleSize; index += 1) {
+    numerator += (xs[index] - meanX) * (ys[index] - meanY);
+    denominator += (xs[index] - meanX) ** 2;
   }
 
   const slope = denominator === 0 ? 0 : numerator / denominator;
   const intercept = meanY - slope * meanX;
-
   return { slope, intercept };
 }
 
@@ -337,16 +377,16 @@ const regression = computed(() =>
 );
 
 const trendLinePoints = computed(() => {
-  if (!stadiumData.value.length) return { x: [], y: [] };
+  if (stadiumData.value.length === 0) return { x: [], y: [] };
 
   const capacities = stadiumData.value.map((stadium) => stadium.capacity);
-  const minX = Math.min(...capacities);
-  const maxX = Math.max(...capacities);
+  const minCapacity = Math.min(...capacities);
+  const maxCapacity = Math.max(...capacities);
   const { slope, intercept } = regression.value;
 
   return {
-    x: [minX, maxX],
-    y: [slope * minX + intercept, slope * maxX + intercept],
+    x: [minCapacity, maxCapacity],
+    y: [slope * minCapacity + intercept, slope * maxCapacity + intercept],
   };
 });
 
@@ -360,158 +400,148 @@ const correlationStrengthLabel = computed(() => {
 });
 
 const interpretationText = computed(() => {
-  const r = stadiumCorrelation.value;
+  const correlation = stadiumCorrelation.value;
   const metricText = metricAxisLabel.value.toLowerCase();
 
-  if (r > 0.3) {
-    return `The correlation is positive (${r.toFixed(
-      3,
-    )}), which suggests that larger stadiums tend to be associated with higher ${metricText}. This is still a broad tendency rather than a strong effect.`;
+  if (correlation > 0.3) {
+    return `The correlation is positive (${correlation.toFixed(3)}), which suggests that larger stadiums tend to be associated with higher ${metricText}. This is still a broad tendency rather than a strong effect.`;
+  }
+  if (correlation > 0.1) {
+    return `The correlation is weakly positive (${correlation.toFixed(3)}), so larger stadiums show only a small tendency toward higher ${metricText}.`;
+  }
+  if (correlation >= -0.1) {
+    return `The correlation is very close to zero (${correlation.toFixed(3)}), which means stadium capacity has little to no clear linear relationship with ${metricText}.`;
+  }
+  if (correlation >= -0.3) {
+    return `The correlation is weakly negative (${correlation.toFixed(3)}), so larger stadiums show only a small tendency toward lower ${metricText}.`;
   }
 
-  if (r > 0.1) {
-    return `The correlation is weakly positive (${r.toFixed(
-      3,
-    )}), so larger stadiums show only a small tendency toward higher ${metricText}.`;
-  }
-
-  if (r >= -0.1) {
-    return `The correlation is very close to zero (${r.toFixed(
-      3,
-    )}), which means stadium capacity has little to no clear linear relationship with ${metricText}.`;
-  }
-
-  if (r >= -0.3) {
-    return `The correlation is weakly negative (${r.toFixed(
-      3,
-    )}), so larger stadiums show only a small tendency toward lower ${metricText}.`;
-  }
-
-  return `The correlation is negative (${r.toFixed(
-    3,
-  )}), which suggests that larger stadiums tend to be associated with lower ${metricText}. This should be interpreted carefully and not as causation.`;
+  return `The correlation is negative (${correlation.toFixed(3)}), which suggests that larger stadiums tend to be associated with lower ${metricText}. This should be interpreted carefully and not as causation.`;
 });
 
-function getSelectedStadiumIndex() {
+function getSelectedStadiumIndex(): number {
   if (!selectedStadium.value) return -1;
 
-  return stadiumData.value.findIndex(
-    (stadium) =>
-      stadium.home_team_name === selectedStadium.value.home_team_name &&
-      stadium.venue_name === selectedStadium.value.venue_name,
-  );
+  return stadiumData.value.findIndex((stadium) => {
+    return (
+      stadium.homeTeamName === selectedStadium.value?.homeTeamName &&
+      stadium.venueName === selectedStadium.value?.venueName
+    );
+  });
 }
 
-function renderChart() {
-  if (!chartRef.value || !stadiumData.value.length) return;
+async function renderChart() {
+  if (!chartRef.value || stadiumData.value.length === 0) return;
 
   const selectedIndex = getSelectedStadiumIndex();
 
-  const scatterTrace = {
-    x: stadiumData.value.map((stadium) => stadium.capacity),
-    y: stadiumData.value.map((stadium) =>
-      Number(stadium[selectedMetric.value].toFixed(2)),
-    ),
-    text: stadiumData.value.map(
-      (stadium) =>
-        `${stadium.home_team_name}<br>` +
-        `Venue: ${stadium.venue_name}<br>` +
-        `Capacity: ${stadium.capacity.toLocaleString()}<br>` +
-        `Matches: ${stadium.match_count}<br>` +
-        `${metricLabel.value}: ${stadium[selectedMetric.value].toFixed(2)}`,
-    ),
-    type: "scatter",
-    mode: "markers",
-    name: "Stadiums",
-    hovertemplate: "%{text}<extra></extra>",
-    marker: {
-      size: stadiumData.value.map((stadium) => 12 + stadium.match_count * 0.18),
-      color: stadiumData.value.map((_, index) =>
-        index === selectedIndex ? "#b91c1c" : "#2563eb",
-      ),
-      opacity: 0.82,
-      line: {
-        color: "#ffffff",
-        width: 1.5,
+  await Plotly.react(
+    chartRef.value,
+    [
+      {
+        x: stadiumData.value.map((stadium) => stadium.capacity),
+        y: stadiumData.value.map((stadium) =>
+          Number(stadium[selectedMetric.value].toFixed(2)),
+        ),
+        text: stadiumData.value.map(
+          (stadium) =>
+            `${stadium.homeTeamName}<br>` +
+            `Venue: ${stadium.venueName}<br>` +
+            `Capacity: ${stadium.capacity.toLocaleString()}<br>` +
+            `Matches: ${stadium.matchCount}<br>` +
+            `${metricLabel.value}: ${stadium[selectedMetric.value].toFixed(2)}`,
+        ),
+        type: "scatter",
+        mode: "markers",
+        name: "Stadiums",
+        hovertemplate: "%{text}<extra></extra>",
+        marker: {
+          size: stadiumData.value.map(
+            (stadium) => 12 + stadium.matchCount * 0.18,
+          ),
+          color: stadiumData.value.map((_, index) =>
+            index === selectedIndex ? "#b91c1c" : "#2563eb",
+          ),
+          opacity: 0.82,
+          line: {
+            color: "#ffffff",
+            width: 1.5,
+          },
+        },
       },
+      {
+        x: trendLinePoints.value.x,
+        y: trendLinePoints.value.y,
+        type: "scatter",
+        mode: "lines",
+        name: "Trend line",
+        hoverinfo: "skip",
+        line: {
+          color: "#b91c1c",
+          width: 3,
+        },
+      },
+    ],
+    {
+      autosize: true,
+      height: 560,
+      paper_bgcolor: "transparent",
+      plot_bgcolor: "#f8fafc",
+      margin: { t: 24, r: 24, b: 64, l: 72 },
+      xaxis: {
+        title: "Arena capacity",
+        gridcolor: "#dbe4f0",
+        zeroline: false,
+        tickformat: ",",
+      },
+      yaxis: {
+        title: metricAxisLabel.value,
+        gridcolor: "#dbe4f0",
+        zeroline: false,
+      },
+      legend: {
+        orientation: "h",
+        y: 1.12,
+        x: 0,
+      },
+      hovermode: "closest",
     },
-  };
-
-  const trendTrace = {
-    x: trendLinePoints.value.x,
-    y: trendLinePoints.value.y,
-    type: "scatter",
-    mode: "lines",
-    name: "Trend line",
-    hoverinfo: "skip",
-    line: {
-      color: "#b91c1c",
-      width: 3,
-      dash: "solid",
-    },
-  };
-
-  const layout = {
-    autosize: true,
-    height: 560,
-    paper_bgcolor: "transparent",
-    plot_bgcolor: "#f8fafc",
-    margin: { t: 24, r: 24, b: 64, l: 72 },
-    xaxis: {
-      title: "Arena capacity",
-      gridcolor: "#dbe4f0",
-      zeroline: false,
-      tickformat: ",",
-    },
-    yaxis: {
-      title: metricAxisLabel.value,
-      gridcolor: "#dbe4f0",
-      zeroline: false,
-    },
-    legend: {
-      orientation: "h",
-      y: 1.12,
-      x: 0,
-    },
-    hovermode: "closest",
-  };
-
-  const config = {
-    responsive: true,
-    displayModeBar: false,
-  };
-
-  Plotly.react(chartRef.value, [scatterTrace, trendTrace], layout, config).then(
-    () => {
-      const pointElements = chartRef.value?.querySelectorAll(
-        ".scatterlayer .trace .points path",
-      );
-
-      pointElements?.forEach((element) => {
-        element.style.cursor = "pointer";
-      });
+    {
+      responsive: true,
+      displayModeBar: false,
     },
   );
 
   chartRef.value.removeAllListeners?.("plotly_click");
-  chartRef.value.on?.("plotly_click", (event) => {
-    const pointIndex = event?.points?.[0]?.pointIndex;
-    if (typeof pointIndex !== "number") return;
-    selectedStadium.value = stadiumData.value[pointIndex] ?? null;
-  });
+  chartRef.value.on?.(
+    "plotly_click",
+    (event: { points?: Array<{ pointIndex?: number }> }) => {
+      const pointIndex = event?.points?.[0]?.pointIndex;
+      if (typeof pointIndex === "number") {
+        selectedStadium.value = stadiumData.value[pointIndex] ?? null;
+      }
+    },
+  );
 }
 
-onMounted(async () => {
-  await nextTick();
-  renderChart();
+function handleResize() {
+  if (chartRef.value) {
+    Plotly.Plots.resize(chartRef.value);
+  }
+}
+
+watch([selectedMetric, selectedStadium], async () => {
+  await renderChart();
 });
 
-watch([stadiumData, selectedMetric, selectedStadium], async () => {
-  await nextTick();
-  renderChart();
+onMounted(async () => {
+  window.addEventListener("resize", handleResize);
+  await renderChart();
 });
 
 onBeforeUnmount(() => {
+  window.removeEventListener("resize", handleResize);
+
   if (chartRef.value) {
     chartRef.value.removeAllListeners?.("plotly_click");
     Plotly.purge(chartRef.value);

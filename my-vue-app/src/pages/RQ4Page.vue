@@ -1,36 +1,37 @@
 <template>
-  <div class="rq4-page">
-    <section class="rq4-hero">
-      <h1 class="rq4-page-title">
-        Which players perform particularly well in home matches and which in away matches?
+  <div class="page">
+    <section class="hero">
+      <h1 class="page-title">
+        Which players perform particularly well in home matches and which in
+        away matches?
       </h1>
-      <p class="rq4-page-subtitle">{{ researchQuestionAnswer }}</p>
+      <p class="page-subtitle">{{ researchQuestionAnswer }}</p>
     </section>
 
-    <section class="rq4-controls">
-      <div class="rq4-control-block">
-        <span class="rq4-control-label">Chart view</span>
+    <section class="controls-card">
+      <div class="control-block">
+        <span class="control-label">Chart view</span>
 
-        <div class="rq4-radio-group">
-          <label class="rq4-radio-option">
+        <div class="radio-group">
+          <label class="radio-option">
             <input v-model="selectedChart" type="radio" value="compare" />
             <span>Comparison</span>
           </label>
 
-          <label class="rq4-radio-option">
+          <label class="radio-option">
             <input v-model="selectedChart" type="radio" value="scatter" />
             <span>Scatter</span>
           </label>
         </div>
       </div>
 
-      <div v-if="selectedChart === 'compare'" class="rq4-control-grid">
-        <div class="rq4-control-block">
-          <label class="rq4-control-label" for="rq4ViewMode">Mode</label>
+      <div v-if="selectedChart === 'compare'" class="control-grid">
+        <div class="control-block">
+          <label class="control-label" for="rq4ViewMode">Mode</label>
           <select
             id="rq4ViewMode"
             v-model="selectedViewMode"
-            class="rq4-select-control"
+            class="select-control"
           >
             <option value="abs_delta">Biggest gaps</option>
             <option value="home_specialists">Better at home</option>
@@ -38,209 +39,261 @@
           </select>
         </div>
 
-        <div class="rq4-control-block">
-          <label class="rq4-control-label" for="rq4TopN">Top players</label>
+        <div class="control-block">
+          <label class="control-label" for="rq4TopN">Top players</label>
           <input
             id="rq4TopN"
             v-model.number="topN"
-            class="rq4-range-control"
+            class="range-control"
             type="range"
             min="5"
             max="20"
             step="1"
           />
-          <div class="rq4-range-meta">{{ topN }} players</div>
+          <div class="range-meta">{{ clampedTopN }} players</div>
         </div>
       </div>
     </section>
 
-    <section class="rq4-description">{{ plotDescription }}</section>
+    <section class="description-box">{{ plotDescription }}</section>
 
-    <section class="rq4-chart-card">
-      <div ref="chartRef" class="rq4-chart"></div>
+    <section v-if="!rows.length" class="status-box error-box">
+      No eligible player rows were found in the RQ4 dataset.
+    </section>
+
+    <section v-else class="chart-card">
+      <div ref="chartRef" class="chart"></div>
     </section>
   </div>
 </template>
 
-<script setup>
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
+<script setup lang="ts">
+import {
+  computed,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  watch,
+} from "vue";
 import Plotly from "plotly.js-dist-min";
 import deltaCsv from "../../data/rq4/rq4_player_home_away_delta.csv?raw";
 
-// load the rq4 csv data
-const chartRef = ref(null);
-const selectedChart = ref("compare");
-const selectedViewMode = ref("abs_delta");
+type ViewMode = "abs_delta" | "home_specialists" | "away_specialists";
+type ChartMode = "compare" | "scatter";
+
+type PlayerRow = {
+  player: string;
+  home: number;
+  away: number;
+  delta: number;
+  absDelta: number;
+  homeMatches: number;
+  awayMatches: number;
+};
+
+const chartRef = ref<HTMLDivElement | null>(null);
+const selectedChart = ref<ChartMode>("compare");
+const selectedViewMode = ref<ViewMode>("abs_delta");
 const topN = ref(10);
 
-// simple csv parser for our data
-function parseCsv(text) {
-  const lines = text.replace(/^\uFEFF/, "").trim().split(/\r?\n/).filter(Boolean);
-  if (!lines.length) {
+function parseCsv(text: string): Record<string, string>[] {
+  const lines = text
+    .replace(/^\uFEFF/, "")
+    .trim()
+    .split(/\r?\n/)
+    .filter(Boolean);
+
+  if (lines.length < 2) {
     return [];
   }
 
-  // rq4 data has no quoted cells, so a normal split is enough here
   const headers = lines[0].split(",").map((value) => value.trim());
+
   return lines.slice(1).map((line) => {
     const values = line.split(",");
-    const row = {};
+    const row: Record<string, string> = {};
 
     headers.forEach((header, index) => {
-      row[header] = values[index] ?? "";
+      row[header] = values[index]?.trim() ?? "";
     });
 
     return row;
   });
 }
 
-// turn text into numbers
-const num = (value) => {
+function toNumber(value: unknown): number | null {
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : null;
-};
+}
 
-// average helper for summary text
-const average = (values) =>
-  values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : null;
+function getAverage(values: number[]): number | null {
+  if (values.length === 0) {
+    return null;
+  }
 
-// keep only valid player rows
-const rows = parseCsv(deltaCsv)
-  .map((row) => ({
-    player: row.player,
-    home: num(row.home_avg_overall_rating),
-    away: num(row.away_avg_overall_rating),
-    delta: num(row.avg_rating_delta_home_minus_away),
-    absDelta: num(row.abs_avg_rating_delta),
-    homeMatches: num(row.home_matches),
-    awayMatches: num(row.away_matches),
-    eligible: String(row.eligible_both_sides).trim().toLowerCase() === "true",
-  }))
-  .filter(
-    (row) =>
-      row.player &&
-      row.eligible &&
-      row.home !== null &&
-      row.away !== null &&
-      row.delta !== null &&
-      row.absDelta !== null &&
-      row.homeMatches !== null &&
-      row.awayMatches !== null,
-  );
+  return values.reduce((sum, value) => sum + value, 0) / values.length;
+}
 
-// summary values for the page text
-const overallHome = average(rows.map((row) => row.home));
-const overallAway = average(rows.map((row) => row.away));
+const rows: PlayerRow[] = parseCsv(deltaCsv)
+  .map((row) => {
+    const home = toNumber(row.home_avg_overall_rating);
+    const away = toNumber(row.away_avg_overall_rating);
+    const delta = toNumber(row.avg_rating_delta_home_minus_away);
+    const absDelta = toNumber(row.abs_avg_rating_delta);
+    const homeMatches = toNumber(row.home_matches);
+    const awayMatches = toNumber(row.away_matches);
+    const eligible =
+      String(row.eligible_both_sides).trim().toLowerCase() === "true";
+
+    if (
+      !row.player ||
+      !eligible ||
+      home === null ||
+      away === null ||
+      delta === null ||
+      absDelta === null ||
+      homeMatches === null ||
+      awayMatches === null
+    ) {
+      return null;
+    }
+
+    return {
+      player: row.player,
+      home,
+      away,
+      delta,
+      absDelta,
+      homeMatches,
+      awayMatches,
+    };
+  })
+  .filter((row): row is PlayerRow => row !== null);
+
+const clampedTopN = computed(() => Math.min(Math.max(topN.value, 5), 20));
+
+const overallHome = getAverage(rows.map((row) => row.home));
+const overallAway = getAverage(rows.map((row) => row.away));
+const overallDelta =
+  overallHome !== null && overallAway !== null
+    ? overallHome - overallAway
+    : null;
 const homeBetterCount = rows.filter((row) => row.delta > 0).length;
 
-// short answer for the title
 const researchQuestionAnswer =
-  rows.length && overallHome !== null && overallAway !== null
-    ? `Players are a bit better at home. Average home rating is ${overallHome.toFixed(3)} and away is ${overallAway.toFixed(3)}. The average difference is ${(overallHome - overallAway).toFixed(3)} rating points. ${homeBetterCount} of ${rows.length} eligible players rate higher at home.`
+  rows.length > 0 &&
+  overallHome !== null &&
+  overallAway !== null &&
+  overallDelta !== null
+    ? `Players perform slightly better at home overall. The average home rating is ${overallHome.toFixed(3)}, compared with ${overallAway.toFixed(3)} away, a difference of ${overallDelta.toFixed(3)} rating points. ${homeBetterCount} of ${rows.length} eligible players have a higher home rating.`
     : "Not enough usable RQ4 data was found.";
 
-// rows used in the bar chart
 const leaderboardRows = computed(() => {
-  // first keep only the players that fit the selected mode
-  const list = rows.filter((row) => {
-    if (selectedViewMode.value === "home_specialists") {
-      return row.delta > 0;
+  const mode = selectedViewMode.value;
+  const filteredRows = rows.filter((row) =>
+    mode === "home_specialists"
+      ? row.delta > 0
+      : mode === "away_specialists"
+        ? row.delta < 0
+        : true,
+  );
+
+  filteredRows.sort((left, right) => {
+    if (mode === "home_specialists") {
+      return (
+        right.delta - left.delta || left.player.localeCompare(right.player)
+      );
     }
-    if (selectedViewMode.value === "away_specialists") {
-      return row.delta < 0;
+
+    if (mode === "away_specialists") {
+      return (
+        left.delta - right.delta || left.player.localeCompare(right.player)
+      );
     }
-    return true;
+
+    return (
+      right.absDelta - left.absDelta || left.player.localeCompare(right.player)
+    );
   });
 
-  // then sort by the number that matters for that mode
-  list.sort((a, b) => {
-    if (selectedViewMode.value === "home_specialists") {
-      return b.delta - a.delta || a.player.localeCompare(b.player);
-    }
-    if (selectedViewMode.value === "away_specialists") {
-      return a.delta - b.delta || a.player.localeCompare(b.player);
-    }
-    return b.absDelta - a.absDelta || a.player.localeCompare(b.player);
-  });
-
-  return list.slice(0, topN.value);
+  return filteredRows.slice(0, clampedTopN.value);
 });
 
 const plotDescription = computed(() => {
-  // text shown under the controls
   if (selectedChart.value === "scatter") {
-    return "Each blue point is one player. The x-axis is away rating, the y-axis is home rating, and the red point is the overall average.";
+    return "Each blue point represents one player. The x-axis shows away ratings, the y-axis shows home ratings, and the red point marks the overall average.";
   }
 
-  const list = leaderboardRows.value;
-  if (!list.length) {
-    return "No players match this selection.";
+  if (leaderboardRows.value.length === 0) {
+    return "No players match the current selection.";
   }
 
-  const home = average(list.map((row) => row.home));
-  const away = average(list.map((row) => row.away));
+  const homeAverage = getAverage(leaderboardRows.value.map((row) => row.home));
+  const awayAverage = getAverage(leaderboardRows.value.map((row) => row.away));
+  const averageDifference = (homeAverage ?? 0) - (awayAverage ?? 0);
+
   let modeLabel = "biggest home-away gaps";
-
   if (selectedViewMode.value === "home_specialists") {
-    modeLabel = "players who do better at home";
+    modeLabel = "players who perform better at home";
   } else if (selectedViewMode.value === "away_specialists") {
-    modeLabel = "players who do better away";
+    modeLabel = "players who perform better away";
   }
 
-  return `This view shows the ${modeLabel}. For these ${list.length} players, home averages ${home.toFixed(3)} and away averages ${away.toFixed(3)} (Difference ${(
-    home - away
-  ).toFixed(3)}).`;
+  return `This view highlights the ${modeLabel}. Across the shown players, home averages ${homeAverage?.toFixed(3) ?? "0.000"} and away averages ${awayAverage?.toFixed(3) ?? "0.000"}, a difference of ${Math.abs(averageDifference).toFixed(3)}${averageDifference === 0 ? "" : averageDifference > 0 ? " in favor of home" : " in favor of away"}.`;
 });
 
 function buildCompareFigure() {
-  const list = leaderboardRows.value;
+  const labels = leaderboardRows.value.map((row) => row.player);
 
-  // bar chart with home and away ratings
   return {
     data: [
       {
         type: "bar",
         name: "Home",
-        x: list.map((row) => row.player),
-        y: list.map((row) => row.home),
-        marker: { color: "#2E8B57" },
-        hovertemplate: "<b>%{x}</b><br>Home average rating: %{y:.3f}<extra></extra>",
+        x: labels,
+        y: leaderboardRows.value.map((row) => row.home),
+        marker: { color: "#16a34a" },
+        hovertemplate:
+          "<b>%{x}</b><br>Home average rating: %{y:.3f}<extra></extra>",
       },
       {
         type: "bar",
         name: "Away",
-        x: list.map((row) => row.player),
-        y: list.map((row) => row.away),
-        marker: { color: "#1F77B4" },
-        hovertemplate: "<b>%{x}</b><br>Away average rating: %{y:.3f}<extra></extra>",
+        x: labels,
+        y: leaderboardRows.value.map((row) => row.away),
+        marker: { color: "#2563eb" },
+        hovertemplate:
+          "<b>%{x}</b><br>Away average rating: %{y:.3f}<extra></extra>",
       },
     ],
     layout: {
       title: "Leaderboard comparison by player",
-      barmode: "group",
+      barmode: "group" as const,
       margin: { t: 64, r: 24, b: 110, l: 72 },
       paper_bgcolor: "#ffffff",
       plot_bgcolor: "#ffffff",
-      legend: { orientation: "h", y: 1.12 },
+      legend: { orientation: "h" as const, y: 1.12 },
       xaxis: {
         title: "Player",
         tickangle: 50,
         automargin: true,
       },
       yaxis: {
-        title: "Average Overall Rating",
+        title: "Average overall rating",
       },
     },
   };
 }
 
 function buildScatterFigure() {
-  // scatter plot for all players
+  if (overallHome === null || overallAway === null) {
+    return { data: [], layout: {} };
+  }
+
   const allRatings = rows.flatMap((row) => [row.away, row.home]);
-  // use both home and away values so both axes cover all points
   const minRating = Math.min(...allRatings);
   const maxRating = Math.max(...allRatings);
-  // a bit of padding stops points from touching the plot edges
   const padding = Math.max((maxRating - minRating) * 0.05, 0.05);
   const axisMin = minRating - padding;
   const axisMax = maxRating + padding;
@@ -254,9 +307,13 @@ function buildScatterFigure() {
         x: rows.map((row) => row.away),
         y: rows.map((row) => row.home),
         text: rows.map((row) => row.player),
-        customdata: rows.map((row) => [row.homeMatches, row.awayMatches, row.delta]),
+        customdata: rows.map((row) => [
+          row.homeMatches,
+          row.awayMatches,
+          row.delta,
+        ]),
         marker: {
-          color: "#1F77B4",
+          color: "#2563eb",
           size: 10,
           opacity: 0.72,
           line: { color: "#ffffff", width: 0.8 },
@@ -271,12 +328,13 @@ function buildScatterFigure() {
         x: [overallAway],
         y: [overallHome],
         marker: {
-          color: "#DC2626",
+          color: "#dc2626",
           size: 16,
           opacity: 0.98,
           line: { color: "#ffffff", width: 1.5 },
         },
-        hovertemplate: "Overall average<br>Away: %{x:.3f}<br>Home: %{y:.3f}<extra></extra>",
+        hovertemplate:
+          "Overall average<br>Away: %{x:.3f}<br>Home: %{y:.3f}<extra></extra>",
       },
     ],
     layout: {
@@ -284,11 +342,10 @@ function buildScatterFigure() {
       margin: { t: 64, r: 24, b: 72, l: 72 },
       paper_bgcolor: "#ffffff",
       plot_bgcolor: "#ffffff",
-      hovermode: "closest",
-      legend: { orientation: "h", y: 1.12 },
+      hovermode: "closest" as const,
+      legend: { orientation: "h" as const, y: 1.12 },
       annotations: [
         {
-          // label the overall average point
           x: overallAway,
           y: overallHome,
           xref: "x",
@@ -297,18 +354,18 @@ function buildScatterFigure() {
           xanchor: "left",
           xshift: 14,
           bgcolor: "#ffffff",
-          bordercolor: "#DC2626",
+          bordercolor: "#dc2626",
           borderwidth: 1,
           borderpad: 4,
           text: `Average<br>Away: ${overallAway.toFixed(3)}<br>Home: ${overallHome.toFixed(3)}`,
         },
       ],
       xaxis: {
-        title: "Away Average Overall Rating",
+        title: "Away average overall rating",
         range: [axisMin, axisMax],
       },
       yaxis: {
-        title: "Home Average Overall Rating",
+        title: "Home average overall rating",
         range: [axisMin, axisMax],
         scaleanchor: "x",
         scaleratio: 1,
@@ -318,47 +375,39 @@ function buildScatterFigure() {
 }
 
 async function renderChart() {
-  if (!chartRef.value) {
+  await nextTick();
+  await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+
+  if (!chartRef.value || rows.length === 0) {
     return;
   }
 
-  // wait until the chart container is ready
-  await nextTick();
-  await new Promise((resolve) => {
-    // one extra frame helps Plotly read the final element size
-    requestAnimationFrame(resolve);
-  });
-
   const figure =
-    selectedChart.value === "scatter" ? buildScatterFigure() : buildCompareFigure();
+    selectedChart.value === "scatter"
+      ? buildScatterFigure()
+      : buildCompareFigure();
 
   await Plotly.react(chartRef.value, figure.data, figure.layout, {
     responsive: true,
-    displayModeBar: true,
+    displayModeBar: false,
   });
-
-  Plotly.Plots.resize(chartRef.value);
 }
 
-function handleResize() {
-  // resize the chart with the window
+function resizeChart() {
   if (chartRef.value) {
     Plotly.Plots.resize(chartRef.value);
   }
 }
 
-// redraw when controls change
-watch([selectedChart, selectedViewMode, topN], renderChart);
+watch([selectedChart, selectedViewMode, clampedTopN], renderChart);
 
 onMounted(async () => {
-  // draw the chart on page load
-  window.addEventListener("resize", handleResize);
+  window.addEventListener("resize", resizeChart);
   await renderChart();
 });
 
 onBeforeUnmount(() => {
-  // clean up before leaving the page
-  window.removeEventListener("resize", handleResize);
+  window.removeEventListener("resize", resizeChart);
 
   if (chartRef.value) {
     Plotly.purge(chartRef.value);
